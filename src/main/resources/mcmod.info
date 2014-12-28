@@ -1,0 +1,16 @@
+[
+{
+  "modid": "minestellar",
+  "name": "Minestellar",
+  "description": "Glalactic exploration and more!",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["_gjkf_"],
+  "credits": "Gekens",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
