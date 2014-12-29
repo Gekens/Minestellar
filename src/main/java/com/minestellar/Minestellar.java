@@ -16,8 +16,16 @@
 
 package com.minestellar;
 
+import net.minecraft.creativetab.CreativeTabs;
+
+import com.minestellar.init.ModBlocks;
 import com.minestellar.proxy.CommonProxy;
 import com.minestellar.reference.References;
+import com.minestellar.world.Dimension;
+import com.minestellar.world.WorldTypesMinestellar;
+import com.minestellar.world.biome.ModBiomes;
+import com.minestellar.world.provider.WorldProviderMoon;
+
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
@@ -33,9 +41,17 @@ public class Minestellar{
     @Mod.Instance
     public Minestellar instance;
 
+    public static CreativeTabs minestellarTab = new MinestellarTab(CreativeTabs.getNextID(), "MineStellar");
+    
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event){
 
+    	ModBlocks.loadBlocks();
+		ModBiomes.registerWithBiomeDictionary();
+		Dimension.registerWorldProvider();
+		Dimension.registerDimensions();
+		WorldTypesMinestellar.addCustomWorldTypes();
+    	
     }
 
     @Mod.EventHandler
