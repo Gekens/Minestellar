@@ -1,4 +1,4 @@
-package com.minestellar.core.util;
+package com.minestellar.moon.blocks.items;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.EnumRarity;
@@ -10,9 +10,14 @@ import com.minestellar.core.proxy.ClientProxyCore;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class ItemBlockUtil extends ItemBlock
+public class ItemBlockTeleporter extends ItemBlock
 {
-    public ItemBlockUtil(Block block)
+	private static final String[] types = new String[]
+	{
+		"teleporter_moon",	
+	};
+	
+    public ItemBlockTeleporter(Block block)
     {
         super(block);
     }
