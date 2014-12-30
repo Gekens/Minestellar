@@ -46,7 +46,7 @@ public class WorldProviderMoon extends WorldProvider
 	 */
 	public String getDimensionName() 
 	{
-		return "Moon Plains";
+		return "Moon";
 	}
 
 	@Override
@@ -74,14 +74,14 @@ public class WorldProviderMoon extends WorldProvider
 	/** @return the light value of the stars*/
 	public float getStarBrightness(World world, float f) 
 	{
-		return 1.0F;
+		return 3.0F;
 	}
 
 	@SideOnly(Side.CLIENT)
 	/** should clouds be rendered? */
 	public boolean renderClouds() 
 	{
-		return true;
+		return false;
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -108,7 +108,7 @@ public class WorldProviderMoon extends WorldProvider
 	@SideOnly(Side.CLIENT)
 	public float setMoonSize() 
 	{
-		return 0.0F;
+		return 9.0F;
 	}
 
 	/**
@@ -214,24 +214,21 @@ public class WorldProviderMoon extends WorldProvider
 	@SideOnly(Side.CLIENT)
 	public Vec3 getFogColor(float par1, float par2)
 	{
-		float f2 = MathHelper.cos(par1 * (float)Math.PI * 2.0F) * 2.0F + 0.5F;
-
-		if (f2 < 0.0F)
-		{
-			f2 = 0.0F;
-		}
-
-		if (f2 > 1.0F)
-		{
-			f2 = 1.0F;
-		}
-
-		float f3 = 0.7529412F;
-		float f4 = 0.84705883F;
-		float f5 = 1.0F;
-		f3 *= f2 * 0.94F + 0.06F;
-		f4 *= f2 * 0.94F + 0.06F;
-		f5 *= f2 * 0.91F + 0.09F;
-		return Vec3.createVectorHelper((double)f3, (double)f4, (double)f5);
+		return Vec3.createVectorHelper(0.0F, 0.0F, 0.0F);
 	}
+	
+	@Override
+	@SideOnly(Side.CLIENT)
+    public float[] calcSunriseSunsetColors(float p_76560_1_, float p_76560_2_){
+		
+		float[] sunriseColors = new float[4];
+		
+		sunriseColors[0] = 0.0F;
+		sunriseColors[1] = 0.0F;
+		sunriseColors[2] = 0.0F;
+		sunriseColors[3] = 0.0F;
+		
+		return sunriseColors;
+	}
+	
 }

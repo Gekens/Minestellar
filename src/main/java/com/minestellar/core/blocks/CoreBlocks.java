@@ -7,6 +7,7 @@ import net.minecraftforge.oredict.OreDictionary;
 import com.minestellar.core.Minestellar;
 import com.minestellar.core.blocks.items.ItemBlockDecor;
 import com.minestellar.core.blocks.items.ItemBlockOres;
+import com.minestellar.moon.blocks.BlockTeleporterMoon;
 
 public class CoreBlocks
 {
@@ -27,6 +28,7 @@ public class CoreBlocks
 	{
 		Minestellar.registerBlock(CoreBlocks.coreOreBlocks, ItemBlockOres.class);
 		Minestellar.registerBlock(CoreBlocks.coreDecorBlocks, ItemBlockDecor.class);
+
 	}
 	
     public static void oreDictRegistration()

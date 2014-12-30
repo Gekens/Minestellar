@@ -12,6 +12,11 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemBlockUtil extends ItemBlock
 {
+	private static final String[] types = new String[]
+	{
+		"teleporter_moon",	
+	};
+	
     public ItemBlockUtil(Block block)
     {
         super(block);

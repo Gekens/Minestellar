@@ -1,0 +1,16 @@
+[
+{
+  "modid": "examplemod",
+  "name": "Example Mod",
+  "description": "La mia prima Mod!!!",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["Mattparks, _gjkf_"],
+  "credits": "_gjkf_",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]

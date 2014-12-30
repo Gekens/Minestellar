@@ -4,6 +4,7 @@ import java.util.Random;
 
 import net.minecraft.block.BlockBreakable;
 import net.minecraft.block.material.Material;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.Item;
@@ -31,7 +32,7 @@ public class BlockTeleporterMoon extends BlockBreakable
 		this.setTickRandomly(true);
 		this.setBlockName(name);
 		this.setBlockTextureName(Minestellar.MOD_ID_CORE + name);
-		this.setCreativeTab(Minestellar.stellarBlocksTab);
+		this.setCreativeTab(CreativeTabs.tabBlock);
 	}
 
 	/**
