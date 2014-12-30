@@ -32,7 +32,7 @@ public class ChunkProviderMoon extends ChunkProviderGenerate
 	final Block fillBlockID = MoonBlocks.moonBasicBlocks;
 	final byte fillBlockMeta = 1;
 	final Block lowerBlockID = MoonBlocks.moonBasicBlocks;
-	final byte lowerBlockMeta = 0;
+	final byte lowerBlockMeta = 2;
 
 	private final Random rand;
 

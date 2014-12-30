@@ -6,6 +6,7 @@ import com.minestellar.core.Minestellar;
 import com.minestellar.core.util.ItemBlockUtil;
 import com.minestellar.moon.MoonCore;
 import com.minestellar.moon.blocks.items.ItemBlockBasic;
+import com.minestellar.moon.blocks.items.ItemBlockTeleporter;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 
@@ -27,8 +28,7 @@ public class MoonBlocks
 	private static void registerBlocks()
 	{
 		MoonCore.registerBlock(MoonBlocks.moonBasicBlocks, ItemBlockBasic.class);
-		//GameRegistry.registerBlock(MoonBlocks.moonPortal, "moonPortal");
-		MoonCore.registerBlock(MoonBlocks.moonPortal, ItemBlockUtil.class);
+		MoonCore.registerBlock(MoonBlocks.moonPortal, ItemBlockTeleporter.class);
 	}
 	
     public static void oreDictRegistration()
