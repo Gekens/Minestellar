@@ -1,0 +1,40 @@
+# Minestellar Core Language File = UNITED STATES ENGLISH
+
+# GENERAL ITEMS
+item.ingotCopper.name=Copper Ingot
+item.ingotTin.name=Tin Ingot
+item.ingotTitanium.name=Titanium Ingot
+item.containerCopper.name=Copper Container
+item.containerTin.name=Tin Container
+item.containerTitanium.name=Titanium Container
+
+# TOOLS
+item.titanium_pickaxe.name=Titanium Pickaxe
+item.titanium_axe.name=Titanium Axe
+item.titanium_hoe.name=Titanium Hoe
+item.titanium_shovel.name=Titanium Shovel
+item.titanium_sword.name=Titanium Sword
+
+# ARMOR
+item.titanium_helmet.name=Titanium Helmet
+item.titanium_chestplate.name=Titanium Chestplate
+item.titanium_leggings.name=Titanium Leggings
+item.titanium_boots.name=Titanium Boots
+
+# BLOCKS
+tile.minestellar_ore.copper_ore.name=Copper Ore
+tile.minestellar_ore.tin_ore.name=Tin Ore
+tile.minestellar_ore.titanium_ore.name=Titanium Ore
+tile.minestellar_decor.copper_block.name=Copper Block
+tile.minestellar_decor.tin_block.name=Tin Block
+tile.minestellar_decor.titanium_block.name=Titanium Block
+
+# GUIS
+itemGroup.MinestellarBlocks=Minestellar Blocks
+itemGroup.MinestellarItems=Minestellar Items
+
+# ENITYS
+
+# OTHERS
+update.failed.name=Minestellar update check failed! Trying again in 15 seconds
+update.success.name=Minestellar remote version found:

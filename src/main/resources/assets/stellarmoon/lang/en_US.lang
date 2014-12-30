@@ -1,0 +1,19 @@
+# Minestellar Moon Language File = UNITED STATES ENGLISH
+
+# GENERAL ITEMS
+
+# TOOLS
+
+# ARMOR
+
+# BLOCKS
+tile.moon_basic.surfaceRock.name=Moon Surface Stone
+tile.moon_basic.subSurface.name=Moon Sub-Surface Stone
+tile.moon_basic.rock.name=Moon Stone
+
+# GUIS
+
+# ENITYS
+
+# OTHERS
+moon.Moon=Moon
