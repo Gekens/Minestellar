@@ -1,18 +1,16 @@
 package com.minestellar.core.items;
 
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemArmor.ArmorMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.util.EnumHelper;
+import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.oredict.OreDictionary;
 
 import com.minestellar.core.Minestellar;
-import com.minestellar.core.items.tools.ItemAxeCore;
-import com.minestellar.core.items.tools.ItemHoeCore;
-import com.minestellar.core.items.tools.ItemPickaxeCore;
-import com.minestellar.core.items.tools.ItemSpadeCore;
-import com.minestellar.core.items.tools.ItemSwordCore;
+import com.minestellar.core.blocks.CoreBlocks;
 
 public class CoreItems
 {
@@ -28,6 +26,11 @@ public class CoreItems
 	public static Item titaniumChestplate;
 	public static Item titaniumLeggings;
 	public static Item titaniumBoots;
+	
+    public static Item canisterOil;
+    public static Item extractorOil;
+	
+	public static Item oilBucket;
 
 	public static ArmorMaterial ARMOR_TITANIUM = EnumHelper.addArmorMaterial("titanium", 30, new int[] { 3, 8, 6, 3 }, 12);
 	public static ToolMaterial TOOL_TITANIUM = EnumHelper.addToolMaterial("titanium", 3, 768, 5.0F, 2, 8);
@@ -46,6 +49,11 @@ public class CoreItems
 		CoreItems.titaniumChestplate = new ItemArmorTitanium("titanium_chestplate", CoreItems.ARMOR_TITANIUM, 7, 1);
 		CoreItems.titaniumLeggings = new ItemArmorTitanium("titanium_leggings", CoreItems.ARMOR_TITANIUM, 7, 2);
 		CoreItems.titaniumBoots = new ItemArmorTitanium("titanium_boots", CoreItems.ARMOR_TITANIUM, 7, 3);
+		
+		CoreItems.canisterOil = new ItemCanisterOil("canisterOilPartial");
+        CoreItems.extractorOil = new ItemExtractorOil("extractorOil");
+        
+		CoreItems.oilBucket = new ItemBucketOil("oil_bucket");
 	}
 
 	private static void registerHarvestLevels()
@@ -69,6 +77,11 @@ public class CoreItems
 		Minestellar.registerItem(titaniumChestplate);
 		Minestellar.registerItem(titaniumLeggings);
 		Minestellar.registerItem(titaniumBoots);
+		
+	    Minestellar.registerItem(CoreItems.canisterOil);
+	    Minestellar.registerItem(CoreItems.extractorOil);
+	        
+		Minestellar.registerItem(oilBucket);
 	}
 	
     public static void oreDictRegistration()
@@ -81,11 +94,17 @@ public class CoreItems
 		OreDictionary.registerOre("containerTitanium", new ItemStack(CoreItems.coreBasicItems, 1, 5));
     }
 	
+	private static void registerFluidContainer()
+	{
+		FluidContainerRegistry.registerFluidContainer(CoreBlocks.oilFluid, new ItemStack(CoreItems.oilBucket), new ItemStack(Items.bucket));
+	}
+	
 	public static void init()
 	{
 		initItems();
 		registerHarvestLevels();
 		registerItems();
 		oreDictRegistration();
+		registerFluidContainer();
 	}
 }

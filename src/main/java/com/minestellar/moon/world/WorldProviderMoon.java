@@ -11,7 +11,7 @@ import net.minecraftforge.common.DimensionManager;
 
 import com.minestellar.api.vector.Vector3;
 import com.minestellar.api.world.MinestellarWorldProvider;
-import com.minestellar.moon.ConfigManagerMoon;
+import com.minestellar.moon.util.ConfigManagerMoon;
 import com.minestellar.moon.world.gen.ChunkProviderMoon;
 import com.minestellar.moon.world.gen.WorldChunkManagerMoon;
 

@@ -4,6 +4,7 @@ import java.util.Random;
 
 import net.minecraft.block.BlockBreakable;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -14,7 +15,8 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import com.minestellar.core.Minestellar;
-import com.minestellar.moon.ConfigManagerMoon;
+import com.minestellar.moon.MoonCore;
+import com.minestellar.moon.util.ConfigManagerMoon;
 import com.minestellar.moon.world.TeleporterMoon;
 
 import cpw.mods.fml.relauncher.Side;
@@ -28,11 +30,17 @@ public class BlockTeleporterMoon extends BlockBreakable
 
 	public BlockTeleporterMoon(String name)
 	{
-		super(Minestellar.MOD_ID_CORE + name, Material.portal, false);
+		super(MoonCore.MOD_ID_MOON + name, Material.portal, false);
 		this.setTickRandomly(true);
 		this.setBlockName(name);
-		this.setBlockTextureName(Minestellar.TEXTURE_PREFIX + name);
-		this.setCreativeTab(CreativeTabs.tabBlock);
+//		this.setBlockTextureName(name);
+	}
+	
+	@Override
+	@SideOnly(Side.CLIENT)
+	public CreativeTabs getCreativeTabToDisplayOn()
+	{
+		return Minestellar.stellarBlocksTab;
 	}
 
 	/**
@@ -251,5 +259,12 @@ public class BlockTeleporterMoon extends BlockBreakable
 	public Item getItem(World p_149694_1_, int p_149694_2_, int p_149694_3_, int p_149694_4_) 
 	{
 		return Item.getItemById(0);
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void registerBlockIcons(IIconRegister iconRegister)
+	{
+		this.blockIcon = iconRegister.registerIcon(MoonCore.TEXTURE_PREFIX + "moon_portal");
 	}
 }

@@ -7,6 +7,10 @@ item.ingotTitanium.name=Titanium Ingot
 item.containerCopper.name=Copper Container
 item.containerTin.name=Tin Container
 item.containerTitanium.name=Titanium Container
+item.emptyLiquidCanister.name=Empty Liquid Canister
+item.canisterOil.name=Oil Canister
+item.oil_bucket.name=Oil Bucket
+item.extractorOil.name=Oil Extractor
 
 # TOOLS
 item.titanium_pickaxe.name=Titanium Pickaxe
@@ -32,6 +36,7 @@ tile.minestellar_decor.titanium_block.name=Titanium Block
 # GUIS
 itemGroup.MinestellarBlocks=Minestellar Blocks
 itemGroup.MinestellarItems=Minestellar Items
+gui.message.oil.name=Oil
 
 # ENITYS
 

@@ -32,4 +32,8 @@ public class CommonProxyCore
 	{
 		return -1;
 	}
+
+	public void spawnParticle(String string, double x, double y, double z)
+	{
+	}
 }

@@ -1,12 +1,17 @@
 package com.minestellar.core.proxy;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.particle.EntityFX;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraftforge.common.util.EnumHelper;
 
+import com.minestellar.core.particles.EntityCoreOilDripFX;
 import com.minestellar.core.util.TickHandlerClient;
 
+import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
@@ -15,7 +20,9 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 
 public class ClientProxyCore extends CommonProxyCore
 {
-	public static EnumRarity stellarItem = EnumHelper.addRarity("MinestellarRarity", EnumChatFormatting.WHITE, "MinestellarCore");
+	private static Minecraft mc = FMLClientHandler.instance().getClient();
+	
+	public static EnumRarity stellarItem = EnumHelper.addRarity("MinestellarRarity", EnumChatFormatting.RED, "MinestellarCore");
 
 	private static int renderIndexTitaniumArmor;
 	
@@ -67,4 +74,16 @@ public class ClientProxyCore extends CommonProxyCore
     {
         TickHandlerClient tickHandlerClient = new TickHandlerClient();
     }
+    
+	@Override
+	public void spawnParticle(String string, double x, double y, double z)
+	{
+		EntityFX entityfx = null;
+
+		if (string == "oilDrip")
+		{
+			entityfx = new EntityCoreOilDripFX(mc.theWorld, x, y, z, Material.water);
+		}
+		mc.effectRenderer.addEffect(entityfx);
+	}
 }

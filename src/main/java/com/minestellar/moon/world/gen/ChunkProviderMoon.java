@@ -44,6 +44,9 @@ public class ChunkProviderMoon extends ChunkProviderGenerate
 	public BiomeDecoratorMoon biomedecoratorplanet = new BiomeDecoratorMoon();
 
 	private final World worldObj;
+	
+	private MapGenMoonCave caveGenerator = new MapGenMoonCave();
+	
 	private BiomeGenBase[] biomesForGeneration = { BiomeGenBaseMoon.moon };
 	private static final int CRATER_PROB = 500;
 
@@ -196,6 +199,7 @@ public class ChunkProviderMoon extends ChunkProviderGenerate
 		this.biomesForGeneration = this.worldObj.getWorldChunkManager().loadBlockGeneratorData(this.biomesForGeneration, par1 * 16, par2 * 16, 16, 16);
 		this.createCraters(par1, par2, ids, meta);
 		this.replaceBlocksForBiome(par1, par2, ids, meta, this.biomesForGeneration);
+		this.caveGenerator.generate(this, this.worldObj, par1, par2, ids, meta);
 		final Block[] abyte = new Block[32768];
 		final Chunk var4 = new Chunk(this.worldObj, ids, meta, par1, par2);
 		var4.generateSkylightMap();

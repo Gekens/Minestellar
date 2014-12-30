@@ -5,7 +5,7 @@ import net.minecraft.entity.monster.EntitySpider;
 import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.world.biome.BiomeGenBase;
 
-import com.minestellar.moon.ConfigManagerMoon;
+import com.minestellar.moon.util.ConfigManagerMoon;
 
 public class BiomeGenBaseMoon extends BiomeGenBase
 {

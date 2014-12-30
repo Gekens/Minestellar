@@ -23,7 +23,7 @@ public class ItemBasicCore extends Item
 		"ingotTitanium", // 2
 		"containerCopper", // 3
 		"containerTin", // 4
-		"containerTitanium" // 5
+		"containerTitanium", // 5
 	};    
 	
 	protected IIcon[] icons = new IIcon[ItemBasicCore.names.length];

@@ -11,6 +11,7 @@ import com.minestellar.moon.blocks.MoonBlocks;
 import com.minestellar.moon.items.MoonItems;
 import com.minestellar.moon.proxy.CommonProxyMoon;
 import com.minestellar.moon.recipe.RecipeManagerMoon;
+import com.minestellar.moon.util.ConfigManagerMoon;
 import com.minestellar.moon.world.DimensionMoon;
 
 import cpw.mods.fml.common.Mod;
@@ -26,8 +27,8 @@ import cpw.mods.fml.common.registry.GameRegistry;
 @Mod(modid = MoonCore.MOD_ID_MOON, name = MoonCore.MOD_NAME_MOON, version = Constants.VERSION)
 public class MoonCore 
 {
-	public static final String MOD_ID_MOON = "Moon";
-	public static final String MOD_NAME_MOON = "Moon";
+	public static final String MOD_ID_MOON = "MSMoon";
+	public static final String MOD_NAME_MOON = "Minestellar Moon";
 	
     public static final String ASSET_PREFIX = "stellarmoon";
     public static final String TEXTURE_PREFIX = MoonCore.ASSET_PREFIX + ":";

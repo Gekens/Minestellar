@@ -1,0 +1,35 @@
+=================================================
+= If it has a > at the end its a folder.        =
+=================================================
+= If it has .java at the end its a java file.   =
+=================================================
+
+Main Folder >
+    PlanetCore.java
+    blocks >
+        PlanetBlocks.java
+        BlockBasicPlanet.java
+        items >
+            ItemBlockBasicPlanet.java
+    items >
+        PlanetItems.java
+        ItemBasicPlanet.java
+    proxy >
+        CommonProxyPlanet.java
+        ClientProxyPlanet.java
+    recipe >
+        RecipeManagerPlanet.java
+    util >
+        ConfigManagerPlanet.java
+        RegisterHelperPlanet.java
+    world >
+        DimensionPlanet.java
+        SkyRendererPlanet.java
+        TeleporterPlanet.java
+        WorldProviderPlanet.java
+        gen >
+            BiomeDecoratorPlanet.java
+            BiomeGenBasePlanet.java
+            ChunkProviderPlanet.java
+            WorldChunkManagerPlanet.java
+            

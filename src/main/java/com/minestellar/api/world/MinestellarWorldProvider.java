@@ -2,6 +2,9 @@ package com.minestellar.api.world;
 
 import com.minestellar.api.vector.Vector3;
 
+/**
+ * Implement this in your World Provider, this sets the basic info for your new world!
+ */
 public interface MinestellarWorldProvider
 {
 	/**
@@ -33,7 +36,15 @@ public interface MinestellarWorldProvider
      */
 	long getDayLength();
 
+	/**
+	 * Fog color, what player sees in the distance.
+	 * @return
+	 */
 	Vector3 getFogColor();
 
+	/**
+	 * Sky color, its everywhere!!
+	 * @return
+	 */
 	Vector3 getSkyColor();
 }

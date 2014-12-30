@@ -1,11 +1,13 @@
 package com.minestellar.core;
 
 import java.io.File;
+import java.util.HashMap;
 
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemStack;
 
 import com.minestellar.core.blocks.CoreBlocks;
 import com.minestellar.core.items.CoreItems;
@@ -32,8 +34,11 @@ public class Minestellar
 	public static CreativeTabs stellarBlocksTab;
 	public static CreativeTabs stellarItemsTab;
 	
-	public static final String MOD_ID_CORE = "Minestellar";
-	public static final String MOD_NAME_CORE = "Minestellar";
+	public static HashMap<String, ItemStack> itemList = new HashMap<String, ItemStack>();
+	public static HashMap<String, ItemStack> blocksList = new HashMap<String, ItemStack>();
+	
+	public static final String MOD_ID_CORE = "MSCore";
+	public static final String MOD_NAME_CORE = "Minestellar Core";
 	
     public static final String ASSET_PREFIX = "stellarcore";
     public static final String TEXTURE_PREFIX = Minestellar.ASSET_PREFIX + ":";
@@ -75,7 +80,8 @@ public class Minestellar
         {
             GameRegistry.registerWorldGenerator(new OverworldGenerator(CoreBlocks.coreOreBlocks, 0, 24, 0, 75, 7), 4);
             GameRegistry.registerWorldGenerator(new OverworldGenerator(CoreBlocks.coreOreBlocks, 1, 22, 0, 60, 7), 4);
-            GameRegistry.registerWorldGenerator(new OverworldGenerator(CoreBlocks.coreOreBlocks, 2, 18, 0, 45, 7), 4);
+            GameRegistry.registerWorldGenerator(new OverworldGenerator(CoreBlocks.coreOreBlocks, 2, 12, 0, 45, 3), 2);
+            GameRegistry.registerWorldGenerator(new OverworldGenerator(CoreBlocks.oilFluidBlock, 2, 17, 0, 45, 17), 17);
         }
         
         else 	
