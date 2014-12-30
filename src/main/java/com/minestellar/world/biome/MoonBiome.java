@@ -16,18 +16,19 @@
 
 package com.minestellar.world.biome;
 
-import java.util.Random;
+import net.minecraft.world.biome.BiomeGenBase;
 
-import net.minecraft.init.Blocks;
 import com.minestellar.init.ModBlocks;
 
-public class MoonPlains extends ModBiomes{
+public class MoonBiome extends ModBiomes{
 
-	public MoonPlains(int id){
+	public MoonBiome(int id){
 		super(id);
 		this.topBlock = ModBlocks.moonStone;
 		this.fillerBlock = ModBlocks.moonStone;
-		this.biomeName = "MoonPlains";
+		this.biomeName = "moonPlains";
+		this.heightVariation = 1.5F;
+		this.biomeHeight = height_LowPlains;
 	}
 	
 	

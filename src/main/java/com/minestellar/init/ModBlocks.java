@@ -31,7 +31,7 @@ public class ModBlocks{
 	
 	public static void loadBlocks(){
 		
-		moonStone = new MoonStone().setBlockName("moonStone").setLightLevel(1.0F).setStepSound(Block.soundTypeSnow).setCreativeTab(Minestellar.minestellarTab);
+		moonStone = new MoonStone().setBlockName("moonStone").setCreativeTab(Minestellar.minestellarTab);
 		moonPortal = new MoonTeleporterBlock("moonPortal");
 	
 		registerBlocks();

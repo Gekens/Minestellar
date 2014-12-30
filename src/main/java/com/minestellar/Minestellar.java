@@ -21,8 +21,8 @@ import net.minecraft.creativetab.CreativeTabs;
 import com.minestellar.init.ModBlocks;
 import com.minestellar.proxy.CommonProxy;
 import com.minestellar.reference.References;
+import com.minestellar.util.LogHelper;
 import com.minestellar.world.Dimension;
-import com.minestellar.world.WorldTypesMinestellar;
 import com.minestellar.world.biome.ModBiomes;
 import com.minestellar.world.provider.WorldProviderMoon;
 
@@ -43,6 +43,8 @@ public class Minestellar{
 
     public static CreativeTabs minestellarTab = new MinestellarTab(CreativeTabs.getNextID(), "MineStellar");
     
+    public static LogHelper log = new LogHelper(References.MOD_ID);
+    
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event){
 
@@ -50,7 +52,6 @@ public class Minestellar{
 		ModBiomes.registerWithBiomeDictionary();
 		Dimension.registerWorldProvider();
 		Dimension.registerDimensions();
-		WorldTypesMinestellar.addCustomWorldTypes();
     	
     }
 

@@ -28,6 +28,8 @@ import net.minecraftforge.client.IRenderHandler;
 
 import org.lwjgl.opengl.GL11;
 
+import com.minestellar.reference.References;
+
 import cpw.mods.fml.relauncher.ReflectionHelper;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -126,7 +128,7 @@ public class MoonSkyRenderer extends IRenderHandler{
 		
 		
 		f10 = 20.0F; // Size of sun from center
-		mc.renderEngine.getTexture(new ResourceLocation("tutorial:/textures/enviroment/sun.png")); 
+		mc.renderEngine.getTexture(new ResourceLocation(References.MOD_ID + ":/textures/enviroment/sun.png")); 
 		
 		
 		tessellator1.startDrawingQuads();
@@ -137,23 +139,7 @@ public class MoonSkyRenderer extends IRenderHandler{
 		
 		
 		tessellator1.draw(); // Draw sun
-		f10 = 15.0F; // Size of moon from center
-		mc.renderEngine.bindTexture(new ResourceLocation("tutorial:/textures/enviroment/moon_phases.png"));
 		
-		
-		int k = world.getMoonPhase();
-		int l = k % 4;
-		int i1 = k / 4 % 2;
-		float f14 = (float) (l + 0) / 4.0F;
-		float f15 = (float) (i1 + 0) / 2.0F;
-		float f16 = (float) (l + 1) / 4.0F;
-		float f17 = (float) (i1 + 1) / 2.0F;
-		tessellator1.startDrawingQuads();
-		tessellator1.addVertexWithUV((double) (-f10), -100.0D, (double) f10, (double) f16, (double) f17);
-		tessellator1.addVertexWithUV((double) f10, -100.0D, (double) f10, (double) f14, (double) f17);
-		tessellator1.addVertexWithUV((double) f10, -100.0D, (double) (-f10), (double) f14, (double) f15);
-		tessellator1.addVertexWithUV((double) (-f10), -100.0D, (double) (-f10), (double) f16, (double) f15);
-		tessellator1.draw();
 		GL11.glDisable(GL11.GL_TEXTURE_2D);
 		float f18 = world.getStarBrightness(partialTicks) * f4;
 		if (f18 > 0.0F){

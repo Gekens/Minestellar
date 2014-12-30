@@ -32,7 +32,7 @@ public class Dimension{
 	}
 	
 	/**
-	 * Regster dimension world providers with the dimension manager.
+	 * Register dimension world providers with the dimension manager.
 	 */
 	public static void registerWorldProvider(){
 		DimensionManager.registerProviderType(DimensionIDs.MOON_DIMENSION, WorldProviderMoon.class, true);

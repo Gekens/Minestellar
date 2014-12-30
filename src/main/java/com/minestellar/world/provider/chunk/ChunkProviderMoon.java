@@ -18,12 +18,6 @@ package com.minestellar.world.provider.chunk;
 
 import static net.minecraftforge.event.terraingen.InitMapGenEvent.EventType.CAVE;
 import static net.minecraftforge.event.terraingen.InitMapGenEvent.EventType.RAVINE;
-import static net.minecraftforge.event.terraingen.InitMapGenEvent.EventType.SCATTERED_FEATURE;
-import static net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate.EventType.ANIMALS;
-import static net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate.EventType.DUNGEON;
-import static net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate.EventType.ICE;
-import static net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate.EventType.LAKE;
-import static net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate.EventType.LAVA;
 
 import java.util.List;
 import java.util.Random;
@@ -55,6 +49,7 @@ import net.minecraftforge.event.terraingen.ChunkProviderEvent;
 import net.minecraftforge.event.terraingen.PopulateChunkEvent;
 import net.minecraftforge.event.terraingen.TerrainGen;
 
+import com.minestellar.Minestellar;
 import com.minestellar.init.ModBlocks;
 import com.minestellar.util.LogHelper;
 import com.minestellar.world.biome.ModBiomes;
@@ -107,12 +102,11 @@ public class ChunkProviderMoon implements IChunkProvider{
 	int[][] field_73219_j = new int[32][32];
 	{
 		caveGenerator = TerrainGen.getModdedMapGen(caveGenerator, CAVE);
-		scatteredFeatureGenerator = (MapGenScatteredFeature) TerrainGen.getModdedMapGen(scatteredFeatureGenerator, SCATTERED_FEATURE);
 		ravineGenerator = TerrainGen.getModdedMapGen(ravineGenerator, RAVINE);
 	}
 
 	public ChunkProviderMoon(World world, long seed, boolean mapFeaturesEnabled){
-		LogHelper.info("Loading Chunk Provider for dmension.");
+		Minestellar.log.info("Loading Chunk Provider for dimension.");
 		this.worldObj = world;
 		this.mapFeaturesEnabled = mapFeaturesEnabled;
 		this.worldType = world.getWorldInfo().getTerrainType();
@@ -147,7 +141,6 @@ public class ChunkProviderMoon implements IChunkProvider{
 	 * Generates the shape of the terrain for the chunk though its all stone
 	 * though the water is frozen if the temperature is low enough
 	 */
-	// TODO: generateTerrain?
 	public void func_147424_a(int par1, int par2, Block[] blocks) {
 		
 		//DONT EDIT THS METHOD UNLES YOU KNOW WHAT UR DOING OR MAKE A COPY INCASE U MESS IT UP....
@@ -207,10 +200,10 @@ public class ChunkProviderMoon implements IChunkProvider{
 				}
 			}
 		}
+		
 	}
 
 	public void replaceBlocksForBiome(int par1, int par2, Block[] blocks, byte[] par3ArrayOfByte, BiomeGenBase[] par4ArrayOfBiomeGenBase) {
-		LogHelper.info("Replacing block for biome.");;
 		@SuppressWarnings("deprecation")
 		ChunkProviderEvent.ReplaceBiomeBlocks event = new ChunkProviderEvent.ReplaceBiomeBlocks(this, par1, par2, blocks, par3ArrayOfByte, par4ArrayOfBiomeGenBase);
 		MinecraftForge.EVENT_BUS.post(event);
@@ -263,7 +256,6 @@ public class ChunkProviderMoon implements IChunkProvider{
 	 * generates a subset of the level's terrain data. Takes 7 arguments: the
 	 * [empty] noise array, the position, and the size.
 	 */
-	// TODO: initializeNoiseField?
 	private void func_147423_a(int p_147423_1_, int p_147423_2_, int p_147423_3_) {
 
 		//DONT EDIT THS METHOD UNLES YOU KNOW WHAT UR DOING OR MAKE A COPY INCASE U MESS IT UP....
@@ -380,58 +372,6 @@ public class ChunkProviderMoon implements IChunkProvider{
 		int l1;
 		int i2;
 
-		//Add Lakes ??
-		if (biomegenbase != BiomeGenBase.desert && biomegenbase != BiomeGenBase.desertHills && !flag && this.rand.nextInt(4) == 0
-				&& TerrainGen.populate(par1IChunkProvider, worldObj, rand, par2, par3, flag, LAKE)) {
-			k1 = k + this.rand.nextInt(16) + 8;
-			l1 = this.rand.nextInt(256);
-			i2 = l + this.rand.nextInt(16) + 8;
-			(new WorldGenLakes(Blocks.water)).generate(this.worldObj, this.rand, k1, l1, i2);
-		}
-
-		//Add Lakes ??
-		if (TerrainGen.populate(par1IChunkProvider, worldObj, rand, par2, par3, flag, LAVA) && !flag && this.rand.nextInt(8) == 0) {
-			k1 = k + this.rand.nextInt(16) + 8;
-			l1 = this.rand.nextInt(this.rand.nextInt(248) + 8);
-			i2 = l + this.rand.nextInt(16) + 8;
-
-			if (l1 < 63 || this.rand.nextInt(10) == 0)  {
-				(new WorldGenLakes(Blocks.lava)).generate(this.worldObj, this.rand, k1, l1, i2);
-			}
-		}
-
-		//Add Dungeons ??
-		boolean doGen = TerrainGen.populate(par1IChunkProvider, worldObj, rand, par2, par3, flag, DUNGEON);
-		for (k1 = 0; doGen && k1 < 8; ++k1) {
-			l1 = k + this.rand.nextInt(16) + 8;
-			i2 = this.rand.nextInt(256);
-			int j2 = l + this.rand.nextInt(16) + 8;
-			(new WorldGenDungeons()).generate(this.worldObj, this.rand, l1, i2, j2);
-		}
-
-		//Add Animals ??
-		biomegenbase.decorate(this.worldObj, this.rand, k, l);
-		if (TerrainGen.populate(par1IChunkProvider, worldObj, rand, par2, par3, flag, ANIMALS)) {
-			SpawnerAnimals.performWorldGenSpawning(this.worldObj, biomegenbase, k + 8, l + 8, 16, 16, this.rand);
-		}
-		k += 8;
-		l += 8;
-
-		//Creates snow and ice in world.
-		doGen = TerrainGen.populate(par1IChunkProvider, worldObj, rand, par2, par3, flag, ICE);
-		for (k1 = 0; doGen && k1 < 16; ++k1) {
-			for (l1 = 0; l1 < 16; ++l1) {
-				i2 = this.worldObj.getPrecipitationHeight(k + k1, l + l1);
-
-				if (this.worldObj.isBlockFreezable(k1 + k, i2 - 1, l1 + l)) {
-					this.worldObj.setBlock(k1 + k, i2 - 1, l1 + l, Blocks.ice, 0, 2);
-				}
-
-				if (this.worldObj.func_147478_e(k1 + k, i2, l1 + l, true)) {
-					this.worldObj.setBlock(k1 + k, i2, l1 + l, Blocks.snow_layer, 0, 2);
-				}
-			}
-		}
 		MinecraftForge.EVENT_BUS.post(new PopulateChunkEvent.Post(par1IChunkProvider, worldObj, rand, par2, par3, flag));
 		BlockFalling.fallInstantly = false;
 	}

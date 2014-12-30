@@ -77,7 +77,7 @@ public class WorldProviderMoon extends WorldProvider{
 	@SideOnly(Side.CLIENT)
 	/** @return the player speed */
 	public double getMovementFactor() {
-		return 0.04;
+		return 0.04D;
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -121,13 +121,13 @@ public class WorldProviderMoon extends WorldProvider{
 	@Override
 	@SideOnly(Side.CLIENT)
 	public Vec3 getSkyColor(Entity cameraEntity, float partialTicks) {
-		return worldObj.getSkyColorBody(cameraEntity, partialTicks);
+		return Vec3.createVectorHelper(0.01F, 0.01F, 0.01F);
 	}
 
 	@SideOnly(Side.CLIENT)
 	/** should a color for the sky be rendered? */
 	public boolean isSkyColored(){
-		return false;
+		return true;
 	}
 
 	/** can the player respawn in this dimension? */

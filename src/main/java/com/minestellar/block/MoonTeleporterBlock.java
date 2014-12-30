@@ -36,6 +36,7 @@ import net.minecraft.world.World;
 import com.minestellar.Minestellar;
 import com.minestellar.init.ModBlocks;
 import com.minestellar.reference.DimensionIDs;
+import com.minestellar.reference.References;
 import com.minestellar.util.MoonTeleporter;
 
 import cpw.mods.fml.relauncher.Side;
@@ -48,10 +49,10 @@ public class MoonTeleporterBlock extends BlockBreakable{
 	private static final String __OBFID = "CL_00000284";
 
 	public MoonTeleporterBlock(String name){
-		super("minestellar:" + name, Material.portal, false);
+		super(References.MOD_ID + name, Material.portal, false);
 		this.setTickRandomly(true);
 		this.setBlockName(name);
-		this.setBlockTextureName("tutorial:" + name);
+		this.setBlockTextureName(References.MOD_ID + name);
 		this.setCreativeTab(Minestellar.minestellarTab);
 	}
 
@@ -114,43 +115,6 @@ public class MoonTeleporterBlock extends BlockBreakable{
 	public boolean renderAsNormalBlock(){
 		return false;
 	}
-
-	public boolean getPortalSize(World world, int x, int y, int z) {
-		MoonTeleporterBlock.Size size = new MoonTeleporterBlock.Size(world, x, y, z, 1);
-		MoonTeleporterBlock.Size size1 = new MoonTeleporterBlock.Size(world, x, y, z, 2);
-		if (size.func_150860_b() && size.field_150864_e == 0) {
-			size.func_150859_c();
-			return true;
-		}
-		else if (size1.func_150860_b() && size1.field_150864_e == 0) {
-			size1.func_150859_c();
-			return true;
-		} else {
-			return false;
-		}
-	}
-
-	/**
-	 * Lets the block know when one of its neighbor changes. Doesn't know which neighbor changed (coordinates passed are
-	 * their own) Args: x, y, z, neighbor Block
-	 */
-    public void onNeighborBlockChange(World world, int x, int y, int z, Block block){
-        int l = func_149999_b(world.getBlockMetadata(x, y, z));
-        MoonTeleporterBlock.Size size = new MoonTeleporterBlock.Size(world, x, y, z, 1);
-        MoonTeleporterBlock.Size size1 = new MoonTeleporterBlock.Size(world, x, y, z, 2);
-        if (l == 1 && (!size.func_150860_b() || size.field_150864_e < size.field_150868_h * size.field_150862_g))
-        {
-            world.setBlock(x, y, z, Blocks.air);
-        }
-        else if (l == 2 && (!size1.func_150860_b() || size1.field_150864_e < size1.field_150868_h * size1.field_150862_g))
-        {
-            world.setBlock(x, y, z, Blocks.air);
-        }
-        else if (l == 0 && !size.func_150860_b() && !size1.func_150860_b())
-        {
-            world.setBlock(x, y, z, Blocks.air);
-        }
-    }
 
 	/**
 	 * Returns true if the given side of this block type should be rendered, if the adjacent block is at the given
@@ -265,148 +229,4 @@ public class MoonTeleporterBlock extends BlockBreakable{
 		return Item.getItemById(0);
 	}
 
-	public static class Size{
-		private final World worldObj;
-		private final int field_150865_b;
-		private final int field_150866_c;
-		private final int field_150863_d;
-		private int field_150864_e = 0;
-		private ChunkCoordinates field_150861_f;
-		private int field_150862_g;
-		private int field_150868_h;
-		
-		private static final String __OBFID = "CL_00000285";
-
-		public Size(World p_i45415_1_, int p_i45415_2_, int p_i45415_3_, int p_i45415_4_, int p_i45415_5_){
-			this.worldObj = p_i45415_1_;
-			this.field_150865_b = p_i45415_5_;
-			this.field_150863_d = MoonTeleporterBlock.field_150001_a[p_i45415_5_][0];
-			this.field_150866_c = MoonTeleporterBlock.field_150001_a[p_i45415_5_][1];
-
-			for (int i1 = p_i45415_3_; p_i45415_3_ > i1 - 21 && p_i45415_3_ > 0 && this.getBlockMaterial(p_i45415_1_.getBlock(p_i45415_2_, p_i45415_3_ - 1, p_i45415_4_)); --p_i45415_3_){
-				;
-			}
-
-			int j1 = this.func_150853_a(p_i45415_2_, p_i45415_3_, p_i45415_4_, this.field_150863_d) - 1;
-
-			if (j1 >= 0){
-				this.field_150861_f = new ChunkCoordinates(p_i45415_2_ + j1 * Direction.offsetX[this.field_150863_d], p_i45415_3_, p_i45415_4_ + j1 * Direction.offsetZ[this.field_150863_d]);
-				this.field_150868_h = this.func_150853_a(this.field_150861_f.posX, this.field_150861_f.posY, this.field_150861_f.posZ, this.field_150866_c);
-
-				if (this.field_150868_h < 2 || this.field_150868_h > 21){
-					this.field_150861_f = null;
-					this.field_150868_h = 0;
-				}
-			}
-
-			if (this.field_150861_f != null){
-				this.field_150862_g = this.func_150858_a();
-			}
-		}
-
-		protected int func_150853_a(int x, int y, int z, int p_150853_4_){
-			int j1 = Direction.offsetX[p_150853_4_];
-			int k1 = Direction.offsetZ[p_150853_4_];
-			int i1;
-			Block block;
-
-			for (i1 = 0; i1 < 22; ++i1){
-				block = this.worldObj.getBlock(x + j1 * i1, y, z + k1 * i1);
-
-				if (!this.getBlockMaterial(block)){
-					break;
-				}
-
-				Block block1 = this.worldObj.getBlock(x + j1 * i1, y - 1, z + k1 * i1);
-
-				if (block1 != Blocks.stone){
-					break;
-				}
-			}
-
-			block = this.worldObj.getBlock(x + j1 * i1, y, z + k1 * i1);
-			return block == Blocks.stone ? i1 : 0;
-		}
-
-		protected int func_150858_a(){
-			int i;
-			int j;
-			int k;
-			int l;
-			label56:
-
-				for (this.field_150862_g = 0; this.field_150862_g < 21; ++this.field_150862_g){
-					i = this.field_150861_f.posY + this.field_150862_g;
-
-					for (j = 0; j < this.field_150868_h; ++j){
-						k = this.field_150861_f.posX + j * Direction.offsetX[MoonTeleporterBlock.field_150001_a[this.field_150865_b][1]];
-						l = this.field_150861_f.posZ + j * Direction.offsetZ[MoonTeleporterBlock.field_150001_a[this.field_150865_b][1]];
-						Block block = this.worldObj.getBlock(k, i, l);
-
-						if (!this.getBlockMaterial(block)){
-							break label56;
-						}
-
-						if (block == ModBlocks.moonPortal){
-							++this.field_150864_e;
-						}
-
-						if (j == 0){
-							block = this.worldObj.getBlock(k + Direction.offsetX[MoonTeleporterBlock.field_150001_a[this.field_150865_b][0]], i, l + Direction.offsetZ[MoonTeleporterBlock.field_150001_a[this.field_150865_b][0]]);
-
-							if (block != Blocks.stone){
-								break label56;
-							}
-						}else if (j == this.field_150868_h - 1){
-							block = this.worldObj.getBlock(k + Direction.offsetX[MoonTeleporterBlock.field_150001_a[this.field_150865_b][1]], i, l + Direction.offsetZ[MoonTeleporterBlock.field_150001_a[this.field_150865_b][1]]);
-
-							if (block != Blocks.stone){
-								break label56;
-							}
-						}
-					}
-				}
-
-			for (i = 0; i < this.field_150868_h; ++i){
-				j = this.field_150861_f.posX + i * Direction.offsetX[MoonTeleporterBlock.field_150001_a[this.field_150865_b][1]];
-				k = this.field_150861_f.posY + this.field_150862_g;
-				l = this.field_150861_f.posZ + i * Direction.offsetZ[MoonTeleporterBlock.field_150001_a[this.field_150865_b][1]];
-
-				if (this.worldObj.getBlock(j, k, l) != Blocks.stone){
-					this.field_150862_g = 0;
-					break;
-				}
-			}
-
-			if (this.field_150862_g <= 21 && this.field_150862_g >= 3){
-				return this.field_150862_g;
-			}else{
-				this.field_150861_f = null;
-				this.field_150868_h = 0;
-				this.field_150862_g = 0;
-				return 0;
-			}
-		}
-		
-		protected boolean getBlockMaterial(Block block){
-			return block.getMaterial() == Material.air || block == ModBlocks.moonPortal;
-		}
-
-		public boolean func_150860_b(){
-			return this.field_150861_f != null && this.field_150868_h >= 2 && this.field_150868_h <= 21 && this.field_150862_g >= 3 && this.field_150862_g <= 21;
-		}
-
-		public void func_150859_c(){
-			for (int i = 0; i < this.field_150868_h; ++i){
-				int j = this.field_150861_f.posX + Direction.offsetX[this.field_150866_c] * i;
-				int k = this.field_150861_f.posZ + Direction.offsetZ[this.field_150866_c] * i;
-
-				for (int l = 0; l < this.field_150862_g; ++l){
-					int i1 = this.field_150861_f.posY + l;
-					this.worldObj.setBlock(j, i1, k, ModBlocks.moonPortal, this.field_150865_b, 2);
-				}
-			}
-		}
-	}
-	
 }

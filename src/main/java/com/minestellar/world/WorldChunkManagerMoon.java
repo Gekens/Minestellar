@@ -16,7 +16,16 @@
 
 package com.minestellar.world;
 
+import static net.minecraft.world.biome.BiomeGenBase.forest;
+import static net.minecraft.world.biome.BiomeGenBase.forestHills;
+import static net.minecraft.world.biome.BiomeGenBase.jungle;
+import static net.minecraft.world.biome.BiomeGenBase.jungleHills;
+import static net.minecraft.world.biome.BiomeGenBase.plains;
+import static net.minecraft.world.biome.BiomeGenBase.taiga;
+import static net.minecraft.world.biome.BiomeGenBase.taigaHills;
+
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -32,6 +41,8 @@ import net.minecraft.world.biome.WorldChunkManager;
 import net.minecraft.world.gen.layer.GenLayer;
 import net.minecraft.world.gen.layer.IntCache;
 
+import com.minestellar.world.biome.ModBiomes;
+import com.minestellar.world.biome.MoonBiome;
 import com.minestellar.world.gen.MoonGenLayer;
 
 import cpw.mods.fml.relauncher.Side;
@@ -51,12 +62,11 @@ public class WorldChunkManagerMoon extends WorldChunkManager{
 	public WorldChunkManagerMoon(){
 		this.biomeCache = new BiomeCache(this);
 		this.biomesToSpawnIn = new ArrayList();
-		this.biomesToSpawnIn.addAll(allowedBiomes);
+		this.biomesToSpawnIn.add(ModBiomes.moonPlains);
 	}
 
 	public WorldChunkManagerMoon(long seed, WorldType worldType){
 		this();
-		// i changed this to my GenLayerTutorial
 		GenLayer[] agenlayer = MoonGenLayer.makeTheWorld(seed, worldType);
 		agenlayer = getModdedBiomeGenerators(worldType, seed, agenlayer);
 		this.genBiomes = agenlayer[0];
