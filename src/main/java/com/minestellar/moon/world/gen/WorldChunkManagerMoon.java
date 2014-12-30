@@ -2,7 +2,7 @@ package com.minestellar.moon.world.gen;
 
 import net.minecraft.world.biome.BiomeGenBase;
 
-import com.minestellar.api.prefab.wgen.MinestellarWorldChunkManager;
+import com.minestellar.api.world.gen.MinestellarWorldChunkManager;
 
 public class WorldChunkManagerMoon extends MinestellarWorldChunkManager
 {

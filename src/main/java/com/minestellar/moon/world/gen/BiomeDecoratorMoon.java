@@ -2,25 +2,22 @@ package com.minestellar.moon.world.gen;
 
 import net.minecraft.world.World;
 
-import com.minestellar.api.prefab.wgen.BiomeDecorator;
+import com.minestellar.api.world.gen.MinestellarBiomeDecorator;
 
-public class BiomeDecoratorMoon extends BiomeDecorator
+public class BiomeDecoratorMoon extends MinestellarBiomeDecorator
 {	
-//	protected WorldGenerator dirtyIce;
-//	protected WorldGenerator denceIce;
+//	protected WorldGenerator oreExample;
 	private World currentWorld;
 
 	public BiomeDecoratorMoon()
 	{
-//		this.dirtyIce = new WorldGenMinableMeta(EuropaBlocks.europaIce, 8, 1, true, EuropaBlocks.europaIce, 2);
-//		this.denceIce = new WorldGenMinableMeta(EuropaBlocks.europaIce, 8, 2, true, EuropaBlocks.europaIce, 2);
+//		this.oreExample = new WorldGenMinableMeta(MoonBlocks.moonOreBlocks, 8, 1, true, MoonBlocks.moonBasicBlocks, 2);
 	}
 
 	@Override
 	public void decorate()
 	{
-//		this.generateOre(32, this.dirtyIce, 0, 256);
-//		this.generateOre(32, this.denceIce, 0, 256);
+//		this.generateOre(32, this.oreExample, 0, 128);
 	}
     
     protected void setCurrentWorld(World world)

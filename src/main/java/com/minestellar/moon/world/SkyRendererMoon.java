@@ -1,4 +1,4 @@
-   package com.minestellar.moon.world;
+package com.minestellar.moon.world;
 
 import java.util.Random;
 
@@ -15,7 +15,7 @@ import net.minecraftforge.client.IRenderHandler;
 import org.lwjgl.opengl.GL11;
 
 import com.minestellar.api.world.MinestellarWorldProvider;
-import com.minestellar.core.ConfigManagerCore;
+import com.minestellar.core.util.ConfigManagerCore;
 import com.minestellar.moon.MoonCore;
 
 import cpw.mods.fml.client.FMLClientHandler;
@@ -23,7 +23,8 @@ import cpw.mods.fml.client.FMLClientHandler;
 public class SkyRendererMoon extends IRenderHandler
 {
 	private static final ResourceLocation sunTexture = new ResourceLocation("textures/environment/sun.png");
-    private static final ResourceLocation earthTexture = new ResourceLocation(MoonCore.ASSET_PREFIX, "textures/environment/earth_phases.png");
+ //   private static final ResourceLocation earthTexture = new ResourceLocation(MoonCore.ASSET_PREFIX, "textures/environment/earth_phases.png");
+	private static final ResourceLocation earthTexture = new ResourceLocation(MoonCore.ASSET_PREFIX, "textures/environment/earth.png");
 
     public int starGLCallList = GLAllocation.generateDisplayLists(3);
     public int glSkyList;
@@ -33,8 +34,6 @@ public class SkyRendererMoon extends IRenderHandler
 
     public SkyRendererMoon(MinestellarWorldProvider moonProvider)
     {
-//        this.sunSize = 17.5F * moonProvider.getSolarSize();
-
     	GL11.glPushMatrix();
         GL11.glNewList(this.starGLCallList, GL11.GL_COMPILE);
         this.renderStars();
@@ -128,6 +127,7 @@ public class SkyRendererMoon extends IRenderHandler
 
         GL11.glPushMatrix();
 
+        // SUN:
         GL11.glRotatef(-90.0F, 0.0F, 1.0F, 0.0F);
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 5F);
         GL11.glRotatef(world.getCelestialAngle(partialTicks) * 360.0F, 1.0F, 0.0F, 0.0F);
@@ -146,7 +146,7 @@ public class SkyRendererMoon extends IRenderHandler
 
         GL11.glDisable(GL11.GL_BLEND);
 
-        // HOME:
+        // EARTH:
         var12 = 50.0F;
         final float earthRotation = (float) (world.getSpawnPoint().posZ - mc.thePlayer.posZ) * 0.01F;
         GL11.glScalef(0.6F, 0.6F, 0.6F);
@@ -156,10 +156,10 @@ public class SkyRendererMoon extends IRenderHandler
         FMLClientHandler.instance().getClient().renderEngine.bindTexture(SkyRendererMoon.earthTexture);
         world.getMoonPhase();
         var23.startDrawingQuads();
-        var23.addVertexWithUV(-var12, -500.0D, var12, 0, 1);
-        var23.addVertexWithUV(var12, -500.0D, var12, 1, 1);
-        var23.addVertexWithUV(var12, -500.0D, -var12, 1, 0);
-        var23.addVertexWithUV(-var12, -500.0D, -var12, 0, 0);
+        var23.addVertexWithUV(-var12, -400.0D, var12, 0, 1);
+        var23.addVertexWithUV(var12, -400.0D, var12, 1, 1);
+        var23.addVertexWithUV(var12, -400.0D, -var12, 1, 0);
+        var23.addVertexWithUV(-var12, -400.0D, -var12, 0, 0);
         var23.draw();
 
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);

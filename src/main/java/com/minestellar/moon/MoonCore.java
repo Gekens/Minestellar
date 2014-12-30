@@ -6,10 +6,11 @@ import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 
-import com.minestellar.core.Version;
+import com.minestellar.core.Constants;
 import com.minestellar.moon.blocks.MoonBlocks;
 import com.minestellar.moon.items.MoonItems;
 import com.minestellar.moon.proxy.CommonProxyMoon;
+import com.minestellar.moon.recipe.RecipeManagerMoon;
 import com.minestellar.moon.world.DimensionMoon;
 
 import cpw.mods.fml.common.Mod;
@@ -22,16 +23,15 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartedEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
 
-@Mod(modid = MoonCore.MOD_ID_MOON, name = MoonCore.MOD_NAME_MOON, version = Version.VERSION)
+@Mod(modid = MoonCore.MOD_ID_MOON, name = MoonCore.MOD_NAME_MOON, version = Constants.VERSION)
 public class MoonCore 
 {
-
 	public static final String MOD_ID_MOON = "Moon";
 	public static final String MOD_NAME_MOON = "Moon";
 	
     public static final String ASSET_PREFIX = "stellarmoon";
     public static final String TEXTURE_PREFIX = MoonCore.ASSET_PREFIX + ":";
-
+    
 	@SidedProxy(clientSide = "com.minestellar.moon.proxy.ClientProxyMoon", serverSide = "com.minestellar.core.proxy.CommonProxyMoon")
 	public static CommonProxyMoon proxy;
 	
@@ -45,8 +45,7 @@ public class MoonCore
 
 		MoonBlocks.init();		
 		MoonItems.init();
-		
-//		ModBiomes.registerWithBiomeDictionary(); // TODO: ???
+
 		DimensionMoon.registerWorldProvider();
 		DimensionMoon.registerDimensions();
 		
@@ -76,7 +75,7 @@ public class MoonCore
     @EventHandler
     public void postInit(FMLPostInitializationEvent event) 
     {
-//    	RecipeManagerMoon.loadRecipes();
+    	RecipeManagerMoon.loadRecipes();
     	
         this.proxy.postInit(event);
     }

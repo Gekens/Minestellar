@@ -9,6 +9,8 @@ import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraftforge.client.IRenderHandler;
 import net.minecraftforge.common.DimensionManager;
 
+import com.minestellar.api.vector.Vector3;
+import com.minestellar.api.world.MinestellarWorldProvider;
 import com.minestellar.moon.ConfigManagerMoon;
 import com.minestellar.moon.world.gen.ChunkProviderMoon;
 import com.minestellar.moon.world.gen.WorldChunkManagerMoon;
@@ -16,31 +18,9 @@ import com.minestellar.moon.world.gen.WorldChunkManagerMoon;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class WorldProviderMoon extends WorldProvider
-{
-	@Override
-	public float calculateCelestialAngle(long par1, float par3)
-	{
-		final int var4 = (int) (par1 % 58320L);
-		float var5 = (var4 + par3) / 58320.0F - 0.25F;
-
-		if (var5 < 0.0F)
-		{
-			++var5;
-		}
-
-		if (var5 > 1.0F)
-		{
-			--var5;
-		}
-
-		final float var6 = var5;
-		var5 = 1.0F - (float) ((Math.cos(var5 * Math.PI) + 1.0D) / 2.0D);
-		var5 = var6 + (var5 - var6) / 3.0F;
-		return var5;
-	}
-	
-	/** tells Minecraft to use our new Terrain Generator */
+public class WorldProviderMoon extends WorldProvider implements MinestellarWorldProvider
+{    
+	/** Tells Minecraft to use our new Terrain Generator. */
 	@Override
 	public IChunkProvider createChunkGenerator() 
 	{
@@ -48,44 +28,42 @@ public class WorldProviderMoon extends WorldProvider
 	}
 
 	@Override
-	/** tells Minecraft to use our new WorldChunkManager **/
+	/** Tells Minecraft to use our new WorldChunkManager. **/
 	public void registerWorldChunkManager() 
 	{
 		this.worldChunkMgr = new WorldChunkManagerMoon();
 		this.dimensionId = ConfigManagerMoon.idDimensionMoon;
 	}
 
-	/** Get Provider for Dimension **/
+	/** Get Provider for Dimension. **/
 	public static WorldProvider getProviderForDimension(int id)
 	{
 		return DimensionManager.createProviderFor(ConfigManagerMoon.idDimensionMoon);
 	}
 
 	@Override
-	/**
-	 * @return the name of the dimension
-	 */
+	/** @return the name of the dimension. */
 	public String getDimensionName() 
 	{
 		return "Moon";
 	}
 
 	@Override
-	/** sets/creates the save folder */
+	/** Sets/creates the save folder. */
 	public String getSaveFolder() 
 	{
 		return "DIM" + ConfigManagerMoon.idDimensionMoon;
 	}
 
 	@SideOnly(Side.CLIENT)
-	/** should stars be rendered? */
+	/** Should stars be rendered? */
 	public boolean renderStars() 
 	{
 		return true;
 	}
 
 	@SideOnly(Side.CLIENT)
-	/** @return the player speed */
+	/** @return the player speed. */
 	public double getMovementFactor() 
 	{
 		return 0.04D;
@@ -93,7 +71,7 @@ public class WorldProviderMoon extends WorldProvider
 	
 	@Override
 	@SideOnly(Side.CLIENT)
-	/** @return the light value of the stars*/
+	/** @return the light value of the stars. */
 	public float getStarBrightness(float par1)
 	{
 		final float var2 = this.worldObj.getCelestialAngle(par1);
@@ -113,7 +91,7 @@ public class WorldProviderMoon extends WorldProvider
 	}
 
 	@SideOnly(Side.CLIENT)
-	/** should clouds be rendered? */
+	/** Should clouds be rendered? */
 	public boolean renderClouds() 
 	{
 		return false;
@@ -125,7 +103,7 @@ public class WorldProviderMoon extends WorldProvider
 		return false;
 	}
 
-	/** should the end sky be rendered or the overworld sky? */
+	/** Should the end sky be rendered or the overworld sky? */
 	@SideOnly(Side.CLIENT)
 	public boolean renderEndSky() 
 	{
@@ -133,22 +111,21 @@ public class WorldProviderMoon extends WorldProvider
 	}
 
 	@SideOnly(Side.CLIENT)
-	/** @return the size of the sun */
+	/** @return the size of the sun. */
 	public float setSunSize() 
 	{
 		return 0.5F;
 	}
 
-	/** @return the size of the moon */
+	/** @return the size of the moon. */
 	@SideOnly(Side.CLIENT)
 	public float setMoonSize() 
 	{
 		return 9.0F;
 	}
 
-	/**
-	 * @return the sky color
-	 */
+	/** @return the sky color. */
+	 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public Vec3 getSkyColor(Entity cameraEntity, float partialTicks) 
@@ -157,20 +134,20 @@ public class WorldProviderMoon extends WorldProvider
 	}
 
 	@SideOnly(Side.CLIENT)
-	/** should a color for the sky be rendered? */
+	/** Should a color for the sky be rendered? */
 	public boolean isSkyColored()
 	{
 		return true;
 	}
 
-	/** can the player respawn in this dimension? */
+	/** Can the player respawn in this dimension? */
 	@Override
 	public boolean canRespawnHere()
 	{
 		return true;
 	}
 
-	/** is this a surface world or an underworld */
+	/** Is this a surface world or an underworld? */
 	@Override
 	public boolean isSurfaceWorld()
 	{
@@ -179,7 +156,7 @@ public class WorldProviderMoon extends WorldProvider
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	/** @return the high of the clouds */
+	/** @return the high of the clouds. */
 	public float getCloudHeight()
 	{
 		return 0;
@@ -191,8 +168,7 @@ public class WorldProviderMoon extends WorldProvider
 		return new ChunkCoordinates(50, 5, 0);
 	}
 
-
-	/** the light value in this dimension */
+	/** The light value in this dimension. */
 	@Override
 	protected void generateLightBrightnessTable()
 	{
@@ -205,20 +181,20 @@ public class WorldProviderMoon extends WorldProvider
 		}
 	}
 
-	/** @return the dimension join message */
+	/** @return the dimension join message. */
 	@Override
 	@SideOnly(Side.CLIENT)
 	public String getWelcomeMessage()
 	{
-		return "Entering the Dimension";
+		return "Entering the Moon";
 	}
 
-	/** @return the dimension leave message */
+	/** @return the dimension leave message. */
 	@Override
 	@SideOnly(Side.CLIENT)
 	public String getDepartMessage()
 	{
-		return "Leaving the Dimension";
+		return "Leaving the Moon";
 	}
 
 	@Override
@@ -266,4 +242,41 @@ public class WorldProviderMoon extends WorldProvider
 		return sunriseColors;
 	}
 	
+    @Override
+    public float getGravity()
+    {
+        return 0.062F;
+    }
+
+	@Override
+	public float getFallDamageModifier()
+	{
+		return 0.18F;
+	}
+
+	@Override
+	public boolean hasBreathableAtmosphere()
+	{
+		return false;
+	}
+	
+    @Override
+    public long getDayLength()
+    {
+        return 655200L;
+    }
+
+	@Override
+	public Vector3 getFogColor()
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Vector3 getSkyColor()
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

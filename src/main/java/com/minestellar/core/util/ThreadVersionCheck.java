@@ -7,7 +7,7 @@ import java.net.URL;
 
 import net.minecraft.util.ChatComponentText;
 
-import com.minestellar.core.Version;
+import com.minestellar.core.Constants;
 
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -70,13 +70,13 @@ public class ThreadVersionCheck extends Thread
                             remoteBuildVer = Integer.parseInt(str2[2]);
                         }
 
-                        if (remoteMajVer > Version.LOCALMAJVERSION || remoteMajVer == Version.LOCALMAJVERSION && remoteMinVer > Version.LOCALMINVERSION || remoteMajVer == Version.LOCALMAJVERSION && remoteMinVer == Version.LOCALMINVERSION && remoteBuildVer > Version.LOCALBUILDVERSION)
+                        if (remoteMajVer > Constants.LOCALMAJVERSION || remoteMajVer == Constants.LOCALMAJVERSION && remoteMinVer > Constants.LOCALMINVERSION || remoteMajVer == Constants.LOCALMAJVERSION && remoteMinVer == Constants.LOCALMINVERSION && remoteBuildVer > Constants.LOCALBUILDVERSION)
                         {
                             Thread.sleep(5000);
 
                             if (sideToCheck.equals(Side.CLIENT))
                             {
-                                FMLClientHandler.instance().getClient().thePlayer.addChatMessage(new ChatComponentText(EnumColor.GREY + "New " + EnumColor.DARK_AQUA + "Minestellar" + EnumColor.GREY + " version available! v" + String.valueOf(remoteMajVer) + "." + String.valueOf(remoteMinVer) + "." + String.valueOf(remoteBuildVer) + EnumColor.DARK_BLUE + " http://minestellar.host56.com/"));
+                                FMLClientHandler.instance().getClient().thePlayer.addChatMessage(new ChatComponentText(EnumColorUtil.GREY + "New " + EnumColorUtil.DARK_AQUA + "Minestellar" + EnumColorUtil.GREY + " version available! v" + String.valueOf(remoteMajVer) + "." + String.valueOf(remoteMinVer) + "." + String.valueOf(remoteBuildVer) + EnumColorUtil.DARK_BLUE + " http://minestellar.host56.com/"));
                             }
                             
                             else if (sideToCheck.equals(Side.SERVER))

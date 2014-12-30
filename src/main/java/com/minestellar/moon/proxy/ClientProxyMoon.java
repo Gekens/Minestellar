@@ -1,6 +1,6 @@
 package com.minestellar.moon.proxy;
 
-import com.minestellar.core.util.tick.TickHandlerClient;
+import com.minestellar.core.util.TickHandlerClient;
 
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.event.FMLInitializationEvent;

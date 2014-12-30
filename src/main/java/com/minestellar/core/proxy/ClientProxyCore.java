@@ -1,10 +1,11 @@
 package com.minestellar.core.proxy;
 
+import net.minecraft.block.Block;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraftforge.common.util.EnumHelper;
 
-import com.minestellar.core.util.tick.TickHandlerClient;
+import com.minestellar.core.util.TickHandlerClient;
 
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -14,8 +15,8 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 
 public class ClientProxyCore extends CommonProxyCore
 {
-	public static EnumRarity stellarItem = EnumHelper.addRarity("MinestellarRarity", EnumChatFormatting.WHITE, "Minestellar");
-	
+	public static EnumRarity stellarItem = EnumHelper.addRarity("MinestellarRarity", EnumChatFormatting.WHITE, "MinestellarCore");
+
 	private static int renderIndexTitaniumArmor;
 	
     @Override
@@ -48,8 +49,19 @@ public class ClientProxyCore extends CommonProxyCore
     public void postInit(FMLPostInitializationEvent event) 
     {
     	ClientProxyCore.registerEntityRenderers();
+    	
         super.postInit(event);
     }
+    
+	public void registerRenderInfo() 
+	{
+	}
+	
+	@Override
+	public int getBlockRender(Block block)
+	{
+		return -1;
+	}
     
     public static void registerHandlers()
     {

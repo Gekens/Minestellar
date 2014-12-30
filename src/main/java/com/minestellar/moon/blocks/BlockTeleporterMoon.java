@@ -31,7 +31,7 @@ public class BlockTeleporterMoon extends BlockBreakable
 		super(Minestellar.MOD_ID_CORE + name, Material.portal, false);
 		this.setTickRandomly(true);
 		this.setBlockName(name);
-		this.setBlockTextureName(Minestellar.MOD_ID_CORE + name);
+		this.setBlockTextureName(Minestellar.TEXTURE_PREFIX + name);
 		this.setCreativeTab(CreativeTabs.tabBlock);
 	}
 
@@ -63,8 +63,7 @@ public class BlockTeleporterMoon extends BlockBreakable
 	}
 
 	/**
-	 * Returns a bounding box from the pool of bounding boxes (this means this box can change after the pool has been
-	 * cleared to be reused)
+	 * Returns a bounding box from the pool of bounding boxes (this means this box can change after the pool has been cleared to be reused)
 	 */
 	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z) 
 	{
@@ -120,8 +119,7 @@ public class BlockTeleporterMoon extends BlockBreakable
 	}
 
 	/**
-	 * Returns true if the given side of this block type should be rendered, if the adjacent block is at the given
-	 * coordinates.  Args: blockAccess, x, y, z, side
+	 * Returns true if the given side of this block type should be rendered, if the adjacent block is at the given coordinates.  Args: blockAccess, x, y, z, side
 	 */
 	@SideOnly(Side.CLIENT)
 	public boolean shouldSideBeRendered(IBlockAccess p_149646_1_, int p_149646_2_, int p_149646_3_, int p_149646_4_, int p_149646_5_)

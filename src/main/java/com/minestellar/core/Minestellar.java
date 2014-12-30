@@ -11,7 +11,7 @@ import com.minestellar.core.blocks.CoreBlocks;
 import com.minestellar.core.items.CoreItems;
 import com.minestellar.core.proxy.CommonProxyCore;
 import com.minestellar.core.recipe.RecipeManagerCore;
-import com.minestellar.core.util.LogHelper;
+import com.minestellar.core.util.ConfigManagerCore;
 import com.minestellar.core.util.MinestellarTab;
 import com.minestellar.core.util.ThreadVersionCheck;
 import com.minestellar.core.wgen.OverworldGenerator;
@@ -26,7 +26,7 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartedEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
 
-@Mod(modid = Minestellar.MOD_ID_CORE, name = Minestellar.MOD_NAME_CORE, version = Version.VERSION)
+@Mod(modid = Minestellar.MOD_ID_CORE, name = Minestellar.MOD_NAME_CORE, version = Constants.VERSION)
 public class Minestellar 
 {
 	public static CreativeTabs stellarBlocksTab;
@@ -35,7 +35,7 @@ public class Minestellar
 	public static final String MOD_ID_CORE = "Minestellar";
 	public static final String MOD_NAME_CORE = "Minestellar";
 	
-    public static final String ASSET_PREFIX = "minestellarcore";
+    public static final String ASSET_PREFIX = "stellarcore";
     public static final String TEXTURE_PREFIX = Minestellar.ASSET_PREFIX + ":";
 
 	@SidedProxy(clientSide = "com.minestellar.core.proxy.ClientProxyCore", serverSide = "com.minestellar.core.proxy.CommonProxyCore")
@@ -43,8 +43,6 @@ public class Minestellar
 	
 	@Instance(Minestellar.MOD_ID_CORE)
 	public static Minestellar instance;
-	
-	public static LogHelper log = new LogHelper(Minestellar.MOD_ID_CORE);
 	
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) 
@@ -109,6 +107,12 @@ public class Minestellar
 
 	private void registerOtherEntities()
 	{
+	}
+	
+	@EventHandler
+	public static void PreLoad(FMLPreInitializationEvent PreEvent) 
+	{
+		proxy.registerRenderInfo();
 	}
     
     @EventHandler
