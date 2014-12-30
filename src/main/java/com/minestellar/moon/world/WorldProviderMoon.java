@@ -4,7 +4,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
-import net.minecraft.world.World;
 import net.minecraft.world.WorldProvider;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraftforge.client.IRenderHandler;
@@ -19,6 +18,28 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class WorldProviderMoon extends WorldProvider
 {
+	@Override
+	public float calculateCelestialAngle(long par1, float par3)
+	{
+		final int var4 = (int) (par1 % 58320L);
+		float var5 = (var4 + par3) / 58320.0F - 0.25F;
+
+		if (var5 < 0.0F)
+		{
+			++var5;
+		}
+
+		if (var5 > 1.0F)
+		{
+			--var5;
+		}
+
+		final float var6 = var5;
+		var5 = 1.0F - (float) ((Math.cos(var5 * Math.PI) + 1.0D) / 2.0D);
+		var5 = var6 + (var5 - var6) / 3.0F;
+		return var5;
+	}
+	
 	/** tells Minecraft to use our new Terrain Generator */
 	@Override
 	public IChunkProvider createChunkGenerator() 
@@ -69,12 +90,26 @@ public class WorldProviderMoon extends WorldProvider
 	{
 		return 0.04D;
 	}
-
+	
+	@Override
 	@SideOnly(Side.CLIENT)
 	/** @return the light value of the stars*/
-	public float getStarBrightness(World world, float f) 
+	public float getStarBrightness(float par1)
 	{
-		return 3.0F;
+		final float var2 = this.worldObj.getCelestialAngle(par1);
+		float var3 = 1.0F - (MathHelper.cos(var2 * (float) Math.PI * 2.0F) * 2.0F + 0.25F);
+
+		if (var3 < 0.0F)
+		{
+			var3 = 0.0F;
+		}
+
+		if (var3 > 1.0F)
+		{
+			var3 = 1.0F;
+		}
+
+		return var3 * var3 * 0.5F + 0.3F;
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -161,12 +196,12 @@ public class WorldProviderMoon extends WorldProvider
 	@Override
 	protected void generateLightBrightnessTable()
 	{
-		float f = 0.0F;
+		final float var1 = 0.0F;
 
-		for (int i = 0; i <= 15; ++i)
+		for (int var2 = 0; var2 <= 15; ++var2)
 		{
-			float f1 = 1.0F - (float)i / 15.0F;
-			this.lightBrightnessTable[i] = (1.0F - f1) / (f1 * 3.0F + 1.0F) * (1.0F - f) + f;
+			final float var3 = 1.0F - var2 / 15.0F;
+			this.lightBrightnessTable[var2] = (1.0F - var3) / (var3 * 3.0F + 1.0F) * (1.0F - var1) + var1;
 		}
 	}
 
@@ -189,7 +224,7 @@ public class WorldProviderMoon extends WorldProvider
 	@Override
 	public IRenderHandler getSkyRenderer() 
 	{
-		return new SkyRendererMoon();
+		return new SkyRendererMoon(null);
 	}
 
 	@Override

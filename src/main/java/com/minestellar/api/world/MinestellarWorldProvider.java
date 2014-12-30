@@ -4,4 +4,5 @@ public interface MinestellarWorldProvider{
     public float getGravity();
     public float getFallDamageModifier();
     public boolean hasBreathableAtmosphere();
+	public float getSolarSize();
 }

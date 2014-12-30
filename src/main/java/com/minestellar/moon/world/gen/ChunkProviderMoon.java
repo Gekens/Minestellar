@@ -45,7 +45,11 @@ public class ChunkProviderMoon extends ChunkProviderGenerate
 
 	private final World worldObj;
 	private BiomeGenBase[] biomesForGeneration = { BiomeGenBaseMoon.moon };
+<<<<<<< HEAD
 	private static final int CRATER_PROB = 30000000;
+=======
+	private static final int CRATER_PROB = 500;
+>>>>>>> 6c51eb4dea33b5e1688b235115e8fe5da3617867
 
 	// DO NOT CHANGE
 	private static final int MID_HEIGHT = 64;
@@ -325,7 +329,7 @@ public class ChunkProviderMoon extends ChunkProviderGenerate
 	@Override
 	public String makeString()
 	{
-		return "EuropaLevelSource";
+		return "moonLevelSource";
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
