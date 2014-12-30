@@ -32,7 +32,7 @@ public class ChunkProviderMoon extends ChunkProviderGenerate
 	final Block fillBlockID = MoonBlocks.moonBasicBlocks;
 	final byte fillBlockMeta = 1;
 	final Block lowerBlockID = MoonBlocks.moonBasicBlocks;
-	final byte lowerBlockMeta = 0;
+	final byte lowerBlockMeta = 2;
 
 	private final Random rand;
 
@@ -44,7 +44,7 @@ public class ChunkProviderMoon extends ChunkProviderGenerate
 	public BiomeDecoratorMoon biomedecoratorplanet = new BiomeDecoratorMoon();
 
 	private final World worldObj;
-	private BiomeGenBase[] biomesForGeneration = { BiomeGenBaseMoon.europa };
+	private BiomeGenBase[] biomesForGeneration = { BiomeGenBaseMoon.moon };
 	private static final int CRATER_PROB = 30000000;
 
 	// DO NOT CHANGE
