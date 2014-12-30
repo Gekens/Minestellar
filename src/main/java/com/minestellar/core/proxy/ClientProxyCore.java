@@ -14,7 +14,7 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 
 public class ClientProxyCore extends CommonProxyCore
 {
-	public static EnumRarity stellarItem = EnumHelper.addRarity("MinestellarRarity", EnumChatFormatting.BLUE, "Minestellar");
+	public static EnumRarity stellarItem = EnumHelper.addRarity("MinestellarRarity", EnumChatFormatting.WHITE, "Minestellar");
 	
 	private static int renderIndexTitaniumArmor;
 	

@@ -2,13 +2,9 @@ package com.minestellar.moon.blocks;
 
 import net.minecraft.block.Block;
 
-import com.minestellar.core.Minestellar;
-import com.minestellar.core.util.ItemBlockUtil;
 import com.minestellar.moon.MoonCore;
 import com.minestellar.moon.blocks.items.ItemBlockBasic;
 import com.minestellar.moon.blocks.items.ItemBlockTeleporter;
-
-import cpw.mods.fml.common.registry.GameRegistry;
 
 public class MoonBlocks
 {

@@ -24,6 +24,7 @@ public class ConfigManagerCore
 	}
 	
 	public static boolean enableOverworldOreGen;
+	public static boolean moreStars;
 
 	private void setDefaultValues()
 	{
@@ -32,6 +33,7 @@ public class ConfigManagerCore
 			ConfigManagerCore.configuration.load();
 			
 			ConfigManagerCore.enableOverworldOreGen = ConfigManagerCore.configuration.get(Configuration.CATEGORY_GENERAL, "Enable Overworld Ore Generation", true).getBoolean(true);
+			ConfigManagerCore.moreStars = ConfigManagerCore.configuration.get(Configuration.CATEGORY_GENERAL, "More Stars?", true).getBoolean(true);
 		}
 
 		catch (final Exception e)

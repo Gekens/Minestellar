@@ -7,7 +7,6 @@ import net.minecraftforge.oredict.OreDictionary;
 import com.minestellar.core.Minestellar;
 import com.minestellar.core.blocks.items.ItemBlockDecor;
 import com.minestellar.core.blocks.items.ItemBlockOres;
-import com.minestellar.moon.blocks.BlockTeleporterMoon;
 
 public class CoreBlocks
 {

@@ -9,7 +9,7 @@ import com.minestellar.moon.ConfigManagerMoon;
 
 public class BiomeGenBaseMoon extends BiomeGenBase
 {
-	public static final BiomeGenBase europa = new BiomeGenBaseMoon(ConfigManagerMoon.idBiomeMoon).setBiomeName("Europa");
+	public static final BiomeGenBase moon = new BiomeGenBaseMoon(ConfigManagerMoon.idBiomeMoon).setBiomeName("Moon");
 
 	public BiomeGenBaseMoon(int var1)
 	{

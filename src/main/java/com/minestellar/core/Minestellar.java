@@ -15,7 +15,6 @@ import com.minestellar.core.util.LogHelper;
 import com.minestellar.core.util.MinestellarTab;
 import com.minestellar.core.util.ThreadVersionCheck;
 import com.minestellar.core.wgen.OverworldGenerator;
-import com.minestellar.moon.blocks.MoonBlocks;
 
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
