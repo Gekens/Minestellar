@@ -33,7 +33,7 @@ public class SkyRendererMoon extends IRenderHandler
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void render(float partialTicks, WorldClient world, Minecraft mc) 
+	public void render(float partialTicks, WorldClient world, Minecraft mc)
 	{
 		GL11.glDisable(GL11.GL_TEXTURE_2D);
 		Vec3 vec3 = world.getSkyColor(mc.renderViewEntity, partialTicks);
