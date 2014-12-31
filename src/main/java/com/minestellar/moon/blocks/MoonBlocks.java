@@ -16,7 +16,7 @@ public class MoonBlocks
 		MoonBlocks.moonBasicBlocks = new BlockBasicMoon("moon_basic");
 		MoonBlocks.moonPortal = new BlockTeleporterMoon("moon_portal");
 	}
-	
+
 	public static void setHarvestLevels()
 	{
 	}
@@ -26,11 +26,11 @@ public class MoonBlocks
 		MoonCore.registerBlock(MoonBlocks.moonBasicBlocks, ItemBlockBasic.class);
 		MoonCore.registerBlock(MoonBlocks.moonPortal, ItemBlockTeleporter.class);
 	}
-	
-    public static void oreDictRegistration()
-    {
-    }
-	
+
+	public static void oreDictRegistration()
+	{
+	}
+
 	public static void init()
 	{
 		initBlocks();

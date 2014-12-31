@@ -17,7 +17,7 @@ public class CoreBlocks
 {
 	public static Block coreOreBlocks;
 	public static Block coreDecorBlocks;
-	
+
 	public static Block oilFluidBlock;
 	public static Fluid oilFluid;
 
@@ -25,12 +25,12 @@ public class CoreBlocks
 	{
 		CoreBlocks.coreOreBlocks = new BlockOreCore("minestellar_ore");
 		CoreBlocks.coreDecorBlocks = new BlockDecorCore("minestellar_decor");
-		
+
 		CoreBlocks.oilFluid = new OilFluid("oil").setBlock(CoreBlocks.oilFluidBlock);
 		FluidRegistry.registerFluid(CoreBlocks.oilFluid);
 		CoreBlocks.oilFluidBlock = new BlockFluidOil("oil", CoreBlocks.oilFluid, Material.water);
 	}
-	
+
 	public static void setHarvestLevels()
 	{
 	}
@@ -39,22 +39,24 @@ public class CoreBlocks
 	{
 		Minestellar.registerBlock(CoreBlocks.coreOreBlocks, ItemBlockOres.class);
 		Minestellar.registerBlock(CoreBlocks.coreDecorBlocks, ItemBlockDecor.class);
-		
+
 		Minestellar.registerBlock(CoreBlocks.oilFluidBlock, ItemBlockUtil.class);
 
 	}
-	
-    public static void oreDictRegistration()
-    {
-        OreDictionary.registerOre("oreCopper", new ItemStack(CoreBlocks.coreOreBlocks, 1, 0));
-        OreDictionary.registerOre("oreTin", new ItemStack(CoreBlocks.coreOreBlocks, 1, 1));
-        OreDictionary.registerOre("oreTitanium", new ItemStack(CoreBlocks.coreOreBlocks, 1, 2));
-        
-        OreDictionary.registerOre("blockCopper", new ItemStack(CoreBlocks.coreDecorBlocks, 1, 0));
-        OreDictionary.registerOre("blockTin", new ItemStack(CoreBlocks.coreDecorBlocks, 1, 1));
-        OreDictionary.registerOre("blcokTitanium", new ItemStack(CoreBlocks.coreDecorBlocks, 1, 2));
-    }
-	
+
+	public static void oreDictRegistration()
+	{
+		OreDictionary.registerOre("oreCopper", new ItemStack(CoreBlocks.coreOreBlocks, 1, 0));
+		OreDictionary.registerOre("oreTin", new ItemStack(CoreBlocks.coreOreBlocks, 1, 1));
+		OreDictionary.registerOre("oreTitanium", new ItemStack(CoreBlocks.coreOreBlocks, 1, 2));
+		OreDictionary.registerOre("oreCarbon", new ItemStack(CoreBlocks.coreOreBlocks, 1, 3));
+
+		OreDictionary.registerOre("blockCopper", new ItemStack(CoreBlocks.coreDecorBlocks, 1, 0));
+		OreDictionary.registerOre("blockTin", new ItemStack(CoreBlocks.coreDecorBlocks, 1, 1));
+		OreDictionary.registerOre("blockTitanium", new ItemStack(CoreBlocks.coreDecorBlocks, 1, 2));
+		OreDictionary.registerOre("blockCarbon", new ItemStack(CoreBlocks.coreDecorBlocks, 1, 3));
+	}
+
 	public static void init()
 	{
 		initBlocks();

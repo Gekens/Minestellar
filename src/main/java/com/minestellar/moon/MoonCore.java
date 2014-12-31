@@ -25,34 +25,34 @@ import cpw.mods.fml.common.event.FMLServerStartedEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 @Mod(modid = MoonCore.MOD_ID_MOON, name = MoonCore.MOD_NAME_MOON, version = Constants.VERSION)
-public class MoonCore 
+public class MoonCore
 {
 	public static final String MOD_ID_MOON = "MSMoon";
 	public static final String MOD_NAME_MOON = "Minestellar Moon";
-	
-    public static final String ASSET_PREFIX = "stellarmoon";
-    public static final String TEXTURE_PREFIX = MoonCore.ASSET_PREFIX + ":";
-    
+
+	public static final String ASSET_PREFIX = "stellarmoon";
+	public static final String TEXTURE_PREFIX = MoonCore.ASSET_PREFIX + ":";
+
 	@SidedProxy(clientSide = "com.minestellar.moon.proxy.ClientProxyMoon", serverSide = "com.minestellar.core.proxy.CommonProxyMoon")
 	public static CommonProxyMoon proxy;
-	
+
 	@Instance(MoonCore.MOD_ID_MOON)
 	public static MoonCore instance;
-	
-    @EventHandler
-    public void preInit(FMLPreInitializationEvent event) 
-    {
+
+	@EventHandler
+	public void preInit(FMLPreInitializationEvent event)
+	{
 		new ConfigManagerMoon(new File(event.getModConfigurationDirectory(), "Minestellar/moon.cfg"));
 
-		MoonBlocks.init();		
+		MoonBlocks.init();
 		MoonItems.init();
 
 		DimensionMoon.registerWorldProvider();
 		DimensionMoon.registerDimensions();
-		
-        this.proxy.preInit(event);
-    }
-    
+
+		MoonCore.proxy.preInit(event);
+	}
+
 	public static void registerBlock(Block block, Class<? extends ItemBlock> itemBlockClass)
 	{
 		GameRegistry.registerBlock(block, itemBlockClass, block.getUnlocalizedName().replace("tile.", ""));
@@ -63,28 +63,28 @@ public class MoonCore
 		GameRegistry.registerItem(item, item.getUnlocalizedName().replace("item.", ""));
 	}
 
-    @EventHandler
-    public void init(FMLInitializationEvent event) 
-    {
+	@EventHandler
+	public void init(FMLInitializationEvent event)
+	{
 		this.registerTileEntities();
 		this.registerCreatures();
 		this.registerOtherEntities();
-		
-        this.proxy.init(event);
-    }
 
-    @EventHandler
-    public void postInit(FMLPostInitializationEvent event) 
-    {
-    	RecipeManagerMoon.loadRecipes();
-    	
-        this.proxy.postInit(event);
-    }
-    
+		MoonCore.proxy.init(event);
+	}
+
+	@EventHandler
+	public void postInit(FMLPostInitializationEvent event)
+	{
+		RecipeManagerMoon.loadRecipes();
+
+		MoonCore.proxy.postInit(event);
+	}
+
 	private void registerTileEntities()
 	{
 	}
-	
+
 	private void registerCreatures()
 	{
 	}
@@ -92,9 +92,9 @@ public class MoonCore
 	private void registerOtherEntities()
 	{
 	}
-    
-    @EventHandler
-    public void serverInit(FMLServerStartedEvent event)
-    {
-    }
+
+	@EventHandler
+	public void serverInit(FMLServerStartedEvent event)
+	{
+	}
 }

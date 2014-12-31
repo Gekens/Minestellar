@@ -11,7 +11,7 @@ public class DimensionMoon
 	{
 		DimensionManager.registerDimension(ConfigManagerMoon.idDimensionMoon, ConfigManagerMoon.idDimensionMoon);
 	}
-	
+
 	/** Register dimension world providers with the dimension manager. */
 	public static void registerWorldProvider()
 	{

@@ -29,37 +29,37 @@ import cpw.mods.fml.common.event.FMLServerStartedEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 @Mod(modid = Minestellar.MOD_ID_CORE, name = Minestellar.MOD_NAME_CORE, version = Constants.VERSION)
-public class Minestellar 
+public class Minestellar
 {
 	public static CreativeTabs stellarBlocksTab;
 	public static CreativeTabs stellarItemsTab;
-	
+
 	public static HashMap<String, ItemStack> itemList = new HashMap<String, ItemStack>();
 	public static HashMap<String, ItemStack> blocksList = new HashMap<String, ItemStack>();
-	
+
 	public static final String MOD_ID_CORE = "MSCore";
 	public static final String MOD_NAME_CORE = "Minestellar Core";
-	
-    public static final String ASSET_PREFIX = "stellarcore";
-    public static final String TEXTURE_PREFIX = Minestellar.ASSET_PREFIX + ":";
+
+	public static final String ASSET_PREFIX = "stellarcore";
+	public static final String TEXTURE_PREFIX = Minestellar.ASSET_PREFIX + ":";
 
 	@SidedProxy(clientSide = "com.minestellar.core.proxy.ClientProxyCore", serverSide = "com.minestellar.core.proxy.CommonProxyCore")
 	public static CommonProxyCore proxy;
-	
+
 	@Instance(Minestellar.MOD_ID_CORE)
 	public static Minestellar instance;
-	
-    @EventHandler
-    public void preInit(FMLPreInitializationEvent event) 
-    {
+
+	@EventHandler
+	public void preInit(FMLPreInitializationEvent event)
+	{
 		new ConfigManagerCore(new File(event.getModConfigurationDirectory(), "Minestellar/core.cfg"));
 
-		CoreBlocks.init();		
+		CoreBlocks.init();
 		CoreItems.init();
-		
-        this.proxy.preInit(event);
-    }
-    
+
+		Minestellar.proxy.preInit(event);
+	}
+
 	public static void registerBlock(Block block, Class<? extends ItemBlock> itemBlockClass)
 	{
 		GameRegistry.registerBlock(block, itemBlockClass, block.getUnlocalizedName().replace("tile.", ""));
@@ -70,43 +70,40 @@ public class Minestellar
 		GameRegistry.registerItem(item, item.getUnlocalizedName().replace("item.", ""));
 	}
 
-    @EventHandler
-    public void init(FMLInitializationEvent event) 
-    {
-    	Minestellar.stellarBlocksTab = new MinestellarTab(CreativeTabs.getNextID(), "MinestellarBlocks", Item.getItemFromBlock(CoreBlocks.coreOreBlocks), 1);
-    	Minestellar.stellarItemsTab = new MinestellarTab(CreativeTabs.getNextID(), "MinestellarItems", CoreItems.titaniumPickaxe, 0);
+	@EventHandler
+	public void init(FMLInitializationEvent event)
+	{
+		Minestellar.stellarBlocksTab = new MinestellarTab(CreativeTabs.getNextID(), "MinestellarBlocks", Item.getItemFromBlock(CoreBlocks.coreOreBlocks), 1);
+		Minestellar.stellarItemsTab = new MinestellarTab(CreativeTabs.getNextID(), "MinestellarItems", CoreItems.titaniumPickaxe, 0);
 
-        if (ConfigManagerCore.enableOverworldOreGen == true)
-        {
-            GameRegistry.registerWorldGenerator(new OverworldGenerator(CoreBlocks.coreOreBlocks, 0, 24, 0, 75, 7), 4);
-            GameRegistry.registerWorldGenerator(new OverworldGenerator(CoreBlocks.coreOreBlocks, 1, 22, 0, 60, 7), 4);
-            GameRegistry.registerWorldGenerator(new OverworldGenerator(CoreBlocks.coreOreBlocks, 2, 12, 0, 45, 3), 2);
-            GameRegistry.registerWorldGenerator(new OverworldGenerator(CoreBlocks.oilFluidBlock, 2, 17, 0, 45, 17), 17);
-        }
-        
-        else 	
-        {
-        }
-        
+		if (ConfigManagerCore.enableOverworldOreGen == true)
+		{
+			GameRegistry.registerWorldGenerator(new OverworldGenerator(CoreBlocks.coreOreBlocks, 0, 24, 0, 75, 7), 4);
+			GameRegistry.registerWorldGenerator(new OverworldGenerator(CoreBlocks.coreOreBlocks, 1, 22, 0, 60, 7), 4);
+			GameRegistry.registerWorldGenerator(new OverworldGenerator(CoreBlocks.coreOreBlocks, 2, 12, 0, 45, 3), 2);
+			GameRegistry.registerWorldGenerator(new OverworldGenerator(CoreBlocks.coreOreBlocks, 3, 12, 0, 45, 3), 3);
+			GameRegistry.registerWorldGenerator(new OverworldGenerator(CoreBlocks.oilFluidBlock, 2, 17, 0, 45, 17), 17);
+		}
+
 		this.registerTileEntities();
 		this.registerCreatures();
 		this.registerOtherEntities();
-		
-        this.proxy.init(event);
-    }
 
-    @EventHandler
-    public void postInit(FMLPostInitializationEvent event) 
-    {
-    	RecipeManagerCore.loadRecipes();
-    	
-        this.proxy.postInit(event);
-    }
-    
+		Minestellar.proxy.init(event);
+	}
+
+	@EventHandler
+	public void postInit(FMLPostInitializationEvent event)
+	{
+		RecipeManagerCore.loadRecipes();
+
+		Minestellar.proxy.postInit(event);
+	}
+
 	private void registerTileEntities()
 	{
 	}
-	
+
 	private void registerCreatures()
 	{
 	}
@@ -114,16 +111,16 @@ public class Minestellar
 	private void registerOtherEntities()
 	{
 	}
-	
+
 	@EventHandler
-	public static void PreLoad(FMLPreInitializationEvent PreEvent) 
+	public static void PreLoad(FMLPreInitializationEvent PreEvent)
 	{
 		proxy.registerRenderInfo();
 	}
-    
-    @EventHandler
-    public void serverInit(FMLServerStartedEvent event)
-    {
-        ThreadVersionCheck.startCheck();
-    }
+
+	@EventHandler
+	public void serverInit(FMLServerStartedEvent event)
+	{
+		ThreadVersionCheck.startCheck();
+	}
 }

@@ -21,60 +21,61 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 public class ClientProxyCore extends CommonProxyCore
 {
 	private static Minecraft mc = FMLClientHandler.instance().getClient();
-	
+
 	public static EnumRarity stellarItem = EnumHelper.addRarity("MinestellarRarity", EnumChatFormatting.RED, "MinestellarCore");
 
 	private static int renderIndexTitaniumArmor;
-	
-    @Override
-    public void preInit(FMLPreInitializationEvent event) 
-    {
-    	ClientProxyCore.renderIndexTitaniumArmor = RenderingRegistry.addNewArmourRendererPrefix("titanium");
-    	 
-        super.preInit(event);
-    }
-    
-    @Override
-    public int getTitaniumArmorRenderIndex()
-    {
-        return ClientProxyCore.renderIndexTitaniumArmor;
-    }
 
-    public static void registerEntityRenderers()
-    {   
-    }
-    
-    @Override
-    public void init(FMLInitializationEvent event) 
-    {
-    	FMLCommonHandler.instance().bus().register(new TickHandlerClient());
-    	
-        super.init(event);
-    }
+	@Override
+	public void preInit(FMLPreInitializationEvent event)
+	{
+		ClientProxyCore.renderIndexTitaniumArmor = RenderingRegistry.addNewArmourRendererPrefix("titanium");
 
-    @Override
-    public void postInit(FMLPostInitializationEvent event) 
-    {
-    	ClientProxyCore.registerEntityRenderers();
-    	
-        super.postInit(event);
-    }
-    
-	public void registerRenderInfo() 
+		super.preInit(event);
+	}
+
+	@Override
+	public int getTitaniumArmorRenderIndex()
+	{
+		return ClientProxyCore.renderIndexTitaniumArmor;
+	}
+
+	public static void registerEntityRenderers()
 	{
 	}
-	
+
+	@Override
+	public void init(FMLInitializationEvent event)
+	{
+		FMLCommonHandler.instance().bus().register(new TickHandlerClient());
+
+		super.init(event);
+	}
+
+	@Override
+	public void postInit(FMLPostInitializationEvent event)
+	{
+		ClientProxyCore.registerEntityRenderers();
+
+		super.postInit(event);
+	}
+
+	@Override
+	public void registerRenderInfo()
+	{
+	}
+
 	@Override
 	public int getBlockRender(Block block)
 	{
 		return -1;
 	}
-    
-    public static void registerHandlers()
-    {
-        TickHandlerClient tickHandlerClient = new TickHandlerClient();
-    }
-    
+
+	public static void registerHandlers()
+	{
+		TickHandlerClient tickHandlerClient = new TickHandlerClient();
+	}
+
 	@Override
 	public void spawnParticle(String string, double x, double y, double z)
 	{

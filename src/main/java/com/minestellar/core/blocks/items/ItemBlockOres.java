@@ -9,11 +9,12 @@ import com.minestellar.core.proxy.ClientProxyCore;
 
 public class ItemBlockOres extends ItemBlock
 {
-	private static final String[] types = new String[] 
+	private static final String[] types = new String[]
 	{
-		"copper_ore",
-		"tin_ore",
-		"titanium_ore",
+			"copper_ore",
+			"tin_ore",
+			"titanium_ore",
+			"carbon_ore",
 	};
 
 	public ItemBlockOres(Block par1)

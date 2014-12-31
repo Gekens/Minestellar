@@ -55,7 +55,7 @@ public class BlockBasicMoon extends Block
 	}
 
 	@Override
-	public float getBlockHardness(World par1World, int par2, int par3, int par4) //FIX
+	public float getBlockHardness(World par1World, int par2, int par3, int par4) // FIX
 	{
 		final int meta = par1World.getBlockMetadata(par2, par3, par4);
 
@@ -63,29 +63,27 @@ public class BlockBasicMoon extends Block
 		{
 			return 2.25F;
 		}
-		
+
 		if (meta == 1)
 		{
 			return 2.25F;
 		}
-		
+
 		if (meta == 2)
 		{
 			return 2.75F;
 		}
-			
+
 		return 1.0F;
 	}
-
 
 	@Override
 	public int damageDropped(int meta)
 	{
-/*		if (meta == 2)
-		{
-			return 3;
-		}*/
-		
+		/*
+		 * if (meta == 2) { return 3; }
+		 */
+
 		return meta;
 	}
 }

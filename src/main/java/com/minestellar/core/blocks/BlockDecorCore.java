@@ -26,10 +26,12 @@ public class BlockDecorCore extends Block
 	@Override
 	public void registerBlockIcons(IIconRegister par1IconRegister)
 	{
-		this.stellarBlockIcon = new IIcon[3]; // UPDATE WHEN ADDING BLOCKS
+		this.stellarBlockIcon = new IIcon[5]; // UPDATE WHEN ADDING BLOCKS
 		this.stellarBlockIcon[0] = par1IconRegister.registerIcon(Minestellar.TEXTURE_PREFIX + "blockCopper");
 		this.stellarBlockIcon[1] = par1IconRegister.registerIcon(Minestellar.TEXTURE_PREFIX + "blockTin");
 		this.stellarBlockIcon[2] = par1IconRegister.registerIcon(Minestellar.TEXTURE_PREFIX + "blockTitanium");
+		this.stellarBlockIcon[3] = par1IconRegister.registerIcon(Minestellar.TEXTURE_PREFIX + "blockCarbon");
+		this.stellarBlockIcon[4] = par1IconRegister.registerIcon(Minestellar.TEXTURE_PREFIX + "blockSteel");
 	}
 
 	@Override
@@ -47,14 +49,14 @@ public class BlockDecorCore extends Block
 	@Override
 	public void getSubBlocks(Item block, CreativeTabs creativeTabs, List list)
 	{
-		for (int i = 0; i < 3; ++i) // UPDATE WHEN ADDING BLOCKS
+		for (int i = 0; i < 5; ++i) // UPDATE WHEN ADDING BLOCKS
 		{
 			list.add(new ItemStack(this, 1, i));
 		}
 	}
 
 	@Override
-	public float getBlockHardness(World par1World, int par2, int par3, int par4) //FIX
+	public float getBlockHardness(World par1World, int par2, int par3, int par4) // FIX
 	{
 		final int meta = par1World.getBlockMetadata(par2, par3, par4);
 
@@ -62,29 +64,33 @@ public class BlockDecorCore extends Block
 		{
 			return 3.0F;
 		}
-		
+
 		if (meta == 1)
 		{
 			return 3.0F;
 		}
-		
+
 		if (meta == 2)
 		{
 			return 3.5F;
 		}
-			
+
+		if (meta == 3)
+		{
+			return 3.23F;
+		}
+
+		if (meta == 4)
+		{
+			return 3.45F;
+		}
+
 		return 1.0F;
 	}
-
 
 	@Override
 	public int damageDropped(int meta)
 	{
-/*		if (meta == 2)
-		{
-			return 3;
-		}*/
-		
 		return meta;
 	}
 }

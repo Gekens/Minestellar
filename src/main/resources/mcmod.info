@@ -1,8 +1,8 @@
 [
 {
-  "modid": "examplemod",
-  "name": "Example Mod",
-  "description": "La mia prima Mod!!!",
+  "modid": "MSCore",
+  "name": "Minestellar Core",
+  "description": "Galactic Exploration and more!",
   "version": "${version}",
   "mcversion": "${mcversion}",
   "url": "",

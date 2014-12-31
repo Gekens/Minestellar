@@ -23,149 +23,149 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public abstract class ItemCanisterGeneric extends ItemFluidContainer
 {
-    private String allowedFluid = null;
-    public final static int EMPTY = FluidContainerRegistry.BUCKET_VOLUME + 1;
-	
+	private String allowedFluid = null;
+	public final static int EMPTY = FluidContainerRegistry.BUCKET_VOLUME + 1;
+
 	public ItemCanisterGeneric(String assetName)
-    {
-        super(0, FluidContainerRegistry.BUCKET_VOLUME);
-        this.setMaxDamage(FluidContainerRegistry.BUCKET_VOLUME + 1);
-        this.setMaxStackSize(1);
-        this.setNoRepair();
-        this.setUnlocalizedName(assetName);
-        this.setContainerItem(CoreItems.canisterOil);
-    }
+	{
+		super(0, FluidContainerRegistry.BUCKET_VOLUME);
+		this.setMaxDamage(FluidContainerRegistry.BUCKET_VOLUME + 1);
+		this.setMaxStackSize(1);
+		this.setNoRepair();
+		this.setUnlocalizedName(assetName);
+		this.setContainerItem(CoreItems.canisterOil);
+	}
 
-    @Override
-    @SideOnly(Side.CLIENT)
-    public EnumRarity getRarity(ItemStack par1ItemStack)
-    {
-    	return ClientProxyCore.stellarItem;
-    }
+	@Override
+	@SideOnly(Side.CLIENT)
+	public EnumRarity getRarity(ItemStack par1ItemStack)
+	{
+		return ClientProxyCore.stellarItem;
+	}
 
-    @Override
-    public CreativeTabs getCreativeTab()
-    {
-    	return Minestellar.stellarItemsTab;
-    }
+	@Override
+	public CreativeTabs getCreativeTab()
+	{
+		return Minestellar.stellarItemsTab;
+	}
 
-    @SuppressWarnings({ "unchecked", "rawtypes" })
-    @Override
-    @SideOnly(Side.CLIENT)
-    public void getSubItems(Item par1, CreativeTabs par2CreativeTabs, List par3List)
-    {
-        par3List.add(new ItemStack(par1, 1, 1));
-    }
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void getSubItems(Item par1, CreativeTabs par2CreativeTabs, List par3List)
+	{
+		par3List.add(new ItemStack(par1, 1, 1));
+	}
 
-    @Override
-    public ItemStack getContainerItem(ItemStack itemStack)
-    {
-        if (itemStack != null && itemStack.getItem() == this.getContainerItem() && itemStack.getItemDamage() == ItemCanisterGeneric.EMPTY)
-        {
-            return null;
-        }
+	@Override
+	public ItemStack getContainerItem(ItemStack itemStack)
+	{
+		if (itemStack != null && itemStack.getItem() == this.getContainerItem() && itemStack.getItemDamage() == ItemCanisterGeneric.EMPTY)
+		{
+			return null;
+		}
 
-        return new ItemStack(this.getContainerItem(), 1, ItemCanisterGeneric.EMPTY);
-    }
+		return new ItemStack(this.getContainerItem(), 1, ItemCanisterGeneric.EMPTY);
+	}
 
-    @Override
-    public void onUpdate(ItemStack par1ItemStack, World par2World, Entity par3Entity, int par4, boolean par5)
-    {
-        if (ItemCanisterGeneric.EMPTY == par1ItemStack.getItemDamage())
-        {
-            final int stackSize = par1ItemStack.stackSize;
+	@Override
+	public void onUpdate(ItemStack par1ItemStack, World par2World, Entity par3Entity, int par4, boolean par5)
+	{
+		if (ItemCanisterGeneric.EMPTY == par1ItemStack.getItemDamage())
+		{
+			final int stackSize = par1ItemStack.stackSize;
 
-            if (!(par1ItemStack.getItem() instanceof ItemCanisterOil))
-            {
-            	NBTTagCompound tag = new NBTTagCompound();
-    			tag.setShort("id", (short)Item.getIdFromItem(CoreItems.canisterOil));
-    	        tag.setByte("Count", (byte)stackSize);
-    	        tag.setShort("Damage", (short)ItemCanisterGeneric.EMPTY);
-    	        par1ItemStack.readFromNBT(tag);
-            }
-        }
-    }
+			if (!(par1ItemStack.getItem() instanceof ItemCanisterOil))
+			{
+				NBTTagCompound tag = new NBTTagCompound();
+				tag.setShort("id", (short) Item.getIdFromItem(CoreItems.canisterOil));
+				tag.setByte("Count", (byte) stackSize);
+				tag.setShort("Damage", (short) ItemCanisterGeneric.EMPTY);
+				par1ItemStack.readFromNBT(tag);
+			}
+		}
+	}
 
-    public void setAllowedFluid(String name)
-    {
-    	this.allowedFluid = new String(name);
-    }
-    
-    public String getAllowedFluid()
-    {
-    	return this.allowedFluid;
-    }
-    
-    @Override
-    public int fill(ItemStack container, FluidStack resource, boolean doFill)
-    {
-    	if (resource == null || resource.getFluid() == null || !(container.getItem() instanceof ItemCanisterGeneric))
-        {
-            return 0;
-        }
-        
-        String fluidName = resource.getFluid().getName();
-        if (container.getItemDamage() == ItemCanisterGeneric.EMPTY)
-        {
-        	for (String key : Minestellar.itemList.keySet())
-        	{
-        		if (key.contains("CanisterFull"))
-        		{
-        			Item i = Minestellar.itemList.get(key).getItem();
-        			if (i instanceof ItemCanisterGeneric && fluidName.equalsIgnoreCase(((ItemCanisterGeneric)i).allowedFluid))
-        			{
-                    	NBTTagCompound tag = new NBTTagCompound();
-        				tag.setShort("id", (short)Item.getIdFromItem(i));
-        		        tag.setByte("Count", (byte)1);
-        		        tag.setShort("Damage", (short)ItemCanisterGeneric.EMPTY);
-        				container.readFromNBT(tag);
-        				
-        				break;
-        			}
-        		}
-        	}
-        }
+	public void setAllowedFluid(String name)
+	{
+		this.allowedFluid = new String(name);
+	}
 
-        if (fluidName.equalsIgnoreCase(((ItemCanisterGeneric)container.getItem()).allowedFluid))
-        {	
-        	int added = super.fill(container, resource, doFill);
-        	container.setItemDamage(Math.min(1, container.getItemDamage() - added));
-        	return added;
-        }
-       
-        return 0;
-    }
-    
-    @Override
-    public FluidStack drain(ItemStack container, int maxDrain, boolean doDrain)
-    {
-    	if (this.allowedFluid == null)
-    	{
-        	return null;
-    	}
-        
-        container.stackTagCompound = null;
-        
-        super.fill(container, this.getFluid(container), true);
+	public String getAllowedFluid()
+	{
+		return this.allowedFluid;
+	}
 
-        return super.drain(container, maxDrain, doDrain);
-    }
+	@Override
+	public int fill(ItemStack container, FluidStack resource, boolean doFill)
+	{
+		if (resource == null || resource.getFluid() == null || !(container.getItem() instanceof ItemCanisterGeneric))
+		{
+			return 0;
+		}
 
-    @Override
-    public FluidStack getFluid(ItemStack container)
-    {
-    	if (this.allowedFluid == null || ItemCanisterGeneric.EMPTY == container.getItemDamage())
-    	{
-        	return null;
-    	}
-        
-        Fluid fluid = FluidRegistry.getFluid(this.allowedFluid);
-        
-        if (fluid == null)
-        {
-        	return null;
-        }
+		String fluidName = resource.getFluid().getName();
+		if (container.getItemDamage() == ItemCanisterGeneric.EMPTY)
+		{
+			for (String key : Minestellar.itemList.keySet())
+			{
+				if (key.contains("CanisterFull"))
+				{
+					Item i = Minestellar.itemList.get(key).getItem();
+					if (i instanceof ItemCanisterGeneric && fluidName.equalsIgnoreCase(((ItemCanisterGeneric) i).allowedFluid))
+					{
+						NBTTagCompound tag = new NBTTagCompound();
+						tag.setShort("id", (short) Item.getIdFromItem(i));
+						tag.setByte("Count", (byte) 1);
+						tag.setShort("Damage", (short) ItemCanisterGeneric.EMPTY);
+						container.readFromNBT(tag);
 
-        return new FluidStack(fluid, ItemCanisterGeneric.EMPTY - container.getItemDamage());
-    }
+						break;
+					}
+				}
+			}
+		}
+
+		if (fluidName.equalsIgnoreCase(((ItemCanisterGeneric) container.getItem()).allowedFluid))
+		{
+			int added = super.fill(container, resource, doFill);
+			container.setItemDamage(Math.min(1, container.getItemDamage() - added));
+			return added;
+		}
+
+		return 0;
+	}
+
+	@Override
+	public FluidStack drain(ItemStack container, int maxDrain, boolean doDrain)
+	{
+		if (this.allowedFluid == null)
+		{
+			return null;
+		}
+
+		container.stackTagCompound = null;
+
+		super.fill(container, this.getFluid(container), true);
+
+		return super.drain(container, maxDrain, doDrain);
+	}
+
+	@Override
+	public FluidStack getFluid(ItemStack container)
+	{
+		if (this.allowedFluid == null || ItemCanisterGeneric.EMPTY == container.getItemDamage())
+		{
+			return null;
+		}
+
+		Fluid fluid = FluidRegistry.getFluid(this.allowedFluid);
+
+		if (fluid == null)
+		{
+			return null;
+		}
+
+		return new FluidStack(fluid, ItemCanisterGeneric.EMPTY - container.getItemDamage());
+	}
 }

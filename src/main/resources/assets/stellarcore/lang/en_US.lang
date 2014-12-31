@@ -4,13 +4,30 @@
 item.ingotCopper.name=Copper Ingot
 item.ingotTin.name=Tin Ingot
 item.ingotTitanium.name=Titanium Ingot
+item.ingotSteel.name=Refined Steel
+item.dustSteel.name=Unrefined Steel Dust
+item.bitsCarbon.name=Carbon Bits
 item.containerCopper.name=Copper Container
 item.containerTin.name=Tin Container
 item.containerTitanium.name=Titanium Container
 item.emptyLiquidCanister.name=Empty Liquid Canister
-item.canisterOil.name=Oil Canister
+item.canisterOil.name=Full Oil Canister
 item.oil_bucket.name=Oil Bucket
+item.oilCanisterPartial.name=Partialy Filled Oil Canister
 item.extractorOil.name=Oil Extractor
+item.compressedCopper.name=Copper Plate
+item.compressedTin.name=Tin Plate
+item.compressedTitanium.name=Titanium Plate
+item.compressedCarbon.name=Carbon Plate
+item.compressedSteel.name=Steel Plate
+item.filterAir.name=Air Filter
+item.filterOil.name=Oil Filter
+item.electricMotor.name=Electric Motor
+item.electricPump.name=Electric Pump
+item.fanSteel.name=Steel Fan
+item.nozzleSteel.name=Steel Nozzle
+item.pipeSteel.name=Steel Pipe
+item.exceleratorCopper.name=Copper Excelerator
 
 # TOOLS
 item.titanium_pickaxe.name=Titanium Pickaxe
@@ -29,9 +46,12 @@ item.titanium_boots.name=Titanium Boots
 tile.minestellar_ore.copper_ore.name=Copper Ore
 tile.minestellar_ore.tin_ore.name=Tin Ore
 tile.minestellar_ore.titanium_ore.name=Titanium Ore
+tile.minestellar_ore.carbon_ore.name=Carbon Ore
 tile.minestellar_decor.copper_block.name=Copper Block
 tile.minestellar_decor.tin_block.name=Tin Block
 tile.minestellar_decor.titanium_block.name=Titanium Block
+tile.minestellar_decor.carbon_block.name=Carbon Block
+tile.minestellar_decor.steel_block.name=Steel Block
 
 # GUIS
 itemGroup.MinestellarBlocks=Minestellar Blocks

@@ -9,11 +9,11 @@ import com.minestellar.core.proxy.ClientProxyCore;
 
 public class ItemBlockBasic extends ItemBlock
 {
-	private static final String[] types = new String[] 
+	private static final String[] types = new String[]
 	{
-		"surfaceRock",
-		"subSurface",
-		"rock",
+			"surfaceRock",
+			"subSurface",
+			"rock",
 	};
 
 	public ItemBlockBasic(Block par1)

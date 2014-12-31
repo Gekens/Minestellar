@@ -44,9 +44,9 @@ public class ChunkProviderMoon extends ChunkProviderGenerate
 	public BiomeDecoratorMoon biomedecoratorplanet = new BiomeDecoratorMoon();
 
 	private final World worldObj;
-	
+
 	private MapGenMoonCave caveGenerator = new MapGenMoonCave();
-	
+
 	private BiomeGenBase[] biomesForGeneration = { BiomeGenBaseMoon.moon };
 	private static final int CRATER_PROB = 500;
 

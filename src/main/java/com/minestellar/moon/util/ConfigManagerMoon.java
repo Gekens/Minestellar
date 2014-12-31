@@ -22,7 +22,7 @@ public class ConfigManagerMoon
 			this.setDefaultValues();
 		}
 	}
-	
+
 	public static int idDimensionMoon;
 	public static int idBiomeMoon;
 
@@ -31,7 +31,7 @@ public class ConfigManagerMoon
 		try
 		{
 			ConfigManagerMoon.configuration.load();
-			
+
 			ConfigManagerMoon.idDimensionMoon = ConfigManagerMoon.configuration.get(Configuration.CATEGORY_GENERAL, "Moon Dimension", -25).getInt(-25);
 			ConfigManagerMoon.idBiomeMoon = ConfigManagerMoon.configuration.get(Configuration.CATEGORY_GENERAL, "Moon Biome", 225).getInt(225);
 		}

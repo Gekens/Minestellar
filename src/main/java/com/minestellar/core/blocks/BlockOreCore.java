@@ -26,10 +26,11 @@ public class BlockOreCore extends Block
 	@Override
 	public void registerBlockIcons(IIconRegister par1IconRegister)
 	{
-		this.stellarBlockIcon = new IIcon[3]; // UPDATE WHEN ADDING BLOCKS
+		this.stellarBlockIcon = new IIcon[4]; // UPDATE WHEN ADDING BLOCKS
 		this.stellarBlockIcon[0] = par1IconRegister.registerIcon(Minestellar.TEXTURE_PREFIX + "oreCopper");
 		this.stellarBlockIcon[1] = par1IconRegister.registerIcon(Minestellar.TEXTURE_PREFIX + "oreTin");
 		this.stellarBlockIcon[2] = par1IconRegister.registerIcon(Minestellar.TEXTURE_PREFIX + "oreTitanium");
+		this.stellarBlockIcon[3] = par1IconRegister.registerIcon(Minestellar.TEXTURE_PREFIX + "oreCarbon");
 	}
 
 	@Override
@@ -47,14 +48,14 @@ public class BlockOreCore extends Block
 	@Override
 	public void getSubBlocks(Item block, CreativeTabs creativeTabs, List list)
 	{
-		for (int i = 0; i < 3; ++i) // UPDATE WHEN ADDING BLOCKS
+		for (int i = 0; i < 4; ++i) // UPDATE WHEN ADDING BLOCKS
 		{
 			list.add(new ItemStack(this, 1, i));
 		}
 	}
 
 	@Override
-	public float getBlockHardness(World par1World, int par2, int par3, int par4) //FIX
+	public float getBlockHardness(World par1World, int par2, int par3, int par4) // FIX
 	{
 		final int meta = par1World.getBlockMetadata(par2, par3, par4);
 
@@ -62,29 +63,28 @@ public class BlockOreCore extends Block
 		{
 			return 2.25F;
 		}
-		
+
 		if (meta == 1)
 		{
 			return 2.25F;
 		}
-		
+
 		if (meta == 2)
 		{
 			return 2.75F;
 		}
-			
+
+		if (meta == 3)
+		{
+			return 2.6F;
+		}
+
 		return 1.0F;
 	}
-
 
 	@Override
 	public int damageDropped(int meta)
 	{
-/*		if (meta == 2)
-		{
-			return 3;
-		}*/
-		
 		return meta;
 	}
 }

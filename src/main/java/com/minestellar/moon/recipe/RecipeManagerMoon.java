@@ -1,16 +1,14 @@
 package com.minestellar.moon.recipe;
 
-
-
 public class RecipeManagerMoon
 {
-    private static void addUniversalRecipes()
-    {
+	private static void addUniversalRecipes()
+	{
 
-    }
+	}
 
-    public static void loadRecipes()
-    {
-        RecipeManagerMoon.addUniversalRecipes();
-    }
+	public static void loadRecipes()
+	{
+		RecipeManagerMoon.addUniversalRecipes();
+	}
 }

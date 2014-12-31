@@ -21,11 +21,11 @@ public class MoonItems
 	{
 		Minestellar.registerItem(moonBasicItems);
 	}
-	
-    public static void oreDictRegistration()
-    {
-    }
-	
+
+	public static void oreDictRegistration()
+	{
+	}
+
 	public static void init()
 	{
 		initItems();

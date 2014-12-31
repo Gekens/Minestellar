@@ -19,17 +19,17 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class WorldProviderMoon extends WorldProvider implements MinestellarWorldProvider
-{    
+{
 	/** Tells Minecraft to use our new Terrain Generator. */
 	@Override
-	public IChunkProvider createChunkGenerator() 
+	public IChunkProvider createChunkGenerator()
 	{
 		return new ChunkProviderMoon(this.worldObj, this.worldObj.getSeed(), true);
 	}
 
 	@Override
 	/** Tells Minecraft to use our new WorldChunkManager. **/
-	public void registerWorldChunkManager() 
+	public void registerWorldChunkManager()
 	{
 		this.worldChunkMgr = new WorldChunkManagerMoon();
 		this.dimensionId = ConfigManagerMoon.idDimensionMoon;
@@ -43,32 +43,33 @@ public class WorldProviderMoon extends WorldProvider implements MinestellarWorld
 
 	@Override
 	/** @return the name of the dimension. */
-	public String getDimensionName() 
+	public String getDimensionName()
 	{
 		return "Moon";
 	}
 
 	@Override
 	/** Sets/creates the save folder. */
-	public String getSaveFolder() 
+	public String getSaveFolder()
 	{
 		return "DIM" + ConfigManagerMoon.idDimensionMoon;
 	}
 
 	@SideOnly(Side.CLIENT)
 	/** Should stars be rendered? */
-	public boolean renderStars() 
+	public boolean renderStars()
 	{
 		return true;
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 	/** @return the player speed. */
-	public double getMovementFactor() 
+	public double getMovementFactor()
 	{
 		return 0.04D;
 	}
-	
+
 	@Override
 	@SideOnly(Side.CLIENT)
 	/** @return the light value of the stars. */
@@ -92,47 +93,48 @@ public class WorldProviderMoon extends WorldProvider implements MinestellarWorld
 
 	@SideOnly(Side.CLIENT)
 	/** Should clouds be rendered? */
-	public boolean renderClouds() 
+	public boolean renderClouds()
 	{
 		return false;
 	}
 
 	@SideOnly(Side.CLIENT)
-	public boolean renderVoidFog() 
+	public boolean renderVoidFog()
 	{
 		return false;
 	}
 
 	/** Should the end sky be rendered or the overworld sky? */
 	@SideOnly(Side.CLIENT)
-	public boolean renderEndSky() 
+	public boolean renderEndSky()
 	{
 		return false;
 	}
 
 	@SideOnly(Side.CLIENT)
 	/** @return the size of the sun. */
-	public float setSunSize() 
+	public float setSunSize()
 	{
 		return 0.5F;
 	}
 
 	/** @return the size of the moon. */
 	@SideOnly(Side.CLIENT)
-	public float setMoonSize() 
+	public float setMoonSize()
 	{
 		return 9.0F;
 	}
 
 	/** @return the sky color. */
-	 
+
 	@Override
 	@SideOnly(Side.CLIENT)
-	public Vec3 getSkyColor(Entity cameraEntity, float partialTicks) 
+	public Vec3 getSkyColor(Entity cameraEntity, float partialTicks)
 	{
 		return Vec3.createVectorHelper(0.01F, 0.01F, 0.01F);
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 	/** Should a color for the sky be rendered? */
 	public boolean isSkyColored()
@@ -198,19 +200,19 @@ public class WorldProviderMoon extends WorldProvider implements MinestellarWorld
 	}
 
 	@Override
-	public IRenderHandler getSkyRenderer() 
+	public IRenderHandler getSkyRenderer()
 	{
 		return new SkyRendererMoon(null);
 	}
 
 	@Override
-	public IRenderHandler getCloudRenderer() 
+	public IRenderHandler getCloudRenderer()
 	{
 		return null;
 	}
 
 	@Override
-	public IRenderHandler getWeatherRenderer() 
+	public IRenderHandler getWeatherRenderer()
 	{
 		return null;
 	}
@@ -227,26 +229,27 @@ public class WorldProviderMoon extends WorldProvider implements MinestellarWorld
 	{
 		return Vec3.createVectorHelper(0.0F, 0.0F, 0.0F);
 	}
-	
+
 	@Override
 	@SideOnly(Side.CLIENT)
-    public float[] calcSunriseSunsetColors(float p_76560_1_, float p_76560_2_){
-		
+	public float[] calcSunriseSunsetColors(float p_76560_1_, float p_76560_2_)
+	{
+
 		float[] sunriseColors = new float[4];
-		
+
 		sunriseColors[0] = 0.0F;
 		sunriseColors[1] = 0.0F;
 		sunriseColors[2] = 0.0F;
 		sunriseColors[3] = 0.0F;
-		
+
 		return sunriseColors;
 	}
-	
-    @Override
-    public float getGravity()
-    {
-        return 0.062F;
-    }
+
+	@Override
+	public float getGravity()
+	{
+		return 0.062F;
+	}
 
 	@Override
 	public float getFallDamageModifier()
@@ -259,12 +262,12 @@ public class WorldProviderMoon extends WorldProvider implements MinestellarWorld
 	{
 		return false;
 	}
-	
-    @Override
-    public long getDayLength()
-    {
-        return 655200L;
-    }
+
+	@Override
+	public long getDayLength()
+	{
+		return 655200L;
+	}
 
 	@Override
 	public Vector3 getFogColor()

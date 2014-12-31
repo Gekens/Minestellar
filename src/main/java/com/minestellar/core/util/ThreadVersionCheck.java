@@ -15,102 +15,104 @@ import cpw.mods.fml.relauncher.Side;
 
 public class ThreadVersionCheck extends Thread
 {
-    public static ThreadVersionCheck INSTANCE = new ThreadVersionCheck();
-    private int count = 0;
+	public static ThreadVersionCheck INSTANCE = new ThreadVersionCheck();
+	private int count = 0;
 
-    public static int remoteMajVer;
-    public static int remoteMinVer;
-    public static int remoteBuildVer;
+	public static int remoteMajVer;
+	public static int remoteMinVer;
+	public static int remoteBuildVer;
 
-    public ThreadVersionCheck()
-    {
-        super("Minestellar Version Check Thread");
-    }
+	public ThreadVersionCheck()
+	{
+		super("Minestellar Version Check Thread");
+	}
 
-    public static void startCheck()
-    {
-        final Thread thread = new Thread(ThreadVersionCheck.INSTANCE);
-        thread.start();
-    }
+	public static void startCheck()
+	{
+		final Thread thread = new Thread(ThreadVersionCheck.INSTANCE);
+		thread.start();
+	}
 
-    @Override
-    public void run()
-    {
-        final Side sideToCheck = FMLCommonHandler.instance().getSide();
+	@Override
+	public void run()
+	{
+		final Side sideToCheck = FMLCommonHandler.instance().getSide();
 
-        if (sideToCheck == null)
-        {
-            return;
-        }
+		if (sideToCheck == null)
+		{
+			return;
+		}
 
-        while (this.count < 3 && remoteBuildVer == 0)
-        {
-            try
-            {
-                final URL url = new URL("http://minestellar.host56.com/version.html"); // TODO: Change URL
-                final HttpURLConnection http = (HttpURLConnection) url.openConnection();
-                http.addRequestProperty("User-Agent", "Mozilla/4.76");
-                final BufferedReader in = new BufferedReader(new InputStreamReader(http.getInputStream()));
-                String str;
-                String str2[] = null;
+		while (this.count < 3 && remoteBuildVer == 0)
+		{
+			try
+			{
+				final URL url = new URL("http://minestellar.host56.com/version.html"); // TODO:
+																						// Change
+																						// URL
+				final HttpURLConnection http = (HttpURLConnection) url.openConnection();
+				http.addRequestProperty("User-Agent", "Mozilla/4.76");
+				final BufferedReader in = new BufferedReader(new InputStreamReader(http.getInputStream()));
+				String str;
+				String str2[] = null;
 
-                while ((str = in.readLine()) != null)
-                {
+				while ((str = in.readLine()) != null)
+				{
 
-                    if (str.contains("Version"))
-                    {
-                        str = str.replace("Version=", "");
+					if (str.contains("Version"))
+					{
+						str = str.replace("Version=", "");
 
-                        str2 = str.split("#");
+						str2 = str.split("#");
 
-                        if (str2.length == 3)
-                        {
-                            remoteMajVer = Integer.parseInt(str2[0]);
-                            remoteMinVer = Integer.parseInt(str2[1]);
-                            remoteBuildVer = Integer.parseInt(str2[2]);
-                        }
+						if (str2.length == 3)
+						{
+							remoteMajVer = Integer.parseInt(str2[0]);
+							remoteMinVer = Integer.parseInt(str2[1]);
+							remoteBuildVer = Integer.parseInt(str2[2]);
+						}
 
-                        if (remoteMajVer > Constants.LOCALMAJVERSION || remoteMajVer == Constants.LOCALMAJVERSION && remoteMinVer > Constants.LOCALMINVERSION || remoteMajVer == Constants.LOCALMAJVERSION && remoteMinVer == Constants.LOCALMINVERSION && remoteBuildVer > Constants.LOCALBUILDVERSION)
-                        {
-                            Thread.sleep(5000);
+						if (remoteMajVer > Constants.LOCALMAJVERSION || remoteMajVer == Constants.LOCALMAJVERSION && remoteMinVer > Constants.LOCALMINVERSION || remoteMajVer == Constants.LOCALMAJVERSION && remoteMinVer == Constants.LOCALMINVERSION && remoteBuildVer > Constants.LOCALBUILDVERSION)
+						{
+							Thread.sleep(5000);
 
-                            if (sideToCheck.equals(Side.CLIENT))
-                            {
-                                FMLClientHandler.instance().getClient().thePlayer.addChatMessage(new ChatComponentText(EnumColorUtil.GREY + "New " + EnumColorUtil.DARK_AQUA + "Minestellar" + EnumColorUtil.GREY + " version available! v" + String.valueOf(remoteMajVer) + "." + String.valueOf(remoteMinVer) + "." + String.valueOf(remoteBuildVer) + EnumColorUtil.DARK_BLUE + " http://minestellar.host56.com/"));
-                            }
-                            
-                            else if (sideToCheck.equals(Side.SERVER))
-                            {
-                                MinestellarLog.severe("New Minestellar version available! v" + String.valueOf(remoteMajVer) + "." + String.valueOf(remoteMinVer) + "." + String.valueOf(remoteBuildVer) + " http://minestellar.host56.com/");
-                            }
-                        }
-                    }
-                }
-            }
-            
-            catch (final Exception e)
-            {
-            }
+							if (sideToCheck.equals(Side.CLIENT))
+							{
+								FMLClientHandler.instance().getClient().thePlayer.addChatMessage(new ChatComponentText(EnumColorUtil.GREY + "New " + EnumColorUtil.DARK_AQUA + "Minestellar" + EnumColorUtil.GREY + " version available! v" + String.valueOf(remoteMajVer) + "." + String.valueOf(remoteMinVer) + "." + String.valueOf(remoteBuildVer) + EnumColorUtil.DARK_BLUE + " http://minestellar.host56.com/"));
+							}
 
-            if (remoteBuildVer == 0)
-            {
-                try
-                {
-                    MinestellarLog.severe(MinestellarUtil.translate("update.failed.name"));
-                    Thread.sleep(15000);
-                }
-                
-                catch (final InterruptedException e)
-                {
-                }
-            }
-            
-            else
-            {
-                MinestellarLog.info(MinestellarUtil.translate("update.success.name") + " " + remoteMajVer + "." + remoteMinVer + "." + remoteBuildVer);
-            }
+							else if (sideToCheck.equals(Side.SERVER))
+							{
+								MinestellarLog.severe("New Minestellar version available! v" + String.valueOf(remoteMajVer) + "." + String.valueOf(remoteMinVer) + "." + String.valueOf(remoteBuildVer) + " http://minestellar.host56.com/");
+							}
+						}
+					}
+				}
+			}
 
-            this.count++;
-        }
-    }
+			catch (final Exception e)
+			{
+			}
+
+			if (remoteBuildVer == 0)
+			{
+				try
+				{
+					MinestellarLog.severe(MinestellarUtil.translate("update.failed.name"));
+					Thread.sleep(15000);
+				}
+
+				catch (final InterruptedException e)
+				{
+				}
+			}
+
+			else
+			{
+				MinestellarLog.info(MinestellarUtil.translate("update.success.name") + " " + remoteMajVer + "." + remoteMinVer + "." + remoteBuildVer);
+			}
+
+			this.count++;
+		}
+	}
 }
