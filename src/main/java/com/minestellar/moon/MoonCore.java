@@ -7,7 +7,9 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 
 import com.minestellar.core.Constants;
+import com.minestellar.core.util.MinestellarUtil;
 import com.minestellar.moon.blocks.MoonBlocks;
+import com.minestellar.moon.entities.EntityMoonZombie;
 import com.minestellar.moon.items.MoonItems;
 import com.minestellar.moon.proxy.CommonProxyMoon;
 import com.minestellar.moon.recipe.RecipeManagerMoon;
@@ -87,6 +89,7 @@ public class MoonCore
 
 	private void registerCreatures()
 	{
+		MinestellarUtil.registerSpaceCreature(EntityMoonZombie.class, "entityZombie", -030201, -102030);
 	}
 
 	private void registerOtherEntities()

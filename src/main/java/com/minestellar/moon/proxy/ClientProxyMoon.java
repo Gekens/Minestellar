@@ -1,11 +1,20 @@
 package com.minestellar.moon.proxy;
 
-import com.minestellar.core.util.TickHandlerClient;
+import java.util.Random;
 
+import net.minecraft.entity.EntityList;
+
+import com.minestellar.core.util.TickHandlerClient;
+import com.minestellar.moon.MoonCore;
+import com.minestellar.moon.entities.EntityMoonZombie;
+import com.minestellar.moon.entities.render.RenderMoonZombie;
+
+import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.registry.EntityRegistry;
 
 public class ClientProxyMoon extends CommonProxyMoon
 {
@@ -17,6 +26,7 @@ public class ClientProxyMoon extends CommonProxyMoon
 
 	public static void registerEntityRenderers()
 	{
+		RenderingRegistry.registerEntityRenderingHandler(EntityMoonZombie.class, new RenderMoonZombie());
 	}
 
 	@Override
