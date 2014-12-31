@@ -17,7 +17,9 @@ public class CoreBlocks
 {
 	public static Block coreOreBlocks;
 	public static Block coreDecorBlocks;
-
+	
+	public static Block cableBlock;
+	
 	public static Block oilFluidBlock;
 	public static Fluid oilFluid;
 
@@ -25,6 +27,7 @@ public class CoreBlocks
 	{
 		CoreBlocks.coreOreBlocks = new BlockOreCore("minestellar_ore");
 		CoreBlocks.coreDecorBlocks = new BlockDecorCore("minestellar_decor");
+		CoreBlocks.cableBlock = new BlockCable("minestellar_cable");
 
 		CoreBlocks.oilFluid = new OilFluid("oil").setBlock(CoreBlocks.oilFluidBlock);
 		FluidRegistry.registerFluid(CoreBlocks.oilFluid);
@@ -39,7 +42,9 @@ public class CoreBlocks
 	{
 		Minestellar.registerBlock(CoreBlocks.coreOreBlocks, ItemBlockOres.class);
 		Minestellar.registerBlock(CoreBlocks.coreDecorBlocks, ItemBlockDecor.class);
-
+		
+		Minestellar.registerBlock(CoreBlocks.cableBlock, ItemBlockUtil.class);
+		
 		Minestellar.registerBlock(CoreBlocks.oilFluidBlock, ItemBlockUtil.class);
 
 	}

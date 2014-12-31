@@ -8,10 +8,13 @@ import net.minecraft.item.EnumRarity;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraftforge.common.util.EnumHelper;
 
+import com.minestellar.core.blocks.tileEntities.TileEntityCable;
 import com.minestellar.core.particles.EntityCoreOilDripFX;
+import com.minestellar.core.render.TileEntityRenderCable;
 import com.minestellar.core.util.TickHandlerClient;
 
 import cpw.mods.fml.client.FMLClientHandler;
+import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
@@ -43,12 +46,18 @@ public class ClientProxyCore extends CommonProxyCore
 	public static void registerEntityRenderers()
 	{
 	}
+	
+	public static void registerTileEntityRenders(){
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityCable.class, new TileEntityRenderCable());
+	}
 
 	@Override
 	public void init(FMLInitializationEvent event)
 	{
 		FMLCommonHandler.instance().bus().register(new TickHandlerClient());
 
+		registerTileEntityRenders();
+		
 		super.init(event);
 	}
 

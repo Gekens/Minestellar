@@ -10,6 +10,7 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 
 import com.minestellar.core.blocks.CoreBlocks;
+import com.minestellar.core.blocks.tileEntities.TileEntityCable;
 import com.minestellar.core.items.CoreItems;
 import com.minestellar.core.proxy.CommonProxyCore;
 import com.minestellar.core.recipe.RecipeManagerCore;
@@ -102,6 +103,7 @@ public class Minestellar
 
 	private void registerTileEntities()
 	{
+		GameRegistry.registerTileEntity(TileEntityCable.class, "cable");
 	}
 
 	private void registerCreatures()
