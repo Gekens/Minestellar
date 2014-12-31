@@ -1,5 +1,0 @@
- - Oxygen; Oxygen Collector, Oxygen Sealer, Oxygen Storage, Oxygen Carbon Pipe
- - Power (red flux); Solar Planel, Thermal Generator, Energy Storage, Light Carbon Wire, Medium Carbon Wire, Heavy Carbon Wire
- - Machines; Chryogenic Bed, Airlock
- - Space mobs; Pig, Cow, Sheep, Chicken, Creeper, Spider, Skeleton, Zombie, Villager
- - Planetary Transport???

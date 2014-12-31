@@ -1,0 +1,35 @@
+# Minestellar Core Language File = UNITED STATES ENGLISH
+
+# GENERAL ITEMS
+item.emptyLiquidCanister.name=Empty Liquid Canister
+item.canisterOil.name=Full Oil Canister
+item.oil_bucket.name=Oil Bucket
+item.oilCanisterPartial.name=Partialy Filled Oil Canister
+item.extractorOil.name=Oil Extractor
+item.exceleratorCopper.name=Copper Excelerator
+
+# TOOLS
+item.titanium_pickaxe.name=Titanium Pickaxe
+item.titanium_axe.name=Titanium Axe
+item.titanium_hoe.name=Titanium Hoe
+item.titanium_shovel.name=Titanium Shovel
+item.titanium_sword.name=Titanium Sword
+
+# ARMOR
+item.titanium_helmet.name=Titanium Helmet
+item.titanium_chestplate.name=Titanium Chestplate
+item.titanium_leggings.name=Titanium Leggings
+item.titanium_boots.name=Titanium Boots
+
+# BLOCKS
+
+# GUIS
+itemGroup.MinestellarBlocks=Minestellar Blocks
+itemGroup.MinestellarItems=Minestellar Items
+gui.message.oil.name=Oil
+
+# ENITYS
+
+# OTHERS
+update.failed.name=Minestellar update check failed! Trying again in 15 seconds
+update.success.name=Minestellar remote version found:

@@ -9,8 +9,7 @@ import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraftforge.client.IRenderHandler;
 import net.minecraftforge.common.DimensionManager;
 
-import com.minestellar.api.vector.Vector3;
-import com.minestellar.api.world.MinestellarWorldProvider;
+import com.minestellar.api.world.IMinestellarWorldProvider;
 import com.minestellar.moon.util.ConfigManagerMoon;
 import com.minestellar.moon.world.gen.ChunkProviderMoon;
 import com.minestellar.moon.world.gen.WorldChunkManagerMoon;
@@ -18,7 +17,7 @@ import com.minestellar.moon.world.gen.WorldChunkManagerMoon;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class WorldProviderMoon extends WorldProvider implements MinestellarWorldProvider
+public class WorldProviderMoon extends WorldProvider implements IMinestellarWorldProvider
 {
 	/** Tells Minecraft to use our new Terrain Generator. */
 	@Override
@@ -267,19 +266,5 @@ public class WorldProviderMoon extends WorldProvider implements MinestellarWorld
 	public long getDayLength()
 	{
 		return 655200L;
-	}
-
-	@Override
-	public Vector3 getFogColor()
-	{
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Vector3 getSkyColor()
-	{
-		// TODO Auto-generated method stub
-		return null;
 	}
 }

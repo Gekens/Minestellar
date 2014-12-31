@@ -1,3 +1,19 @@
+/**
+ * Copyright (c) 31/dic/2014 Davide Cossu & Matthew Albrecht.
+ *
+ * This program is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU Lesser General Public License as published by the Free
+ * Software Foundation; either version 3 of the License, or (at your option) any
+ * later version.
+ *
+ * This program is distributed in the hope that it will be useful, but WITHOUT ANY
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+ * PARTICULAR PURPOSE. See the GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along with
+ * this program; if not, see <http://www.gnu.org/licenses>.
+ */
+
 package com.minestellar.moon.blocks;
 
 import java.util.List;
@@ -11,8 +27,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
-import com.minestellar.core.Minestellar;
-import com.minestellar.moon.MoonCore;
+import com.minestellar.core.MinestellarCore;
+import com.minestellar.moon.MinestellarMoon;
 
 public class BlockBasicMoon extends Block
 {
@@ -28,15 +44,15 @@ public class BlockBasicMoon extends Block
 	public void registerBlockIcons(IIconRegister par1IconRegister)
 	{
 		this.basicBlockIcon = new IIcon[3]; // UPDATE WHEN ADDING BLOCKS
-		this.basicBlockIcon[0] = par1IconRegister.registerIcon(MoonCore.TEXTURE_PREFIX + "moonSurfaceRock");
-		this.basicBlockIcon[1] = par1IconRegister.registerIcon(MoonCore.TEXTURE_PREFIX + "moonSubRock");
-		this.basicBlockIcon[2] = par1IconRegister.registerIcon(MoonCore.TEXTURE_PREFIX + "moonRock");
+		this.basicBlockIcon[0] = par1IconRegister.registerIcon(MinestellarMoon.TEXTURE_PREFIX + "moonSurfaceRock");
+		this.basicBlockIcon[1] = par1IconRegister.registerIcon(MinestellarMoon.TEXTURE_PREFIX + "moonSubRock");
+		this.basicBlockIcon[2] = par1IconRegister.registerIcon(MinestellarMoon.TEXTURE_PREFIX + "moonRock");
 	}
 
 	@Override
 	public CreativeTabs getCreativeTabToDisplayOn()
 	{
-		return Minestellar.stellarBlocksTab;
+		return MinestellarCore.stellarBlocksTab;
 	}
 
 	@Override

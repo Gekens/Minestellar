@@ -1,3 +1,19 @@
+/**
+ * Copyright (c) 31/dic/2014 Davide Cossu & Matthew Albrecht.
+ *
+ * This program is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU Lesser General Public License as published by the Free
+ * Software Foundation; either version 3 of the License, or (at your option) any
+ * later version.
+ *
+ * This program is distributed in the hope that it will be useful, but WITHOUT ANY
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+ * PARTICULAR PURPOSE. See the GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along with
+ * this program; if not, see <http://www.gnu.org/licenses>.
+ */
+
 package com.minestellar.core.blocks;
 
 import java.util.Random;
@@ -12,7 +28,7 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidStack;
 
-import com.minestellar.core.Minestellar;
+import com.minestellar.core.MinestellarCore;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -63,8 +79,8 @@ public class BlockFluidOil extends BlockFluidClassic
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister par1IconRegister)
 	{
-		BlockFluidOil.oilStillIcon = par1IconRegister.registerIcon(Minestellar.TEXTURE_PREFIX + "oil_flowing");
-		BlockFluidOil.oilFlowingIcon = par1IconRegister.registerIcon(Minestellar.TEXTURE_PREFIX + "oil_still");
+		BlockFluidOil.oilStillIcon = par1IconRegister.registerIcon(MinestellarCore.TEXTURE_PREFIX + "oil_flowing");
+		BlockFluidOil.oilFlowingIcon = par1IconRegister.registerIcon(MinestellarCore.TEXTURE_PREFIX + "oil_still");
 	}
 
 	@Override
@@ -98,7 +114,7 @@ public class BlockFluidOil extends BlockFluidClassic
 			final double d5 = x + rand.nextFloat();
 			final double d6 = y - 1.05D;
 			final double d7 = z + rand.nextFloat();
-			Minestellar.proxy.spawnParticle("oilDrip", d5, d6, d7);
+			MinestellarCore.proxy.spawnParticle("oilDrip", d5, d6, d7);
 		}
 	}
 }

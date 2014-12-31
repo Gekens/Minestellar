@@ -1,3 +1,19 @@
+/**
+ * Copyright (c) 31/dic/2014 Davide Cossu & Matthew Albrecht.
+ *
+ * This program is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU Lesser General Public License as published by the Free
+ * Software Foundation; either version 3 of the License, or (at your option) any
+ * later version.
+ *
+ * This program is distributed in the hope that it will be useful, but WITHOUT ANY
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+ * PARTICULAR PURPOSE. See the GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along with
+ * this program; if not, see <http://www.gnu.org/licenses>.
+ */
+
 package com.minestellar.core.items;
 
 import net.minecraft.init.Items;
@@ -7,9 +23,8 @@ import net.minecraft.item.ItemArmor.ArmorMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.fluids.FluidContainerRegistry;
-import net.minecraftforge.oredict.OreDictionary;
 
-import com.minestellar.core.Minestellar;
+import com.minestellar.core.MinestellarCore;
 import com.minestellar.core.blocks.CoreBlocks;
 
 public class CoreItems
@@ -65,52 +80,27 @@ public class CoreItems
 
 	private static void registerItems()
 	{
-		Minestellar.registerItem(coreBasicItems);
+		MinestellarCore.registerItem(coreBasicItems);
 
-		Minestellar.registerItem(titaniumPickaxe);
-		Minestellar.registerItem(titaniumAxe);
-		Minestellar.registerItem(titaniumHoe);
-		Minestellar.registerItem(titaniumShovel);
-		Minestellar.registerItem(titaniumSword);
+		MinestellarCore.registerItem(titaniumPickaxe);
+		MinestellarCore.registerItem(titaniumAxe);
+		MinestellarCore.registerItem(titaniumHoe);
+		MinestellarCore.registerItem(titaniumShovel);
+		MinestellarCore.registerItem(titaniumSword);
 
-		Minestellar.registerItem(titaniumHelmet);
-		Minestellar.registerItem(titaniumChestplate);
-		Minestellar.registerItem(titaniumLeggings);
-		Minestellar.registerItem(titaniumBoots);
+		MinestellarCore.registerItem(titaniumHelmet);
+		MinestellarCore.registerItem(titaniumChestplate);
+		MinestellarCore.registerItem(titaniumLeggings);
+		MinestellarCore.registerItem(titaniumBoots);
 
-		Minestellar.registerItem(CoreItems.canisterOil);
-		Minestellar.registerItem(CoreItems.extractorOil);
+		MinestellarCore.registerItem(CoreItems.canisterOil);
+		MinestellarCore.registerItem(CoreItems.extractorOil);
 
-		Minestellar.registerItem(oilBucket);
+		MinestellarCore.registerItem(oilBucket);
 	}
 
 	public static void oreDictRegistration()
 	{
-		OreDictionary.registerOre("ingotCopper", new ItemStack(CoreItems.coreBasicItems, 1, 0));
-		OreDictionary.registerOre("ingotTin", new ItemStack(CoreItems.coreBasicItems, 1, 1));
-		OreDictionary.registerOre("ingotTitanium", new ItemStack(CoreItems.coreBasicItems, 1, 2));
-		OreDictionary.registerOre("ingotSteel", new ItemStack(CoreItems.coreBasicItems, 1, 3));
-
-		OreDictionary.registerOre("dustSteel", new ItemStack(CoreItems.coreBasicItems, 1, 4));
-		OreDictionary.registerOre("bitsCarbon", new ItemStack(CoreItems.coreBasicItems, 1, 5));
-
-		OreDictionary.registerOre("containerCopper", new ItemStack(CoreItems.coreBasicItems, 1, 6));
-		OreDictionary.registerOre("containerTin", new ItemStack(CoreItems.coreBasicItems, 1, 7));
-		OreDictionary.registerOre("containerTitanium", new ItemStack(CoreItems.coreBasicItems, 1, 8));
-
-		OreDictionary.registerOre("plateCopper", new ItemStack(CoreItems.coreBasicItems, 1, 9));
-		OreDictionary.registerOre("plateTin", new ItemStack(CoreItems.coreBasicItems, 1, 10));
-		OreDictionary.registerOre("plateTitanium", new ItemStack(CoreItems.coreBasicItems, 1, 11));
-		OreDictionary.registerOre("plateSteel", new ItemStack(CoreItems.coreBasicItems, 1, 12));
-
-		OreDictionary.registerOre("filterAir", new ItemStack(CoreItems.coreBasicItems, 1, 14));
-		OreDictionary.registerOre("filterOil", new ItemStack(CoreItems.coreBasicItems, 1, 15));
-		OreDictionary.registerOre("electricMotor", new ItemStack(CoreItems.coreBasicItems, 1, 16));
-		OreDictionary.registerOre("electricPump", new ItemStack(CoreItems.coreBasicItems, 1, 17));
-		OreDictionary.registerOre("fanSteel", new ItemStack(CoreItems.coreBasicItems, 1, 18));
-		OreDictionary.registerOre("nozzleSteel", new ItemStack(CoreItems.coreBasicItems, 1, 19));
-		OreDictionary.registerOre("pipeSteel", new ItemStack(CoreItems.coreBasicItems, 1, 20));
-		OreDictionary.registerOre("exceleratorCopper", new ItemStack(CoreItems.coreBasicItems, 1, 21));
 	}
 
 	private static void registerFluidContainer()

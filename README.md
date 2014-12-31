@@ -34,7 +34,7 @@ this mod crashes every time?  Have a suggestion?  Found a bug?  Create an issue 
 
 ### Licensing
 
-- Source code Copyright &copy; 2014 Davide Cossu & Mattew Albrecht.
+- Source code Copyright &copy; 2014 Davide Cossu & Matthew Albrecht.
 
   ![GPL3](https://www.gnu.org/graphics/lgplv3-147x51.png)
 

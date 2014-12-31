@@ -18,6 +18,7 @@ package com.minestellar.core.blocks.tileEntities;
 
 import net.minecraft.tileentity.TileEntity;
 
-public class TileEntityCable extends TileEntity{
+public class TileEntityCable extends TileEntity
+{
 
 }

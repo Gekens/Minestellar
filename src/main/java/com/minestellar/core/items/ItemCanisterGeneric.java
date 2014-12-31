@@ -1,3 +1,19 @@
+/**
+ * Copyright (c) 31/dic/2014 Davide Cossu & Matthew Albrecht.
+ *
+ * This program is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU Lesser General Public License as published by the Free
+ * Software Foundation; either version 3 of the License, or (at your option) any
+ * later version.
+ *
+ * This program is distributed in the hope that it will be useful, but WITHOUT ANY
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+ * PARTICULAR PURPOSE. See the GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along with
+ * this program; if not, see <http://www.gnu.org/licenses>.
+ */
+
 package com.minestellar.core.items;
 
 import java.util.List;
@@ -15,7 +31,7 @@ import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.ItemFluidContainer;
 
-import com.minestellar.core.Minestellar;
+import com.minestellar.core.MinestellarCore;
 import com.minestellar.core.proxy.ClientProxyCore;
 
 import cpw.mods.fml.relauncher.Side;
@@ -46,7 +62,7 @@ public abstract class ItemCanisterGeneric extends ItemFluidContainer
 	@Override
 	public CreativeTabs getCreativeTab()
 	{
-		return Minestellar.stellarItemsTab;
+		return MinestellarCore.stellarItemsTab;
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
@@ -107,11 +123,11 @@ public abstract class ItemCanisterGeneric extends ItemFluidContainer
 		String fluidName = resource.getFluid().getName();
 		if (container.getItemDamage() == ItemCanisterGeneric.EMPTY)
 		{
-			for (String key : Minestellar.itemList.keySet())
+			for (String key : MinestellarCore.itemList.keySet())
 			{
 				if (key.contains("CanisterFull"))
 				{
-					Item i = Minestellar.itemList.get(key).getItem();
+					Item i = MinestellarCore.itemList.get(key).getItem();
 					if (i instanceof ItemCanisterGeneric && fluidName.equalsIgnoreCase(((ItemCanisterGeneric) i).allowedFluid))
 					{
 						NBTTagCompound tag = new NBTTagCompound();

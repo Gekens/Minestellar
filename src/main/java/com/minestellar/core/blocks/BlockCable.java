@@ -23,76 +23,77 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
-import com.minestellar.core.Minestellar;
+import com.minestellar.core.MinestellarCore;
 import com.minestellar.core.blocks.tileEntities.TileEntityCable;
 
-public class BlockCable extends BlockContainer{
+public class BlockCable extends BlockContainer
+{
+	public static IIcon cableBlockIcon;
 
-	private IIcon[] cableBlockIcon;
-	
-	protected BlockCable(String name){
+	protected BlockCable(String name)
+	{
 		super(Material.ground);
 		this.setBlockName(name);
-		
-		float pixel = 1F/16F;
-		this.setBlockBounds(11*pixel/2, 11*pixel/2, 11*pixel/2, 1-11*pixel/2, 1-11*pixel/2, 1-11*pixel/2);
+
+		float pixel = 1F / 16F;
+		this.setBlockBounds(11 * pixel / 2, 11 * pixel / 2, 11 * pixel / 2, 1 - 11 * pixel / 2, 1 - 11 * pixel / 2, 1 - 11 * pixel / 2);
 		this.useNeighborBrightness = true;
 	}
 
 	@Override
-	public TileEntity createNewTileEntity(World world, int meta){
+	public TileEntity createNewTileEntity(World world, int meta)
+	{
 		return new TileEntityCable();
 	}
 
 	@Override
 	public CreativeTabs getCreativeTabToDisplayOn()
 	{
-		return Minestellar.stellarBlocksTab;
+		return MinestellarCore.stellarBlocksTab;
 	}
-	
+
 	@Override
-	public int getRenderType(){
+	public int getRenderType()
+	{
 		return -1;
 	}
-	
+
 	@Override
-	public boolean isOpaqueCube(){
-		return false;
-	}
-	
-	@Override
-	public boolean renderAsNormalBlock(){
+	public boolean isOpaqueCube()
+	{
 		return false;
 	}
 
-	/*@Override
-	public void registerBlockIcons(IIconRegister par1IconRegister)
-	{
-		this.cableBlockIcon = new IIcon[4]; // UPDATE WHEN ADDING BLOCKS
-		this.cableBlockIcon[0] = par1IconRegister.registerIcon(Minestellar.TEXTURE_PREFIX + "blockCable");
-		this.cableBlockIcon[1] = par1IconRegister.registerIcon(Minestellar.TEXTURE_PREFIX + "oreTin");
-		this.cableBlockIcon[2] = par1IconRegister.registerIcon(Minestellar.TEXTURE_PREFIX + "oreTitanium");
-	}
-	
 	@Override
-	public IIcon getIcon(int side, int meta)
+	public boolean renderAsNormalBlock()
 	{
-		return this.cableBlockIcon[meta];
+		return false;
 	}
 
-	@Override
-	public void getSubBlocks(Item block, CreativeTabs creativeTabs, List list)
-	{
-		for (int i = 0; i < 2; ++i) // UPDATE WHEN ADDING BLOCKS
-		{
-			list.add(new ItemStack(this, 1, i));
-		}
-	}
-	
-	@Override
-	public int damageDropped(int meta)
-	{
-		return meta;
-	}*/
-	
+	/*
+	 * @Override
+	 * 
+	 * @SideOnly(Side.CLIENT) public void registerBlockIcons(IIconRegister
+	 * par1IconRegister) { BlockCable.cableBlockIcon =
+	 * par1IconRegister.registerIcon(MinestellarCore.TEXTURE_PREFIX +
+	 * "cable_tin"); BlockCable.cableBlockIcon =
+	 * par1IconRegister.registerIcon(MinestellarCore.TEXTURE_PREFIX +
+	 * "cable_copper"); }
+	 * 
+	 * @Override public void registerBlockIcons(IIconRegister par1IconRegister)
+	 * { this.cableBlockIcon = new IIcon[4]; // UPDATE WHEN ADDING BLOCKS
+	 * this.cableBlockIcon[0] =
+	 * par1IconRegister.registerIcon(Minestellar.TEXTURE_PREFIX + "blockCable");
+	 * this.cableBlockIcon[1] =
+	 * par1IconRegister.registerIcon(Minestellar.TEXTURE_PREFIX + "oreTin"); }
+	 * 
+	 * @Override public IIcon getIcon(int side, int meta) { return
+	 * this.cableBlockIcon[meta]; }
+	 * 
+	 * @Override public void getSubBlocks(Item block, CreativeTabs creativeTabs,
+	 * List list) { for (int i = 0; i < 2; ++i) // UPDATE WHEN ADDING BLOCKS {
+	 * list.add(new ItemStack(this, 1, i)); } }
+	 * 
+	 * @Override public int damageDropped(int meta) { return meta; }
+	 */
 }

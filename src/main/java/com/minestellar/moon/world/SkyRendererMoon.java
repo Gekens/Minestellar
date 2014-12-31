@@ -14,19 +14,15 @@ import net.minecraftforge.client.IRenderHandler;
 
 import org.lwjgl.opengl.GL11;
 
-import com.minestellar.api.world.MinestellarWorldProvider;
-import com.minestellar.core.util.ConfigManagerCore;
-import com.minestellar.moon.MoonCore;
+import com.minestellar.api.world.IMinestellarWorldProvider;
+import com.minestellar.moon.MinestellarMoon;
 
 import cpw.mods.fml.client.FMLClientHandler;
 
 public class SkyRendererMoon extends IRenderHandler
 {
 	private static final ResourceLocation sunTexture = new ResourceLocation("textures/environment/sun.png");
-	// private static final ResourceLocation earthTexture = new
-	// ResourceLocation(MoonCore.ASSET_PREFIX,
-	// "textures/environment/earth_phases.png");
-	private static final ResourceLocation earthTexture = new ResourceLocation(MoonCore.ASSET_PREFIX, "textures/environment/earth.png");
+	private static final ResourceLocation earthTexture = new ResourceLocation(MinestellarMoon.ASSET_PREFIX, "textures/environment/earth.png");
 
 	public int starGLCallList = GLAllocation.generateDisplayLists(3);
 	public int glSkyList;
@@ -34,7 +30,7 @@ public class SkyRendererMoon extends IRenderHandler
 
 	private float sunSize;
 
-	public SkyRendererMoon(MinestellarWorldProvider moonProvider)
+	public SkyRendererMoon(IMinestellarWorldProvider moonProvider)
 	{
 		GL11.glPushMatrix();
 		GL11.glNewList(this.starGLCallList, GL11.GL_COMPILE);
@@ -223,7 +219,7 @@ public class SkyRendererMoon extends IRenderHandler
 		final Tessellator var2 = Tessellator.instance;
 		var2.startDrawingQuads();
 
-		for (int var3 = 0; var3 < (ConfigManagerCore.moreStars ? 20000 : 6000); ++var3)
+		for (int var3 = 0; var3 < (20000); ++var3)
 		{
 			double var4 = var1.nextFloat() * 2.0F - 1.0F;
 			double var6 = var1.nextFloat() * 2.0F - 1.0F;
@@ -237,9 +233,9 @@ public class SkyRendererMoon extends IRenderHandler
 				var4 *= var12;
 				var6 *= var12;
 				var8 *= var12;
-				final double var14 = var4 * (ConfigManagerCore.moreStars ? var1.nextDouble() * 100D + 150D : 100.0D);
-				final double var16 = var6 * (ConfigManagerCore.moreStars ? var1.nextDouble() * 100D + 150D : 100.0D);
-				final double var18 = var8 * (ConfigManagerCore.moreStars ? var1.nextDouble() * 100D + 150D : 100.0D);
+				final double var14 = var4 * (var1.nextDouble() * 100D + 150D);
+				final double var16 = var6 * (var1.nextDouble() * 100D + 150D);
+				final double var18 = var8 * (var1.nextDouble() * 100D + 150D);
 				final double var20 = Math.atan2(var4, var8);
 				final double var22 = Math.sin(var20);
 				final double var24 = Math.cos(var20);
