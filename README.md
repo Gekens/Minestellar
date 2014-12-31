@@ -17,7 +17,6 @@ So you found a bug in this project's code?  Think you can make it more efficient
 
 1. If you haven't already, create a Github account.
 2. Click the `Fork` icon located at the top-right of this page (below your username).
-3. Switch to the `develop` branch.
 3. Make the changes that you want to and commit them.
     * If you're making changes locally, you'll have to execute `git commit -a` and `git push` in your command line.
 4. Click `Pull Request` at the right-hand side of the gray bar directly below your fork's name.
