@@ -61,10 +61,10 @@ public class CoreItems
 		CoreItems.carbonAxe = new ItemAxeCore("carbon_axe", CoreItems.TOOL_CARBON);
 		CoreItems.carbonHoe = new ItemHoeCore("carbon_hoe", CoreItems.TOOL_CARBON);
 
-		CoreItems.carbonHelmet = new ItemArmorCarbon("carbon_helmet", CoreItems.ARMOR_CARBON, 7, 0);
-		CoreItems.carbonChestplate = new ItemArmorCarbon("carbon_chestplate", CoreItems.ARMOR_CARBON, 7, 1);
-		CoreItems.carbonLeggings = new ItemArmorCarbon("carbon_leggings", CoreItems.ARMOR_CARBON, 7, 2);
-		CoreItems.carbonBoots = new ItemArmorCarbon("carbon_boots", CoreItems.ARMOR_CARBON, 7, 3);
+		CoreItems.carbonHelmet = new ItemArmorCarbon(0, "helmet");
+		CoreItems.carbonChestplate = new ItemArmorCarbon(1, "chestplate");
+		CoreItems.carbonLeggings = new ItemArmorCarbon(2, "leggings");
+		CoreItems.carbonBoots = new ItemArmorCarbon(3, "boots");
 
 		CoreItems.canisterOil = new ItemCanisterOil("canisterOilPartial");
 		CoreItems.extractorOil = new ItemExtractorOil("extractorOil");
@@ -112,8 +112,8 @@ public class CoreItems
 		OreDictionary.registerOre("ingotTitanium", new ItemStack(CoreItems.coreBasicItems, 1, 6));
 		OreDictionary.registerOre("ingotCarbon", new ItemStack(CoreItems.coreBasicItems, 1, 7));
 
-		/* Dust */
-		OreDictionary.registerOre("ingotCarbon", new ItemStack(CoreItems.coreBasicItems, 1, 8));
+		/* Dusts */
+		OreDictionary.registerOre("dustSteel", new ItemStack(CoreItems.coreBasicItems, 1, 8));
 
 		/* Plates */
 		OreDictionary.registerOre("plateCopper", new ItemStack(CoreItems.coreBasicItems, 1, 9));
@@ -128,6 +128,11 @@ public class CoreItems
 		/* Others */
 		OreDictionary.registerOre("electricMotor", new ItemStack(CoreItems.coreBasicItems, 1, 17));
 		OreDictionary.registerOre("electricPump", new ItemStack(CoreItems.coreBasicItems, 1, 18));
+		OreDictionary.registerOre("filterAir", new ItemStack(CoreItems.coreBasicItems, 1, 19));
+		OreDictionary.registerOre("filterOil", new ItemStack(CoreItems.coreBasicItems, 1, 20));
+		OreDictionary.registerOre("nozzleSteel", new ItemStack(CoreItems.coreBasicItems, 1, 21));
+		OreDictionary.registerOre("pipeSteel", new ItemStack(CoreItems.coreBasicItems, 1, 22));
+		OreDictionary.registerOre("pipeMagnetic", new ItemStack(CoreItems.coreBasicItems, 1, 23));
 	}
 
 	private static void registerFluidContainer()

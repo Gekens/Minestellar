@@ -18,12 +18,14 @@ package com.minestellar.moon.blocks;
 
 import java.util.Random;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockBreakable;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemMonsterPlacer;
 import net.minecraft.util.AxisAlignedBB;
@@ -31,6 +33,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import com.minestellar.core.MinestellarCore;
+import com.minestellar.core.blocks.CoreBlocks;
 import com.minestellar.moon.MinestellarMoon;
 import com.minestellar.moon.util.ConfigManagerMoon;
 import com.minestellar.moon.world.TeleporterMoon;
@@ -300,5 +303,69 @@ public class BlockTeleporterMoon extends BlockBreakable
 	public void registerBlockIcons(IIconRegister iconRegister)
 	{
 		this.blockIcon = iconRegister.registerIcon(MinestellarMoon.TEXTURE_PREFIX + "moon_portal");
+	}
+
+	public boolean tryToCreatePortal(World par1World, int par2, int par3, int par4)
+	{
+		byte b0 = 0;
+		byte b1 = 0;
+
+		if (par1World.getBlock(par2 - 1, par3, par4) == CoreBlocks.teleportBlock || par1World.getBlock(par2 + 1, par3, par4) == CoreBlocks.teleportBlock)
+		{
+			b0 = 1;
+		}
+
+		if (par1World.getBlock(par2, par3, par4 - 1) == CoreBlocks.teleportBlock || par1World.getBlock(par2, par3, par4 + 1) == CoreBlocks.teleportBlock)
+		{
+			b1 = 1;
+		}
+
+		if (b0 == b1)
+		{
+			return false;
+		}
+
+		else
+		{
+			if (par1World.getBlock(par2 - b0, par3, par4 - b1) == Blocks.air)
+			{
+				par2 -= b0;
+				par4 -= b1;
+			}
+
+			int l;
+			int i1;
+
+			for (l = -1; l <= 2; ++l)
+			{
+				for (i1 = -1; i1 <= 3; ++i1)
+				{
+					boolean flag = l == -1 || l == 2 || i1 == -1 || i1 == 3;
+
+					if (l != -1 && l != 2 || i1 != -1 && i1 != 3)
+					{
+						Block j1 = par1World.getBlock(par2 + b0 * l, par3 + i1, par4 + b1 * l);
+
+						if (flag)
+						{
+							if (j1 != CoreBlocks.teleportBlock)
+							{
+								return false;
+							}
+						}
+					}
+				}
+			}
+
+			for (l = 0; l < 2; ++l)
+			{
+				for (i1 = 0; i1 < 3; ++i1)
+				{
+					par1World.setBlock(par2 + b0 * l, par3 + i1, par4 + b1 * l, this, 0, 2);
+				}
+			}
+
+			return true;
+		}
 	}
 }

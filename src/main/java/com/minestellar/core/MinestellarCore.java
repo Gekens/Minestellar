@@ -100,6 +100,8 @@ public class MinestellarCore
 		GameRegistry.registerWorldGenerator(new OverworldGenerator(CoreBlocks.coreOreBlocks, 5, 22, 0, 200, 7), 4);
 		GameRegistry.registerWorldGenerator(new OverworldGenerator(CoreBlocks.coreOreBlocks, 6, 12, 0, 200, 3), 7);
 
+		GameRegistry.registerWorldGenerator(new OverworldGenerator(CoreBlocks.oilFluidBlock, 0, 25, 20, 75, 3), 20);
+
 		this.registerTileEntities();
 		this.registerCreatures();
 		this.registerOtherEntities();

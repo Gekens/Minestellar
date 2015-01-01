@@ -16,11 +16,16 @@
 
 package com.minestellar.moon.recipe;
 
+import net.minecraft.item.ItemStack;
+
+import com.minestellar.core.util.RecipeUtil;
+import com.minestellar.moon.items.MoonItems;
+
 public class RecipeManagerMoon
 {
 	private static void addUniversalRecipes()
 	{
-
+		RecipeUtil.addRecipe(new ItemStack(MoonItems.moonPortalTrigger, 1, 0), new Object[] { "X X", " X ", " X ", "Z", 'X', "pipeSteel" });
 	}
 
 	public static void loadRecipes()

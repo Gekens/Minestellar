@@ -25,7 +25,12 @@ item.compressedTitanium.name=Titanium Plate
 item.compressedCarbon.name=Carbon Plate
 item.electricMotor.name=Electric Motor
 item.electricPump.name=Electric Pump
-
+item.filterAir.name=Air Filter
+item.filterOil.name=Oil Filter
+item.nozzleSteel.name=Steel Nozzle
+item.pipeSteel.name=Steel Pipe
+item.pipeMagnetic.name=Magnetic Pipe
+            
 # TOOLS
 item.carbon_pickaxe.name=Carbon Pickaxe
 item.carbon_axe.name=Carbon Axe
@@ -56,6 +61,7 @@ tile.core_decor.blockAluminum.name=Aluminum Block
 tile.core_decor.blockTitanium.name=Titanium Block
 tile.core_decor.blockCarbon.name=Carbon Block
 tile.core_cable.name=Electrical Cable
+tile.teleporter.name=Planetary Teleporter Block
 
 # GUIS
 itemGroup.MinestellarBlocks=Minestellar Blocks

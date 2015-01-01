@@ -56,6 +56,11 @@ public class ItemBasicCore extends Item
 
 			"electricMotor", // 17
 			"electricPump", // 18
+			"filterAir", // 19
+			"filterOil", // 20
+			"nozzleSteel", // 21
+			"pipeSteel", // 22
+			"pipeMagnetic", // 23
 	};
 
 	protected IIcon[] icons = new IIcon[ItemBasicCore.names.length];

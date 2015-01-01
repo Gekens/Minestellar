@@ -33,8 +33,8 @@ public class CoreBlocks
 {
 	public static Block coreOreBlocks;
 	public static Block coreDecorBlocks;
-
 	public static Block cableBlock;
+	public static Block teleportBlock;
 
 	public static Block oilFluidBlock;
 	public static Fluid oilFluid;
@@ -43,6 +43,7 @@ public class CoreBlocks
 	{
 		CoreBlocks.coreOreBlocks = new BlockOreCore("core_ore");
 		CoreBlocks.coreDecorBlocks = new BlockDecorCore("core_decor");
+		CoreBlocks.teleportBlock = new BlockTeleportCore("teleporter", Material.iron);
 		CoreBlocks.cableBlock = new BlockCable("core_cable");
 
 		CoreBlocks.oilFluid = new OilFluid("oil").setBlock(CoreBlocks.oilFluidBlock);
@@ -58,7 +59,7 @@ public class CoreBlocks
 	{
 		MinestellarCore.registerBlock(CoreBlocks.coreOreBlocks, ItemBlockOres.class);
 		MinestellarCore.registerBlock(CoreBlocks.coreDecorBlocks, ItemBlockDecor.class);
-
+		MinestellarCore.registerBlock(CoreBlocks.teleportBlock, ItemBlockUtil.class);
 		MinestellarCore.registerBlock(CoreBlocks.cableBlock, ItemBlockUtil.class);
 
 		MinestellarCore.registerBlock(CoreBlocks.oilFluidBlock, ItemBlockUtil.class);

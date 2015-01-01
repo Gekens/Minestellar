@@ -23,10 +23,12 @@ import com.minestellar.moon.MinestellarMoon;
 public class MoonItems
 {
 	public static Item moonBasicItems;
+	public static Item moonPortalTrigger;
 
 	private static void initItems()
 	{
 		MoonItems.moonBasicItems = new ItemBasicMoon();
+		MoonItems.moonPortalTrigger = new ItemPortalTrigger("moon_trigger");
 	}
 
 	private static void registerHarvestLevels()
@@ -36,6 +38,7 @@ public class MoonItems
 	private static void registerItems()
 	{
 		MinestellarMoon.registerItem(moonBasicItems);
+		MinestellarMoon.registerItem(moonPortalTrigger);
 	}
 
 	public static void oreDictRegistration()

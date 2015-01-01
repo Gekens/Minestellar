@@ -16,6 +16,7 @@
 
 package com.minestellar.core.recipe;
 
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
@@ -41,9 +42,32 @@ public class RecipeManagerCore
 		RecipeUtil.addRecipe(new ItemStack(CoreItems.carbonAxe), new Object[] { "XX", "XY", " Y", 'X', "ingotCarbon", 'Y', Items.stick });
 
 		// OTHER CRAFTING
-		// TODO: Make rest of crafting
+		RecipeUtil.addRecipe(new ItemStack(CoreItems.extractorOil, 1, 0), new Object[] { "N  ", " T ", "  P", 'N', "nozzleSteel", 'T', "pipeSteel", 'P', "electricPump" });
+		RecipeUtil.addRecipe(new ItemStack(CoreItems.canisterOil, 1, (CoreItems.canisterOil.getMaxDamage())), new Object[] { "F", "T", 'F', "nozzleSteel", 'T', "containerTin" });
+		RecipeUtil.addRecipe(new ItemStack(CoreItems.coreBasicItems, 1, 17), new Object[] { "XRX", "XRX", "XAX", 'X', "plateSteel", 'A', "pipeMagnetic", 'R', "pipeSteel" });
+		RecipeUtil.addRecipe(new ItemStack(CoreItems.coreBasicItems, 1, 18), new Object[] { "XRX", "XRX", "XAX", 'X', "plateTin", 'A', Blocks.piston, 'R', "pipeSteel" });
+		RecipeUtil.addRecipe(new ItemStack(CoreItems.coreBasicItems, 1, 19), new Object[] { "X X", "Y Y", "X X", 'X', "ingotSteel", 'Y', "ingotCopper" });
+		RecipeUtil.addRecipe(new ItemStack(CoreItems.coreBasicItems, 1, 20), new Object[] { "X X", "Y Y", "X X", 'X', "ingotSteel", 'Y', "ingotTin" });
+		RecipeUtil.addRecipe(new ItemStack(CoreItems.coreBasicItems, 1, 21), new Object[] { "X X", " X ", 'X', "ingotSteel" });
+		RecipeUtil.addRecipe(new ItemStack(CoreItems.coreBasicItems, 1, 22), new Object[] { "X", "X", 'X', "ingotSteel" });
+		RecipeUtil.addRecipe(new ItemStack(CoreItems.coreBasicItems, 1, 23), new Object[] { "Y", "X", "Z", 'X', "pipeSteel", 'Y', "compressedLithium", 'Z', "compressedTin" });
+
+		// STEEL RECIPES
+		RecipeUtil.addRecipe(new ItemStack(CoreItems.coreBasicItems, 2, 8), new Object[] { "XY", "Y ", 'X', Items.iron_ingot, 'Y', Items.coal });
+		FurnaceRecipes.smelting().func_151394_a(new ItemStack(CoreItems.coreBasicItems, 1, 8), OreDictionary.getOres("ingotSteel").get(0), 0.2F);
+
+		// PLATE CRAFTING
+		RecipeUtil.addRecipe(new ItemStack(CoreItems.coreBasicItems, 1, 9), new Object[] { "XX", "XX", 'X', "ingotCopper" });
+		RecipeUtil.addRecipe(new ItemStack(CoreItems.coreBasicItems, 1, 10), new Object[] { "XX", "XX", 'X', "ingotTin" });
+		RecipeUtil.addRecipe(new ItemStack(CoreItems.coreBasicItems, 1, 11), new Object[] { "XX", "XX", 'X', "ingotSteel" });
+		RecipeUtil.addRecipe(new ItemStack(CoreItems.coreBasicItems, 1, 12), new Object[] { "XX", "XX", 'X', "ingotLithium" });
+		RecipeUtil.addRecipe(new ItemStack(CoreItems.coreBasicItems, 1, 13), new Object[] { "XX", "XX", 'X', "ingotSilicon" });
+		RecipeUtil.addRecipe(new ItemStack(CoreItems.coreBasicItems, 1, 14), new Object[] { "XX", "XX", 'X', "ingotAluminum" });
+		RecipeUtil.addRecipe(new ItemStack(CoreItems.coreBasicItems, 1, 15), new Object[] { "XX", "XX", 'X', "ingotTitanium" });
+		RecipeUtil.addRecipe(new ItemStack(CoreItems.coreBasicItems, 1, 16), new Object[] { "XX", "XX", 'X', "ingotCarbon" });
 
 		// ITEM TO BLOCK
+		RecipeUtil.addRecipe(new ItemStack(CoreBlocks.teleportBlock, 3, 0), new Object[] { "AXA", "XCX", "AXA", 'X', "plateLithium", 'Y', "plateTitanium", 'A', "plateAluminum" });
 		RecipeUtil.addRecipe(new ItemStack(CoreBlocks.coreDecorBlocks, 1, 0), new Object[] { "XXX", "XXX", "XXX", 'X', "ingotCopper" });
 		RecipeUtil.addRecipe(new ItemStack(CoreBlocks.coreDecorBlocks, 1, 1), new Object[] { "XXX", "XXX", "XXX", 'X', "ingotTin" });
 		RecipeUtil.addRecipe(new ItemStack(CoreBlocks.coreDecorBlocks, 1, 2), new Object[] { "XXX", "XXX", "XXX", 'X', "ingotSteel" });
@@ -71,7 +95,6 @@ public class RecipeManagerCore
 		FurnaceRecipes.smelting().func_151394_a(new ItemStack(CoreBlocks.coreOreBlocks, 1, 4), OreDictionary.getOres("ingotAluminum").get(0), 0.2F);
 		FurnaceRecipes.smelting().func_151394_a(new ItemStack(CoreBlocks.coreOreBlocks, 1, 5), OreDictionary.getOres("ingotTitanium").get(0), 0.2F);
 		FurnaceRecipes.smelting().func_151394_a(new ItemStack(CoreBlocks.coreOreBlocks, 1, 6), OreDictionary.getOres("ingotCarbon").get(0), 0.2F);
-
 	}
 
 	public static void loadRecipes()
