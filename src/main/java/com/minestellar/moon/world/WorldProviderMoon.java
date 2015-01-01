@@ -1,3 +1,19 @@
+/**
+ * Copyright (c) 31/dic/2014 Davide Cossu & Matthew Albrecht.
+ *
+ * This program is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU Lesser General Public License as published by the Free
+ * Software Foundation; either version 3 of the License, or (at your option) any
+ * later version.
+ *
+ * This program is distributed in the hope that it will be useful, but WITHOUT ANY
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+ * PARTICULAR PURPOSE. See the GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along with
+ * this program; if not, see <http://www.gnu.org/licenses>.
+ */
+
 package com.minestellar.moon.world;
 
 import net.minecraft.entity.Entity;
@@ -77,15 +93,7 @@ public class WorldProviderMoon extends WorldProvider implements IMinestellarWorl
 		final float var2 = this.worldObj.getCelestialAngle(par1);
 		float var3 = 1.0F - (MathHelper.cos(var2 * (float) Math.PI * 2.0F) * 2.0F + 0.25F);
 
-		if (var3 < 0.0F)
-		{
-			var3 = 0.0F;
-		}
-
-		if (var3 > 1.0F)
-		{
-			var3 = 1.0F;
-		}
+		var3 = 0.0F;
 
 		return var3 * var3 * 0.5F + 0.3F;
 	}
@@ -100,7 +108,7 @@ public class WorldProviderMoon extends WorldProvider implements IMinestellarWorl
 	@SideOnly(Side.CLIENT)
 	public boolean renderVoidFog()
 	{
-		return false;
+		return true;
 	}
 
 	/** Should the end sky be rendered or the overworld sky? */

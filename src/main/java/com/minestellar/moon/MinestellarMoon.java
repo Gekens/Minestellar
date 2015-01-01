@@ -53,7 +53,7 @@ public class MinestellarMoon
 	public static HashMap<String, ItemStack> blocksList = new HashMap<String, ItemStack>();
 	public static HashMap<String, ItemStack> itemList = new HashMap<String, ItemStack>();
 
-	@Instance
+	@Instance(MinestellarMoon.MODID)
 	public static MinestellarMoon instance = new MinestellarMoon();
 
 	@SidedProxy(clientSide = "com.minestellar.moon.proxy.ClientProxyMoon", serverSide = "com.minestellar.moon.proxy.CommonProxyMoon")
