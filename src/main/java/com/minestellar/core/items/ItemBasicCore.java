@@ -34,7 +34,29 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class ItemBasicCore extends Item
 {
 	private static String[] names = {
-			};
+			"ingotCopper", // 0
+			"ingotTin", // 1
+			"ingotSteel", // 2
+			"ingotLithium", // 3
+			"ingotSilicon", // 4
+			"ingotAluminum", // 5
+			"ingotTitanium", // 6
+			"ingotCarbon", // 7
+
+			"dustSteel", // 8
+
+			"compressedCopper", // 9
+			"compressedTin", // 10
+			"compressedSteel", // 11
+			"compressedLithium", // 12
+			"compressedSilicon", // 13
+			"compressedAluminum", // 14
+			"compressedTitanium", // 15
+			"compressedCarbon", // 16
+
+			"electricMotor", // 17
+			"electricPump", // 18
+	};
 
 	protected IIcon[] icons = new IIcon[ItemBasicCore.names.length];
 

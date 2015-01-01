@@ -38,7 +38,7 @@ public class CommonProxyCore
 	{
 	}
 
-	public int getTitaniumArmorRenderIndex()
+	public int getCarbonArmorRenderIndex()
 	{
 		return 0;
 	}

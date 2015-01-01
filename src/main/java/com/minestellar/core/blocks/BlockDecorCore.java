@@ -42,10 +42,15 @@ public class BlockDecorCore extends Block
 	@Override
 	public void registerBlockIcons(IIconRegister par1IconRegister)
 	{
-		this.decorBlockIcon = new IIcon[0]; // UPDATE WHEN ADDING BLOCKS
-		// this.decorBlockIcon[0] =
-		// par1IconRegister.registerIcon(MinestellarCore.TEXTURE_PREFIX +
-		// "blockCopper");
+		this.decorBlockIcon = new IIcon[8]; // UPDATE WHEN ADDING BLOCKS
+		this.decorBlockIcon[0] = par1IconRegister.registerIcon(MinestellarCore.TEXTURE_PREFIX + "blockCopper");
+		this.decorBlockIcon[1] = par1IconRegister.registerIcon(MinestellarCore.TEXTURE_PREFIX + "blockTin");
+		this.decorBlockIcon[2] = par1IconRegister.registerIcon(MinestellarCore.TEXTURE_PREFIX + "blockSteel");
+		this.decorBlockIcon[3] = par1IconRegister.registerIcon(MinestellarCore.TEXTURE_PREFIX + "blockLithium");
+		this.decorBlockIcon[4] = par1IconRegister.registerIcon(MinestellarCore.TEXTURE_PREFIX + "blockSilicon");
+		this.decorBlockIcon[5] = par1IconRegister.registerIcon(MinestellarCore.TEXTURE_PREFIX + "blockAluminum");
+		this.decorBlockIcon[6] = par1IconRegister.registerIcon(MinestellarCore.TEXTURE_PREFIX + "blockTitanium");
+		this.decorBlockIcon[7] = par1IconRegister.registerIcon(MinestellarCore.TEXTURE_PREFIX + "blockCarbon");
 	}
 
 	@Override
@@ -63,7 +68,7 @@ public class BlockDecorCore extends Block
 	@Override
 	public void getSubBlocks(Item block, CreativeTabs creativeTabs, List list)
 	{
-		for (int i = 0; i < 0; ++i) // UPDATE WHEN ADDING BLOCKS
+		for (int i = 0; i < 8; ++i) // UPDATE WHEN ADDING BLOCKS
 		{
 			list.add(new ItemStack(this, 1, i));
 		}
@@ -74,9 +79,11 @@ public class BlockDecorCore extends Block
 	{
 		final int meta = par1World.getBlockMetadata(par2, par3, par4);
 
-		/*
-		 * if (meta == 0) { return 3.0F; }
-		 */
+		if (meta == 0 && meta < 7)
+		{
+			return 2.25F;
+		}
+
 		return 1.0F;
 	}
 

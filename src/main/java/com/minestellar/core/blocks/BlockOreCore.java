@@ -42,8 +42,14 @@ public class BlockOreCore extends Block
 	@Override
 	public void registerBlockIcons(IIconRegister par1IconRegister)
 	{
-		this.oreBlockIcon = new IIcon[1]; // UPDATE WHEN ADDING BLOCKS
+		this.oreBlockIcon = new IIcon[7]; // UPDATE WHEN ADDING BLOCKS
 		this.oreBlockIcon[0] = par1IconRegister.registerIcon(MinestellarCore.TEXTURE_PREFIX + "oreCopper");
+		this.oreBlockIcon[1] = par1IconRegister.registerIcon(MinestellarCore.TEXTURE_PREFIX + "oreTin");
+		this.oreBlockIcon[2] = par1IconRegister.registerIcon(MinestellarCore.TEXTURE_PREFIX + "oreLithium");
+		this.oreBlockIcon[3] = par1IconRegister.registerIcon(MinestellarCore.TEXTURE_PREFIX + "oreSilicon");
+		this.oreBlockIcon[4] = par1IconRegister.registerIcon(MinestellarCore.TEXTURE_PREFIX + "oreAluminum");
+		this.oreBlockIcon[5] = par1IconRegister.registerIcon(MinestellarCore.TEXTURE_PREFIX + "oreTitanium");
+		this.oreBlockIcon[6] = par1IconRegister.registerIcon(MinestellarCore.TEXTURE_PREFIX + "oreCarbon");
 	}
 
 	@Override
@@ -61,7 +67,7 @@ public class BlockOreCore extends Block
 	@Override
 	public void getSubBlocks(Item block, CreativeTabs creativeTabs, List list)
 	{
-		for (int i = 0; i < 1; ++i) // UPDATE WHEN ADDING BLOCKS
+		for (int i = 0; i < 7; ++i) // UPDATE WHEN ADDING BLOCKS
 		{
 			list.add(new ItemStack(this, 1, i));
 		}
@@ -72,9 +78,11 @@ public class BlockOreCore extends Block
 	{
 		final int meta = par1World.getBlockMetadata(par2, par3, par4);
 
-		/*
-		 * if (meta == 0) { return 2.25F; }
-		 */
+		if (meta == 0 && meta < 6)
+		{
+			return 2.25F;
+		}
+
 		return 1.0F;
 	}
 

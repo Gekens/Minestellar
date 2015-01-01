@@ -47,20 +47,20 @@ public class ClientProxyCore extends CommonProxyCore
 	public static ArrayList<SoundPoolEntry> newMusic = new ArrayList<SoundPoolEntry>();
 	public static EnumRarity stellarItem = EnumHelper.addRarity("MinestellarRarity", EnumChatFormatting.RED, "MinestellarCore");
 
-	private static int renderIndexTitaniumArmor;
+	private static int renderIndexCarbonArmor;
 
 	@Override
 	public void preInit(FMLPreInitializationEvent event)
 	{
-		ClientProxyCore.renderIndexTitaniumArmor = RenderingRegistry.addNewArmourRendererPrefix("titanium");
+		ClientProxyCore.renderIndexCarbonArmor = RenderingRegistry.addNewArmourRendererPrefix("carbon");
 
 		super.preInit(event);
 	}
 
 	@Override
-	public int getTitaniumArmorRenderIndex()
+	public int getCarbonArmorRenderIndex()
 	{
-		return ClientProxyCore.renderIndexTitaniumArmor;
+		return ClientProxyCore.renderIndexCarbonArmor;
 	}
 
 	@Override

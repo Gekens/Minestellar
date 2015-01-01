@@ -30,11 +30,11 @@ import com.minestellar.core.proxy.ClientProxyCore;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class ItemArmorTitanium extends ItemArmor
+public class ItemArmorCarbon extends ItemArmor
 {
 	private final ArmorMaterial material;
 
-	public ItemArmorTitanium(String name, ArmorMaterial par2EnumArmorMaterial, int par3, int par4)
+	public ItemArmorCarbon(String name, ArmorMaterial par2EnumArmorMaterial, int par3, int par4)
 	{
 		super(par2EnumArmorMaterial, par3, par4);
 		this.material = par2EnumArmorMaterial;
@@ -50,19 +50,19 @@ public class ItemArmorTitanium extends ItemArmor
 	@Override
 	public String getArmorTexture(ItemStack stack, Entity entity, int slot, String layer)
 	{
-		if (this.material == CoreItems.ARMOR_TITANIUM)
+		if (this.material == CoreItems.ARMOR_CARBON)
 		{
-			if (stack.getItem() == CoreItems.titaniumHelmet)
+			if (stack.getItem() == CoreItems.carbonHelmet)
 			{
-				return MinestellarCore.TEXTURE_PREFIX + "textures/model/armor/titanium_1.png";
+				return MinestellarCore.TEXTURE_PREFIX + "textures/model/armor/carbon_1.png";
 			}
-			else if (stack.getItem() == CoreItems.titaniumChestplate || stack.getItem() == CoreItems.titaniumBoots)
+			else if (stack.getItem() == CoreItems.carbonChestplate || stack.getItem() == CoreItems.carbonBoots)
 			{
-				return MinestellarCore.TEXTURE_PREFIX + "textures/model/armor/titanium_2.png";
+				return MinestellarCore.TEXTURE_PREFIX + "textures/model/armor/carbon_2.png";
 			}
-			else if (stack.getItem() == CoreItems.titaniumLeggings)
+			else if (stack.getItem() == CoreItems.carbonLeggings)
 			{
-				return MinestellarCore.TEXTURE_PREFIX + "textures/model/armor/titanium_3.png";
+				return MinestellarCore.TEXTURE_PREFIX + "textures/model/armor/carbon_3.png";
 			}
 		}
 

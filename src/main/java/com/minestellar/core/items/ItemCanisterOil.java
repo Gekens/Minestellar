@@ -82,7 +82,7 @@ public class ItemCanisterOil extends ItemCanisterGeneric
 			return "item.canisterOil";
 		}
 
-		return "item.oilCanisterPartial";
+		return "item.canisterOilPartial";
 	}
 
 	@Override
@@ -105,7 +105,7 @@ public class ItemCanisterOil extends ItemCanisterGeneric
 	{
 		if (par1ItemStack.getMaxDamage() - par1ItemStack.getItemDamage() > 0)
 		{
-			par3List.add(MinestellarUtil.translate("gui.message.oil.name") + ": " + (par1ItemStack.getMaxDamage() - par1ItemStack.getItemDamage()));
+			par3List.add(MinestellarUtil.translate("gui.info.oil.name") + ": " + (par1ItemStack.getMaxDamage() - par1ItemStack.getItemDamage()));
 		}
 	}
 }

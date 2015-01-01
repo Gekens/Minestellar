@@ -18,18 +18,21 @@ package com.minestellar.core.blocks;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.oredict.OreDictionary;
 
 import com.minestellar.core.MinestellarCore;
 import com.minestellar.core.blocks.fluid.OilFluid;
+import com.minestellar.core.blocks.items.ItemBlockDecor;
 import com.minestellar.core.blocks.items.ItemBlockOres;
 import com.minestellar.core.util.ItemBlockUtil;
 
 public class CoreBlocks
 {
 	public static Block coreOreBlocks;
-	// public static Block coreDecorBlocks;
+	public static Block coreDecorBlocks;
 
 	public static Block cableBlock;
 
@@ -39,7 +42,7 @@ public class CoreBlocks
 	private static void initBlocks()
 	{
 		CoreBlocks.coreOreBlocks = new BlockOreCore("core_ore");
-		// CoreBlocks.coreDecorBlocks = new BlockDecorCore("core_decor");
+		CoreBlocks.coreDecorBlocks = new BlockDecorCore("core_decor");
 		CoreBlocks.cableBlock = new BlockCable("core_cable");
 
 		CoreBlocks.oilFluid = new OilFluid("oil").setBlock(CoreBlocks.oilFluidBlock);
@@ -54,8 +57,7 @@ public class CoreBlocks
 	private static void registerBlocks()
 	{
 		MinestellarCore.registerBlock(CoreBlocks.coreOreBlocks, ItemBlockOres.class);
-		// MinestellarCore.registerBlock(CoreBlocks.coreDecorBlocks,
-		// ItemBlockDecor.class);
+		MinestellarCore.registerBlock(CoreBlocks.coreDecorBlocks, ItemBlockDecor.class);
 
 		MinestellarCore.registerBlock(CoreBlocks.cableBlock, ItemBlockUtil.class);
 
@@ -65,6 +67,24 @@ public class CoreBlocks
 
 	public static void oreDictRegistration()
 	{
+		/* Ores */
+		OreDictionary.registerOre("oreCopper", new ItemStack(CoreBlocks.coreOreBlocks, 1, 0));
+		OreDictionary.registerOre("oreTin", new ItemStack(CoreBlocks.coreOreBlocks, 1, 1));
+		OreDictionary.registerOre("oreLithium", new ItemStack(CoreBlocks.coreOreBlocks, 1, 2));
+		OreDictionary.registerOre("oreSilicon", new ItemStack(CoreBlocks.coreOreBlocks, 1, 3));
+		OreDictionary.registerOre("oreAluminum", new ItemStack(CoreBlocks.coreOreBlocks, 1, 4));
+		OreDictionary.registerOre("oreTitanium", new ItemStack(CoreBlocks.coreOreBlocks, 1, 5));
+		OreDictionary.registerOre("oreCarbon", new ItemStack(CoreBlocks.coreOreBlocks, 1, 6));
+
+		/* Blocks */
+		OreDictionary.registerOre("blockCopper", new ItemStack(CoreBlocks.coreDecorBlocks, 1, 0));
+		OreDictionary.registerOre("blockTin", new ItemStack(CoreBlocks.coreDecorBlocks, 1, 1));
+		OreDictionary.registerOre("blockSteel", new ItemStack(CoreBlocks.coreDecorBlocks, 1, 2));
+		OreDictionary.registerOre("blockLithium", new ItemStack(CoreBlocks.coreDecorBlocks, 1, 3));
+		OreDictionary.registerOre("blockSilicon", new ItemStack(CoreBlocks.coreDecorBlocks, 1, 4));
+		OreDictionary.registerOre("blockAluminum", new ItemStack(CoreBlocks.coreDecorBlocks, 1, 5));
+		OreDictionary.registerOre("blockTitanium", new ItemStack(CoreBlocks.coreDecorBlocks, 1, 6));
+		OreDictionary.registerOre("blockCarbon", new ItemStack(CoreBlocks.coreDecorBlocks, 1, 7));
 	}
 
 	public static void init()

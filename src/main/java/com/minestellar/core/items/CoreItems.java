@@ -23,6 +23,7 @@ import net.minecraft.item.ItemArmor.ArmorMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.fluids.FluidContainerRegistry;
+import net.minecraftforge.oredict.OreDictionary;
 
 import com.minestellar.core.MinestellarCore;
 import com.minestellar.core.blocks.CoreBlocks;
@@ -31,39 +32,39 @@ public class CoreItems
 {
 	public static Item coreBasicItems;
 
-	public static Item titaniumSword;
-	public static Item titaniumPickaxe;
-	public static Item titaniumShovel;
-	public static Item titaniumAxe;
-	public static Item titaniumHoe;
+	public static Item carbonSword;
+	public static Item carbonPickaxe;
+	public static Item carbonShovel;
+	public static Item carbonAxe;
+	public static Item carbonHoe;
 
-	public static Item titaniumHelmet;
-	public static Item titaniumChestplate;
-	public static Item titaniumLeggings;
-	public static Item titaniumBoots;
+	public static Item carbonHelmet;
+	public static Item carbonChestplate;
+	public static Item carbonLeggings;
+	public static Item carbonBoots;
 
 	public static Item canisterOil;
 	public static Item extractorOil;
 
 	public static Item oilBucket;
 
-	public static ArmorMaterial ARMOR_TITANIUM = EnumHelper.addArmorMaterial("titanium", 30, new int[] { 3, 8, 6, 3 }, 12);
-	public static ToolMaterial TOOL_TITANIUM = EnumHelper.addToolMaterial("titanium", 3, 768, 5.0F, 2, 8);
+	public static ArmorMaterial ARMOR_CARBON = EnumHelper.addArmorMaterial("carbon", 30, new int[] { 3, 8, 6, 3 }, 12);
+	public static ToolMaterial TOOL_CARBON = EnumHelper.addToolMaterial("carbon", 3, 768, 5.0F, 2, 8);
 
 	private static void initItems()
 	{
 		CoreItems.coreBasicItems = new ItemBasicCore();
 
-		CoreItems.titaniumSword = new ItemSwordCore("titanium_sword", CoreItems.TOOL_TITANIUM);
-		CoreItems.titaniumPickaxe = new ItemPickaxeCore("titanium_pickaxe", CoreItems.TOOL_TITANIUM);
-		CoreItems.titaniumShovel = new ItemSpadeCore("titanium_shovel", CoreItems.TOOL_TITANIUM);
-		CoreItems.titaniumAxe = new ItemAxeCore("titanium_axe", CoreItems.TOOL_TITANIUM);
-		CoreItems.titaniumHoe = new ItemHoeCore("titanium_hoe", CoreItems.TOOL_TITANIUM);
+		CoreItems.carbonSword = new ItemSwordCore("carbon_sword", CoreItems.TOOL_CARBON);
+		CoreItems.carbonPickaxe = new ItemPickaxeCore("carbon_pickaxe", CoreItems.TOOL_CARBON);
+		CoreItems.carbonShovel = new ItemSpadeCore("carbon_shovel", CoreItems.TOOL_CARBON);
+		CoreItems.carbonAxe = new ItemAxeCore("carbon_axe", CoreItems.TOOL_CARBON);
+		CoreItems.carbonHoe = new ItemHoeCore("carbon_hoe", CoreItems.TOOL_CARBON);
 
-		CoreItems.titaniumHelmet = new ItemArmorTitanium("titanium_helmet", CoreItems.ARMOR_TITANIUM, 7, 0);
-		CoreItems.titaniumChestplate = new ItemArmorTitanium("titanium_chestplate", CoreItems.ARMOR_TITANIUM, 7, 1);
-		CoreItems.titaniumLeggings = new ItemArmorTitanium("titanium_leggings", CoreItems.ARMOR_TITANIUM, 7, 2);
-		CoreItems.titaniumBoots = new ItemArmorTitanium("titanium_boots", CoreItems.ARMOR_TITANIUM, 7, 3);
+		CoreItems.carbonHelmet = new ItemArmorCarbon("carbon_helmet", CoreItems.ARMOR_CARBON, 7, 0);
+		CoreItems.carbonChestplate = new ItemArmorCarbon("carbon_chestplate", CoreItems.ARMOR_CARBON, 7, 1);
+		CoreItems.carbonLeggings = new ItemArmorCarbon("carbon_leggings", CoreItems.ARMOR_CARBON, 7, 2);
+		CoreItems.carbonBoots = new ItemArmorCarbon("carbon_boots", CoreItems.ARMOR_CARBON, 7, 3);
 
 		CoreItems.canisterOil = new ItemCanisterOil("canisterOilPartial");
 		CoreItems.extractorOil = new ItemExtractorOil("extractorOil");
@@ -73,25 +74,25 @@ public class CoreItems
 
 	private static void registerHarvestLevels()
 	{
-		CoreItems.titaniumPickaxe.setHarvestLevel("pickaxe", 4);
-		CoreItems.titaniumAxe.setHarvestLevel("axe", 4);
-		CoreItems.titaniumShovel.setHarvestLevel("shovel", 4);
+		CoreItems.carbonPickaxe.setHarvestLevel("pickaxe", 4);
+		CoreItems.carbonAxe.setHarvestLevel("axe", 4);
+		CoreItems.carbonShovel.setHarvestLevel("shovel", 4);
 	}
 
 	private static void registerItems()
 	{
 		MinestellarCore.registerItem(coreBasicItems);
 
-		MinestellarCore.registerItem(titaniumPickaxe);
-		MinestellarCore.registerItem(titaniumAxe);
-		MinestellarCore.registerItem(titaniumHoe);
-		MinestellarCore.registerItem(titaniumShovel);
-		MinestellarCore.registerItem(titaniumSword);
+		MinestellarCore.registerItem(carbonPickaxe);
+		MinestellarCore.registerItem(carbonAxe);
+		MinestellarCore.registerItem(carbonHoe);
+		MinestellarCore.registerItem(carbonShovel);
+		MinestellarCore.registerItem(carbonSword);
 
-		MinestellarCore.registerItem(titaniumHelmet);
-		MinestellarCore.registerItem(titaniumChestplate);
-		MinestellarCore.registerItem(titaniumLeggings);
-		MinestellarCore.registerItem(titaniumBoots);
+		MinestellarCore.registerItem(carbonHelmet);
+		MinestellarCore.registerItem(carbonChestplate);
+		MinestellarCore.registerItem(carbonLeggings);
+		MinestellarCore.registerItem(carbonBoots);
 
 		MinestellarCore.registerItem(CoreItems.canisterOil);
 		MinestellarCore.registerItem(CoreItems.extractorOil);
@@ -101,6 +102,32 @@ public class CoreItems
 
 	public static void oreDictRegistration()
 	{
+		/* Ingots */
+		OreDictionary.registerOre("ingotCopper", new ItemStack(CoreItems.coreBasicItems, 1, 0));
+		OreDictionary.registerOre("ingotTin", new ItemStack(CoreItems.coreBasicItems, 1, 1));
+		OreDictionary.registerOre("ingotSteel", new ItemStack(CoreItems.coreBasicItems, 1, 2));
+		OreDictionary.registerOre("ingotLithium", new ItemStack(CoreItems.coreBasicItems, 1, 3));
+		OreDictionary.registerOre("ingotSilicon", new ItemStack(CoreItems.coreBasicItems, 1, 4));
+		OreDictionary.registerOre("ingotAluminum", new ItemStack(CoreItems.coreBasicItems, 1, 5));
+		OreDictionary.registerOre("ingotTitanium", new ItemStack(CoreItems.coreBasicItems, 1, 6));
+		OreDictionary.registerOre("ingotCarbon", new ItemStack(CoreItems.coreBasicItems, 1, 7));
+
+		/* Dust */
+		OreDictionary.registerOre("ingotCarbon", new ItemStack(CoreItems.coreBasicItems, 1, 8));
+
+		/* Plates */
+		OreDictionary.registerOre("plateCopper", new ItemStack(CoreItems.coreBasicItems, 1, 9));
+		OreDictionary.registerOre("plateTin", new ItemStack(CoreItems.coreBasicItems, 1, 10));
+		OreDictionary.registerOre("plateSteel", new ItemStack(CoreItems.coreBasicItems, 1, 11));
+		OreDictionary.registerOre("plateLithium", new ItemStack(CoreItems.coreBasicItems, 1, 12));
+		OreDictionary.registerOre("plateSilicon", new ItemStack(CoreItems.coreBasicItems, 1, 13));
+		OreDictionary.registerOre("plateAluminum", new ItemStack(CoreItems.coreBasicItems, 1, 14));
+		OreDictionary.registerOre("plateTitanium", new ItemStack(CoreItems.coreBasicItems, 1, 15));
+		OreDictionary.registerOre("plateCarbon", new ItemStack(CoreItems.coreBasicItems, 1, 16));
+
+		/* Others */
+		OreDictionary.registerOre("electricMotor", new ItemStack(CoreItems.coreBasicItems, 1, 17));
+		OreDictionary.registerOre("electricPump", new ItemStack(CoreItems.coreBasicItems, 1, 18));
 	}
 
 	private static void registerFluidContainer()

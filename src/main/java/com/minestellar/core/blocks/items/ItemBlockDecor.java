@@ -25,9 +25,16 @@ import com.minestellar.core.proxy.ClientProxyCore;
 
 public class ItemBlockDecor extends ItemBlock
 {
-	private static final String[] types = new String[]
-	{
-			};
+	private static final String[] types = new String[] {
+			"blockCopper",
+			"blockTin",
+			"blockSteel",
+			"blockLithium",
+			"blockSilicon",
+			"blockAluminum",
+			"blockTitanium",
+			"blockCarbon",
+	};
 
 	public ItemBlockDecor(Block par1)
 	{

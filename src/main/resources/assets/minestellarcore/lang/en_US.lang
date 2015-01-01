@@ -1,32 +1,66 @@
 # Minestellar Core Language File = UNITED STATES ENGLISH
 
 # GENERAL ITEMS
-item.emptyLiquidCanister.name=Empty Liquid Canister
-item.canisterOil.name=Full Oil Canister
-item.oil_bucket.name=Oil Bucket
-item.oilCanisterPartial.name=Partialy Filled Oil Canister
+item.emptyLiquidCanister.name=Empty Canister
+item.canisterOilPartial.name=Partially Filled Oil Canister
+item.canisterOil.name=Filled Oil Canister
 item.extractorOil.name=Oil Extractor
-item.exceleratorCopper.name=Copper Excelerator
+item.oil_bucket.name=Oil Bucket
+item.ingotCopper.name=Copper Ingot
+item.ingotTin.name=Tin Ingot
+item.ingotSteel.name=Steel Ingot
+item.ingotLithium.name=Lithium Ingot
+item.ingotSilicon.name=Silicon Ingot
+item.ingotAluminum.name=Aluminum Ingot
+item.ingotTitanium.name=Titanium Ingot
+item.ingotCarbon.name=Carbon Dust
+item.dustSteel.name=Steel Dust
+item.compressedCopper.name=Copper Plate
+item.compressedTin.name=Tin Plate
+item.compressedSteel.name=Steel Plate
+item.compressedLithium.name=Lithium Plate
+item.compressedSilicon.name=Silicon Plate
+item.compressedAluminum.name=Aluminum Plate
+item.compressedTitanium.name=Titanium Plate
+item.compressedCarbon.name=Carbon Plate
+item.electricMotor.name=Electric Motor
+item.electricPump.name=Electric Pump
 
 # TOOLS
-item.titanium_pickaxe.name=Titanium Pickaxe
-item.titanium_axe.name=Titanium Axe
-item.titanium_hoe.name=Titanium Hoe
-item.titanium_shovel.name=Titanium Shovel
-item.titanium_sword.name=Titanium Sword
+item.carbon_pickaxe.name=Carbon Pickaxe
+item.carbon_axe.name=Carbon Axe
+item.carbon_hoe.name=Carbon Hoe
+item.carbon_shovel.name=Carbon Shovel
+item.carbon_sword.name=Carbon Sword
 
 # ARMOR
-item.titanium_helmet.name=Titanium Helmet
-item.titanium_chestplate.name=Titanium Chestplate
-item.titanium_leggings.name=Titanium Leggings
-item.titanium_boots.name=Titanium Boots
+item.carbon_helmet.name=Carbon Helmet
+item.carbon_chestplate.name=Carbon Chestplate
+item.carbon_leggings.name=Carbon Leggings
+item.carbon_boots.name=Carbon Boots
 
 # BLOCKS
+tile.core_ore.oreCopper.name=Copper Ore
+tile.core_ore.oreTin.name=Tin Ore
+tile.core_ore.oreLithium.name=Lithium Ore
+tile.core_ore.oreSilicon.name=Silicone Ore
+tile.core_ore.oreAluminum.name=Aluminum Ore
+tile.core_ore.oreTitanium.name=Titanium Ore
+tile.core_ore.oreCarbon.name=Carbon Ore
+tile.core_decor.blockCopper.name=Copper Block
+tile.core_decor.blockTin.name=Tin Block
+tile.core_decor.blockSteel.name=Steel Block
+tile.core_decor.blockLithium.name=Lithium Block
+tile.core_decor.blockSilicon.name=Silicon Block
+tile.core_decor.blockAluminum.name=Aluminum Block
+tile.core_decor.blockTitanium.name=Titanium Block
+tile.core_decor.blockCarbon.name=Carbon Block
+tile.core_cable.name=Electrical Cable
 
 # GUIS
 itemGroup.MinestellarBlocks=Minestellar Blocks
 itemGroup.MinestellarItems=Minestellar Items
-gui.message.oil.name=Oil
+gui.info.oil.name=Oil
 
 # ENITYS
 

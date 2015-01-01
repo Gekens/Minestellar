@@ -34,7 +34,7 @@ import com.minestellar.core.recipe.RecipeManagerCore;
 import com.minestellar.core.util.ConfigManagerCore;
 import com.minestellar.core.util.MinestellarCreativeTab;
 import com.minestellar.core.util.MinestellarUtil;
-import com.minestellar.moon.MinestellarMoon;
+import com.minestellar.core.world.gen.OverworldGenerator;
 
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -88,9 +88,18 @@ public class MinestellarCore
 	public void init(FMLInitializationEvent event)
 	{
 		MinestellarCore.stellarBlocksTab = new MinestellarCreativeTab(CreativeTabs.getNextID(), "MinestellarBlocks", Item.getItemFromBlock(CoreBlocks.coreOreBlocks), 0);
-		MinestellarCore.stellarItemsTab = new MinestellarCreativeTab(CreativeTabs.getNextID(), "MinestellarItems", CoreItems.titaniumPickaxe, 0);
+		MinestellarCore.stellarItemsTab = new MinestellarCreativeTab(CreativeTabs.getNextID(), "MinestellarItems", CoreItems.carbonPickaxe, 0);
 
 		RecipeManagerCore.loadRecipes();
+
+		GameRegistry.registerWorldGenerator(new OverworldGenerator(CoreBlocks.coreOreBlocks, 0, 24, 0, 75, 7), 4);
+		GameRegistry.registerWorldGenerator(new OverworldGenerator(CoreBlocks.coreOreBlocks, 1, 22, 0, 60, 7), 4);
+		GameRegistry.registerWorldGenerator(new OverworldGenerator(CoreBlocks.coreOreBlocks, 2, 12, 0, 45, 3), 2);
+		GameRegistry.registerWorldGenerator(new OverworldGenerator(CoreBlocks.coreOreBlocks, 3, 12, 0, 45, 3), 3);
+		GameRegistry.registerWorldGenerator(new OverworldGenerator(CoreBlocks.coreOreBlocks, 4, 24, 0, 75, 7), 4);
+		GameRegistry.registerWorldGenerator(new OverworldGenerator(CoreBlocks.coreOreBlocks, 5, 22, 0, 60, 7), 4);
+		GameRegistry.registerWorldGenerator(new OverworldGenerator(CoreBlocks.coreOreBlocks, 6, 12, 0, 45, 3), 2);
+		GameRegistry.registerWorldGenerator(new OverworldGenerator(CoreBlocks.coreOreBlocks, 7, 12, 0, 45, 3), 3);
 
 		this.registerTileEntities();
 		this.registerCreatures();
