@@ -116,14 +116,14 @@ public class CoreItems
 		OreDictionary.registerOre("dustSteel", new ItemStack(CoreItems.coreBasicItems, 1, 8));
 
 		/* Plates */
-		OreDictionary.registerOre("plateCopper", new ItemStack(CoreItems.coreBasicItems, 1, 9));
-		OreDictionary.registerOre("plateTin", new ItemStack(CoreItems.coreBasicItems, 1, 10));
-		OreDictionary.registerOre("plateSteel", new ItemStack(CoreItems.coreBasicItems, 1, 11));
-		OreDictionary.registerOre("plateLithium", new ItemStack(CoreItems.coreBasicItems, 1, 12));
-		OreDictionary.registerOre("plateSilicon", new ItemStack(CoreItems.coreBasicItems, 1, 13));
-		OreDictionary.registerOre("plateAluminum", new ItemStack(CoreItems.coreBasicItems, 1, 14));
-		OreDictionary.registerOre("plateTitanium", new ItemStack(CoreItems.coreBasicItems, 1, 15));
-		OreDictionary.registerOre("plateCarbon", new ItemStack(CoreItems.coreBasicItems, 1, 16));
+		OreDictionary.registerOre("compressedCopper", new ItemStack(CoreItems.coreBasicItems, 1, 9));
+		OreDictionary.registerOre("compressedTin", new ItemStack(CoreItems.coreBasicItems, 1, 10));
+		OreDictionary.registerOre("compressedSteel", new ItemStack(CoreItems.coreBasicItems, 1, 11));
+		OreDictionary.registerOre("compressedLithium", new ItemStack(CoreItems.coreBasicItems, 1, 12));
+		OreDictionary.registerOre("compressedSilicon", new ItemStack(CoreItems.coreBasicItems, 1, 13));
+		OreDictionary.registerOre("compressedAluminum", new ItemStack(CoreItems.coreBasicItems, 1, 14));
+		OreDictionary.registerOre("compressedTitanium", new ItemStack(CoreItems.coreBasicItems, 1, 15));
+		OreDictionary.registerOre("compressedCarbon", new ItemStack(CoreItems.coreBasicItems, 1, 16));
 
 		/* Others */
 		OreDictionary.registerOre("electricMotor", new ItemStack(CoreItems.coreBasicItems, 1, 17));

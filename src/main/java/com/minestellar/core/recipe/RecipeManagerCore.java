@@ -43,9 +43,9 @@ public class RecipeManagerCore
 
 		// OTHER CRAFTING
 		RecipeUtil.addRecipe(new ItemStack(CoreItems.extractorOil, 1, 0), new Object[] { "N  ", " T ", "  P", 'N', "nozzleSteel", 'T', "pipeSteel", 'P', "electricPump" });
-		RecipeUtil.addRecipe(new ItemStack(CoreItems.canisterOil, 1, (CoreItems.canisterOil.getMaxDamage())), new Object[] { "F", "T", 'F', "nozzleSteel", 'T', "containerTin" });
-		RecipeUtil.addRecipe(new ItemStack(CoreItems.coreBasicItems, 1, 17), new Object[] { "XRX", "XRX", "XAX", 'X', "plateSteel", 'A', "pipeMagnetic", 'R', "pipeSteel" });
-		RecipeUtil.addRecipe(new ItemStack(CoreItems.coreBasicItems, 1, 18), new Object[] { "XRX", "XRX", "XAX", 'X', "plateTin", 'A', Blocks.piston, 'R', "pipeSteel" });
+		RecipeUtil.addRecipe(new ItemStack(CoreItems.canisterOil, 1, (CoreItems.canisterOil.getMaxDamage())), new Object[] { "TFT", "T T", "TTT", 'F', "nozzleSteel", 'T', "compressedTin" });
+		RecipeUtil.addRecipe(new ItemStack(CoreItems.coreBasicItems, 1, 17), new Object[] { "XRX", "XRX", "XAX", 'X', "compressedSteel", 'A', "pipeMagnetic", 'R', "pipeSteel" });
+		RecipeUtil.addRecipe(new ItemStack(CoreItems.coreBasicItems, 1, 18), new Object[] { "XRX", "XRX", "XAX", 'X', "compressedTin", 'A', Blocks.piston, 'R', "pipeSteel" });
 		RecipeUtil.addRecipe(new ItemStack(CoreItems.coreBasicItems, 1, 19), new Object[] { "X X", "Y Y", "X X", 'X', "ingotSteel", 'Y', "ingotCopper" });
 		RecipeUtil.addRecipe(new ItemStack(CoreItems.coreBasicItems, 1, 20), new Object[] { "X X", "Y Y", "X X", 'X', "ingotSteel", 'Y', "ingotTin" });
 		RecipeUtil.addRecipe(new ItemStack(CoreItems.coreBasicItems, 1, 21), new Object[] { "X X", " X ", 'X', "ingotSteel" });
@@ -67,7 +67,7 @@ public class RecipeManagerCore
 		RecipeUtil.addRecipe(new ItemStack(CoreItems.coreBasicItems, 1, 16), new Object[] { "XX", "XX", 'X', "ingotCarbon" });
 
 		// ITEM TO BLOCK
-		RecipeUtil.addRecipe(new ItemStack(CoreBlocks.teleportBlock, 3, 0), new Object[] { "AXA", "XCX", "AXA", 'X', "plateLithium", 'Y', "plateTitanium", 'A', "plateAluminum" });
+		RecipeUtil.addRecipe(new ItemStack(CoreBlocks.teleportBlock, 3, 0), new Object[] { "AXA", "XCX", "AXA", 'X', "compressedLithium", 'Y', "compressedTitanium", 'A', "compressedAluminum" });
 		RecipeUtil.addRecipe(new ItemStack(CoreBlocks.coreDecorBlocks, 1, 0), new Object[] { "XXX", "XXX", "XXX", 'X', "ingotCopper" });
 		RecipeUtil.addRecipe(new ItemStack(CoreBlocks.coreDecorBlocks, 1, 1), new Object[] { "XXX", "XXX", "XXX", 'X', "ingotTin" });
 		RecipeUtil.addRecipe(new ItemStack(CoreBlocks.coreDecorBlocks, 1, 2), new Object[] { "XXX", "XXX", "XXX", 'X', "ingotSteel" });

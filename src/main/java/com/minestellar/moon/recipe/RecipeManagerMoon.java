@@ -25,7 +25,7 @@ public class RecipeManagerMoon
 {
 	private static void addUniversalRecipes()
 	{
-		RecipeUtil.addRecipe(new ItemStack(MoonItems.moonPortalTrigger, 1, 0), new Object[] { "X X", " X ", " X ", "Z", 'X', "pipeSteel" });
+		RecipeUtil.addRecipe(new ItemStack(MoonItems.moonPortalTrigger, 1, 0), new Object[] { "X X", "XXX", " X ", 'X', "pipeSteel" });
 	}
 
 	public static void loadRecipes()
