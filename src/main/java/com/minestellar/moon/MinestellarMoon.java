@@ -23,15 +23,19 @@ import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
+import net.minecraft.stats.Achievement;
 
 import com.minestellar.core.Constants;
+import com.minestellar.core.MinestellarCore;
 import com.minestellar.moon.blocks.MoonBlocks;
+import com.minestellar.moon.event.EventAchievementMoon;
 import com.minestellar.moon.items.MoonItems;
 import com.minestellar.moon.proxy.CommonProxyMoon;
 import com.minestellar.moon.recipe.RecipeManagerMoon;
 import com.minestellar.moon.util.ConfigManagerMoon;
 import com.minestellar.moon.world.DimensionMoon;
 
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
@@ -52,6 +56,8 @@ public class MinestellarMoon
 
 	public static HashMap<String, ItemStack> blocksList = new HashMap<String, ItemStack>();
 	public static HashMap<String, ItemStack> itemList = new HashMap<String, ItemStack>();
+
+	public static Achievement achievementMoon;
 
 	@Instance(MinestellarMoon.MODID)
 	public static MinestellarMoon instance = new MinestellarMoon();
@@ -83,6 +89,10 @@ public class MinestellarMoon
 	@EventHandler
 	public void init(FMLInitializationEvent event)
 	{
+		MinestellarMoon.achievementMoon = new Achievement("achievement.moon", "gotoMoon", 2, 1, new ItemStack(MoonItems.moonPortalTrigger), (Achievement) MinestellarCore.achievementSpace).registerStat();
+
+		FMLCommonHandler.instance().bus().register(new EventAchievementMoon());
+
 		RecipeManagerMoon.loadRecipes();
 
 		this.registerTileEntities();

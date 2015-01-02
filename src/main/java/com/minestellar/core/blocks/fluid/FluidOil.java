@@ -14,19 +14,17 @@
  * this program; if not, see <http://www.gnu.org/licenses>.
  */
 
-package com.minestellar.core;
+package com.minestellar.core.blocks.fluid;
 
-public class Constants
+import net.minecraftforge.fluids.Fluid;
+
+import com.minestellar.core.blocks.BlockFluidOil;
+
+public class FluidOil extends Fluid
 {
-	public static final int LOCALMAJVERSION = 0;
-	public static final int LOCALMINVERSION = 0;
-	public static final int LOCALBUILDVERSION = 1;
-	public static final String VERSION = (LOCALMAJVERSION + "." + LOCALMINVERSION + "." + LOCALBUILDVERSION);
-
-	public static final String MOD_NAME = "Minestellar";
-
-	public static final String CONFIG_CATEGORY_DIMENSIONS = "dimensions";
-	public static final String CONFIG_CATEGORY_BIOMES = "biomes";
-	public static final String CONFIG_CATEGORY_ENTITIES = "entities";
-	public static final String CONFIG_CATEGORY_GENERAL = "general";
+	public FluidOil(String fluidName)
+	{
+		super(fluidName);
+		this.setIcons(BlockFluidOil.oilStillIcon, BlockFluidOil.oilFlowingIcon);
+	}
 }

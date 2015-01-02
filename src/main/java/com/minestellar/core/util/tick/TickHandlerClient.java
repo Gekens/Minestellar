@@ -20,6 +20,9 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.client.multiplayer.WorldClient;
 
+import com.minestellar.core.util.ConfigManagerCore;
+import com.minestellar.core.util.MinestellarLog;
+import com.minestellar.core.util.MinestellarUtil;
 import com.minestellar.core.util.thread.ThreadVersionCheck;
 
 import cpw.mods.fml.client.FMLClientHandler;
@@ -40,10 +43,18 @@ public class TickHandlerClient
 
 		if (event.phase == Phase.START)
 		{
-			if (world != null && TickHandlerClient.checkedVersion)
+			if (ConfigManagerCore.idVersionCheck == true)
 			{
-				ThreadVersionCheck.startCheck();
-				TickHandlerClient.checkedVersion = false;
+				if (world != null && TickHandlerClient.checkedVersion)
+				{
+					ThreadVersionCheck.startCheck();
+					TickHandlerClient.checkedVersion = false;
+				}
+			}
+
+			else
+			{
+				MinestellarLog.severe(MinestellarUtil.translate("update.skipped.name"));
 			}
 		}
 	}

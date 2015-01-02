@@ -50,8 +50,8 @@ public class ConfigManagerMoon
 		{
 			ConfigManagerMoon.configuration.load();
 
-			ConfigManagerMoon.idDimensionMoon = ConfigManagerMoon.configuration.get(Configuration.CATEGORY_GENERAL, "Moon Dimension", -25).getInt(-25);
-			ConfigManagerMoon.idBiomeMoon = ConfigManagerMoon.configuration.get(Configuration.CATEGORY_GENERAL, "Moon Biome", 225).getInt(225);
+			ConfigManagerMoon.idDimensionMoon = ConfigManagerMoon.configuration.get(Constants.CONFIG_CATEGORY_DIMENSIONS, "Moon Dimension", -25).getInt(-25);
+			ConfigManagerMoon.idBiomeMoon = ConfigManagerMoon.configuration.get(Constants.CONFIG_CATEGORY_BIOMES, "Moon Biome", 225).getInt(225);
 		}
 
 		catch (final Exception e)

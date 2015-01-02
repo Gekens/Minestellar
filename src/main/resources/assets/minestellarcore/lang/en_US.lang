@@ -71,5 +71,6 @@ gui.info.oil.name=Oil
 # ENITYS
 
 # OTHERS
-update.failed.name=Minestellar update check failed! Trying again in 15 seconds
-update.success.name=Minestellar remote version found:
+update.skipped.name=Update check skipped! If you want to enable version check edit your config files!
+update.failed.name=Update check failed! Trying again in 30 seconds
+update.success.name=Remote version found:

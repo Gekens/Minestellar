@@ -426,7 +426,7 @@ public abstract class ChunkProviderMinestellar extends ChunkProviderGenerate
 	 * Do not return null
 	 *
 	 * @return The biome generator for this world, handles ore, flower, etc
-	 *         generation. See GCBiomeDecoratorBase.
+	 *         generation.
 	 */
 	protected abstract BiomeDecoratorMinestellar getBiomeGenerator();
 

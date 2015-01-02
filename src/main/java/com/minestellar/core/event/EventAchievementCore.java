@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 31/dic/2014 Davide Cossu & Matthew Albrecht.
+ * Copyright (c) 1/dic/2015 Davide Cossu & Matthew Albrecht.
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -14,23 +14,22 @@
  * this program; if not, see <http://www.gnu.org/licenses>.
  */
 
-package com.minestellar.moon.world;
+package com.minestellar.core.event;
 
-import net.minecraftforge.common.DimensionManager;
+import com.minestellar.core.MinestellarCore;
+import com.minestellar.core.blocks.CoreBlocks;
 
-import com.minestellar.moon.util.ConfigManagerMoon;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.gameevent.PlayerEvent;
 
-public class DimensionMoon
+public class EventAchievementCore
 {
-	/** Register dimension. */
-	public static void registerDimensions()
+	@SubscribeEvent
+	public void space(PlayerEvent.ItemCraftedEvent event)
 	{
-		DimensionManager.registerDimension(ConfigManagerMoon.idDimensionMoon, ConfigManagerMoon.idDimensionMoon);
-	}
-
-	/** Register dimensions world providers with the dimension manager. */
-	public static void registerWorldProvider()
-	{
-		DimensionManager.registerProviderType(ConfigManagerMoon.idDimensionMoon, WorldProviderMoon.class, true);
+		if (event.crafting.getItem().equals(CoreBlocks.teleportBlock))
+		{
+			event.player.addStat(MinestellarCore.achievementSpace, 1);
+		}
 	}
 }

@@ -24,10 +24,13 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
+import net.minecraft.stats.Achievement;
+import net.minecraftforge.common.AchievementPage;
 
 import com.minestellar.core.blocks.CoreBlocks;
 import com.minestellar.core.blocks.tileEntities.TileEntityCable;
 import com.minestellar.core.entities.EntityZombieCore;
+import com.minestellar.core.event.EventAchievementCore;
 import com.minestellar.core.items.CoreItems;
 import com.minestellar.core.proxy.CommonProxyCore;
 import com.minestellar.core.recipe.RecipeManagerCore;
@@ -35,7 +38,9 @@ import com.minestellar.core.util.ConfigManagerCore;
 import com.minestellar.core.util.MinestellarCreativeTab;
 import com.minestellar.core.util.MinestellarUtil;
 import com.minestellar.core.world.gen.OverworldGenerator;
+import com.minestellar.moon.MinestellarMoon;
 
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
@@ -59,6 +64,8 @@ public class MinestellarCore
 
 	public static HashMap<String, ItemStack> blocksList = new HashMap<String, ItemStack>();
 	public static HashMap<String, ItemStack> itemList = new HashMap<String, ItemStack>();
+
+	public static Achievement achievementSpace;
 
 	@Instance(MinestellarCore.MODID)
 	public static MinestellarCore instance = new MinestellarCore();
@@ -90,7 +97,13 @@ public class MinestellarCore
 		MinestellarCore.stellarBlocksTab = new MinestellarCreativeTab(CreativeTabs.getNextID(), "MinestellarBlocks", Item.getItemFromBlock(CoreBlocks.coreOreBlocks), 0);
 		MinestellarCore.stellarItemsTab = new MinestellarCreativeTab(CreativeTabs.getNextID(), "MinestellarItems", CoreItems.carbonPickaxe, 0);
 
+		AchievementPage.registerAchievementPage(new AchievementPage("Minestellar", new Achievement[] { MinestellarCore.achievementSpace, MinestellarMoon.achievementMoon }));
+
+		MinestellarCore.achievementSpace = new Achievement("achievement.space", "space", 0, 0, new ItemStack(CoreBlocks.teleportBlock), (Achievement) null).initIndependentStat().registerStat();
+
 		RecipeManagerCore.loadRecipes();
+
+		FMLCommonHandler.instance().bus().register(new EventAchievementCore());
 
 		GameRegistry.registerWorldGenerator(new OverworldGenerator(CoreBlocks.coreOreBlocks, 0, 24, 0, 200, 7), 6);
 		GameRegistry.registerWorldGenerator(new OverworldGenerator(CoreBlocks.coreOreBlocks, 1, 22, 0, 200, 7), 4);

@@ -31,6 +31,7 @@ import net.minecraftforge.client.IRenderHandler;
 import org.lwjgl.opengl.GL11;
 
 import com.minestellar.api.world.IMinestellarWorldProvider;
+import com.minestellar.core.util.ConfigManagerCore;
 import com.minestellar.moon.MinestellarMoon;
 
 import cpw.mods.fml.client.FMLClientHandler;
@@ -235,8 +236,7 @@ public class SkyRendererMoon extends IRenderHandler
 		final Tessellator var2 = Tessellator.instance;
 		var2.startDrawingQuads();
 
-		for (int var3 = 0; var3 < (3750); ++var3) // Adds more stars, at the
-													// cost of more lag
+		for (int var3 = 0; var3 < (3750 * ConfigManagerCore.idStarMultiplier); ++var3)
 		{
 			double var4 = var1.nextFloat() * 2.0F - 1.0F;
 			double var6 = var1.nextFloat() * 2.0F - 1.0F;

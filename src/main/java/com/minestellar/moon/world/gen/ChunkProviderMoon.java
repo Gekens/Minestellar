@@ -37,8 +37,8 @@ import com.minestellar.moon.blocks.MoonBlocks;
 
 public class ChunkProviderMoon extends ChunkProviderMinestellar
 {
-	private final BiomeDecoratorMoon marsBiomeDecorator = new BiomeDecoratorMoon();
-	private final MapGenCaveMoon cavernGenerator = new MapGenCaveMoon();
+	private final BiomeDecoratorMoon moonBiomeDecorator = new BiomeDecoratorMoon();
+	private final MapGenCaveMoon caveGenerator = new MapGenCaveMoon();
 
 	public ChunkProviderMoon(World par1World, long seed, boolean mapFeaturesEnabled)
 	{
@@ -48,7 +48,7 @@ public class ChunkProviderMoon extends ChunkProviderMinestellar
 	@Override
 	protected BiomeDecoratorMinestellar getBiomeGenerator()
 	{
-		return this.marsBiomeDecorator;
+		return this.moonBiomeDecorator;
 	}
 
 	@Override
@@ -67,7 +67,7 @@ public class ChunkProviderMoon extends ChunkProviderMinestellar
 	protected List<MapGenBaseMeta> getWorldGenerators()
 	{
 		List<MapGenBaseMeta> generators = Lists.newArrayList();
-		generators.add(this.cavernGenerator);
+		generators.add(this.caveGenerator);
 		return generators;
 	}
 
@@ -133,7 +133,7 @@ public class ChunkProviderMoon extends ChunkProviderMinestellar
 	@Override
 	public int getCraterProbability()
 	{
-		return 2000;
+		return 500;
 	}
 
 	@Override

@@ -70,6 +70,7 @@ public class ThreadVersionCheck extends Thread
 
 				final HttpURLConnection http = (HttpURLConnection) url.openConnection();
 				http.addRequestProperty("User-Agent", "Mozilla/4.76");
+
 				final BufferedReader in = new BufferedReader(new InputStreamReader(http.getInputStream()));
 				String str;
 				String str2[] = null;
@@ -94,15 +95,8 @@ public class ThreadVersionCheck extends Thread
 						{
 							Thread.sleep(5000);
 
-							if (sideToCheck.equals(Side.CLIENT))
-							{
-								FMLClientHandler.instance().getClient().thePlayer.addChatMessage(new ChatComponentText(EnumColor.GREY + "New " + EnumColor.DARK_AQUA + "Minestellar" + EnumColor.GREY + " version available! v" + String.valueOf(remoteMajVer) + "." + String.valueOf(remoteMinVer) + "." + String.valueOf(remoteBuildVer) + EnumColor.DARK_BLUE + " http://minestellar.hostei.com/"));
-							}
-
-							else if (sideToCheck.equals(Side.SERVER))
-							{
-								MinestellarLog.severe("New Minestellar version available! v" + String.valueOf(remoteMajVer) + "." + String.valueOf(remoteMinVer) + "." + String.valueOf(remoteBuildVer) + " http://minestellar.hostei.com/");
-							}
+							FMLClientHandler.instance().getClient().thePlayer.addChatMessage(new ChatComponentText(EnumColor.GREY + "New " + EnumColor.DARK_AQUA + "Minestellar" + EnumColor.GREY + " version available! v" + String.valueOf(remoteMajVer) + "." + String.valueOf(remoteMinVer) + "." + String.valueOf(remoteBuildVer) + EnumColor.DARK_BLUE + " http://minestellar.hostei.com/"));
+							MinestellarLog.severe("New Minestellar version available! v" + String.valueOf(remoteMajVer) + "." + String.valueOf(remoteMinVer) + "." + String.valueOf(remoteBuildVer) + " http://minestellar.hostei.com/");
 						}
 					}
 				}
@@ -117,6 +111,7 @@ public class ThreadVersionCheck extends Thread
 				try
 				{
 					MinestellarLog.severe(MinestellarUtil.translate("update.failed.name"));
+
 					Thread.sleep(30000);
 				}
 
