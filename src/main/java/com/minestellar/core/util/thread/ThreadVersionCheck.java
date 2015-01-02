@@ -66,9 +66,7 @@ public class ThreadVersionCheck extends Thread
 		{
 			try
 			{
-				final URL url = new URL("http://minestellar.host56.com/version.html"); // TODO:
-																						// Change
-																						// URL
+				final URL url = new URL("http://minestellar.hostei.com/version.html");
 
 				final HttpURLConnection http = (HttpURLConnection) url.openConnection();
 				http.addRequestProperty("User-Agent", "Mozilla/4.76");
@@ -98,12 +96,12 @@ public class ThreadVersionCheck extends Thread
 
 							if (sideToCheck.equals(Side.CLIENT))
 							{
-								FMLClientHandler.instance().getClient().thePlayer.addChatMessage(new ChatComponentText(EnumColor.GREY + "New " + EnumColor.DARK_AQUA + "Minestellar" + EnumColor.GREY + " version available! v" + String.valueOf(remoteMajVer) + "." + String.valueOf(remoteMinVer) + "." + String.valueOf(remoteBuildVer) + EnumColor.DARK_BLUE + " http://minestellar.host56.com/"));
+								FMLClientHandler.instance().getClient().thePlayer.addChatMessage(new ChatComponentText(EnumColor.GREY + "New " + EnumColor.DARK_AQUA + "Minestellar" + EnumColor.GREY + " version available! v" + String.valueOf(remoteMajVer) + "." + String.valueOf(remoteMinVer) + "." + String.valueOf(remoteBuildVer) + EnumColor.DARK_BLUE + " http://minestellar.hostei.com/"));
 							}
 
 							else if (sideToCheck.equals(Side.SERVER))
 							{
-								MinestellarLog.severe("New Minestellar version available! v" + String.valueOf(remoteMajVer) + "." + String.valueOf(remoteMinVer) + "." + String.valueOf(remoteBuildVer) + " http://minestellar.host56.com/");
+								MinestellarLog.severe("New Minestellar version available! v" + String.valueOf(remoteMajVer) + "." + String.valueOf(remoteMinVer) + "." + String.valueOf(remoteBuildVer) + " http://minestellar.hostei.com/");
 							}
 						}
 					}
@@ -119,7 +117,7 @@ public class ThreadVersionCheck extends Thread
 				try
 				{
 					MinestellarLog.severe(MinestellarUtil.translate("update.failed.name"));
-					Thread.sleep(15000);
+					Thread.sleep(30000);
 				}
 
 				catch (final InterruptedException e)
