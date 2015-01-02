@@ -71,6 +71,15 @@ public class TileEntityRenderCable extends TileEntitySpecialRenderer
 					}
 				}
 			}
+			for(int i = 0; i < cable.connections.length; i++)
+			{
+				if(cable.connections[i] != null)
+				{
+					if(cable.canConnectEnergy(cable.connections[i])){
+						drawConnector(cable.connections[i]);
+					}
+				}
+			}
 		}
 		GL11.glTranslated(-translationX, -translationY, -translationZ);
 
