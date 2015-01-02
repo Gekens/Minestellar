@@ -20,6 +20,7 @@ import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
@@ -28,6 +29,8 @@ import com.minestellar.core.blocks.tileEntities.TileEntityCable;
 
 public class BlockCable extends BlockContainer
 {
+	float pixel = 1F / 16F;
+	
 	public static IIcon cableBlockIcon;
 
 	protected BlockCable(String name)
@@ -35,9 +38,29 @@ public class BlockCable extends BlockContainer
 		super(Material.ground);
 		this.setBlockName(name);
 
-		float pixel = 1F / 16F;
-		this.setBlockBounds(11 * pixel / 2, 11 * pixel / 2, 11 * pixel / 2, 1 - 11 * pixel / 2, 1 - 11 * pixel / 2, 1 - 11 * pixel / 2);
+		this.setBlockBounds(11*pixel/2, 11*pixel/2, 11*pixel/2, 1-11*pixel/2, 1-11*pixel/2, 1-11*pixel/2);
 		this.useNeighborBrightness = true;
+	}
+
+	@Override
+	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z)
+	{
+		TileEntityCable cable = (TileEntityCable) world.getTileEntity(x, y, z);
+		
+		if(cable != null)
+		{
+			
+			float minX = 11*pixel/2-(cable.connections[5] != null ? (11*pixel/2) : 0);
+			float minY = 11*pixel/2-(cable.connections[1] != null ? (11*pixel/2) : 0);
+			float minZ = 11*pixel/2-(cable.connections[2] != null ? (11*pixel/2) : 0);
+			float maxX = 1-11*pixel/2+(cable.connections[3] != null ? (11*pixel/2) : 0);
+			float maxY = 1-11*pixel/2+(cable.connections[0] != null ? (11*pixel/2) : 0);
+			float maxZ = 1-11*pixel/2+(cable.connections[4] != null ? (11*pixel/2) : 0);
+			
+			this.setBlockBounds(minX, minY, minZ, maxX, maxY, maxZ);
+		}
+		
+		return AxisAlignedBB.getBoundingBox(x+this.minX, y+this.minY, z+this.minZ, x+this.maxX, y+this.maxY, z+this.maxZ);
 	}
 
 	@Override
