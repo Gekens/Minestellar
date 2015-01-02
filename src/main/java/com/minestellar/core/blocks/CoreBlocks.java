@@ -63,7 +63,6 @@ public class CoreBlocks
 		MinestellarCore.registerBlock(CoreBlocks.cableBlock, ItemBlockUtil.class);
 
 		MinestellarCore.registerBlock(CoreBlocks.oilFluidBlock, ItemBlockUtil.class);
-
 	}
 
 	public static void oreDictRegistration()

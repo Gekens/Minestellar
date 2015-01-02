@@ -65,10 +65,6 @@ public class MinestellarMoon
 	@SidedProxy(clientSide = "com.minestellar.moon.proxy.ClientProxyMoon", serverSide = "com.minestellar.moon.proxy.CommonProxyMoon")
 	public static CommonProxyMoon proxy;
 
-	/**
-	 * Runs before anything else. Reads/sets up your config, create blocks,
-	 * items and register them with the GameRegistry.
-	 */
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event)
 	{
@@ -83,9 +79,6 @@ public class MinestellarMoon
 		this.proxy.preInit(event);
 	}
 
-	/**
-	 * Build whatever data structures you care about. And registers recipes.
-	 */
 	@EventHandler
 	public void init(FMLInitializationEvent event)
 	{
@@ -124,9 +117,6 @@ public class MinestellarMoon
 		GameRegistry.registerItem(item, item.getUnlocalizedName().replace("item.", ""));
 	}
 
-	/**
-	 * Handle interaction with other mods.
-	 */
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event)
 	{
