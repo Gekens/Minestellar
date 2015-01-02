@@ -43,6 +43,27 @@ public class BlockCable extends BlockContainer
 	}
 
 	@Override
+	public AxisAlignedBB getSelectedBoundingBoxFromPool(World world, int x, int y, int z)
+	{
+		TileEntityCable cable = (TileEntityCable) world.getTileEntity(x, y, z);
+		
+		if(cable != null)
+		{
+			
+			float minX = 11*pixel/2-(cable.connections[5] != null ? (11*pixel/2) : 0);
+			float minY = 11*pixel/2-(cable.connections[1] != null ? (11*pixel/2) : 0);
+			float minZ = 11*pixel/2-(cable.connections[2] != null ? (11*pixel/2) : 0);
+			float maxX = 1-11*pixel/2+(cable.connections[3] != null ? (11*pixel/2) : 0);
+			float maxY = 1-11*pixel/2+(cable.connections[0] != null ? (11*pixel/2) : 0);
+			float maxZ = 1-11*pixel/2+(cable.connections[4] != null ? (11*pixel/2) : 0);
+			
+			this.setBlockBounds(minX, minY, minZ, maxX, maxY, maxZ);
+		}
+		
+		return AxisAlignedBB.getBoundingBox(x+this.minX, y+this.minY, z+this.minZ, x+this.maxX, y+this.maxY, z+this.maxZ);
+	}
+	
+	@Override
 	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z)
 	{
 		TileEntityCable cable = (TileEntityCable) world.getTileEntity(x, y, z);
