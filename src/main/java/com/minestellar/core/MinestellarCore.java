@@ -128,12 +128,12 @@ public class MinestellarCore
 
 	private void registerCreatures()
 	{
-		MinestellarUtil.registerMinestellarCreature(EntityZombieCore.class, "entityZombieCore", -030201, -102030);
+		MinestellarUtil.registerMinestellarCreature(EntityZombieCore.class, "entityAdvancedZombie", -030201, -102030);
 	}
 
 	private void registerTileEntities()
 	{
-		GameRegistry.registerTileEntity(TileEntityCable.class, "cable");
+        GameRegistry.registerTileEntity(TileEntityCable.class, "cable");
 	}
 
 	public static void registerBlock(Block block, Class<? extends ItemBlock> itemBlockClass)

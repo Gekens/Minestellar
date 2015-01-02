@@ -113,7 +113,7 @@ public class BlockCable extends BlockContainer
 	{
 		return false;
 	}
-
+	
 	/*
 	 * @Override
 	 * 
