@@ -35,8 +35,7 @@ public class TileEntityRenderCable extends TileEntitySpecialRenderer
 	boolean drawInside = true;
 
 	float pixel = 1F / 16F;
-	float texturePixel = 1F / 32F; // 32 because my image is 32 pixels big, in
-	// every direction
+	float texturePixel = 1F / 32F; // 32 because my image is 32 pixels big, in every direction
 
 	@Override
 	public void renderTileEntityAt(TileEntity tileEntity, double translationX, double translationY, double translationZ, float f)
@@ -47,6 +46,8 @@ public class TileEntityRenderCable extends TileEntitySpecialRenderer
 		this.bindTexture(blockTexture);
 		{
 			TileEntityCable cable = (TileEntityCable) tileEntity;
+
+			if(cable.canConnectEnergy(ForgeDirection.NORTH)) System.out.println("Test"); drawConnector(ForgeDirection.NORTH);
 
 			if(!cable.onlyOneOpposite(cable.connections))
 			{
@@ -68,15 +69,6 @@ public class TileEntityRenderCable extends TileEntitySpecialRenderer
 					{
 						drawStraight(cable.connections[i]);
 						break;
-					}
-				}
-			}
-			for(int i = 0; i < cable.connections.length; i++)
-			{
-				if(cable.connections[i] != null)
-				{
-					if(cable.canConnectEnergy(cable.connections[i])){
-						drawConnector(cable.connections[i]);
 					}
 				}
 			}

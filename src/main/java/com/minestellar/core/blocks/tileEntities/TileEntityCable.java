@@ -16,13 +16,18 @@
 
 package com.minestellar.core.blocks.tileEntities;
 
+import cpw.mods.fml.common.Optional;
+import cpw.mods.fml.common.Optional.Method;
+
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
-import cofh.api.energy.EnergyStorage;
-import cofh.api.energy.IEnergyHandler;
-import cofh.api.energy.IEnergyStorage;
 
+import cofh.api.energy.EnergyStorage;
+import cofh.api.energy.IEnergyConnection;
+import cofh.api.energy.IEnergyHandler;
+
+@Optional.Interface(iface = "cofh.api.energy.IEnergyHandler", modid = "CoFHCore")
 public class TileEntityCable extends TileEntity implements IEnergyHandler
 {
 
@@ -106,59 +111,67 @@ public class TileEntityCable extends TileEntity implements IEnergyHandler
 
 	//RF IMPLEMENTATION
 
+	@Method(modid = "CoFHCore")
 	@Override
 	public boolean canConnectEnergy(ForgeDirection direction) {
-		return true;
-	}
 
-	@Override
-	public int extractEnergy(ForgeDirection direction, int maxExtract, boolean simulate) {
-		
 		if(direction.equals(ForgeDirection.UP)){
-			if((worldObj.getTileEntity(xCoord, yCoord+1, zCoord) != null) && (worldObj.getTileEntity(xCoord, yCoord+1, zCoord) instanceof IEnergyStorage)){
-				IEnergyStorage te = (IEnergyStorage)worldObj.getTileEntity(xCoord, yCoord+1, zCoord);
-				te.receiveEnergy(maxExtract, false);
+			if((worldObj.getTileEntity(xCoord, yCoord+1, zCoord) != null) && (worldObj.getTileEntity(xCoord, yCoord+1, zCoord) instanceof IEnergyConnection)){
+				connections[0] = ForgeDirection.UP;
+				return true;
 			}
-		}else if(direction.equals(ForgeDirection.DOWN)){
-			if((worldObj.getTileEntity(xCoord, yCoord-1, zCoord) != null) && (worldObj.getTileEntity(xCoord, yCoord-1, zCoord) instanceof IEnergyStorage)){
-				IEnergyStorage te = (IEnergyStorage)worldObj.getTileEntity(xCoord, yCoord-1, zCoord);
-				te.receiveEnergy(maxExtract, false);
-			}
-		}else if(direction.equals(ForgeDirection.EAST)){
-			if((worldObj.getTileEntity(xCoord+1, yCoord, zCoord) != null) && (worldObj.getTileEntity(xCoord+1, yCoord, zCoord) instanceof IEnergyStorage)){
-				IEnergyStorage te = (IEnergyStorage)worldObj.getTileEntity(xCoord+1, yCoord, zCoord);
-				te.receiveEnergy(maxExtract, false);
-			}
-		}else if(direction.equals(ForgeDirection.WEST)){
-			if((worldObj.getTileEntity(xCoord-1, yCoord, zCoord) != null) && (worldObj.getTileEntity(xCoord-1, yCoord, zCoord) instanceof IEnergyStorage)){
-				IEnergyStorage te = (IEnergyStorage)worldObj.getTileEntity(xCoord-1, yCoord, zCoord);
-				te.receiveEnergy(maxExtract, false);
-			}
-		}else if(direction.equals(ForgeDirection.NORTH)){
-			if((worldObj.getTileEntity(xCoord, yCoord, zCoord-1) != null) && (worldObj.getTileEntity(xCoord, yCoord, zCoord-1) instanceof IEnergyStorage)){
-				IEnergyStorage te = (IEnergyStorage)worldObj.getTileEntity(xCoord, yCoord, zCoord-1);
-				te.receiveEnergy(maxExtract, false);
-			}
-		}else if(direction.equals(ForgeDirection.SOUTH)){
-			if((worldObj.getTileEntity(xCoord, yCoord, zCoord+1) != null) && (worldObj.getTileEntity(xCoord, yCoord, zCoord+1) instanceof IEnergyStorage)){
-				IEnergyStorage te = (IEnergyStorage)worldObj.getTileEntity(xCoord, yCoord, zCoord+1);
-				te.receiveEnergy(maxExtract, false);
+		}else{
+			connections[0] = null;
+		}
+		if(direction.equals(ForgeDirection.DOWN)){
+			if((worldObj.getTileEntity(xCoord, yCoord-1, zCoord) != null) && (worldObj.getTileEntity(xCoord, yCoord-1, zCoord) instanceof IEnergyConnection)){
+				return true;
 			}
 		}
-		
+		if(direction.equals(ForgeDirection.EAST)){
+			if((worldObj.getTileEntity(xCoord+1, yCoord, zCoord) != null) && (worldObj.getTileEntity(xCoord+1, yCoord, zCoord) instanceof IEnergyConnection)){
+				return true;
+			}
+		}
+		if(direction.equals(ForgeDirection.WEST)){
+			if((worldObj.getTileEntity(xCoord-1, yCoord, zCoord) != null) && (worldObj.getTileEntity(xCoord-1, yCoord, zCoord) instanceof IEnergyConnection)){
+				return true;
+			}
+		}
+		if(direction.equals(ForgeDirection.NORTH)){
+			if((worldObj.getTileEntity(xCoord, yCoord, zCoord-1) != null) && (worldObj.getTileEntity(xCoord, yCoord, zCoord-1) instanceof IEnergyConnection)){
+				return true;
+			}
+		}
+		if(direction.equals(ForgeDirection.SOUTH)){
+			if((worldObj.getTileEntity(xCoord, yCoord, zCoord+1) != null) && (worldObj.getTileEntity(xCoord, yCoord, zCoord+1) instanceof IEnergyConnection)){
+				
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	@Method(modid = "CoFHCore")
+	@Override
+	public int extractEnergy(ForgeDirection direction, int maxExtract, boolean simulate) {
 		return storage.extractEnergy(maxExtract, simulate);
 	}
 
+	@Method(modid = "CoFHCore")
 	@Override
 	public int getEnergyStored(ForgeDirection direction) {
 		return storage.getMaxEnergyStored();
 	}
 
+	@Method(modid = "CoFHCore")
 	@Override
 	public int getMaxEnergyStored(ForgeDirection direction) {
 		return storage.getEnergyStored();
 	}
 
+	@Method(modid = "CoFHCore")
 	@Override
 	public int receiveEnergy(ForgeDirection direction, int maxReceive, boolean simulate) {
 		return storage.receiveEnergy(maxReceive, simulate);
