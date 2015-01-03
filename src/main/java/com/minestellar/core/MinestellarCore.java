@@ -73,10 +73,6 @@ public class MinestellarCore
 	@SidedProxy(clientSide = "com.minestellar.core.proxy.ClientProxyCore", serverSide = "com.minestellar.core.proxy.CommonProxyCore")
 	public static CommonProxyCore proxy;
 
-	/**
-	 * Runs before anything else. Reads/sets up your config, create blocks,
-	 * items and register them with the GameRegistry.
-	 */
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event)
 	{
@@ -88,9 +84,6 @@ public class MinestellarCore
 		this.proxy.preInit(event);
 	}
 
-	/**
-	 * Build whatever data structures you care about. And registers recipes.
-	 */
 	@EventHandler
 	public void init(FMLInitializationEvent event)
 	{
@@ -146,12 +139,9 @@ public class MinestellarCore
 		GameRegistry.registerItem(item, item.getUnlocalizedName().replace("item.", ""));
 	}
 
-	/**
-	 * Handle interaction with other mods.
-	 */
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event)
 	{
-		this.proxy.postInit(event);
+        this.proxy.postInit(event);
 	}
 }
