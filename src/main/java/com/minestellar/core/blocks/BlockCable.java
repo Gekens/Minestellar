@@ -16,9 +16,14 @@
 
 package com.minestellar.core.blocks;
 
+import java.util.List;
+
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.IIcon;
@@ -31,7 +36,7 @@ public class BlockCable extends BlockContainer
 {
 	float pixel = 1F / 16F;
 	
-	public static IIcon cableBlockIcon;
+	public static IIcon[] cableBlockIcon;
 
 	protected BlockCable(String name)
 	{
@@ -87,7 +92,7 @@ public class BlockCable extends BlockContainer
 	@Override
 	public TileEntity createNewTileEntity(World world, int meta)
 	{
-		return new TileEntityCable();
+		return new TileEntityCable(meta);
 	}
 
 	@Override
@@ -114,30 +119,34 @@ public class BlockCable extends BlockContainer
 		return false;
 	}
 	
-	/*
-	 * @Override
-	 * 
-	 * @SideOnly(Side.CLIENT) public void registerBlockIcons(IIconRegister
-	 * par1IconRegister) { BlockCable.cableBlockIcon =
-	 * par1IconRegister.registerIcon(MinestellarCore.TEXTURE_PREFIX +
-	 * "cable_tin"); BlockCable.cableBlockIcon =
-	 * par1IconRegister.registerIcon(MinestellarCore.TEXTURE_PREFIX +
-	 * "cable_copper"); }
-	 * 
-	 * @Override public void registerBlockIcons(IIconRegister par1IconRegister)
-	 * { this.cableBlockIcon = new IIcon[4]; // UPDATE WHEN ADDING BLOCKS
-	 * this.cableBlockIcon[0] =
-	 * par1IconRegister.registerIcon(Minestellar.TEXTURE_PREFIX + "blockCable");
-	 * this.cableBlockIcon[1] =
-	 * par1IconRegister.registerIcon(Minestellar.TEXTURE_PREFIX + "oreTin"); }
-	 * 
-	 * @Override public IIcon getIcon(int side, int meta) { return
-	 * this.cableBlockIcon[meta]; }
-	 * 
-	 * @Override public void getSubBlocks(Item block, CreativeTabs creativeTabs,
-	 * List list) { for (int i = 0; i < 2; ++i) // UPDATE WHEN ADDING BLOCKS {
-	 * list.add(new ItemStack(this, 1, i)); } }
-	 * 
-	 * @Override public int damageDropped(int meta) { return meta; }
-	 */
+	@Override
+	public void registerBlockIcons(IIconRegister par1IconRegister)
+	{
+		this.cableBlockIcon = new IIcon[3];
+		this.cableBlockIcon[0] = par1IconRegister.registerIcon("bedrock");
+		this.cableBlockIcon[1] = par1IconRegister.registerIcon("bookshelf");
+		this.cableBlockIcon[2] = par1IconRegister.registerIcon("brick");
+	}
+	
+	@Override
+	public IIcon getIcon(int side, int meta)
+	{
+		return this.cableBlockIcon[meta];
+	}
+
+	@Override
+	public void getSubBlocks(Item block, CreativeTabs creativeTabs, List list)
+	{
+		for (int i = 0; i < 3; ++i) // UPDATE WHEN ADDING BLOCKS
+		{
+			list.add(new ItemStack(this, 1, i));
+		}
+	}
+	
+	@Override
+	public int damageDropped(int meta)
+	{
+		return meta;
+	}
+	
 }

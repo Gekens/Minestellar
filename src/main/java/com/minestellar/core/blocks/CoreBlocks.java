@@ -25,6 +25,7 @@ import net.minecraftforge.oredict.OreDictionary;
 
 import com.minestellar.core.MinestellarCore;
 import com.minestellar.core.blocks.fluid.FluidOil;
+import com.minestellar.core.blocks.items.ItemBlockCable;
 import com.minestellar.core.blocks.items.ItemBlockDecor;
 import com.minestellar.core.blocks.items.ItemBlockOres;
 import com.minestellar.core.util.ItemBlockUtil;
@@ -44,7 +45,7 @@ public class CoreBlocks
 		CoreBlocks.coreOreBlocks = new BlockOreCore("core_ore");
 		CoreBlocks.coreDecorBlocks = new BlockDecorCore("core_decor");
 		CoreBlocks.teleportBlock = new BlockTeleportCore("teleporter", Material.iron);
-		CoreBlocks.cableBlock = new BlockCable("core_cable");
+		CoreBlocks.cableBlock = new BlockCable("core_cable_0");
 
 		CoreBlocks.oilFluid = new FluidOil("oil").setBlock(CoreBlocks.oilFluidBlock);
 		FluidRegistry.registerFluid(CoreBlocks.oilFluid);
@@ -60,8 +61,8 @@ public class CoreBlocks
 		MinestellarCore.registerBlock(CoreBlocks.coreOreBlocks, ItemBlockOres.class);
 		MinestellarCore.registerBlock(CoreBlocks.coreDecorBlocks, ItemBlockDecor.class);
 		MinestellarCore.registerBlock(CoreBlocks.teleportBlock, ItemBlockUtil.class);
-		MinestellarCore.registerBlock(CoreBlocks.cableBlock, ItemBlockUtil.class);
-
+		MinestellarCore.registerBlock(CoreBlocks.cableBlock, ItemBlockCable.class);
+		
 		MinestellarCore.registerBlock(CoreBlocks.oilFluidBlock, ItemBlockUtil.class);
 	}
 
