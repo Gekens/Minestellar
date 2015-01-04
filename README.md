@@ -24,7 +24,7 @@ So you found a bug in this project's code?  Think you can make it more efficient
 6. Click `Send pull request`, and wait for feedback!
 
 ####Creating an Issue
-this mod crashes every time?  Have a suggestion?  Found a bug?  Create an issue now!
+This mod crashes every time?  Have a suggestion?  Found a bug?  Create an issue now!
 
 1. Make sure your issue hasn't already been answered or fixed.  Also think about whether your issue is a valid one before submitting it.
 2. Go to [the issues page](http://github.com/SteamNSteel/SteamNSteel/issues).

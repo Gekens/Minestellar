@@ -40,7 +40,6 @@ public class TileEntityRenderCable extends TileEntitySpecialRenderer
 	@Override
 	public void renderTileEntityAt(TileEntity tileEntity, double translationX, double translationY, double translationZ, float f)
 	{
-
 		blockTexture = new ResourceLocation(MinestellarCore.TEXTURE_PREFIX + "textures/model/tile/blockCable" + tileEntity.blockMetadata + ".png");
 		
 		GL11.glTranslated(translationX, translationY, translationZ);
@@ -48,17 +47,6 @@ public class TileEntityRenderCable extends TileEntitySpecialRenderer
 		this.bindTexture(blockTexture);
 		{
 			TileEntityCable cable = (TileEntityCable) tileEntity;
-
-			/*for(int i = 0; i < cable.connections.length; i++)
-			{
-				if(cable.connections[i] != null)
-				{
-					if(cable.canConnectEnergy(cable.connections[i])){ 
-						System.out.println("Test: " + cable.connections[i]); 
-						drawConnector(cable.connections[i]);
-					}
-				}
-			}*/
 			
 			if(!cable.onlyOneOpposite(cable.connections))
 			{

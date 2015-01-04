@@ -45,7 +45,7 @@ public class CoreBlocks
 		CoreBlocks.coreOreBlocks = new BlockOreCore("core_ore");
 		CoreBlocks.coreDecorBlocks = new BlockDecorCore("core_decor");
 		CoreBlocks.teleportBlock = new BlockTeleportCore("teleporter", Material.iron);
-		CoreBlocks.cableBlock = new BlockCable("core_cable_0");
+		CoreBlocks.cableBlock = new BlockCable("core_cable");
 
 		CoreBlocks.oilFluid = new FluidOil("oil").setBlock(CoreBlocks.oilFluidBlock);
 		FluidRegistry.registerFluid(CoreBlocks.oilFluid);

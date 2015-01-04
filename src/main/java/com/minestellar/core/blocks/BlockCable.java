@@ -123,9 +123,9 @@ public class BlockCable extends BlockContainer
 	public void registerBlockIcons(IIconRegister par1IconRegister)
 	{
 		this.cableBlockIcon = new IIcon[3];
-		this.cableBlockIcon[0] = par1IconRegister.registerIcon("bedrock");
-		this.cableBlockIcon[1] = par1IconRegister.registerIcon("bookshelf");
-		this.cableBlockIcon[2] = par1IconRegister.registerIcon("brick");
+		this.cableBlockIcon[0] = par1IconRegister.registerIcon(MinestellarCore.TEXTURE_PREFIX + "light_cable_icon");
+		this.cableBlockIcon[1] = par1IconRegister.registerIcon(MinestellarCore.TEXTURE_PREFIX + "medium_cable_icon");
+		this.cableBlockIcon[2] = par1IconRegister.registerIcon(MinestellarCore.TEXTURE_PREFIX + "heavy_cable_icon");
 	}
 	
 	@Override
@@ -148,5 +148,4 @@ public class BlockCable extends BlockContainer
 	{
 		return meta;
 	}
-	
 }

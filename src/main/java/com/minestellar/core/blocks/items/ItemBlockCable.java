@@ -25,13 +25,12 @@ import net.minecraft.item.ItemStack;
 
 public class ItemBlockCable extends ItemBlock{
 
-	private static final String[] types = new String[] {
-		"blockCable0",
-		"blockCable1",
-		"blockCable2",
-		
+	public static String[] types = new String[] {
+		"light_wire", 
+		"medium_wire", 
+		"heavy_wire"
 	};
-
+	
 	public ItemBlockCable(Block par1)
 	{
 		super(par1);

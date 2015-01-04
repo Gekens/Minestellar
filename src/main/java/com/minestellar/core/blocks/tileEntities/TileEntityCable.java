@@ -36,10 +36,22 @@ public class TileEntityCable extends TileEntity implements IEnergyHandler
 	 */
 	public ForgeDirection[] connections = new ForgeDirection[6];
 
-	private EnergyStorage storage = new EnergyStorage(3600);
+	private EnergyStorage storage;
 
 	public TileEntityCable(int meta){
 		this.blockMetadata = meta;
+		
+		switch(this.blockMetadata)
+		{
+		case 0:
+			storage = new EnergyStorage(360);
+			break;
+		case 1:
+			storage = new EnergyStorage(1250);
+			break;
+		case 2:
+			storage = new EnergyStorage(20000);
+		}
 	}
 
 	@Override

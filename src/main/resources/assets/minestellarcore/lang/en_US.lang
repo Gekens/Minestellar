@@ -60,7 +60,9 @@ tile.core_decor.blockSilicon.name=Silicon Block
 tile.core_decor.blockAluminum.name=Aluminum Block
 tile.core_decor.blockTitanium.name=Titanium Block
 tile.core_decor.blockCarbon.name=Carbon Block
-tile.core_cable.name=Electrical Cable
+tile.core_cable.light_wire.name=Electrical Cable (Light)
+tile.core_cable.medium_wire.name=Electrical Cable (Medium)
+tile.core_cable.heavy_wire.name=Electrical Cable (Heavy)
 tile.teleporter.name=Planetary Teleporter Block
 
 # GUIS
