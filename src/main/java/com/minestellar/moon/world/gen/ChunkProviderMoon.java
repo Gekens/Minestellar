@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 31/dic/2014 Davide Cossu & Matthew Albrecht.
+ * Copyright (c) 04/January/2015 Davide Cossu & Matthew Albrecht.
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -35,45 +35,38 @@ import com.minestellar.api.world.gen.ChunkProviderMinestellar;
 import com.minestellar.api.world.gen.MapGenBaseMeta;
 import com.minestellar.moon.blocks.MoonBlocks;
 
-public class ChunkProviderMoon extends ChunkProviderMinestellar
-{
+public class ChunkProviderMoon extends ChunkProviderMinestellar {
 	private final BiomeDecoratorMoon moonBiomeDecorator = new BiomeDecoratorMoon();
 	private final MapGenCaveMoon caveGenerator = new MapGenCaveMoon();
 
-	public ChunkProviderMoon(World par1World, long seed, boolean mapFeaturesEnabled)
-	{
+	public ChunkProviderMoon(World par1World, long seed, boolean mapFeaturesEnabled) {
 		super(par1World, seed, mapFeaturesEnabled);
 	}
 
 	@Override
-	protected BiomeDecoratorMinestellar getBiomeGenerator()
-	{
+	protected BiomeDecoratorMinestellar getBiomeGenerator() {
 		return this.moonBiomeDecorator;
 	}
 
 	@Override
-	protected BiomeGenBase[] getBiomesForGeneration()
-	{
+	protected BiomeGenBase[] getBiomesForGeneration() {
 		return new BiomeGenBase[] { BiomeGenBaseMoon.moon };
 	}
 
 	@Override
-	protected int getSeaLevel()
-	{
+	protected int getSeaLevel() {
 		return 93;
 	}
 
 	@Override
-	protected List<MapGenBaseMeta> getWorldGenerators()
-	{
+	protected List<MapGenBaseMeta> getWorldGenerators() {
 		List<MapGenBaseMeta> generators = Lists.newArrayList();
 		generators.add(this.caveGenerator);
 		return generators;
 	}
 
 	@Override
-	protected BiomeGenBase.SpawnListEntry[] getMonsters()
-	{
+	protected BiomeGenBase.SpawnListEntry[] getMonsters() {
 		List<BiomeGenBase.SpawnListEntry> monsters = new ArrayList<BiomeGenBase.SpawnListEntry>();
 		monsters.add(new BiomeGenBase.SpawnListEntry(EntityZombie.class, 8, 2, 3));
 		monsters.add(new BiomeGenBase.SpawnListEntry(EntitySpider.class, 8, 2, 3));
@@ -83,66 +76,55 @@ public class ChunkProviderMoon extends ChunkProviderMinestellar
 	}
 
 	@Override
-	protected BiomeGenBase.SpawnListEntry[] getCreatures()
-	{
+	protected BiomeGenBase.SpawnListEntry[] getCreatures() {
 		return new BiomeGenBase.SpawnListEntry[0];
 	}
 
 	@Override
-	protected BlockMetaPair getGrassBlock()
-	{
+	protected BlockMetaPair getGrassBlock() {
 		return new BlockMetaPair(MoonBlocks.moonBasicBlocks, (byte) 0);
 	}
 
 	@Override
-	protected BlockMetaPair getDirtBlock()
-	{
+	protected BlockMetaPair getDirtBlock() {
 		return new BlockMetaPair(MoonBlocks.moonBasicBlocks, (byte) 1);
 	}
 
 	@Override
-	protected BlockMetaPair getStoneBlock()
-	{
+	protected BlockMetaPair getStoneBlock() {
 		return new BlockMetaPair(MoonBlocks.moonBasicBlocks, (byte) 2);
 	}
 
 	@Override
-	public double getHeightModifier()
-	{
+	public double getHeightModifier() {
 		return 12;
 	}
 
 	@Override
-	public double getSmallFeatureHeightModifier()
-	{
-		return 26;
+	public double getSmallFeatureHeightModifier() {
+		return 25;
 	}
 
 	@Override
-	public double getMountainHeightModifier()
-	{
-		return 95;
+	public double getMountainHeightModifier() {
+		return 0;
 	}
 
 	@Override
-	public double getValleyHeightModifier()
-	{
-		return 50;
+	public double getValleyHeightModifier() {
+		return 0;
 	}
 
 	@Override
-	public int getCraterProbability()
-	{
-		return 500;
+	public int getCraterProbability() {
+		return 450;
 	}
 
 	@Override
-	public void onChunkProvide(int cX, int cZ, Block[] blocks, byte[] metadata)
-	{
+	public void onChunkProvide(int cX, int cZ, Block[] blocks, byte[] metadata) {
 	}
 
 	@Override
-	public void onPopulate(IChunkProvider provider, int cX, int cZ)
-	{
+	public void onPopulate(IChunkProvider provider, int cX, int cZ) {
 	}
 }

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 31/dic/2014 Davide Cossu & Matthew Albrecht.
+ * Copyright (c) 04/January/2015 Davide Cossu & Matthew Albrecht.
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -26,17 +26,14 @@ import com.minestellar.core.proxy.ClientProxyCore;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class ItemBlockUtil extends ItemBlock
-{
-	public ItemBlockUtil(Block block)
-	{
+public class ItemBlockUtil extends ItemBlock {
+	public ItemBlockUtil(Block block) {
 		super(block);
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public EnumRarity getRarity(ItemStack par1ItemStack)
-	{
+	public EnumRarity getRarity(ItemStack par1ItemStack) {
 		return ClientProxyCore.stellarItem;
 	}
 }

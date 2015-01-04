@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 31/dic/2014 Davide Cossu & Matthew Albrecht.
+ * Copyright (c) 04/January/2015 Davide Cossu & Matthew Albrecht.
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -24,13 +24,11 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-import net.minecraft.stats.Achievement;
-import net.minecraftforge.common.AchievementPage;
 
 import com.minestellar.core.blocks.CoreBlocks;
-import com.minestellar.core.blocks.tileEntities.TileEntityCable;
+import com.minestellar.core.blocks.tile.TileEntityCable;
+import com.minestellar.core.blocks.tile.TileEntityPipe;
 import com.minestellar.core.entities.EntityZombieCore;
-import com.minestellar.core.event.EventAchievementCore;
 import com.minestellar.core.items.CoreItems;
 import com.minestellar.core.proxy.CommonProxyCore;
 import com.minestellar.core.recipe.RecipeManagerCore;
@@ -38,9 +36,7 @@ import com.minestellar.core.util.ConfigManagerCore;
 import com.minestellar.core.util.MinestellarCreativeTab;
 import com.minestellar.core.util.MinestellarUtil;
 import com.minestellar.core.world.gen.OverworldGenerator;
-import com.minestellar.moon.MinestellarMoon;
 
-import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
@@ -50,11 +46,10 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
 
-@Mod(modid = MinestellarCore.MODID, name = MinestellarCore.MODNAME, version = Constants.VERSION)
-public class MinestellarCore
-{
-	public static final String MODID = "MinestellarCore";
-	public static final String MODNAME = "Minestellar Core";
+@Mod(modid = MinestellarCore.MOD_ID, name = MinestellarCore.MOD_NAME, version = Constants.VERSION)
+public class MinestellarCore {
+	public static final String MOD_ID = "MinestellarCore";
+	public static final String MOD_NAME = "Minestellar Core";
 
 	public static final String ASSET_PREFIX = "minestellarcore";
 	public static final String TEXTURE_PREFIX = MinestellarCore.ASSET_PREFIX + ":";
@@ -65,17 +60,22 @@ public class MinestellarCore
 	public static HashMap<String, ItemStack> blocksList = new HashMap<String, ItemStack>();
 	public static HashMap<String, ItemStack> itemList = new HashMap<String, ItemStack>();
 
-	public static Achievement achievementSpace;
-
-	@Instance(MinestellarCore.MODID)
+	@Instance(MinestellarCore.MOD_ID)
 	public static MinestellarCore instance = new MinestellarCore();
 
 	@SidedProxy(clientSide = "com.minestellar.core.proxy.ClientProxyCore", serverSide = "com.minestellar.core.proxy.CommonProxyCore")
 	public static CommonProxyCore proxy;
 
+	public static void registerBlock(Block block, Class<? extends ItemBlock> itemBlockClass) {
+		GameRegistry.registerBlock(block, itemBlockClass, block.getUnlocalizedName().replace("tile.", ""));
+	}
+
+	public static void registerItem(Item item) {
+		GameRegistry.registerItem(item, item.getUnlocalizedName().replace("item.", ""));
+	}
+
 	@EventHandler
-	public void preInit(FMLPreInitializationEvent event)
-	{
+	public void preInit(FMLPreInitializationEvent event) {
 		new ConfigManagerCore(new File(event.getModConfigurationDirectory(), Constants.MOD_NAME + "/core.cfg"));
 
 		CoreBlocks.init();
@@ -85,18 +85,9 @@ public class MinestellarCore
 	}
 
 	@EventHandler
-	public void init(FMLInitializationEvent event)
-	{
+	public void init(FMLInitializationEvent event) {
 		MinestellarCore.stellarBlocksTab = new MinestellarCreativeTab(CreativeTabs.getNextID(), "MinestellarBlocks", Item.getItemFromBlock(CoreBlocks.coreOreBlocks), 0);
-		MinestellarCore.stellarItemsTab = new MinestellarCreativeTab(CreativeTabs.getNextID(), "MinestellarItems", CoreItems.carbonPickaxe, 0);
-
-		AchievementPage.registerAchievementPage(new AchievementPage("Minestellar", new Achievement[] { MinestellarCore.achievementSpace, MinestellarMoon.achievementMoon }));
-
-		MinestellarCore.achievementSpace = new Achievement("achievement.space", "space", 0, 0, new ItemStack(CoreBlocks.teleportBlock), (Achievement) null).initIndependentStat().registerStat();
-
-		RecipeManagerCore.loadRecipes();
-
-		FMLCommonHandler.instance().bus().register(new EventAchievementCore());
+		MinestellarCore.stellarItemsTab = new MinestellarCreativeTab(CreativeTabs.getNextID(), "MinestellarItems", CoreItems.coreBasicItems, 0);
 
 		GameRegistry.registerWorldGenerator(new OverworldGenerator(CoreBlocks.coreOreBlocks, 0, 24, 0, 200, 7), 6);
 		GameRegistry.registerWorldGenerator(new OverworldGenerator(CoreBlocks.coreOreBlocks, 1, 22, 0, 200, 7), 4);
@@ -108,6 +99,8 @@ public class MinestellarCore
 
 		GameRegistry.registerWorldGenerator(new OverworldGenerator(CoreBlocks.oilFluidBlock, 0, 25, 20, 75, 3), 20);
 
+		RecipeManagerCore.loadRecipes();
+
 		this.registerTileEntities();
 		this.registerCreatures();
 		this.registerOtherEntities();
@@ -115,33 +108,20 @@ public class MinestellarCore
 		this.proxy.init(event);
 	}
 
-	private void registerOtherEntities()
-	{
+	@EventHandler
+	public void postInit(FMLPostInitializationEvent event) {
+		this.proxy.postInit(event);
 	}
 
-	private void registerCreatures()
-	{
+	private void registerTileEntities() {
+		GameRegistry.registerTileEntity(TileEntityCable.class, "cable");
+		GameRegistry.registerTileEntity(TileEntityPipe.class, "pipe");
+	}
+
+	private void registerCreatures() {
 		MinestellarUtil.registerMinestellarCreature(EntityZombieCore.class, "entityAdvancedZombie", -030201, -102030);
 	}
 
-	private void registerTileEntities()
-	{
-        GameRegistry.registerTileEntity(TileEntityCable.class, "cable");
-	}
-
-	public static void registerBlock(Block block, Class<? extends ItemBlock> itemBlockClass)
-	{
-		GameRegistry.registerBlock(block, itemBlockClass, block.getUnlocalizedName().replace("tile.", ""));
-	}
-
-	public static void registerItem(Item item)
-	{
-		GameRegistry.registerItem(item, item.getUnlocalizedName().replace("item.", ""));
-	}
-
-	@EventHandler
-	public void postInit(FMLPostInitializationEvent event)
-	{
-        this.proxy.postInit(event);
+	private void registerOtherEntities() {
 	}
 }

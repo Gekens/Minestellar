@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 31/dic/2014 Davide Cossu & Matthew Albrecht.
+ * Copyright (c) 04/January/2015 Davide Cossu & Matthew Albrecht.
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -20,11 +20,9 @@ import net.minecraft.world.biome.BiomeGenBase;
 
 import com.minestellar.api.world.gen.WorldChunkManagerMinestellar;
 
-public class WorldChunkManagerMoon extends WorldChunkManagerMinestellar
-{
+public class WorldChunkManagerMoon extends WorldChunkManagerMinestellar {
 	@Override
-	public BiomeGenBase getBiome()
-	{
+	public BiomeGenBase getBiome() {
 		return BiomeGenBaseMoon.moon;
 	}
 }

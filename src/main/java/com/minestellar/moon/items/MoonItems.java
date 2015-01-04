@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 31/dic/2014 Davide Cossu & Matthew Albrecht.
+ * Copyright (c) 04/January/2015 Davide Cossu & Matthew Albrecht.
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -20,36 +20,34 @@ import net.minecraft.item.Item;
 
 import com.minestellar.moon.MinestellarMoon;
 
-public class MoonItems
-{
+public class MoonItems {
+	public static void init() {
+		initItems();
+		registerItems();
+		oreDictRegistration();
+		registerHarvestLevels();
+		registerFluidContainer();
+	}
+
 	public static Item moonBasicItems;
 	public static Item moonPortalTrigger;
 
-	private static void initItems()
-	{
+	private static void initItems() {
 		MoonItems.moonBasicItems = new ItemBasicMoon();
 		MoonItems.moonPortalTrigger = new ItemPortalTrigger("moon_trigger");
 	}
 
-	private static void registerHarvestLevels()
-	{
-	}
-
-	private static void registerItems()
-	{
+	private static void registerItems() {
 		MinestellarMoon.registerItem(moonBasicItems);
 		MinestellarMoon.registerItem(moonPortalTrigger);
 	}
 
-	public static void oreDictRegistration()
-	{
+	private static void oreDictRegistration() {
 	}
 
-	public static void init()
-	{
-		initItems();
-		registerHarvestLevels();
-		registerItems();
-		oreDictRegistration();
+	private static void registerHarvestLevels() {
+	}
+
+	private static void registerFluidContainer() {
 	}
 }

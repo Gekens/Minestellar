@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 31/dic/2014 Davide Cossu & Matthew Albrecht.
+ * Copyright (c) 04/January/2015 Davide Cossu & Matthew Albrecht.
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -26,10 +26,8 @@ import com.minestellar.core.blocks.CoreBlocks;
 import com.minestellar.core.items.CoreItems;
 import com.minestellar.core.util.RecipeUtil;
 
-public class RecipeManagerCore
-{
-	private static void addUniversalRecipes()
-	{
+public class RecipeManagerCore {
+	private static void addUniversalRecipes() {
 		// ARMOR AND TOOLS CRAFTING
 		RecipeUtil.addRecipe(new ItemStack(CoreItems.carbonBoots), new Object[] { "X X", "X X", 'X', "ingotCarbon" });
 		RecipeUtil.addRecipe(new ItemStack(CoreItems.carbonHelmet), new Object[] { "XXX", "X X", 'X', "ingotCarbon" });
@@ -76,6 +74,8 @@ public class RecipeManagerCore
 		RecipeUtil.addRecipe(new ItemStack(CoreBlocks.coreDecorBlocks, 1, 5), new Object[] { "XXX", "XXX", "XXX", 'X', "ingotAluminum" });
 		RecipeUtil.addRecipe(new ItemStack(CoreBlocks.coreDecorBlocks, 1, 6), new Object[] { "XXX", "XXX", "XXX", 'X', "ingotTitanium" });
 		RecipeUtil.addRecipe(new ItemStack(CoreBlocks.coreDecorBlocks, 1, 7), new Object[] { "XXX", "XXX", "XXX", 'X', "ingotCarbon" });
+		
+		RecipeUtil.addRecipe(new ItemStack(CoreBlocks.coreDecorBlocks, 1, 7), new Object[] { "T", "B", 'T', "ingotCarbon", 'B', Blocks.cobblestone });
 
 		// BLOCK TO ITEM
 		RecipeUtil.addRecipe(new ItemStack(CoreItems.coreBasicItems, 9, 0), new Object[] { "X", 'X', "blockCopper" });
@@ -97,8 +97,7 @@ public class RecipeManagerCore
 		FurnaceRecipes.smelting().func_151394_a(new ItemStack(CoreBlocks.coreOreBlocks, 1, 6), OreDictionary.getOres("ingotCarbon").get(0), 0.2F);
 	}
 
-	public static void loadRecipes()
-	{
+	public static void loadRecipes() {
 		RecipeManagerCore.addUniversalRecipes();
 	}
 }

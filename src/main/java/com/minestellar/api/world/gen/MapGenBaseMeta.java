@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 31/dic/2014 Davide Cossu & Matthew Albrecht.
+ * Copyright (c) 04/January/2015 Davide Cossu & Matthew Albrecht.
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -22,8 +22,7 @@ import net.minecraft.block.Block;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
 
-public abstract class MapGenBaseMeta
-{
+public abstract class MapGenBaseMeta {
 	/**
 	 * The number of Chunks to gen-check in any given direction.
 	 */
@@ -39,17 +38,14 @@ public abstract class MapGenBaseMeta
 	 */
 	protected World worldObj;
 
-	public void generate(IChunkProvider par1IChunkProvider, World world, int chunkX, int chunkZ, Block[] blocks, byte[] metadata)
-	{
+	public void generate(IChunkProvider par1IChunkProvider, World world, int chunkX, int chunkZ, Block[] blocks, byte[] metadata) {
 		this.worldObj = world;
 		this.rand.setSeed(world.getSeed());
 		final long r0 = this.rand.nextLong();
 		final long r1 = this.rand.nextLong();
 
-		for (int x0 = chunkX - this.range; x0 <= chunkX + this.range; ++x0)
-		{
-			for (int y0 = chunkZ - this.range; y0 <= chunkZ + this.range; ++y0)
-			{
+		for (int x0 = chunkX - this.range; x0 <= chunkX + this.range; ++x0) {
+			for (int y0 = chunkZ - this.range; y0 <= chunkZ + this.range; ++y0) {
 				final long randX = x0 * r0;
 				final long randZ = y0 * r1;
 				this.rand.setSeed(randX ^ randZ ^ world.getSeed());
@@ -61,7 +57,6 @@ public abstract class MapGenBaseMeta
 	/**
 	 * Recursively called by generate() (generate) and optionally by itself.
 	 */
-	protected void recursiveGenerate(World world, int xChunkCoord, int zChunkCoord, int origXChunkCoord, int origZChunkCoord, Block[] blocks, byte[] metadata)
-	{
+	protected void recursiveGenerate(World world, int xChunkCoord, int zChunkCoord, int origXChunkCoord, int origZChunkCoord, Block[] blocks, byte[] metadata) {
 	}
 }

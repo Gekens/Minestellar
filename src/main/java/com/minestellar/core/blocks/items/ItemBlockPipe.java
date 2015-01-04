@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 04/gen/2015 Davide Cossu & Matthew Albrecht.
+ * Copyright (c) 04/January/2015 Davide Cossu & Matthew Albrecht.
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -23,41 +23,36 @@ import net.minecraft.item.ItemStack;
 
 import com.minestellar.core.proxy.ClientProxyCore;
 
-public class ItemBlockPipe extends ItemBlock{
+public class ItemBlockPipe extends ItemBlock {
 
 	public static String[] types = new String[] {
 		"light_pipe", 
 		"medium_pipe", 
 		"heavy_pipe"
 	};
-	
-	public ItemBlockPipe(Block par1)
-	{
+
+	public ItemBlockPipe(Block par1) {
 		super(par1);
 		this.setHasSubtypes(true);
 	}
 
 	@Override
-	public int getMetadata(int meta)
-	{
+	public int getMetadata(int meta) {
 		return meta;
 	}
 
 	@Override
-	public EnumRarity getRarity(ItemStack par1ItemStack)
-	{
+	public EnumRarity getRarity(ItemStack par1ItemStack) {
 		return ClientProxyCore.stellarItem;
 	}
 
 	@Override
-	public String getUnlocalizedName(ItemStack itemstack)
-	{
+	public String getUnlocalizedName(ItemStack itemstack) {
 		int meta = itemstack.getItemDamage();
-		if (meta < 0 || meta >= ItemBlockPipe.types.length)
-		{
+		if (meta < 0 || meta >= ItemBlockPipe.types.length) {
 			meta = 0;
 		}
 		return super.getUnlocalizedName() + "." + ItemBlockPipe.types[meta];
 	}
-	
+
 }

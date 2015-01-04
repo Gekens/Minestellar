@@ -1,3 +1,19 @@
+/**
+ * Copyright (c) 04/January/2015 Davide Cossu & Matthew Albrecht.
+ *
+ * This program is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU Lesser General Public License as published by the Free
+ * Software Foundation; either version 3 of the License, or (at your option) any
+ * later version.
+ *
+ * This program is distributed in the hope that it will be useful, but WITHOUT ANY
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+ * PARTICULAR PURPOSE. See the GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along with
+ * this program; if not, see <http://www.gnu.org/licenses>.
+ */
+
 package com.minestellar.core.world.gen;
 
 import java.util.Random;
@@ -12,8 +28,7 @@ import com.minestellar.api.world.IMinestellarWorldProvider;
 
 import cpw.mods.fml.common.IWorldGenerator;
 
-public class OverworldGenerator implements IWorldGenerator
-{
+public class OverworldGenerator implements IWorldGenerator {
 	private final int amountPerChunk;
 	private final int maxGenerateLevel;
 	private final int minGenerateLevel;
@@ -21,8 +36,7 @@ public class OverworldGenerator implements IWorldGenerator
 	private final Block oreBlock;
 	private final int metadata;
 
-	public OverworldGenerator(Block oreBlock, int metadata, int amountPerChunk, int minGenLevel, int maxGenLevel, int amountPerVein)
-	{
+	public OverworldGenerator(Block oreBlock, int metadata, int amountPerChunk, int minGenLevel, int maxGenLevel, int amountPerVein) {
 		this.oreBlock = oreBlock;
 		this.metadata = metadata;
 		this.amountPerChunk = amountPerChunk;
@@ -32,12 +46,9 @@ public class OverworldGenerator implements IWorldGenerator
 	}
 
 	@Override
-	public void generate(Random random, int chunkX, int chunkZ, World world, IChunkProvider chunkGenerator, IChunkProvider chunkProvider)
-	{
-		if (!(world.provider instanceof IMinestellarWorldProvider))
-		{
-			for (int i = 0; i < this.amountPerChunk; i++)
-			{
+	public void generate(Random random, int chunkX, int chunkZ, World world, IChunkProvider chunkGenerator, IChunkProvider chunkProvider) {
+		if (!(world.provider instanceof IMinestellarWorldProvider)) {
+			for (int i = 0; i < this.amountPerChunk; i++) {
 				int x = chunkX * 16 + random.nextInt(16);
 				int z = chunkZ * 16 + random.nextInt(16);
 				int y = random.nextInt(Math.max(this.maxGenerateLevel - this.minGenerateLevel, 0)) + this.minGenerateLevel;
@@ -46,8 +57,7 @@ public class OverworldGenerator implements IWorldGenerator
 		}
 	}
 
-	private boolean generateOre(World par1World, Random par2Random, int par3, int par4, int par5)
-	{
+	private boolean generateOre(World par1World, Random par2Random, int par3, int par4, int par5) {
 		float var6 = par2Random.nextFloat() * (float) Math.PI;
 		double var7 = par3 + 8 + MathHelper.sin(var6) * this.amountPerVein / 8.0F;
 		double var9 = par3 + 8 - MathHelper.sin(var6) * this.amountPerVein / 8.0F;
@@ -56,8 +66,7 @@ public class OverworldGenerator implements IWorldGenerator
 		double var15 = par4 + par2Random.nextInt(3) - 2;
 		double var17 = par4 + par2Random.nextInt(3) - 2;
 
-		for (int var19 = 0; var19 <= this.amountPerVein; ++var19)
-		{
+		for (int var19 = 0; var19 <= this.amountPerVein; ++var19) {
 			double var20 = var7 + (var9 - var7) * var19 / this.amountPerVein;
 			double var22 = var15 + (var17 - var15) * var19 / this.amountPerVein;
 			double var24 = var11 + (var13 - var11) * var19 / this.amountPerVein;
@@ -71,25 +80,19 @@ public class OverworldGenerator implements IWorldGenerator
 			int var36 = MathHelper.floor_double(var22 + var30 / 2.0D);
 			int var37 = MathHelper.floor_double(var24 + var28 / 2.0D);
 
-			for (int var38 = var32; var38 <= var35; ++var38)
-			{
+			for (int var38 = var32; var38 <= var35; ++var38) {
 				double var39 = (var38 + 0.5D - var20) / (var28 / 2.0D);
 
-				if (var39 * var39 < 1.0D)
-				{
-					for (int var41 = var33; var41 <= var36; ++var41)
-					{
+				if (var39 * var39 < 1.0D) {
+					for (int var41 = var33; var41 <= var36; ++var41) {
 						double var42 = (var41 + 0.5D - var22) / (var30 / 2.0D);
 
-						if (var39 * var39 + var42 * var42 < 1.0D)
-						{
-							for (int var44 = var34; var44 <= var37; ++var44)
-							{
+						if (var39 * var39 + var42 * var42 < 1.0D) {
+							for (int var44 = var34; var44 <= var37; ++var44) {
 								double var45 = (var44 + 0.5D - var24) / (var28 / 2.0D);
 
 								Block block = par1World.getBlock(var38, var41, var44);
-								if (var39 * var39 + var42 * var42 + var45 * var45 < 1.0D && block.isReplaceableOreGen(par1World, var38, var41, var44, Blocks.stone))
-								{
+								if (var39 * var39 + var42 * var42 + var45 * var45 < 1.0D && block.isReplaceableOreGen(par1World, var38, var41, var44, Blocks.stone)) {
 									par1World.setBlock(var38, var41, var44, this.oreBlock, this.metadata, 2);
 								}
 							}

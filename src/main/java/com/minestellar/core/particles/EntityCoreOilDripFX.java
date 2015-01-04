@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 31/dic/2014 Davide Cossu & Matthew Albrecht.
+ * Copyright (c) 04/January/2015 Davide Cossu & Matthew Albrecht.
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -25,18 +25,15 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class EntityCoreOilDripFX extends EntityFX
-{
+public class EntityCoreOilDripFX extends EntityFX {
 	private final Material materialType;
 	private int bobTimer;
 
-	public EntityCoreOilDripFX(World par1World, double par2, double par4, double par6, Material par8Material)
-	{
+	public EntityCoreOilDripFX(World par1World, double par2, double par4, double par6, Material par8Material) {
 		super(par1World, par2, par4, par6, 0.0D, 0.0D, 0.0D);
 		this.motionX = this.motionY = this.motionZ = 0.0D;
 
-		if (par8Material == Material.water)
-		{
+		if (par8Material == Material.water) {
 			this.particleGreen = 1.0F;
 			this.particleBlue = 1.0F;
 			this.particleRed = 1.0F;
@@ -57,26 +54,22 @@ public class EntityCoreOilDripFX extends EntityFX
 	}
 
 	@Override
-	public int getBrightnessForRender(float par1)
-	{
+	public int getBrightnessForRender(float par1) {
 		return super.getBrightnessForRender(par1);
 	}
 
 	@Override
-	public float getBrightness(float par1)
-	{
+	public float getBrightness(float par1) {
 		return super.getBrightness(par1);
 	}
 
 	@Override
-	public void onUpdate()
-	{
+	public void onUpdate() {
 		this.prevPosX = this.posX;
 		this.prevPosY = this.posY;
 		this.prevPosZ = this.posZ;
 
-		if (this.materialType == Material.water)
-		{
+		if (this.materialType == Material.water) {
 			this.particleGreen = 1.0F;
 			this.particleBlue = 1.0F;
 			this.particleRed = 1.0F;
@@ -85,15 +78,13 @@ public class EntityCoreOilDripFX extends EntityFX
 
 		this.motionY -= this.particleGravity;
 
-		if (this.bobTimer-- > 0)
-		{
+		if (this.bobTimer-- > 0) {
 			this.motionX *= 0.02D;
 			this.motionY *= 0.02D;
 			this.motionZ *= 0.02D;
 			this.setParticleTextureIndex(113);
 		}
-		else
-		{
+		else {
 			this.setParticleTextureIndex(112);
 		}
 
@@ -102,13 +93,11 @@ public class EntityCoreOilDripFX extends EntityFX
 		this.motionY *= 0.9800000190734863D;
 		this.motionZ *= 0.9800000190734863D;
 
-		if (this.particleMaxAge-- <= 0)
-		{
+		if (this.particleMaxAge-- <= 0) {
 			this.setDead();
 		}
 
-		if (this.onGround)
-		{
+		if (this.onGround) {
 			this.setDead();
 			this.motionX *= 0.699999988079071D;
 			this.motionZ *= 0.699999988079071D;
@@ -116,12 +105,10 @@ public class EntityCoreOilDripFX extends EntityFX
 
 		final Material var1 = this.worldObj.getBlock(MathHelper.floor_double(this.posX), MathHelper.floor_double(this.posY), MathHelper.floor_double(this.posZ)).getMaterial();
 
-		if (var1.isLiquid() || var1.isSolid())
-		{
+		if (var1.isLiquid() || var1.isSolid()) {
 			final double var2 = MathHelper.floor_double(this.posY) + 1 - BlockLiquid.getLiquidHeightPercent(this.worldObj.getBlockMetadata(MathHelper.floor_double(this.posX), MathHelper.floor_double(this.posY), MathHelper.floor_double(this.posZ)));
 
-			if (this.posY < var2)
-			{
+			if (this.posY < var2) {
 				this.setDead();
 			}
 		}

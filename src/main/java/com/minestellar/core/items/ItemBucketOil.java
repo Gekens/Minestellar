@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 31/dic/2014 Davide Cossu & Matthew Albrecht.
+ * Copyright (c) 04/January/2015 Davide Cossu & Matthew Albrecht.
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -30,12 +30,10 @@ import com.minestellar.core.MinestellarCore;
 import com.minestellar.core.blocks.CoreBlocks;
 import com.minestellar.core.proxy.ClientProxyCore;
 
-public class ItemBucketOil extends ItemBucket
-{
+public class ItemBucketOil extends ItemBucket {
 	private Block isFull;
 
-	public ItemBucketOil(String name)
-	{
+	public ItemBucketOil(String name) {
 		super(CoreBlocks.oilFluidBlock);
 		this.isFull = CoreBlocks.oilFluidBlock;
 		this.setMaxStackSize(1);
@@ -43,46 +41,36 @@ public class ItemBucketOil extends ItemBucket
 	}
 
 	@Override
-	public EnumRarity getRarity(ItemStack par1ItemStack)
-	{
+	public EnumRarity getRarity(ItemStack par1ItemStack) {
 		return ClientProxyCore.stellarItem;
 	}
 
 	@Override
-	public CreativeTabs getCreativeTab()
-	{
+	public CreativeTabs getCreativeTab() {
 		return MinestellarCore.stellarItemsTab;
 	}
 
 	@Override
-	public boolean tryPlaceContainedLiquid(World par1World, int x, int y, int z)
-	{
+	public boolean tryPlaceContainedLiquid(World par1World, int x, int y, int z) {
 		Material material = par1World.getBlock(x, y, z).getMaterial();
 		boolean flag = !material.isSolid();
 
-		if (this.isFull == Blocks.air)
-		{
+		if (this.isFull == Blocks.air) {
 			return false;
 		}
-		else if (!par1World.isAirBlock(x, y, z) && par1World.getBlock(x, y, z).getMaterial().isSolid())
-		{
+		else if (!par1World.isAirBlock(x, y, z) && par1World.getBlock(x, y, z).getMaterial().isSolid()) {
 			return false;
 		}
-		else
-		{
-			if (par1World.provider.isHellWorld && this.isFull != Blocks.air)
-			{
+		else {
+			if (par1World.provider.isHellWorld && this.isFull != Blocks.air) {
 				par1World.playSoundEffect(x + 0.5F, y + 0.5F, z + 0.5F, "random.fizz", 0.5F, 2.6F + (par1World.rand.nextFloat() - par1World.rand.nextFloat()) * 0.8F);
 
-				for (int l = 0; l < 8; l++)
-				{
+				for (int l = 0; l < 8; l++) {
 					par1World.spawnParticle("largesmoke", x + Math.random(), y + Math.random(), z + Math.random(), 0.0D, 0.0D, 0.0D);
 				}
 			}
-			else
-			{
-				if (!par1World.isRemote && flag && !material.isLiquid())
-				{
+			else {
+				if (!par1World.isRemote && flag && !material.isLiquid()) {
 					par1World.func_147480_a(x, y, z, true);
 				}
 				par1World.setBlock(x, y, z, this.isFull, 0, 3);
@@ -92,8 +80,7 @@ public class ItemBucketOil extends ItemBucket
 	}
 
 	@Override
-	public void registerIcons(IIconRegister iconRegister)
-	{
+	public void registerIcons(IIconRegister iconRegister) {
 		this.itemIcon = iconRegister.registerIcon(MinestellarCore.TEXTURE_PREFIX + "oil_bucket");
 	}
 }

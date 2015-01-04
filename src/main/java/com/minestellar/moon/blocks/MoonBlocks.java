@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 31/dic/2014 Davide Cossu & Matthew Albrecht.
+ * Copyright (c) 04/January/2015 Davide Cossu & Matthew Albrecht.
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -17,41 +17,39 @@
 package com.minestellar.moon.blocks;
 
 import net.minecraft.block.Block;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.oredict.OreDictionary;
 
+import com.minestellar.core.blocks.CoreBlocks;
+import com.minestellar.core.util.ItemBlockUtil;
 import com.minestellar.moon.MinestellarMoon;
-import com.minestellar.moon.blocks.items.ItemBlockBasic;
-import com.minestellar.moon.blocks.items.ItemBlockTeleporter;
+import com.minestellar.moon.blocks.items.ItemBlockBasicMoon;
 
-public class MoonBlocks
-{
+public class MoonBlocks {
+	public static void init() {
+		initBlocks();
+		registerBlocks();
+		oreDictRegistration();
+		setHarvestLevels();
+	}
+
 	public static Block moonBasicBlocks;
 	public static BlockTeleporterMoon moonPortal;
 
-	private static void initBlocks()
-	{
+	private static void initBlocks() {
 		MoonBlocks.moonBasicBlocks = new BlockBasicMoon("moon_basic");
 		MoonBlocks.moonPortal = new BlockTeleporterMoon("moon_portal");
 	}
 
-	public static void setHarvestLevels()
-	{
+	private static void registerBlocks() {
+		MinestellarMoon.registerBlock(MoonBlocks.moonBasicBlocks, ItemBlockBasicMoon.class);
+		MinestellarMoon.registerBlock(MoonBlocks.moonPortal, ItemBlockUtil.class);
 	}
 
-	private static void registerBlocks()
-	{
-		MinestellarMoon.registerBlock(MoonBlocks.moonBasicBlocks, ItemBlockBasic.class);
-		MinestellarMoon.registerBlock(MoonBlocks.moonPortal, ItemBlockTeleporter.class);
+	private static void oreDictRegistration() {
+		OreDictionary.registerOre("moonStone", new ItemStack(MoonBlocks.moonBasicBlocks, 1, 2));
 	}
 
-	public static void oreDictRegistration()
-	{
-	}
-
-	public static void init()
-	{
-		initBlocks();
-		setHarvestLevels();
-		registerBlocks();
-		oreDictRegistration();
+	private static void setHarvestLevels() {
 	}
 }

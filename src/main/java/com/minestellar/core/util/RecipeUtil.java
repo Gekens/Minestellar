@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 31/dic/2014 Davide Cossu & Matthew Albrecht.
+ * Copyright (c) 04/January/2015 Davide Cossu & Matthew Albrecht.
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -22,21 +22,19 @@ import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 
-public class RecipeUtil
-{
+public class RecipeUtil {
 	@SuppressWarnings("unchecked")
-	public static void addRecipe(ItemStack result, Object[] obj)
-	{
+	public static void addRecipe(ItemStack result, Object[] obj) {
 		CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(result, obj));
 	}
 
-	public static void addBlockRecipe(ItemStack result, String oreDictIngot, ItemStack gcIngot)
-	{
-		if (OreDictionary.getOres(oreDictIngot).size() > 1)
-		{
-			CraftingManager.getInstance().getRecipeList().add(new ShapelessOreRecipe(result, new Object[] { gcIngot, oreDictIngot, oreDictIngot, oreDictIngot, oreDictIngot, oreDictIngot, oreDictIngot, oreDictIngot, oreDictIngot }));
+	public static void addBlockRecipe(ItemStack result, String oreDictIngot, ItemStack msIngot) {
+		if (OreDictionary.getOres(oreDictIngot).size() > 1) {
+			CraftingManager.getInstance().getRecipeList().add(new ShapelessOreRecipe(result, new Object[] { msIngot, oreDictIngot, oreDictIngot, oreDictIngot, oreDictIngot, oreDictIngot, oreDictIngot, oreDictIngot, oreDictIngot }));
 		}
-		else
-			RecipeUtil.addRecipe(result, new Object[] { "XXX", "XXX", "XXX", 'X', gcIngot });
+
+		else {
+			RecipeUtil.addRecipe(result, new Object[] { "XXX", "XXX", "XXX", 'X', msIngot });
+		}
 	}
 }

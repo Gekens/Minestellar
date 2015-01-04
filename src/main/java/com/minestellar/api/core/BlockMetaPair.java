@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 31/dic/2014 Davide Cossu & Matthew Albrecht.
+ * Copyright (c) 04/January/2015 Davide Cossu & Matthew Albrecht.
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -18,24 +18,20 @@ package com.minestellar.api.core;
 
 import net.minecraft.block.Block;
 
-public class BlockMetaPair
-{
+public class BlockMetaPair {
 	private final Block block;
 	private final byte metadata;
 
-	public BlockMetaPair(Block block, byte metadata)
-	{
+	public BlockMetaPair(Block block, byte metadata) {
 		this.block = block;
 		this.metadata = metadata;
 	}
 
-	public Block getBlock()
-	{
+	public Block getBlock() {
 		return this.block;
 	}
 
-	public byte getMetadata()
-	{
+	public byte getMetadata() {
 		return this.metadata;
 	}
 }

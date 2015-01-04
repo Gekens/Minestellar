@@ -8,9 +8,10 @@ item.moon_trigger.name=Moon Portal Triggerer
 # ARMOR
 
 # BLOCKS
-tile.moon_basic.surfaceRock.name=Moon Surface Stone
-tile.moon_basic.subSurface.name=Moon Sub-Surface Stone
-tile.moon_basic.rock.name=Moon Stone
+tile.moon_basic.surfaceStone.name=Moon Surface Stone
+tile.moon_basic.subSurfaceStone.name=Moon Sub-Surface Stone
+tile.moon_basic.stone.name=Moon Stone
+tile.moon_basic.cobblestone.name=Moon Cobblestone
 tile.moon_portal.name=Moon Portal
 
 # GUIS

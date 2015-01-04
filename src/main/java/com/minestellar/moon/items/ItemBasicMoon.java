@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 31/dic/2014 Davide Cossu & Matthew Albrecht.
+ * Copyright (c) 04/January/2015 Davide Cossu & Matthew Albrecht.
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -32,15 +32,12 @@ import com.minestellar.moon.MinestellarMoon;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class ItemBasicMoon extends Item
-{
-	private static String[] names = {
-			};
+public class ItemBasicMoon extends Item {
+	private static String[] names = {};
 
 	protected IIcon[] icons = new IIcon[ItemBasicMoon.names.length];
 
-	public ItemBasicMoon()
-	{
+	public ItemBasicMoon() {
 		super();
 		this.setMaxDamage(0);
 		this.setHasSubtypes(true);
@@ -48,35 +45,29 @@ public class ItemBasicMoon extends Item
 
 	@SideOnly(Side.CLIENT)
 	@Override
-	public CreativeTabs getCreativeTab()
-	{
+	public CreativeTabs getCreativeTab() {
 		return MinestellarCore.stellarItemsTab;
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public EnumRarity getRarity(ItemStack par1ItemStack)
-	{
+	public EnumRarity getRarity(ItemStack par1ItemStack) {
 		return ClientProxyCore.stellarItem;
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void registerIcons(IIconRegister iconRegister)
-	{
+	public void registerIcons(IIconRegister iconRegister) {
 		int i = 0;
 
-		for (String name : ItemBasicMoon.names)
-		{
+		for (String name : ItemBasicMoon.names) {
 			this.icons[i++] = iconRegister.registerIcon(MinestellarMoon.TEXTURE_PREFIX + name);
 		}
 	}
 
 	@Override
-	public IIcon getIconFromDamage(int damage)
-	{
-		if (this.icons.length > damage)
-		{
+	public IIcon getIconFromDamage(int damage) {
+		if (this.icons.length > damage) {
 			return this.icons[damage];
 		}
 
@@ -85,19 +76,15 @@ public class ItemBasicMoon extends Item
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
-	public void getSubItems(Item par1, CreativeTabs par2CreativeTabs, List par3List)
-	{
-		for (int i = 0; i < ItemBasicMoon.names.length; i++)
-		{
+	public void getSubItems(Item par1, CreativeTabs par2CreativeTabs, List par3List) {
+		for (int i = 0; i < ItemBasicMoon.names.length; i++) {
 			par3List.add(new ItemStack(par1, 1, i));
 		}
 	}
 
 	@Override
-	public String getUnlocalizedName(ItemStack par1ItemStack)
-	{
-		if (this.icons.length > par1ItemStack.getItemDamage())
-		{
+	public String getUnlocalizedName(ItemStack par1ItemStack) {
+		if (this.icons.length > par1ItemStack.getItemDamage()) {
 			return "item." + ItemBasicMoon.names[par1ItemStack.getItemDamage()];
 		}
 
@@ -105,8 +92,7 @@ public class ItemBasicMoon extends Item
 	}
 
 	@Override
-	public int getMetadata(int par1)
-	{
+	public int getMetadata(int par1) {
 		return par1;
 	}
 }

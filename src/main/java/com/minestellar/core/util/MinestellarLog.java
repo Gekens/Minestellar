@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 31/dic/2014 Davide Cossu & Matthew Albrecht.
+ * Copyright (c) 04/January/2015 Davide Cossu & Matthew Albrecht.
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -22,15 +22,12 @@ import com.minestellar.core.Constants;
 
 import cpw.mods.fml.relauncher.FMLRelaunchLog;
 
-public class MinestellarLog
-{
-	public static void info(String message)
-	{
+public class MinestellarLog {
+	public static void info(String message) {
 		FMLRelaunchLog.log(Constants.MOD_NAME, Level.INFO, message);
 	}
 
-	public static void severe(String message)
-	{
+	public static void severe(String message) {
 		FMLRelaunchLog.log(Constants.MOD_NAME, Level.ERROR, message);
 	}
 }

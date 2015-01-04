@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 1/dic/2015 Davide Cossu & Matthew Albrecht.
+ * Copyright (c) 04/January/2015 Davide Cossu & Matthew Albrecht.
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -14,22 +14,15 @@
  * this program; if not, see <http://www.gnu.org/licenses>.
  */
 
-package com.minestellar.moon.event;
+package com.minestellar.core.blocks.fluid;
 
-import com.minestellar.moon.MinestellarMoon;
-import com.minestellar.moon.items.MoonItems;
+import net.minecraftforge.fluids.Fluid;
 
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.gameevent.PlayerEvent;
+import com.minestellar.core.blocks.BlockFluidOil;
 
-public class EventAchievementMoon
-{
-	@SubscribeEvent
-	public void moon(PlayerEvent.ItemCraftedEvent event)
-	{
-		if (event.crafting.getItem().equals(MoonItems.moonPortalTrigger))
-		{
-			event.player.addStat(MinestellarMoon.achievementMoon, 1);
-		}
+public class FluidBlockOil extends Fluid {
+	public FluidBlockOil(String fluidName) {
+		super(fluidName);
+		this.setIcons(BlockFluidOil.oilStillIcon, BlockFluidOil.oilFlowingIcon);
 	}
 }

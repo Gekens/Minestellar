@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 31/dic/2014 Davide Cossu & Matthew Albrecht.
+ * Copyright (c) 04/January/2015 Davide Cossu & Matthew Albrecht.
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -16,20 +16,29 @@
 
 package com.minestellar.core.items;
 
-import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemArmor.ArmorMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.util.EnumHelper;
-import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.oredict.OreDictionary;
 
 import com.minestellar.core.MinestellarCore;
-import com.minestellar.core.blocks.CoreBlocks;
+import com.minestellar.core.items.tools.ItemAxeCore;
+import com.minestellar.core.items.tools.ItemHoeCore;
+import com.minestellar.core.items.tools.ItemPickaxeCore;
+import com.minestellar.core.items.tools.ItemSpadeCore;
+import com.minestellar.core.items.tools.ItemSwordCore;
 
-public class CoreItems
-{
+public class CoreItems {
+	public static void init() {
+		initItems();
+		registerItems();
+		oreDictRegistration();
+		registerHarvestLevels();
+		registerFluidContainer();
+	}
+
 	public static Item coreBasicItems;
 
 	public static Item carbonSword;
@@ -51,8 +60,7 @@ public class CoreItems
 	public static ArmorMaterial ARMOR_CARBON = EnumHelper.addArmorMaterial("carbon", 30, new int[] { 3, 8, 6, 3 }, 12);
 	public static ToolMaterial TOOL_CARBON = EnumHelper.addToolMaterial("carbon", 3, 768, 5.0F, 2, 8);
 
-	private static void initItems()
-	{
+	private static void initItems() {
 		CoreItems.coreBasicItems = new ItemBasicCore();
 
 		CoreItems.carbonSword = new ItemSwordCore("carbon_sword", CoreItems.TOOL_CARBON);
@@ -72,15 +80,7 @@ public class CoreItems
 		CoreItems.oilBucket = new ItemBucketOil("oil_bucket");
 	}
 
-	private static void registerHarvestLevels()
-	{
-		CoreItems.carbonPickaxe.setHarvestLevel("pickaxe", 4);
-		CoreItems.carbonAxe.setHarvestLevel("axe", 4);
-		CoreItems.carbonShovel.setHarvestLevel("shovel", 4);
-	}
-
-	private static void registerItems()
-	{
+	private static void registerItems() {
 		MinestellarCore.registerItem(coreBasicItems);
 
 		MinestellarCore.registerItem(carbonPickaxe);
@@ -100,8 +100,7 @@ public class CoreItems
 		MinestellarCore.registerItem(oilBucket);
 	}
 
-	public static void oreDictRegistration()
-	{
+	private static void oreDictRegistration() {
 		/* Ingots */
 		OreDictionary.registerOre("ingotCopper", new ItemStack(CoreItems.coreBasicItems, 1, 0));
 		OreDictionary.registerOre("ingotTin", new ItemStack(CoreItems.coreBasicItems, 1, 1));
@@ -135,17 +134,12 @@ public class CoreItems
 		OreDictionary.registerOre("pipeMagnetic", new ItemStack(CoreItems.coreBasicItems, 1, 23));
 	}
 
-	private static void registerFluidContainer()
-	{
-		FluidContainerRegistry.registerFluidContainer(CoreBlocks.oilFluid, new ItemStack(CoreItems.oilBucket), new ItemStack(Items.bucket));
+	private static void registerHarvestLevels() {
+		CoreItems.carbonPickaxe.setHarvestLevel("pickaxe", 4);
+		CoreItems.carbonAxe.setHarvestLevel("axe", 4);
+		CoreItems.carbonShovel.setHarvestLevel("shovel", 4);
 	}
 
-	public static void init()
-	{
-		initItems();
-		registerHarvestLevels();
-		registerItems();
-		oreDictRegistration();
-		registerFluidContainer();
+	private static void registerFluidContainer() {
 	}
 }

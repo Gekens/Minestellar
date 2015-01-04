@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 31/dic/2014 Davide Cossu & Matthew Albrecht.
+ * Copyright (c) 04/January/2015 Davide Cossu & Matthew Albrecht.
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -31,43 +31,36 @@ import com.minestellar.moon.world.gen.WorldChunkManagerMoon;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class WorldProviderMoon extends WorldProvider implements IMinestellarWorldProvider
-{
+public class WorldProviderMoon extends WorldProvider implements IMinestellarWorldProvider {
 	@Override
-	public IChunkProvider createChunkGenerator()
-	{
+	public IChunkProvider createChunkGenerator() {
 		return new ChunkProviderMoon(this.worldObj, this.worldObj.getSeed(), true);
 	}
 
 	@Override
-	public void registerWorldChunkManager()
-	{
+	public void registerWorldChunkManager() {
 		this.worldChunkMgr = new WorldChunkManagerMoon();
 		this.dimensionId = ConfigManagerMoon.idDimensionMoon;
 	}
 
 	@Override
-	public IRenderHandler getSkyRenderer()
-	{
+	public IRenderHandler getSkyRenderer() {
 		return new SkyRendererMoon(null);
 	}
 
 	@Override
-	public String getSaveFolder()
-	{
+	public String getSaveFolder() {
 		return "DIM" + ConfigManagerMoon.idDimensionMoon;
 	}
 
 	@Override
-	public String getDimensionName()
-	{
+	public String getDimensionName() {
 		return "Moon";
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public float getStarBrightness(float par1)
-	{
+	public float getStarBrightness(float par1) {
 		final float var2 = this.worldObj.getCelestialAngle(par1);
 		float var3 = 1.0F - (MathHelper.cos(var2 * (float) Math.PI * 2.0F) * 2.0F + 0.25F);
 
@@ -78,22 +71,19 @@ public class WorldProviderMoon extends WorldProvider implements IMinestellarWorl
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public Vec3 getSkyColor(Entity cameraEntity, float partialTicks)
-	{
+	public Vec3 getSkyColor(Entity cameraEntity, float partialTicks) {
 		return Vec3.createVectorHelper(0.01F, 0.01F, 0.01F);
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public Vec3 getFogColor(float par1, float par2)
-	{
+	public Vec3 getFogColor(float par1, float par2) {
 		return Vec3.createVectorHelper(0.0F, 0.0F, 0.0F);
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public float[] calcSunriseSunsetColors(float p_76560_1_, float p_76560_2_)
-	{
+	public float[] calcSunriseSunsetColors(float p_76560_1_, float p_76560_2_) {
 		float[] sunriseColors = new float[4];
 
 		sunriseColors[0] = 0.0F;
@@ -105,68 +95,57 @@ public class WorldProviderMoon extends WorldProvider implements IMinestellarWorl
 	}
 
 	@SideOnly(Side.CLIENT)
-	public boolean renderVoidFog()
-	{
+	public boolean renderVoidFog() {
 		return true;
 	}
 
 	@Override
-	public boolean canRespawnHere()
-	{
+	public boolean canRespawnHere() {
 		return false;
 	}
 
 	@Override
-	public boolean isSurfaceWorld()
-	{
+	public boolean isSurfaceWorld() {
 		return true;
 	}
 
 	@Override
-	protected void generateLightBrightnessTable()
-	{
+	protected void generateLightBrightnessTable() {
 		final float var1 = 0.0F;
 
-		for (int var2 = 0; var2 <= 15; ++var2)
-		{
+		for (int var2 = 0; var2 <= 15; ++var2) {
 			final float var3 = 1.0F - var2 / 15.0F;
 			this.lightBrightnessTable[var2] = (1.0F - var3) / (var3 * 3.0F + 1.0F) * (1.0F - var1) + var1;
 		}
 	}
 
 	@Override
-	public float getGravity()
-	{
+	public float getGravity() {
 		return 0.062F;
 	}
 
 	@Override
-	public boolean hasAtmosphere()
-	{
+	public boolean hasAtmosphere() {
 		return false;
 	}
 
 	@Override
-	public long getDayLength()
-	{
+	public long getDayLength() {
 		return 655200L;
 	}
 
 	@Override
-	public float getHeatLevelsDay()
-	{
+	public float getHeatLevelsDay() {
 		return 100F;
 	}
 
 	@Override
-	public float getHeatLevelsNight()
-	{
+	public float getHeatLevelsNight() {
 		return -173F;
 	}
 
 	@Override
-	public float getAirPressure()
-	{
+	public float getAirPressure() {
 		return 0F;
 	}
 }

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 31/dic/2014 Davide Cossu & Matthew Albrecht.
+ * Copyright (c) 04/January/2015 Davide Cossu & Matthew Albrecht.
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -24,22 +24,18 @@ import net.minecraftforge.common.MinecraftForge;
 
 import com.minestellar.api.event.wgen.MinestellarEventPopulate;
 
-public abstract class BiomeDecoratorMinestellar
-{
+public abstract class BiomeDecoratorMinestellar {
 	protected Random rand;
 
 	protected int chunkX;
 	protected int chunkZ;
 
-	public void decorate(World world, Random random, int chunkX, int chunkZ)
-	{
-		if (this.getCurrentWorld() != null)
-		{
+	public void decorate(World world, Random random, int chunkX, int chunkZ) {
+		if (this.getCurrentWorld() != null) {
 			throw new RuntimeException("Already decorating!");
 		}
 
-		else
-		{
+		else {
 			this.setCurrentWorld(world);
 			this.rand = random;
 			this.chunkX = chunkX;
@@ -56,11 +52,10 @@ public abstract class BiomeDecoratorMinestellar
 
 	protected abstract World getCurrentWorld();
 
-	protected void generateOre(int amountPerChunk, WorldGenerator worldGenerator, int minY, int maxY)
-	{
+	protected void generateOre(int amountPerChunk, WorldGenerator worldGenerator, int minY, int maxY) {
 		World currentWorld = this.getCurrentWorld();
-		for (int var5 = 0; var5 < amountPerChunk; ++var5)
-		{
+
+		for (int var5 = 0; var5 < amountPerChunk; ++var5) {
 			final int var6 = this.chunkX + this.rand.nextInt(16);
 			final int var7 = this.rand.nextInt(maxY - minY) + minY;
 			final int var8 = this.chunkZ + this.rand.nextInt(16);

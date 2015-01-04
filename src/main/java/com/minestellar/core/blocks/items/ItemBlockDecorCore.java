@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 31/dic/2014 Davide Cossu & Matthew Albrecht.
+ * Copyright (c) 04/January/2015 Davide Cossu & Matthew Albrecht.
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -14,7 +14,7 @@
  * this program; if not, see <http://www.gnu.org/licenses>.
  */
 
-package com.minestellar.moon.blocks.items;
+package com.minestellar.core.blocks.items;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.EnumRarity;
@@ -23,41 +23,42 @@ import net.minecraft.item.ItemStack;
 
 import com.minestellar.core.proxy.ClientProxyCore;
 
-public class ItemBlockBasic extends ItemBlock
-{
-	private static final String[] types = new String[]
-	{
-			"surfaceRock",
-			"subSurface",
-			"rock",
+public class ItemBlockDecorCore extends ItemBlock {
+	private static final String[] types = new String[] {
+		"blockCopper", 
+		"blockTin", 
+		"blockSteel", 
+		"blockLithium", 
+		"blockSilicon", 
+		"blockAluminum", 
+		"blockTitanium", 
+		"blockCarbon",
+		"blockTinMix",
 	};
 
-	public ItemBlockBasic(Block par1)
-	{
+	public ItemBlockDecorCore(Block par1) {
 		super(par1);
 		this.setHasSubtypes(true);
 	}
 
 	@Override
-	public int getMetadata(int meta)
-	{
+	public int getMetadata(int meta) {
 		return meta;
 	}
 
 	@Override
-	public EnumRarity getRarity(ItemStack par1ItemStack)
-	{
+	public EnumRarity getRarity(ItemStack par1ItemStack) {
 		return ClientProxyCore.stellarItem;
 	}
 
 	@Override
-	public String getUnlocalizedName(ItemStack itemstack)
-	{
+	public String getUnlocalizedName(ItemStack itemstack) {
 		int meta = itemstack.getItemDamage();
-		if (meta < 0 || meta >= ItemBlockBasic.types.length)
-		{
+
+		if (meta < 0 || meta >= ItemBlockDecorCore.types.length) {
 			meta = 0;
 		}
-		return super.getUnlocalizedName() + "." + ItemBlockBasic.types[meta];
+
+		return super.getUnlocalizedName() + "." + ItemBlockDecorCore.types[meta];
 	}
 }

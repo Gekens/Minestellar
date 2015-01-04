@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 31/dic/2014 Davide Cossu & Matthew Albrecht.
+ * Copyright (c) 04/January/2015 Davide Cossu & Matthew Albrecht.
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -26,16 +26,13 @@ import com.minestellar.core.Constants;
 
 import cpw.mods.fml.common.FMLLog;
 
-public class ConfigManagerCore
-{
+public class ConfigManagerCore {
 	public static boolean loaded;
 
 	static Configuration configuration;
 
-	public ConfigManagerCore(File file)
-	{
-		if (!ConfigManagerCore.loaded)
-		{
+	public ConfigManagerCore(File file) {
+		if (!ConfigManagerCore.loaded) {
 			ConfigManagerCore.configuration = new Configuration(file);
 			this.setDefaultValues();
 		}
@@ -43,28 +40,20 @@ public class ConfigManagerCore
 
 	public static boolean idDayLength;
 	public static double idStarMultiplier;
-	public static boolean idVersionCheck;
 
-	private void setDefaultValues()
-	{
-		try
-		{
+	private void setDefaultValues() {
+		try {
 			ConfigManagerCore.configuration.load();
 
-			ConfigManagerCore.idStarMultiplier = ConfigManagerCore.configuration.get(Constants.CONFIG_CATEGORY_GENERAL, "Star count multiplyer. Causes more lag when in space. (Default '1.0')", 1.0).getInt(1);
-			ConfigManagerCore.idStarMultiplier = ConfigManagerCore.configuration.get(Constants.CONFIG_CATEGORY_GENERAL, "Star count multiplyer. Causes more lag when in space. (Default '1.0')", 1.0).getDouble(1.0);
-
-			ConfigManagerCore.idDayLength = ConfigManagerCore.configuration.get(Constants.CONFIG_CATEGORY_GENERAL, "Realistic Day Length. (Default 'true')", true).getBoolean(true);
-			ConfigManagerCore.idVersionCheck = ConfigManagerCore.configuration.get(Constants.CONFIG_CATEGORY_GENERAL, "Run a version check. May cause lag for the first 2 minutes of loading a world. (Default 'true')", true).getBoolean(true);
+			ConfigManagerCore.idStarMultiplier = ConfigManagerCore.configuration.get(Constants.CONFIGURATION_GENERAL, "Star count multiplyer. Causes more lag when in space. (Default '1.0')", 1.0).getDouble(1.0);
+			ConfigManagerCore.idDayLength = ConfigManagerCore.configuration.get(Constants.CONFIGURATION_GENERAL, "Realistic Day Length. (Default 'true')", true).getBoolean(true);
 		}
 
-		catch (final Exception e)
-		{
+		catch (final Exception e) {
 			FMLLog.log(Level.ERROR, e, Constants.MOD_NAME + " Core Config has a problem loading it's configuration");
 		}
 
-		finally
-		{
+		finally {
 			ConfigManagerCore.configuration.save();
 			ConfigManagerCore.loaded = true;
 		}

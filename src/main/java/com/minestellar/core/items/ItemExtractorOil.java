@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 31/dic/2014 Davide Cossu & Matthew Albrecht.
+ * Copyright (c) 04/January/2015 Davide Cossu & Matthew Albrecht.
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -40,12 +40,10 @@ import com.minestellar.core.proxy.ClientProxyCore;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class ItemExtractorOil extends Item
-{
+public class ItemExtractorOil extends Item {
 	protected IIcon[] icons = new IIcon[5];
 
-	public ItemExtractorOil(String assetName)
-	{
+	public ItemExtractorOil(String assetName) {
 		super();
 		this.setMaxStackSize(1);
 		this.setUnlocalizedName(assetName);
@@ -53,31 +51,25 @@ public class ItemExtractorOil extends Item
 	}
 
 	@Override
-	public CreativeTabs getCreativeTab()
-	{
+	public CreativeTabs getCreativeTab() {
 		return MinestellarCore.stellarItemsTab;
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public EnumRarity getRarity(ItemStack par1ItemStack)
-	{
+	public EnumRarity getRarity(ItemStack par1ItemStack) {
 		return ClientProxyCore.stellarItem;
 	}
 
 	@Override
-	public EnumAction getItemUseAction(ItemStack par1ItemStack)
-	{
+	public EnumAction getItemUseAction(ItemStack par1ItemStack) {
 		return EnumAction.bow;
 	}
 
 	@Override
-	public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer player)
-	{
-		if (this.getNearestOilBlock(player) != null)
-		{
-			if (this.openCanister(player) != null)
-			{
+	public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer player) {
+		if (this.getNearestOilBlock(player) != null) {
+			if (this.openCanister(player) != null) {
 				player.setItemInUse(par1ItemStack, this.getMaxItemUseDuration(par1ItemStack));
 			}
 		}
@@ -87,12 +79,10 @@ public class ItemExtractorOil extends Item
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void registerIcons(IIconRegister iconRegister)
-	{
+	public void registerIcons(IIconRegister iconRegister) {
 		this.icons = new IIcon[5];
 
-		for (int i = 0; i < this.icons.length; i++)
-		{
+		for (int i = 0; i < this.icons.length; i++) {
 			this.icons[i] = iconRegister.registerIcon(this.getIconString() + "_" + (i + 1));
 		}
 
@@ -100,24 +90,19 @@ public class ItemExtractorOil extends Item
 	}
 
 	@Override
-	public void onUsingTick(ItemStack stack, EntityPlayer player, int count)
-	{
+	public void onUsingTick(ItemStack stack, EntityPlayer player, int count) {
 		Vector3 blockHit = this.getNearestOilBlock(player);
 
-		if (blockHit != null)
-		{
+		if (blockHit != null) {
 			final int x = MathHelper.floor_double(blockHit.x);
 			final int y = MathHelper.floor_double(blockHit.y);
 			final int z = MathHelper.floor_double(blockHit.z);
 
-			if (this.isOilBlock(player, player.worldObj, x, y, z, false))
-			{
-				if (this.openCanister(player) != null)
-				{
+			if (this.isOilBlock(player, player.worldObj, x, y, z, false)) {
+				if (this.openCanister(player) != null) {
 					final ItemStack canister = this.openCanister(player);
 
-					if (canister != null && count % 5 == 0 && canister.getItemDamage() > 1)
-					{
+					if (canister != null && count % 5 == 0 && canister.getItemDamage() > 1) {
 						this.isOilBlock(player, player.worldObj, x, y, z, true);
 						canister.setItemDamage(Math.max(canister.getItemDamage() - 200, 1));
 					}
@@ -126,14 +111,10 @@ public class ItemExtractorOil extends Item
 		}
 	}
 
-	private ItemStack openCanister(EntityPlayer player)
-	{
-		for (final ItemStack stack : player.inventory.mainInventory)
-		{
-			if (stack != null && stack.getItem() instanceof ItemCanisterOil)
-			{
-				if (stack.getMaxDamage() - stack.getItemDamage() >= 0 && stack.getMaxDamage() - stack.getItemDamage() < CoreItems.canisterOil.getMaxDamage() - 1)
-				{
+	private ItemStack openCanister(EntityPlayer player) {
+		for (final ItemStack stack : player.inventory.mainInventory) {
+			if (stack != null && stack.getItem() instanceof ItemCanisterOil) {
+				if (stack.getMaxDamage() - stack.getItemDamage() >= 0 && stack.getMaxDamage() - stack.getItemDamage() < CoreItems.canisterOil.getMaxDamage() - 1) {
 					return stack;
 				}
 			}
@@ -143,65 +124,54 @@ public class ItemExtractorOil extends Item
 	}
 
 	@Override
-	public int getMaxItemUseDuration(ItemStack par1ItemStack)
-	{
+	public int getMaxItemUseDuration(ItemStack par1ItemStack) {
 		return 72000;
 	}
 
 	@Override
-	public ItemStack onEaten(ItemStack par1ItemStack, World par2World, EntityPlayer player)
-	{
+	public ItemStack onEaten(ItemStack par1ItemStack, World par2World, EntityPlayer player) {
 		return par1ItemStack;
 	}
 
 	@Override
-	public IIcon getIcon(ItemStack stack, int renderPass, EntityPlayer player, ItemStack usingItem, int useRemaining)
-	{
+	public IIcon getIcon(ItemStack stack, int renderPass, EntityPlayer player, ItemStack usingItem, int useRemaining) {
 		final int count2 = useRemaining / 2;
 
-		switch (count2 % 5)
-		{
-			case 0:
-				if (useRemaining == 0)
-				{
-					return this.icons[0];
-				}
-				return this.icons[4];
-			case 1:
-				return this.icons[3];
-			case 2:
-				return this.icons[2];
-			case 3:
-				return this.icons[1];
-			case 4:
+		switch (count2 % 5) {
+		case 0:
+			if (useRemaining == 0) {
 				return this.icons[0];
+			}
+			return this.icons[4];
+		case 1:
+			return this.icons[3];
+		case 2:
+			return this.icons[2];
+		case 3:
+			return this.icons[1];
+		case 4:
+			return this.icons[0];
 		}
 
 		return this.icons[0];
 	}
 
 	@Override
-	public void onPlayerStoppedUsing(ItemStack par1ItemStack, World par2World, EntityPlayer player, int par4)
-	{
-		if (par2World.isRemote)
-		{
+	public void onPlayerStoppedUsing(ItemStack par1ItemStack, World par2World, EntityPlayer player, int par4) {
+		if (par2World.isRemote) {
 			this.itemIcon = this.icons[0];
 		}
 	}
 
-	private boolean isOilBlock(EntityPlayer player, World world, int x, int y, int z, boolean doDrain)
-	{
+	private boolean isOilBlock(EntityPlayer player, World world, int x, int y, int z, boolean doDrain) {
 		Block block = world.getBlock(x, y, z);
 
-		if (block instanceof IFluidBlock)
-		{
+		if (block instanceof IFluidBlock) {
 			IFluidBlock fluidBlockHit = (IFluidBlock) block;
 			Fluid fluidHit = FluidRegistry.lookupFluidForBlock(block);
 
-			if (fluidHit != null)
-			{
-				if (fluidHit.getName().equalsIgnoreCase("oil"))
-				{
+			if (fluidHit != null) {
+				if (fluidHit.getName().equalsIgnoreCase("oil")) {
 					FluidStack stack = fluidBlockHit.drain(world, x, y, z, doDrain);
 					return stack != null && stack.amount > 0;
 				}
@@ -211,8 +181,7 @@ public class ItemExtractorOil extends Item
 		return false;
 	}
 
-	private Vector3 getNearestOilBlock(EntityPlayer par1EntityPlayer)
-	{
+	private Vector3 getNearestOilBlock(EntityPlayer par1EntityPlayer) {
 		final float var4 = 1.0F;
 		final float var5 = par1EntityPlayer.prevRotationPitch + (par1EntityPlayer.rotationPitch - par1EntityPlayer.prevRotationPitch) * var4;
 		final float var6 = par1EntityPlayer.prevRotationYaw + (par1EntityPlayer.rotationYaw - par1EntityPlayer.prevRotationYaw) * var4;
@@ -228,17 +197,14 @@ public class ItemExtractorOil extends Item
 		final float var20 = var14 * var16;
 		double var21 = 5.0D;
 
-		if (par1EntityPlayer instanceof EntityPlayerMP)
-		{
+		if (par1EntityPlayer instanceof EntityPlayerMP) {
 			var21 = ((EntityPlayerMP) par1EntityPlayer).theItemInWorldManager.getBlockReachDistance();
 		}
 
-		for (double dist = 0.0; dist <= var21; dist += 1D)
-		{
+		for (double dist = 0.0; dist <= var21; dist += 1D) {
 			final Vector3 var23 = var13.translate(new Vector3(var18 * dist, var17 * dist, var20 * dist));
 
-			if (this.isOilBlock(par1EntityPlayer, par1EntityPlayer.worldObj, MathHelper.floor_double(var23.x), MathHelper.floor_double(var23.y), MathHelper.floor_double(var23.z), false))
-			{
+			if (this.isOilBlock(par1EntityPlayer, par1EntityPlayer.worldObj, MathHelper.floor_double(var23.x), MathHelper.floor_double(var23.y), MathHelper.floor_double(var23.z), false)) {
 				return var23;
 			}
 		}

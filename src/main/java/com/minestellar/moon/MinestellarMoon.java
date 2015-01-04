@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 31/dic/2014 Davide Cossu & Matthew Albrecht.
+ * Copyright (c) 04/January/2015 Davide Cossu & Matthew Albrecht.
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -23,19 +23,15 @@ import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-import net.minecraft.stats.Achievement;
 
 import com.minestellar.core.Constants;
-import com.minestellar.core.MinestellarCore;
 import com.minestellar.moon.blocks.MoonBlocks;
-import com.minestellar.moon.event.EventAchievementMoon;
 import com.minestellar.moon.items.MoonItems;
 import com.minestellar.moon.proxy.CommonProxyMoon;
 import com.minestellar.moon.recipe.RecipeManagerMoon;
 import com.minestellar.moon.util.ConfigManagerMoon;
 import com.minestellar.moon.world.DimensionMoon;
 
-import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
@@ -46,8 +42,7 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 @Mod(modid = MinestellarMoon.MODID, name = MinestellarMoon.MODNAME, version = Constants.VERSION)
-public class MinestellarMoon
-{
+public class MinestellarMoon {
 	public static final String MODID = "MinestellarMoon";
 	public static final String MODNAME = "Minestellar Moon";
 
@@ -57,35 +52,34 @@ public class MinestellarMoon
 	public static HashMap<String, ItemStack> blocksList = new HashMap<String, ItemStack>();
 	public static HashMap<String, ItemStack> itemList = new HashMap<String, ItemStack>();
 
-	public static Achievement achievementMoon;
-
 	@Instance(MinestellarMoon.MODID)
 	public static MinestellarMoon instance = new MinestellarMoon();
 
 	@SidedProxy(clientSide = "com.minestellar.moon.proxy.ClientProxyMoon", serverSide = "com.minestellar.moon.proxy.CommonProxyMoon")
 	public static CommonProxyMoon proxy;
 
+	public static void registerBlock(Block block, Class<? extends ItemBlock> itemBlockClass) {
+		GameRegistry.registerBlock(block, itemBlockClass, block.getUnlocalizedName().replace("tile.", ""));
+	}
+
+	public static void registerItem(Item item) {
+		GameRegistry.registerItem(item, item.getUnlocalizedName().replace("item.", ""));
+	}
+
 	@EventHandler
-	public void preInit(FMLPreInitializationEvent event)
-	{
+	public void preInit(FMLPreInitializationEvent event) {
 		new ConfigManagerMoon(new File(event.getModConfigurationDirectory(), Constants.MOD_NAME + "/moon.cfg"));
 
 		MoonBlocks.init();
 		MoonItems.init();
 
-		DimensionMoon.registerWorldProvider();
-		DimensionMoon.registerDimensions();
+		DimensionMoon.init();
 
 		this.proxy.preInit(event);
 	}
 
 	@EventHandler
-	public void init(FMLInitializationEvent event)
-	{
-		MinestellarMoon.achievementMoon = new Achievement("achievement.moon", "gotoMoon", 2, 1, new ItemStack(MoonItems.moonPortalTrigger), (Achievement) MinestellarCore.achievementSpace).registerStat();
-
-		FMLCommonHandler.instance().bus().register(new EventAchievementMoon());
-
+	public void init(FMLInitializationEvent event) {
 		RecipeManagerMoon.loadRecipes();
 
 		this.registerTileEntities();
@@ -95,31 +89,17 @@ public class MinestellarMoon
 		this.proxy.init(event);
 	}
 
-	private void registerOtherEntities()
-	{
-	}
-
-	private void registerCreatures()
-	{
-	}
-
-	private void registerTileEntities()
-	{
-	}
-
-	public static void registerBlock(Block block, Class<? extends ItemBlock> itemBlockClass)
-	{
-		GameRegistry.registerBlock(block, itemBlockClass, block.getUnlocalizedName().replace("tile.", ""));
-	}
-
-	public static void registerItem(Item item)
-	{
-		GameRegistry.registerItem(item, item.getUnlocalizedName().replace("item.", ""));
-	}
-
 	@EventHandler
-	public void postInit(FMLPostInitializationEvent event)
-	{
+	public void postInit(FMLPostInitializationEvent event) {
 		this.proxy.postInit(event);
+	}
+
+	private void registerTileEntities() {
+	}
+
+	private void registerCreatures() {
+	}
+
+	private void registerOtherEntities() {
 	}
 }

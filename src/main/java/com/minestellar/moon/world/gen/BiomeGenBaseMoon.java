@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 31/dic/2014 Davide Cossu & Matthew Albrecht.
+ * Copyright (c) 04/January/2015 Davide Cossu & Matthew Albrecht.
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -23,12 +23,10 @@ import net.minecraft.world.biome.BiomeGenBase;
 
 import com.minestellar.moon.util.ConfigManagerMoon;
 
-public class BiomeGenBaseMoon extends BiomeGenBase
-{
+public class BiomeGenBaseMoon extends BiomeGenBase {
 	public static final BiomeGenBase moon = new BiomeGenBaseMoon(ConfigManagerMoon.idBiomeMoon).setBiomeName("Moon");
 
-	public BiomeGenBaseMoon(int var1)
-	{
+	public BiomeGenBaseMoon(int var1) {
 		super(var1);
 		this.spawnableMonsterList.clear();
 		this.spawnableWaterCreatureList.clear();
@@ -40,14 +38,12 @@ public class BiomeGenBaseMoon extends BiomeGenBase
 	}
 
 	@Override
-	public BiomeGenBaseMoon setColor(int var1)
-	{
+	public BiomeGenBaseMoon setColor(int var1) {
 		return (BiomeGenBaseMoon) super.setColor(var1);
 	}
 
 	@Override
-	public float getSpawningChance()
-	{
+	public float getSpawningChance() {
 		return 0.01F;
 	}
 }

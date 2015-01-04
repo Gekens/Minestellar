@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 31/dic/2014 Davide Cossu & Matthew Albrecht.
+ * Copyright (c) 04/January/2015 Davide Cossu & Matthew Albrecht.
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -21,13 +21,11 @@ import net.minecraft.item.Item;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class MinestellarCreativeTab extends CreativeTabs
-{
+public class MinestellarCreativeTab extends CreativeTabs {
 	private final Item itemForTab;
 	private final int metaForTab;
 
-	public MinestellarCreativeTab(int par1, String par2Str, Item itemForTab, int metaForTab)
-	{
+	public MinestellarCreativeTab(int par1, String par2Str, Item itemForTab, int metaForTab) {
 		super(par1, par2Str);
 		this.itemForTab = itemForTab;
 		this.metaForTab = metaForTab;
@@ -35,15 +33,13 @@ public class MinestellarCreativeTab extends CreativeTabs
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public Item getTabIconItem()
-	{
+	public Item getTabIconItem() {
 		return this.itemForTab;
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public int func_151243_f()
-	{
+	public int func_151243_f() {
 		return this.metaForTab;
 	}
 }

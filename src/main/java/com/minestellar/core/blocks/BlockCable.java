@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 31/dic/2014 Davide Cossu & Matthew Albrecht.
+ * Copyright (c) 04/January/2015 Davide Cossu & Matthew Albrecht.
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -30,122 +30,107 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
 import com.minestellar.core.MinestellarCore;
-import com.minestellar.core.blocks.tileEntities.TileEntityCable;
+import com.minestellar.core.blocks.tile.TileEntityCable;
 
-public class BlockCable extends BlockContainer
-{
+public class BlockCable extends BlockContainer {
 	float pixel = 1F / 16F;
-	
+
 	public static IIcon[] cableBlockIcon;
 
-	protected BlockCable(String name)
-	{
+	protected BlockCable(String name) {
 		super(Material.ground);
 		this.setBlockName(name);
 
-		this.setBlockBounds(11*pixel/2, 11*pixel/2, 11*pixel/2, 1-11*pixel/2, 1-11*pixel/2, 1-11*pixel/2);
+		this.setBlockBounds(11 * pixel / 2, 11 * pixel / 2, 11 * pixel / 2, 1 - 11 * pixel / 2, 1 - 11 * pixel / 2, 1 - 11 * pixel / 2);
 		this.useNeighborBrightness = true;
 	}
 
 	@Override
-	public AxisAlignedBB getSelectedBoundingBoxFromPool(World world, int x, int y, int z)
-	{
+	public AxisAlignedBB getSelectedBoundingBoxFromPool(World world, int x, int y, int z) {
 		TileEntityCable cable = (TileEntityCable) world.getTileEntity(x, y, z);
-		
-		if(cable != null)
-		{
-			
-			float minX = 11*pixel/2-(cable.connections[5] != null ? (11*pixel/2) : 0);
-			float minY = 11*pixel/2-(cable.connections[1] != null ? (11*pixel/2) : 0);
-			float minZ = 11*pixel/2-(cable.connections[2] != null ? (11*pixel/2) : 0);
-			float maxX = 1-11*pixel/2+(cable.connections[3] != null ? (11*pixel/2) : 0);
-			float maxY = 1-11*pixel/2+(cable.connections[0] != null ? (11*pixel/2) : 0);
-			float maxZ = 1-11*pixel/2+(cable.connections[4] != null ? (11*pixel/2) : 0);
-			
+
+		if (cable != null) {
+
+			float minX = 11 * pixel / 2 - (cable.connections[5] != null ? (11 * pixel / 2) : 0);
+			float minY = 11 * pixel / 2 - (cable.connections[1] != null ? (11 * pixel / 2) : 0);
+			float minZ = 11 * pixel / 2 - (cable.connections[2] != null ? (11 * pixel / 2) : 0);
+			float maxX = 1 - 11 * pixel / 2 + (cable.connections[3] != null ? (11 * pixel / 2) : 0);
+			float maxY = 1 - 11 * pixel / 2 + (cable.connections[0] != null ? (11 * pixel / 2) : 0);
+			float maxZ = 1 - 11 * pixel / 2 + (cable.connections[4] != null ? (11 * pixel / 2) : 0);
+
 			this.setBlockBounds(minX, minY, minZ, maxX, maxY, maxZ);
 		}
-		
-		return AxisAlignedBB.getBoundingBox(x+this.minX, y+this.minY, z+this.minZ, x+this.maxX, y+this.maxY, z+this.maxZ);
-	}
-	
-	@Override
-	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z)
-	{
-		TileEntityCable cable = (TileEntityCable) world.getTileEntity(x, y, z);
-		
-		if(cable != null)
-		{
-			
-			float minX = 11*pixel/2-(cable.connections[5] != null ? (11*pixel/2) : 0);
-			float minY = 11*pixel/2-(cable.connections[1] != null ? (11*pixel/2) : 0);
-			float minZ = 11*pixel/2-(cable.connections[2] != null ? (11*pixel/2) : 0);
-			float maxX = 1-11*pixel/2+(cable.connections[3] != null ? (11*pixel/2) : 0);
-			float maxY = 1-11*pixel/2+(cable.connections[0] != null ? (11*pixel/2) : 0);
-			float maxZ = 1-11*pixel/2+(cable.connections[4] != null ? (11*pixel/2) : 0);
-			
-			this.setBlockBounds(minX, minY, minZ, maxX, maxY, maxZ);
-		}
-		
-		return AxisAlignedBB.getBoundingBox(x+this.minX, y+this.minY, z+this.minZ, x+this.maxX, y+this.maxY, z+this.maxZ);
+
+		return AxisAlignedBB.getBoundingBox(x + this.minX, y + this.minY, z + this.minZ, x + this.maxX, y + this.maxY, z + this.maxZ);
 	}
 
 	@Override
-	public TileEntity createNewTileEntity(World world, int meta)
-	{
+	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z) {
+		TileEntityCable cable = (TileEntityCable) world.getTileEntity(x, y, z);
+
+		if (cable != null) {
+
+			float minX = 11 * pixel / 2 - (cable.connections[5] != null ? (11 * pixel / 2) : 0);
+			float minY = 11 * pixel / 2 - (cable.connections[1] != null ? (11 * pixel / 2) : 0);
+			float minZ = 11 * pixel / 2 - (cable.connections[2] != null ? (11 * pixel / 2) : 0);
+			float maxX = 1 - 11 * pixel / 2 + (cable.connections[3] != null ? (11 * pixel / 2) : 0);
+			float maxY = 1 - 11 * pixel / 2 + (cable.connections[0] != null ? (11 * pixel / 2) : 0);
+			float maxZ = 1 - 11 * pixel / 2 + (cable.connections[4] != null ? (11 * pixel / 2) : 0);
+
+			this.setBlockBounds(minX, minY, minZ, maxX, maxY, maxZ);
+		}
+
+		return AxisAlignedBB.getBoundingBox(x + this.minX, y + this.minY, z + this.minZ, x + this.maxX, y + this.maxY, z + this.maxZ);
+	}
+
+	@Override
+	public TileEntity createNewTileEntity(World world, int meta) {
 		return new TileEntityCable(meta);
 	}
 
 	@Override
-	public CreativeTabs getCreativeTabToDisplayOn()
-	{
+	public CreativeTabs getCreativeTabToDisplayOn() {
 		return MinestellarCore.stellarBlocksTab;
 	}
 
 	@Override
-	public int getRenderType()
-	{
+	public int getRenderType() {
 		return -1;
 	}
 
 	@Override
-	public boolean isOpaqueCube()
-	{
+	public boolean isOpaqueCube() {
 		return false;
 	}
 
 	@Override
-	public boolean renderAsNormalBlock()
-	{
+	public boolean renderAsNormalBlock() {
 		return false;
 	}
-	
+
 	@Override
-	public void registerBlockIcons(IIconRegister par1IconRegister)
-	{
+	public void registerBlockIcons(IIconRegister par1IconRegister) {
 		this.cableBlockIcon = new IIcon[3];
 		this.cableBlockIcon[0] = par1IconRegister.registerIcon(MinestellarCore.TEXTURE_PREFIX + "light_cable_icon");
 		this.cableBlockIcon[1] = par1IconRegister.registerIcon(MinestellarCore.TEXTURE_PREFIX + "medium_cable_icon");
 		this.cableBlockIcon[2] = par1IconRegister.registerIcon(MinestellarCore.TEXTURE_PREFIX + "heavy_cable_icon");
 	}
-	
+
 	@Override
-	public IIcon getIcon(int side, int meta)
-	{
+	public IIcon getIcon(int side, int meta) {
 		return this.cableBlockIcon[meta];
 	}
 
 	@Override
-	public void getSubBlocks(Item block, CreativeTabs creativeTabs, List list)
-	{
+	public void getSubBlocks(Item block, CreativeTabs creativeTabs, List list) {
 		for (int i = 0; i < 3; ++i) // UPDATE WHEN ADDING BLOCKS
 		{
 			list.add(new ItemStack(this, 1, i));
 		}
 	}
-	
+
 	@Override
-	public int damageDropped(int meta)
-	{
+	public int damageDropped(int meta) {
 		return meta;
 	}
 }

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 03/gen/2015 Davide Cossu & Matthew Albrecht.
+ * Copyright (c) 04/January/2015 Davide Cossu & Matthew Albrecht.
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -16,45 +16,40 @@
 
 package com.minestellar.core.blocks.items;
 
-import com.minestellar.core.proxy.ClientProxyCore;
-
 import net.minecraft.block.Block;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 
-public class ItemBlockCable extends ItemBlock{
+import com.minestellar.core.proxy.ClientProxyCore;
+
+public class ItemBlockCable extends ItemBlock {
 
 	public static String[] types = new String[] {
 		"light_wire", 
 		"medium_wire", 
 		"heavy_wire"
 	};
-	
-	public ItemBlockCable(Block par1)
-	{
+
+	public ItemBlockCable(Block par1) {
 		super(par1);
 		this.setHasSubtypes(true);
 	}
 
 	@Override
-	public int getMetadata(int meta)
-	{
+	public int getMetadata(int meta) {
 		return meta;
 	}
 
 	@Override
-	public EnumRarity getRarity(ItemStack par1ItemStack)
-	{
+	public EnumRarity getRarity(ItemStack par1ItemStack) {
 		return ClientProxyCore.stellarItem;
 	}
 
 	@Override
-	public String getUnlocalizedName(ItemStack itemstack)
-	{
+	public String getUnlocalizedName(ItemStack itemstack) {
 		int meta = itemstack.getItemDamage();
-		if (meta < 0 || meta >= ItemBlockCable.types.length)
-		{
+		if (meta < 0 || meta >= ItemBlockCable.types.length) {
 			meta = 0;
 		}
 		return super.getUnlocalizedName() + "." + ItemBlockCable.types[meta];

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 31/dic/2014 Davide Cossu & Matthew Albrecht.
+ * Copyright (c) 04/January/2015 Davide Cossu & Matthew Albrecht.
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -31,42 +31,40 @@ import com.minestellar.core.proxy.ClientProxyCore;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class ItemBasicCore extends Item
-{
-	private static String[] names = {
-			"ingotCopper", // 0
-			"ingotTin", // 1
-			"ingotSteel", // 2
-			"ingotLithium", // 3
-			"ingotSilicon", // 4
-			"ingotAluminum", // 5
-			"ingotTitanium", // 6
-			"ingotCarbon", // 7
-
-			"dustSteel", // 8
-
-			"compressedCopper", // 9
-			"compressedTin", // 10
-			"compressedSteel", // 11
-			"compressedLithium", // 12
-			"compressedSilicon", // 13
-			"compressedAluminum", // 14
-			"compressedTitanium", // 15
-			"compressedCarbon", // 16
-
-			"electricMotor", // 17
-			"electricPump", // 18
-			"filterAir", // 19
-			"filterOil", // 20
-			"nozzleSteel", // 21
-			"pipeSteel", // 22
-			"pipeMagnetic", // 23
+public class ItemBasicCore extends Item {
+	private static String[] names = { 
+		"ingotCopper", // 0
+		"ingotTin", // 1
+		"ingotSteel", // 2
+		"ingotLithium", // 3
+		"ingotSilicon", // 4
+		"ingotAluminum", // 5
+		"ingotTitanium", // 6
+		"ingotCarbon", // 7
+	
+		"dustSteel", // 8
+	
+		"compressedCopper", // 9
+		"compressedTin", // 10
+		"compressedSteel", // 11
+		"compressedLithium", // 12
+		"compressedSilicon", // 13
+		"compressedAluminum", // 14
+		"compressedTitanium", // 15
+		"compressedCarbon", // 16
+	
+		"electricMotor", // 17
+		"electricPump", // 18
+		"filterAir", // 19
+		"filterOil", // 20
+		"nozzleSteel", // 21
+		"pipeSteel", // 22
+		"pipeMagnetic", // 23
 	};
 
 	protected IIcon[] icons = new IIcon[ItemBasicCore.names.length];
 
-	public ItemBasicCore()
-	{
+	public ItemBasicCore() {
 		super();
 		this.setMaxDamage(0);
 		this.setHasSubtypes(true);
@@ -74,35 +72,29 @@ public class ItemBasicCore extends Item
 
 	@SideOnly(Side.CLIENT)
 	@Override
-	public CreativeTabs getCreativeTab()
-	{
+	public CreativeTabs getCreativeTab() {
 		return MinestellarCore.stellarItemsTab;
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public EnumRarity getRarity(ItemStack par1ItemStack)
-	{
+	public EnumRarity getRarity(ItemStack par1ItemStack) {
 		return ClientProxyCore.stellarItem;
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void registerIcons(IIconRegister iconRegister)
-	{
+	public void registerIcons(IIconRegister iconRegister) {
 		int i = 0;
 
-		for (String name : ItemBasicCore.names)
-		{
+		for (String name : ItemBasicCore.names) {
 			this.icons[i++] = iconRegister.registerIcon(MinestellarCore.TEXTURE_PREFIX + name);
 		}
 	}
 
 	@Override
-	public IIcon getIconFromDamage(int damage)
-	{
-		if (this.icons.length > damage)
-		{
+	public IIcon getIconFromDamage(int damage) {
+		if (this.icons.length > damage) {
 			return this.icons[damage];
 		}
 
@@ -111,19 +103,15 @@ public class ItemBasicCore extends Item
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
-	public void getSubItems(Item par1, CreativeTabs par2CreativeTabs, List par3List)
-	{
-		for (int i = 0; i < ItemBasicCore.names.length; i++)
-		{
+	public void getSubItems(Item par1, CreativeTabs par2CreativeTabs, List par3List) {
+		for (int i = 0; i < ItemBasicCore.names.length; i++) {
 			par3List.add(new ItemStack(par1, 1, i));
 		}
 	}
 
 	@Override
-	public String getUnlocalizedName(ItemStack par1ItemStack)
-	{
-		if (this.icons.length > par1ItemStack.getItemDamage())
-		{
+	public String getUnlocalizedName(ItemStack par1ItemStack) {
+		if (this.icons.length > par1ItemStack.getItemDamage()) {
 			return "item." + ItemBasicCore.names[par1ItemStack.getItemDamage()];
 		}
 
@@ -131,8 +119,7 @@ public class ItemBasicCore extends Item
 	}
 
 	@Override
-	public int getMetadata(int par1)
-	{
+	public int getMetadata(int par1) {
 		return par1;
 	}
 }

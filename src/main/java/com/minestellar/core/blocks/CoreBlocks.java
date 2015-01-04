@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 31/dic/2014 Davide Cossu & Matthew Albrecht.
+ * Copyright (c) 04/January/2015 Davide Cossu & Matthew Albrecht.
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -24,54 +24,56 @@ import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.oredict.OreDictionary;
 
 import com.minestellar.core.MinestellarCore;
-import com.minestellar.core.blocks.fluid.FluidOil;
+import com.minestellar.core.blocks.fluid.FluidBlockOil;
 import com.minestellar.core.blocks.items.ItemBlockCable;
-import com.minestellar.core.blocks.items.ItemBlockDecor;
-import com.minestellar.core.blocks.items.ItemBlockOres;
+import com.minestellar.core.blocks.items.ItemBlockDecorCore;
+import com.minestellar.core.blocks.items.ItemBlockOreCore;
 import com.minestellar.core.blocks.items.ItemBlockPipe;
 import com.minestellar.core.util.ItemBlockUtil;
 
-public class CoreBlocks
-{
+public class CoreBlocks {
+	public static void init() {
+		initBlocks();
+		registerBlocks();
+		oreDictRegistration();
+		setHarvestLevels();
+	}
+
 	public static Block coreOreBlocks;
 	public static Block coreDecorBlocks;
+	public static Block teleportBlock;
+
 	public static Block cableBlock;
 	public static Block pipeBlock;
-	public static Block teleportBlock;
 
 	public static Block oilFluidBlock;
 	public static Fluid oilFluid;
 
-	private static void initBlocks()
-	{
+	private static void initBlocks() {
 		CoreBlocks.coreOreBlocks = new BlockOreCore("core_ore");
 		CoreBlocks.coreDecorBlocks = new BlockDecorCore("core_decor");
-		CoreBlocks.teleportBlock = new BlockTeleportCore("teleporter", Material.iron);
+		CoreBlocks.teleportBlock = new BlockTeleportCore("teleporter");
+
 		CoreBlocks.cableBlock = new BlockCable("core_cable");
 		CoreBlocks.pipeBlock = new BlockPipe("core_pipe");
 
-		CoreBlocks.oilFluid = new FluidOil("oil").setBlock(CoreBlocks.oilFluidBlock);
+		CoreBlocks.oilFluid = new FluidBlockOil("oil").setBlock(CoreBlocks.oilFluidBlock);
 		FluidRegistry.registerFluid(CoreBlocks.oilFluid);
 		CoreBlocks.oilFluidBlock = new BlockFluidOil("oil", CoreBlocks.oilFluid, Material.water);
 	}
 
-	public static void setHarvestLevels()
-	{
-	}
-
-	private static void registerBlocks()
-	{
-		MinestellarCore.registerBlock(CoreBlocks.coreOreBlocks, ItemBlockOres.class);
-		MinestellarCore.registerBlock(CoreBlocks.coreDecorBlocks, ItemBlockDecor.class);
+	private static void registerBlocks() {
+		MinestellarCore.registerBlock(CoreBlocks.coreOreBlocks, ItemBlockOreCore.class);
+		MinestellarCore.registerBlock(CoreBlocks.coreDecorBlocks, ItemBlockDecorCore.class);
 		MinestellarCore.registerBlock(CoreBlocks.teleportBlock, ItemBlockUtil.class);
+
 		MinestellarCore.registerBlock(CoreBlocks.cableBlock, ItemBlockCable.class);
 		MinestellarCore.registerBlock(CoreBlocks.pipeBlock, ItemBlockPipe.class);
-		
+
 		MinestellarCore.registerBlock(CoreBlocks.oilFluidBlock, ItemBlockUtil.class);
 	}
 
-	public static void oreDictRegistration()
-	{
+	private static void oreDictRegistration() {
 		/* Ores */
 		OreDictionary.registerOre("oreCopper", new ItemStack(CoreBlocks.coreOreBlocks, 1, 0));
 		OreDictionary.registerOre("oreTin", new ItemStack(CoreBlocks.coreOreBlocks, 1, 1));
@@ -92,11 +94,6 @@ public class CoreBlocks
 		OreDictionary.registerOre("blockCarbon", new ItemStack(CoreBlocks.coreDecorBlocks, 1, 7));
 	}
 
-	public static void init()
-	{
-		initBlocks();
-		setHarvestLevels();
-		registerBlocks();
-		oreDictRegistration();
+	private static void setHarvestLevels() {
 	}
 }

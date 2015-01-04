@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 31/dic/2014 Davide Cossu & Matthew Albrecht.
+ * Copyright (c) 04/January/2015 Davide Cossu & Matthew Albrecht.
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -16,24 +16,20 @@
 
 package com.minestellar.core.proxy;
 
-import java.util.ArrayList;
-
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.audio.SoundPoolEntry;
 import net.minecraft.client.particle.EntityFX;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraftforge.common.util.EnumHelper;
 
-import com.minestellar.core.blocks.tileEntities.TileEntityCable;
-import com.minestellar.core.blocks.tileEntities.TileEntityPipe;
+import com.minestellar.core.blocks.tile.TileEntityCable;
+import com.minestellar.core.blocks.tile.TileEntityPipe;
 import com.minestellar.core.entities.EntityZombieCore;
-import com.minestellar.core.entities.render.RenderZombieCore;
 import com.minestellar.core.particles.EntityCoreOilDripFX;
-import com.minestellar.core.render.TileEntityRenderCable;
-import com.minestellar.core.render.TileEntityRenderPipe;
-import com.minestellar.core.util.tick.TickHandlerClient;
+import com.minestellar.core.render.entity.RenderEntityAdvancedZombie;
+import com.minestellar.core.render.tile.TileEntityRenderCable;
+import com.minestellar.core.render.tile.TileEntityRenderPipe;
 
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.client.registry.ClientRegistry;
@@ -43,70 +39,58 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 
-public class ClientProxyCore extends CommonProxyCore
-{
+public class ClientProxyCore extends CommonProxyCore {
 	private static Minecraft mc = FMLClientHandler.instance().getClient();
-	public static ArrayList<SoundPoolEntry> newMusic = new ArrayList<SoundPoolEntry>();
 	public static EnumRarity stellarItem = EnumHelper.addRarity("MinestellarRarity", EnumChatFormatting.RED, "MinestellarCore");
 
 	private static int renderIndexCarbonArmor;
 
 	@Override
-	public void preInit(FMLPreInitializationEvent event)
-	{
+	public void preInit(FMLPreInitializationEvent event) {
 		ClientProxyCore.renderIndexCarbonArmor = RenderingRegistry.addNewArmourRendererPrefix("carbon");
 
 		super.preInit(event);
 	}
 
 	@Override
-	public int getCarbonArmorRenderIndex()
-	{
+	public int getCarbonArmorRenderIndex() {
 		return ClientProxyCore.renderIndexCarbonArmor;
 	}
 
 	@Override
-	public void init(FMLInitializationEvent event)
-	{
+	public void init(FMLInitializationEvent event) {
 		FMLCommonHandler.instance().bus().register(new TickHandlerClient());
-
 		super.init(event);
 	}
 
 	@Override
-	public void postInit(FMLPostInitializationEvent event)
-	{
-		ClientProxyCore.registerEntityRenderers();
-		ClientProxyCore.registerTileEntityRenders();
+	public void postInit(FMLPostInitializationEvent event) {
+		this.registerTileEntityRenders();
+		this.registerEntityRenderers();
 
 		super.postInit(event);
 	}
 
-	private static void registerEntityRenderers()
-	{
-		RenderingRegistry.registerEntityRenderingHandler(EntityZombieCore.class, new RenderZombieCore());
-	}
-
-	public static void registerTileEntityRenders()
-	{
+	private void registerTileEntityRenders() {
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityCable.class, new TileEntityRenderCable());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityPipe.class, new TileEntityRenderPipe());
 	}
 
-	public static void registerHandlers()
-	{
-		TickHandlerClient tickHandlerClient = new TickHandlerClient();
+	private void registerEntityRenderers() {
+		RenderingRegistry.registerEntityRenderingHandler(EntityZombieCore.class, new RenderEntityAdvancedZombie());
 	}
 
 	@Override
-	public void spawnParticle(String string, double x, double y, double z)
-	{
+	public void spawnParticle(String string, double x, double y, double z) {
 		EntityFX entityfx = null;
 
-		if (string == "oilDrip")
-		{
+		if (string == "oilDrip") {
 			entityfx = new EntityCoreOilDripFX(mc.theWorld, x, y, z, Material.water);
 		}
+
 		mc.effectRenderer.addEffect(entityfx);
+	}
+
+	public static class TickHandlerClient {
 	}
 }

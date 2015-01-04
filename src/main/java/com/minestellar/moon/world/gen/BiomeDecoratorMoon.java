@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 31/dic/2014 Davide Cossu & Matthew Albrecht.
+ * Copyright (c) 04/January/2015 Davide Cossu & Matthew Albrecht.
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -20,32 +20,26 @@ import net.minecraft.world.World;
 
 import com.minestellar.api.world.gen.BiomeDecoratorMinestellar;
 
-public class BiomeDecoratorMoon extends BiomeDecoratorMinestellar
-{
+public class BiomeDecoratorMoon extends BiomeDecoratorMinestellar {
 	// protected WorldGenerator oreExample;
 	private World currentWorld;
 
-	public BiomeDecoratorMoon()
-	{
-		// this.oreExample = new WorldGenMinableMeta(MoonBlocks.moonOreBlocks,
-		// 8, 1, true, MoonBlocks.moonBasicBlocks, 2);
+	public BiomeDecoratorMoon() {
+		// this.oreExample = new WorldGenMinableMeta(MoonBlocks.moonOreBlocks, 8, 1, true, MoonBlocks.moonBasicBlocks, 2);
 	}
 
 	@Override
-	public void decorate()
-	{
+	public void decorate() {
 		// this.generateOre(32, this.oreExample, 0, 128);
 	}
 
 	@Override
-	protected void setCurrentWorld(World world)
-	{
+	protected void setCurrentWorld(World world) {
 		this.currentWorld = world;
 	}
 
 	@Override
-	protected World getCurrentWorld()
-	{
+	protected World getCurrentWorld() {
 		return this.currentWorld;
 	}
 }

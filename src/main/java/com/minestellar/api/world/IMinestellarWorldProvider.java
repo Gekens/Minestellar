@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 31/dic/2014 Davide Cossu & Matthew Albrecht.
+ * Copyright (c) 04/January/2015 Davide Cossu & Matthew Albrecht.
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -16,50 +16,16 @@
 
 package com.minestellar.api.world;
 
-/**
- * Implement this in your World Provider, this sets the basic info for your
- * world.
- */
-public interface IMinestellarWorldProvider
-{
-	/**
-	 * Gets the gravity levels on the world. 1 would be equivalent to overworld.
-	 * DO NOT USE 0! Also is used in the calculation of fall damage.
-	 * 
-	 * @return (1.0 - 0.01)F
-	 */
-	public float getGravity();
+public interface IMinestellarWorldProvider {
+	float getGravity();
 
-	/**
-	 * Gets the heat levels on the world. This is measured in Celsius.
-	 * 
-	 * @return
-	 */
-	public float getHeatLevelsDay();
+	boolean hasAtmosphere();
 
-	public float getHeatLevelsNight();
-
-	/**
-	 * Tells weather the planet has a breathable atmosphere or not. True means
-	 * it has a atmosphere and you can breath, false has no atmosphere. This
-	 * also means it has gas.
-	 * 
-	 * @return (true / false)
-	 */
-	public boolean hasAtmosphere();
-
-	/**
-	 * How long the days are. 24000 is 1 minecraft day. Try now to use very
-	 * short values, the sun will start glitching.
-	 * 
-	 * @return (Any Non-Decimal Number)L
-	 */
 	long getDayLength();
 
-	/**
-	 * Gets the air pressure of the world. This is measured in Pounds.
-	 * 
-	 * @return
-	 */
-	public float getAirPressure();
+	float getHeatLevelsDay();
+
+	float getHeatLevelsNight();
+
+	float getAirPressure();
 }

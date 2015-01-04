@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 04/gen/2015 Davide Cossu & Matthew Albrecht.
+ * Copyright (c) 04/January/2015 Davide Cossu & Matthew Albrecht.
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -14,7 +14,7 @@
  * this program; if not, see <http://www.gnu.org/licenses>.
  */
 
-package com.minestellar.core.render;
+package com.minestellar.core.render.tile;
 
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
@@ -25,9 +25,9 @@ import net.minecraftforge.common.util.ForgeDirection;
 import org.lwjgl.opengl.GL11;
 
 import com.minestellar.core.MinestellarCore;
-import com.minestellar.core.blocks.tileEntities.TileEntityPipe;
+import com.minestellar.core.blocks.tile.TileEntityPipe;
 
-public class TileEntityRenderPipe extends TileEntitySpecialRenderer{
+public class TileEntityRenderPipe extends TileEntitySpecialRenderer {
 
 	ResourceLocation blockTexture;
 
@@ -37,34 +37,27 @@ public class TileEntityRenderPipe extends TileEntitySpecialRenderer{
 	float texturePixel = 1F / 32F; // 32 because my image is 32 pixels big, in every direction
 
 	@Override
-	public void renderTileEntityAt(TileEntity tileEntity, double translationX, double translationY, double translationZ, float f)
-	{
+	public void renderTileEntityAt(TileEntity tileEntity, double translationX, double translationY, double translationZ, float f) {
 		blockTexture = new ResourceLocation(MinestellarCore.TEXTURE_PREFIX + "textures/model/tile/blockPipe" + tileEntity.blockMetadata + ".png");
-		
+
 		GL11.glTranslated(translationX, translationY, translationZ);
 		GL11.glDisable(GL11.GL_LIGHTING);
 		this.bindTexture(blockTexture);
 		{
 			TileEntityPipe pipe = (TileEntityPipe) tileEntity;
-			
-			if(!pipe.onlyOneOpposite(pipe.connections))
-			{
+
+			if (!pipe.onlyOneOpposite(pipe.connections)) {
 				drawCore(tileEntity);
 
-				for(int i = 0; i < pipe.connections.length; i++)
-				{
-					if(pipe.connections[i] != null)
-					{
+				for (int i = 0; i < pipe.connections.length; i++) {
+					if (pipe.connections[i] != null) {
 						drawConnector(pipe.connections[i]);
 					}
 				}
 			}
-			else
-			{
-				for(int i = 0; i < pipe.connections.length; i++)
-				{
-					if(pipe.connections[i] != null)
-					{
+			else {
+				for (int i = 0; i < pipe.connections.length; i++) {
+					if (pipe.connections[i] != null) {
 						drawStraight(pipe.connections[i]);
 						break;
 					}
@@ -75,20 +68,17 @@ public class TileEntityRenderPipe extends TileEntitySpecialRenderer{
 
 	}
 
-	public void drawStraight(ForgeDirection direction)
-	{
+	public void drawStraight(ForgeDirection direction) {
 		Tessellator tessellator = Tessellator.instance;
 
 		tessellator.startDrawingQuads();
 		{
 
 			GL11.glTranslatef(0.5F, 0.5F, 0.5F);
-			if (direction.equals(ForgeDirection.SOUTH) || direction.equals(ForgeDirection.NORTH))
-			{
+			if (direction.equals(ForgeDirection.SOUTH) || direction.equals(ForgeDirection.NORTH)) {
 				GL11.glRotatef(90, 1, 0, 0);
 			}
-			else if (direction.equals(ForgeDirection.WEST) || direction.equals(ForgeDirection.EAST))
-			{
+			else if (direction.equals(ForgeDirection.WEST) || direction.equals(ForgeDirection.EAST)) {
 				GL11.glRotatef(90, 0, 0, 1);
 			}
 			GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
@@ -106,15 +96,14 @@ public class TileEntityRenderPipe extends TileEntitySpecialRenderer{
 			tessellator.addVertexWithUV(1 - 11 * pixel / 2, 0, 11 * pixel / 2, 10 * texturePixel, 5 * texturePixel);
 			tessellator.addVertexWithUV(1 - 11 * pixel / 2, 1, 11 * pixel / 2, 26 * texturePixel, 5 * texturePixel);
 			tessellator.addVertexWithUV(1 - 11 * pixel / 2, 1, 1 - 11 * pixel / 2, 26 * texturePixel, 0 * texturePixel);
-			tessellator.addVertexWithUV(1 - 11 * pixel / 2, 0, 1-11 * pixel / 2, 10 * texturePixel, 0 * texturePixel);
+			tessellator.addVertexWithUV(1 - 11 * pixel / 2, 0, 1 - 11 * pixel / 2, 10 * texturePixel, 0 * texturePixel);
 
-			tessellator.addVertexWithUV(11 * pixel / 2, 0, 1-11 * pixel / 2, 10 * texturePixel, 5 * texturePixel);
+			tessellator.addVertexWithUV(11 * pixel / 2, 0, 1 - 11 * pixel / 2, 10 * texturePixel, 5 * texturePixel);
 			tessellator.addVertexWithUV(11 * pixel / 2, 1, 1 - 11 * pixel / 2, 26 * texturePixel, 5 * texturePixel);
 			tessellator.addVertexWithUV(11 * pixel / 2, 1, 11 * pixel / 2, 26 * texturePixel, 0 * texturePixel);
 			tessellator.addVertexWithUV(11 * pixel / 2, 0, 11 * pixel / 2, 10 * texturePixel, 0 * texturePixel);
 
-			if(drawInside)
-			{
+			if (drawInside) {
 				tessellator.addVertexWithUV(11 * pixel / 2, 0, 1 - 11 * pixel / 2, 10 * texturePixel, 0 * texturePixel);
 				tessellator.addVertexWithUV(11 * pixel / 2, 1, 1 - 11 * pixel / 2, 26 * texturePixel, 0 * texturePixel);
 				tessellator.addVertexWithUV(1 - 11 * pixel / 2, 1, 1 - 11 * pixel / 2, 26 * texturePixel, 5 * texturePixel);
@@ -125,7 +114,7 @@ public class TileEntityRenderPipe extends TileEntitySpecialRenderer{
 				tessellator.addVertexWithUV(11 * pixel / 2, 1, 11 * pixel / 2, 26 * texturePixel, 5 * texturePixel);
 				tessellator.addVertexWithUV(11 * pixel / 2, 0, 11 * pixel / 2, 10 * texturePixel, 5 * texturePixel);
 
-				tessellator.addVertexWithUV(1 - 11 * pixel / 2, 0, 1-11 * pixel / 2, 10 * texturePixel, 0 * texturePixel);
+				tessellator.addVertexWithUV(1 - 11 * pixel / 2, 0, 1 - 11 * pixel / 2, 10 * texturePixel, 0 * texturePixel);
 				tessellator.addVertexWithUV(1 - 11 * pixel / 2, 1, 1 - 11 * pixel / 2, 26 * texturePixel, 0 * texturePixel);
 				tessellator.addVertexWithUV(1 - 11 * pixel / 2, 1, 11 * pixel / 2, 26 * texturePixel, 5 * texturePixel);
 				tessellator.addVertexWithUV(1 - 11 * pixel / 2, 0, 11 * pixel / 2, 10 * texturePixel, 5 * texturePixel);
@@ -133,54 +122,45 @@ public class TileEntityRenderPipe extends TileEntitySpecialRenderer{
 				tessellator.addVertexWithUV(11 * pixel / 2, 0, 11 * pixel / 2, 10 * texturePixel, 0 * texturePixel);
 				tessellator.addVertexWithUV(11 * pixel / 2, 1, 11 * pixel / 2, 26 * texturePixel, 0 * texturePixel);
 				tessellator.addVertexWithUV(11 * pixel / 2, 1, 1 - 11 * pixel / 2, 26 * texturePixel, 5 * texturePixel);
-				tessellator.addVertexWithUV(11 * pixel / 2, 0, 1-11 * pixel / 2, 10 * texturePixel, 5 * texturePixel);
+				tessellator.addVertexWithUV(11 * pixel / 2, 0, 1 - 11 * pixel / 2, 10 * texturePixel, 5 * texturePixel);
 			}
 
 		}
 		tessellator.draw();
 
 		GL11.glTranslatef(0.5F, 0.5F, 0.5F);
-		if (direction.equals(ForgeDirection.SOUTH) || direction.equals(ForgeDirection.NORTH))
-		{
+		if (direction.equals(ForgeDirection.SOUTH) || direction.equals(ForgeDirection.NORTH)) {
 			GL11.glRotatef(-90, 1, 0, 0);
 		}
-		else if (direction.equals(ForgeDirection.WEST) || direction.equals(ForgeDirection.EAST))
-		{
+		else if (direction.equals(ForgeDirection.WEST) || direction.equals(ForgeDirection.EAST)) {
 			GL11.glRotatef(-90, 0, 0, 1);
 		}
-		GL11.glTranslatef(-0.5F, -0.5F, -0.5F);	
+		GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
 	}
 
-	public void drawConnector(ForgeDirection direction)
-	{	
+	public void drawConnector(ForgeDirection direction) {
 		Tessellator tessellator = Tessellator.instance;
 
 		tessellator.startDrawingQuads();
 		{
 
 			GL11.glTranslatef(0.5F, 0.5F, 0.5F);
-			if (direction.equals(ForgeDirection.UP))
-			{
-				//ROTATE
+			if (direction.equals(ForgeDirection.UP)) {
+				// ROTATE
 			}
-			else if (direction.equals(ForgeDirection.DOWN))
-			{
+			else if (direction.equals(ForgeDirection.DOWN)) {
 				GL11.glRotatef(180, 1, 0, 0);
 			}
-			else if (direction.equals(ForgeDirection.SOUTH))
-			{
+			else if (direction.equals(ForgeDirection.SOUTH)) {
 				GL11.glRotatef(90, 1, 0, 0);
 			}
-			else if (direction.equals(ForgeDirection.NORTH))
-			{
+			else if (direction.equals(ForgeDirection.NORTH)) {
 				GL11.glRotatef(270, 1, 0, 0);
 			}
-			else if (direction.equals(ForgeDirection.WEST))
-			{
+			else if (direction.equals(ForgeDirection.WEST)) {
 				GL11.glRotatef(90, 0, 0, 1);
 			}
-			else if (direction.equals(ForgeDirection.EAST))
-			{
+			else if (direction.equals(ForgeDirection.EAST)) {
 				GL11.glRotatef(270, 0, 0, 1);
 			}
 			GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
@@ -198,15 +178,14 @@ public class TileEntityRenderPipe extends TileEntitySpecialRenderer{
 			tessellator.addVertexWithUV(1 - 11 * pixel / 2, 1 - 11 * pixel / 2, 11 * pixel / 2, 5 * texturePixel, 5 * texturePixel);
 			tessellator.addVertexWithUV(1 - 11 * pixel / 2, 1, 11 * pixel / 2, 10 * texturePixel, 5 * texturePixel);
 			tessellator.addVertexWithUV(1 - 11 * pixel / 2, 1, 1 - 11 * pixel / 2, 10 * texturePixel, 0 * texturePixel);
-			tessellator.addVertexWithUV(1 - 11 * pixel / 2, 1 - 11 * pixel / 2, 1-11 * pixel / 2, 5 * texturePixel, 0 * texturePixel);
+			tessellator.addVertexWithUV(1 - 11 * pixel / 2, 1 - 11 * pixel / 2, 1 - 11 * pixel / 2, 5 * texturePixel, 0 * texturePixel);
 
-			tessellator.addVertexWithUV(11 * pixel / 2, 1 - 11 * pixel / 2, 1-11 * pixel / 2, 5 * texturePixel, 5 * texturePixel);
+			tessellator.addVertexWithUV(11 * pixel / 2, 1 - 11 * pixel / 2, 1 - 11 * pixel / 2, 5 * texturePixel, 5 * texturePixel);
 			tessellator.addVertexWithUV(11 * pixel / 2, 1, 1 - 11 * pixel / 2, 10 * texturePixel, 5 * texturePixel);
 			tessellator.addVertexWithUV(11 * pixel / 2, 1, 11 * pixel / 2, 10 * texturePixel, 0 * texturePixel);
 			tessellator.addVertexWithUV(11 * pixel / 2, 1 - 11 * pixel / 2, 11 * pixel / 2, 5 * texturePixel, 0 * texturePixel);
 
-			if(drawInside)
-			{
+			if (drawInside) {
 				tessellator.addVertexWithUV(11 * pixel / 2, 1 - 11 * pixel / 2, 1 - 11 * pixel / 2, 5 * texturePixel, 0 * texturePixel);
 				tessellator.addVertexWithUV(11 * pixel / 2, 1, 1 - 11 * pixel / 2, 10 * texturePixel, 0 * texturePixel);
 				tessellator.addVertexWithUV(1 - 11 * pixel / 2, 1, 1 - 11 * pixel / 2, 10 * texturePixel, 5 * texturePixel);
@@ -217,7 +196,7 @@ public class TileEntityRenderPipe extends TileEntitySpecialRenderer{
 				tessellator.addVertexWithUV(11 * pixel / 2, 1, 11 * pixel / 2, 10 * texturePixel, 5 * texturePixel);
 				tessellator.addVertexWithUV(11 * pixel / 2, 1 - 11 * pixel / 2, 11 * pixel / 2, 5 * texturePixel, 5 * texturePixel);
 
-				tessellator.addVertexWithUV(1 - 11 * pixel / 2, 1 - 11 * pixel / 2, 1-11 * pixel / 2, 5 * texturePixel, 0 * texturePixel);
+				tessellator.addVertexWithUV(1 - 11 * pixel / 2, 1 - 11 * pixel / 2, 1 - 11 * pixel / 2, 5 * texturePixel, 0 * texturePixel);
 				tessellator.addVertexWithUV(1 - 11 * pixel / 2, 1, 1 - 11 * pixel / 2, 10 * texturePixel, 0 * texturePixel);
 				tessellator.addVertexWithUV(1 - 11 * pixel / 2, 1, 11 * pixel / 2, 10 * texturePixel, 5 * texturePixel);
 				tessellator.addVertexWithUV(1 - 11 * pixel / 2, 1 - 11 * pixel / 2, 11 * pixel / 2, 5 * texturePixel, 5 * texturePixel);
@@ -225,42 +204,35 @@ public class TileEntityRenderPipe extends TileEntitySpecialRenderer{
 				tessellator.addVertexWithUV(11 * pixel / 2, 1 - 11 * pixel / 2, 11 * pixel / 2, 5 * texturePixel, 0 * texturePixel);
 				tessellator.addVertexWithUV(11 * pixel / 2, 1, 11 * pixel / 2, 10 * texturePixel, 0 * texturePixel);
 				tessellator.addVertexWithUV(11 * pixel / 2, 1, 1 - 11 * pixel / 2, 10 * texturePixel, 5 * texturePixel);
-				tessellator.addVertexWithUV(11 * pixel / 2, 1 - 11 * pixel / 2, 1-11 * pixel / 2, 5 * texturePixel, 5 * texturePixel);
+				tessellator.addVertexWithUV(11 * pixel / 2, 1 - 11 * pixel / 2, 1 - 11 * pixel / 2, 5 * texturePixel, 5 * texturePixel);
 			}
 
 		}
 		tessellator.draw();
 
 		GL11.glTranslatef(0.5F, 0.5F, 0.5F);
-		if (direction.equals(ForgeDirection.UP))
-		{
-			//NOPE
+		if (direction.equals(ForgeDirection.UP)) {
+			// NOPE
 		}
-		else if (direction.equals(ForgeDirection.DOWN))
-		{
+		else if (direction.equals(ForgeDirection.DOWN)) {
 			GL11.glRotatef(-180, 1, 0, 0);
 		}
-		else if (direction.equals(ForgeDirection.SOUTH))
-		{
+		else if (direction.equals(ForgeDirection.SOUTH)) {
 			GL11.glRotatef(-90, 1, 0, 0);
 		}
-		else if (direction.equals(ForgeDirection.NORTH))
-		{
+		else if (direction.equals(ForgeDirection.NORTH)) {
 			GL11.glRotatef(-270, 1, 0, 0);
 		}
-		else if (direction.equals(ForgeDirection.WEST))
-		{
+		else if (direction.equals(ForgeDirection.WEST)) {
 			GL11.glRotatef(-90, 0, 0, 1);
 		}
-		else if (direction.equals(ForgeDirection.EAST))
-		{
+		else if (direction.equals(ForgeDirection.EAST)) {
 			GL11.glRotatef(-270, 0, 0, 1);
 		}
 		GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
 	}
 
-	public void drawCore(TileEntity tileEntity)
-	{
+	public void drawCore(TileEntity tileEntity) {
 
 		Tessellator tessellator = Tessellator.instance;
 
@@ -296,8 +268,7 @@ public class TileEntityRenderPipe extends TileEntitySpecialRenderer{
 			tessellator.addVertexWithUV(1 - 11 * pixel / 2, 11 * pixel / 2, 11 * pixel / 2, 0 * texturePixel, 0 * texturePixel);
 			tessellator.addVertexWithUV(1 - 11 * pixel / 2, 11 * pixel / 2, 1 - 11 * pixel / 2, 0 * texturePixel, 5 * texturePixel);
 
-			if (drawInside)
-			{
+			if (drawInside) {
 
 				tessellator.addVertexWithUV(11 * pixel / 2, 11 * pixel / 2, 1 - 11 * pixel / 2, 0 * texturePixel, 5 * texturePixel);
 				tessellator.addVertexWithUV(11 * pixel / 2, 1 - 11 * pixel / 2, 1 - 11 * pixel / 2, 0 * texturePixel, 0 * texturePixel);
@@ -334,5 +305,5 @@ public class TileEntityRenderPipe extends TileEntitySpecialRenderer{
 		tessellator.draw();
 
 	}
-	
+
 }

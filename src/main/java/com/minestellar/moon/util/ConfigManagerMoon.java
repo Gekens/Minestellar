@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 31/dic/2014 Davide Cossu & Matthew Albrecht.
+ * Copyright (c) 04/January/2015 Davide Cossu & Matthew Albrecht.
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -26,16 +26,13 @@ import com.minestellar.core.Constants;
 
 import cpw.mods.fml.common.FMLLog;
 
-public class ConfigManagerMoon
-{
+public class ConfigManagerMoon {
 	public static boolean loaded;
 
 	static Configuration configuration;
 
-	public ConfigManagerMoon(File file)
-	{
-		if (!ConfigManagerMoon.loaded)
-		{
+	public ConfigManagerMoon(File file) {
+		if (!ConfigManagerMoon.loaded) {
 			ConfigManagerMoon.configuration = new Configuration(file);
 			this.setDefaultValues();
 		}
@@ -44,23 +41,19 @@ public class ConfigManagerMoon
 	public static int idDimensionMoon;
 	public static int idBiomeMoon;
 
-	private void setDefaultValues()
-	{
-		try
-		{
+	private void setDefaultValues() {
+		try {
 			ConfigManagerMoon.configuration.load();
 
-			ConfigManagerMoon.idDimensionMoon = ConfigManagerMoon.configuration.get(Constants.CONFIG_CATEGORY_DIMENSIONS, "Moon Dimension", -25).getInt(-25);
-			ConfigManagerMoon.idBiomeMoon = ConfigManagerMoon.configuration.get(Constants.CONFIG_CATEGORY_BIOMES, "Moon Biome", 225).getInt(225);
+			ConfigManagerMoon.idDimensionMoon = ConfigManagerMoon.configuration.get(Constants.CONFIGURATION_DIMENSIONS, "Moon Dimension", -25).getInt(-25);
+			ConfigManagerMoon.idBiomeMoon = ConfigManagerMoon.configuration.get(Constants.CONFIGURATION_BIOMES, "Moon Biome", 225).getInt(225);
 		}
 
-		catch (final Exception e)
-		{
+		catch (final Exception e) {
 			FMLLog.log(Level.ERROR, e, Constants.MOD_NAME + " Moon Config has a problem loading it's configuration");
 		}
 
-		finally
-		{
+		finally {
 			ConfigManagerMoon.configuration.save();
 			ConfigManagerMoon.loaded = true;
 		}
