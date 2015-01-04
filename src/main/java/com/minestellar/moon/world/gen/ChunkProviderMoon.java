@@ -30,7 +30,7 @@ import net.minecraft.world.chunk.IChunkProvider;
 
 import com.google.common.collect.Lists;
 import com.minestellar.api.core.BlockMetaPair;
-import com.minestellar.api.world.IMinestellarBiomeDecorator;
+import com.minestellar.api.world.gen.BiomeDecoratorMinestellar;
 import com.minestellar.api.world.gen.ChunkProviderMinestellar;
 import com.minestellar.api.world.gen.MapGenBaseMeta;
 import com.minestellar.moon.blocks.MoonBlocks;
@@ -46,7 +46,7 @@ public class ChunkProviderMoon extends ChunkProviderMinestellar
 	}
 
 	@Override
-	protected IMinestellarBiomeDecorator getBiomeGenerator()
+	protected BiomeDecoratorMinestellar getBiomeGenerator()
 	{
 		return this.moonBiomeDecorator;
 	}

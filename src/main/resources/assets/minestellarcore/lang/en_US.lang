@@ -61,7 +61,7 @@ tile.core_decor.blockAluminum.name=Aluminum Block
 tile.core_decor.blockTitanium.name=Titanium Block
 tile.core_decor.blockCarbon.name=Carbon Block
 tile.core_cable.name=Electrical Cable
-tile.core_teleporter.name=Planetary Teleporter Block
+tile.teleporter.name=Planetary Teleporter Block
 
 # GUIS
 itemGroup.MinestellarBlocks=Minestellar Blocks

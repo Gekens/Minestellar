@@ -50,11 +50,11 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
 
-@Mod(modid = MinestellarCore.MOD_ID, name = MinestellarCore.MOD_NAME, version = Constants.VERSION)
+@Mod(modid = MinestellarCore.MODID, name = MinestellarCore.MODNAME, version = Constants.VERSION)
 public class MinestellarCore
 {
-	public static final String MOD_ID = "MinestellarCore";
-	public static final String MOD_NAME = "Minestellar Core";
+	public static final String MODID = "MinestellarCore";
+	public static final String MODNAME = "Minestellar Core";
 
 	public static final String ASSET_PREFIX = "minestellarcore";
 	public static final String TEXTURE_PREFIX = MinestellarCore.ASSET_PREFIX + ":";
@@ -67,7 +67,7 @@ public class MinestellarCore
 
 	public static Achievement achievementSpace;
 
-	@Instance(MinestellarCore.MOD_ID)
+	@Instance(MinestellarCore.MODID)
 	public static MinestellarCore instance = new MinestellarCore();
 
 	@SidedProxy(clientSide = "com.minestellar.core.proxy.ClientProxyCore", serverSide = "com.minestellar.core.proxy.CommonProxyCore")
@@ -81,7 +81,7 @@ public class MinestellarCore
 		CoreBlocks.init();
 		CoreItems.init();
 
-		proxy.preInit(event);
+		this.proxy.preInit(event);
 	}
 
 	@EventHandler
@@ -90,9 +90,9 @@ public class MinestellarCore
 		MinestellarCore.stellarBlocksTab = new MinestellarCreativeTab(CreativeTabs.getNextID(), "MinestellarBlocks", Item.getItemFromBlock(CoreBlocks.coreOreBlocks), 0);
 		MinestellarCore.stellarItemsTab = new MinestellarCreativeTab(CreativeTabs.getNextID(), "MinestellarItems", CoreItems.carbonPickaxe, 0);
 
-		AchievementPage.registerAchievementPage(new AchievementPage("Minestellar", MinestellarCore.achievementSpace, MinestellarMoon.achievementMoon));
+		AchievementPage.registerAchievementPage(new AchievementPage("Minestellar", new Achievement[] { MinestellarCore.achievementSpace, MinestellarMoon.achievementMoon }));
 
-		MinestellarCore.achievementSpace = new Achievement("achievement.space", "space", 0, 0, new ItemStack(CoreBlocks.teleportBlock), null).initIndependentStat().registerStat();
+		MinestellarCore.achievementSpace = new Achievement("achievement.space", "space", 0, 0, new ItemStack(CoreBlocks.teleportBlock), (Achievement) null).initIndependentStat().registerStat();
 
 		RecipeManagerCore.loadRecipes();
 
@@ -112,7 +112,7 @@ public class MinestellarCore
 		this.registerCreatures();
 		this.registerOtherEntities();
 
-		proxy.init(event);
+		this.proxy.init(event);
 	}
 
 	private void registerOtherEntities()
@@ -142,6 +142,6 @@ public class MinestellarCore
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event)
 	{
-        proxy.postInit(event);
+        this.proxy.postInit(event);
 	}
 }

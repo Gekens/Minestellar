@@ -18,9 +18,9 @@ package com.minestellar.moon.world.gen;
 
 import net.minecraft.world.World;
 
-import com.minestellar.api.world.IMinestellarBiomeDecorator;
+import com.minestellar.api.world.gen.BiomeDecoratorMinestellar;
 
-public class BiomeDecoratorMoon extends IMinestellarBiomeDecorator
+public class BiomeDecoratorMoon extends BiomeDecoratorMinestellar
 {
 	// protected WorldGenerator oreExample;
 	private World currentWorld;

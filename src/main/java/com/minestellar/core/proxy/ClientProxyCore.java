@@ -28,9 +28,9 @@ import net.minecraftforge.common.util.EnumHelper;
 
 import com.minestellar.core.blocks.tileEntities.TileEntityCable;
 import com.minestellar.core.entities.EntityZombieCore;
-import com.minestellar.core.render.entitys.RenderEntityAdvancedZombie;
+import com.minestellar.core.entities.render.RenderZombieCore;
 import com.minestellar.core.particles.EntityCoreOilDripFX;
-import com.minestellar.core.render.tile.TileEntityRenderCable;
+import com.minestellar.core.render.TileEntityRenderCable;
 import com.minestellar.core.util.tick.TickHandlerClient;
 
 import cpw.mods.fml.client.FMLClientHandler;
@@ -82,7 +82,7 @@ public class ClientProxyCore extends CommonProxyCore
 
 	private static void registerEntityRenderers()
 	{
-		RenderingRegistry.registerEntityRenderingHandler(EntityZombieCore.class, new RenderEntityAdvancedZombie());
+		RenderingRegistry.registerEntityRenderingHandler(EntityZombieCore.class, new RenderZombieCore());
 	}
 
 	public static void registerTileEntityRenders()
@@ -100,7 +100,7 @@ public class ClientProxyCore extends CommonProxyCore
 	{
 		EntityFX entityfx = null;
 
-		if (string.equals("oilDrip"))
+		if (string == "oilDrip")
 		{
 			entityfx = new EntityCoreOilDripFX(mc.theWorld, x, y, z, Material.water);
 		}

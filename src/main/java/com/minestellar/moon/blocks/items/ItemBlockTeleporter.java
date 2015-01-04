@@ -14,19 +14,34 @@
  * this program; if not, see <http://www.gnu.org/licenses>.
  */
 
-package com.minestellar.core;
+package com.minestellar.moon.blocks.items;
 
-public class Constants
+import net.minecraft.block.Block;
+import net.minecraft.item.EnumRarity;
+import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemStack;
+
+import com.minestellar.core.proxy.ClientProxyCore;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
+public class ItemBlockTeleporter extends ItemBlock
 {
-	public static final int LOCALMAJVERSION = 0;
-	public static final int LOCALMINVERSION = 0;
-	public static final int LOCALBUILDVERSION = 1;
-	public static final String VERSION = (LOCALMAJVERSION + "." + LOCALMINVERSION + "." + LOCALBUILDVERSION);
+	private static final String[] types = new String[]
+	{
+			"teleporter_moon",
+	};
 
-	public static final String MOD_NAME = "Minestellar";
+	public ItemBlockTeleporter(Block block)
+	{
+		super(block);
+	}
 
-	public static final String CONFIG_CATEGORY_DIMENSIONS = "dimensions";
-	public static final String CONFIG_CATEGORY_BIOMES = "biomes";
-	public static final String CONFIG_CATEGORY_ENTITIES = "entities";
-	public static final String CONFIG_CATEGORY_GENERAL = "general";
+	@Override
+	@SideOnly(Side.CLIENT)
+	public EnumRarity getRarity(ItemStack par1ItemStack)
+	{
+		return ClientProxyCore.stellarItem;
+	}
 }

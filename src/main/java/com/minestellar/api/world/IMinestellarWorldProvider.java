@@ -26,16 +26,17 @@ public interface IMinestellarWorldProvider
 	 * Gets the gravity levels on the world. 1 would be equivalent to overworld.
 	 * DO NOT USE 0! Also is used in the calculation of fall damage.
 	 * 
-	 * @return (1.0 though 0.01)F
+	 * @return (1.0 - 0.01)F
 	 */
 	public float getGravity();
 
 	/**
 	 * Gets the heat levels on the world. This is measured in Celsius.
 	 * 
-	 * @return (Degrees In Celsius)
+	 * @return
 	 */
 	public float getHeatLevelsDay();
+
 	public float getHeatLevelsNight();
 
 	/**
@@ -43,7 +44,7 @@ public interface IMinestellarWorldProvider
 	 * it has a atmosphere and you can breath, false has no atmosphere. This
 	 * also means it has gas.
 	 * 
-	 * @return (true or false)
+	 * @return (true / false)
 	 */
 	public boolean hasAtmosphere();
 
@@ -51,14 +52,14 @@ public interface IMinestellarWorldProvider
 	 * How long the days are. 24000 is 1 minecraft day. Try now to use very
 	 * short values, the sun will start glitching.
 	 * 
-	 * @return (Any NonDecimal Number)L
+	 * @return (Any Non-Decimal Number)L
 	 */
 	long getDayLength();
 
 	/**
 	 * Gets the air pressure of the world. This is measured in Pounds.
 	 * 
-	 * @return (Any Number Greater Than 0)L
+	 * @return
 	 */
 	public float getAirPressure();
 }

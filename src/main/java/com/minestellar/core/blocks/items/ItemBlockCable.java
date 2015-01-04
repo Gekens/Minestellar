@@ -29,6 +29,7 @@ public class ItemBlockCable extends ItemBlock{
 		"blockCable0",
 		"blockCable1",
 		"blockCable2",
+		
 	};
 
 	public ItemBlockCable(Block par1)
@@ -59,4 +60,5 @@ public class ItemBlockCable extends ItemBlock{
 		}
 		return super.getUnlocalizedName() + "." + ItemBlockCable.types[meta];
 	}
+
 }

@@ -51,6 +51,7 @@ public class ConfigManagerCore
 		{
 			ConfigManagerCore.configuration.load();
 
+			ConfigManagerCore.idStarMultiplier = ConfigManagerCore.configuration.get(Constants.CONFIG_CATEGORY_GENERAL, "Star count multiplyer. Causes more lag when in space. (Default '1.0')", 1.0).getInt(1);
 			ConfigManagerCore.idStarMultiplier = ConfigManagerCore.configuration.get(Constants.CONFIG_CATEGORY_GENERAL, "Star count multiplyer. Causes more lag when in space. (Default '1.0')", 1.0).getDouble(1.0);
 
 			ConfigManagerCore.idDayLength = ConfigManagerCore.configuration.get(Constants.CONFIG_CATEGORY_GENERAL, "Realistic Day Length. (Default 'true')", true).getBoolean(true);
