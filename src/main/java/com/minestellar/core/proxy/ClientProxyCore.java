@@ -27,10 +27,12 @@ import net.minecraft.util.EnumChatFormatting;
 import net.minecraftforge.common.util.EnumHelper;
 
 import com.minestellar.core.blocks.tileEntities.TileEntityCable;
+import com.minestellar.core.blocks.tileEntities.TileEntityPipe;
 import com.minestellar.core.entities.EntityZombieCore;
 import com.minestellar.core.entities.render.RenderZombieCore;
 import com.minestellar.core.particles.EntityCoreOilDripFX;
 import com.minestellar.core.render.TileEntityRenderCable;
+import com.minestellar.core.render.TileEntityRenderPipe;
 import com.minestellar.core.util.tick.TickHandlerClient;
 
 import cpw.mods.fml.client.FMLClientHandler;
@@ -88,6 +90,7 @@ public class ClientProxyCore extends CommonProxyCore
 	public static void registerTileEntityRenders()
 	{
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityCable.class, new TileEntityRenderCable());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityPipe.class, new TileEntityRenderPipe());
 	}
 
 	public static void registerHandlers()

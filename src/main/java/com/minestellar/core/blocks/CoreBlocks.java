@@ -28,6 +28,7 @@ import com.minestellar.core.blocks.fluid.FluidOil;
 import com.minestellar.core.blocks.items.ItemBlockCable;
 import com.minestellar.core.blocks.items.ItemBlockDecor;
 import com.minestellar.core.blocks.items.ItemBlockOres;
+import com.minestellar.core.blocks.items.ItemBlockPipe;
 import com.minestellar.core.util.ItemBlockUtil;
 
 public class CoreBlocks
@@ -35,6 +36,7 @@ public class CoreBlocks
 	public static Block coreOreBlocks;
 	public static Block coreDecorBlocks;
 	public static Block cableBlock;
+	public static Block pipeBlock;
 	public static Block teleportBlock;
 
 	public static Block oilFluidBlock;
@@ -46,6 +48,7 @@ public class CoreBlocks
 		CoreBlocks.coreDecorBlocks = new BlockDecorCore("core_decor");
 		CoreBlocks.teleportBlock = new BlockTeleportCore("teleporter", Material.iron);
 		CoreBlocks.cableBlock = new BlockCable("core_cable");
+		CoreBlocks.pipeBlock = new BlockPipe("core_pipe");
 
 		CoreBlocks.oilFluid = new FluidOil("oil").setBlock(CoreBlocks.oilFluidBlock);
 		FluidRegistry.registerFluid(CoreBlocks.oilFluid);
@@ -62,6 +65,7 @@ public class CoreBlocks
 		MinestellarCore.registerBlock(CoreBlocks.coreDecorBlocks, ItemBlockDecor.class);
 		MinestellarCore.registerBlock(CoreBlocks.teleportBlock, ItemBlockUtil.class);
 		MinestellarCore.registerBlock(CoreBlocks.cableBlock, ItemBlockCable.class);
+		MinestellarCore.registerBlock(CoreBlocks.pipeBlock, ItemBlockPipe.class);
 		
 		MinestellarCore.registerBlock(CoreBlocks.oilFluidBlock, ItemBlockUtil.class);
 	}
