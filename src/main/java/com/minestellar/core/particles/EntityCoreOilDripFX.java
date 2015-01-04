@@ -37,6 +37,7 @@ public class EntityCoreOilDripFX extends EntityFX
 
 		if (par8Material == Material.water)
 		{
+			// TODO: Adjust colors to be black
 			this.particleGreen = 1.0F;
 			this.particleBlue = 1.0F;
 			this.particleRed = 1.0F;
@@ -47,10 +48,13 @@ public class EntityCoreOilDripFX extends EntityFX
 		this.setSize(0.01F, 0.01F);
 		this.particleGravity = 0.06F;
 		this.materialType = par8Material;
+
+		// TODO: Adjust colors to be black
 		this.particleGreen = 1.0F;
 		this.particleBlue = 1.0F;
 		this.particleRed = 1.0F;
 		this.particleAlpha = 0.7F;
+
 		this.bobTimer = 40;
 		this.particleMaxAge = (int) (64.0D / (Math.random() * 0.8D + 0.2D));
 		this.motionX = this.motionY = this.motionZ = 0.0D;
@@ -77,6 +81,7 @@ public class EntityCoreOilDripFX extends EntityFX
 
 		if (this.materialType == Material.water)
 		{
+			// TODO: Adjust colors to be black
 			this.particleGreen = 1.0F;
 			this.particleBlue = 1.0F;
 			this.particleRed = 1.0F;

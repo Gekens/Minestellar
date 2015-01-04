@@ -45,11 +45,11 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
 
-@Mod(modid = MinestellarMoon.MODID, name = MinestellarMoon.MODNAME, version = Constants.VERSION)
+@Mod(modid = MinestellarMoon.MOD_ID, name = MinestellarMoon.MOD_NAME, version = Constants.VERSION)
 public class MinestellarMoon
 {
-	public static final String MODID = "MinestellarMoon";
-	public static final String MODNAME = "Minestellar Moon";
+	public static final String MOD_ID = "MinestellarMoon";
+	public static final String MOD_NAME = "Minestellar Moon";
 
 	public static final String ASSET_PREFIX = "minestellarmoon";
 	public static final String TEXTURE_PREFIX = MinestellarMoon.ASSET_PREFIX + ":";
@@ -59,7 +59,7 @@ public class MinestellarMoon
 
 	public static Achievement achievementMoon;
 
-	@Instance(MinestellarMoon.MODID)
+	@Instance(MinestellarMoon.MOD_ID)
 	public static MinestellarMoon instance = new MinestellarMoon();
 
 	@SidedProxy(clientSide = "com.minestellar.moon.proxy.ClientProxyMoon", serverSide = "com.minestellar.moon.proxy.CommonProxyMoon")
@@ -76,13 +76,13 @@ public class MinestellarMoon
 		DimensionMoon.registerWorldProvider();
 		DimensionMoon.registerDimensions();
 
-		this.proxy.preInit(event);
+		proxy.preInit(event);
 	}
 
 	@EventHandler
 	public void init(FMLInitializationEvent event)
 	{
-		MinestellarMoon.achievementMoon = new Achievement("achievement.moon", "gotoMoon", 2, 1, new ItemStack(MoonItems.moonPortalTrigger), (Achievement) MinestellarCore.achievementSpace).registerStat();
+		MinestellarMoon.achievementMoon = new Achievement("achievement.moon", "landMoon", 2, 1, new ItemStack(MoonItems.moonPortalTrigger), MinestellarCore.achievementSpace).registerStat();
 
 		FMLCommonHandler.instance().bus().register(new EventAchievementMoon());
 
@@ -92,7 +92,7 @@ public class MinestellarMoon
 		this.registerCreatures();
 		this.registerOtherEntities();
 
-		this.proxy.init(event);
+		proxy.init(event);
 	}
 
 	private void registerOtherEntities()
@@ -120,6 +120,6 @@ public class MinestellarMoon
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event)
 	{
-		this.proxy.postInit(event);
+		proxy.postInit(event);
 	}
 }

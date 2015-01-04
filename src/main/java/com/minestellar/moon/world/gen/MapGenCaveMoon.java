@@ -161,52 +161,48 @@ public class MapGenCaveMoon extends MapGenBaseMeta
 						}
 					}
 
-					if (true)
-					{
+					for (int localY = j2; localY < k2; localY++)
+                    {
+                        final double yfactor = (localY + 0.5D - par8) / d7;
+                        final double yfactorSq = yfactor * yfactor;
 
-						for (int localY = j2; localY < k2; localY++)
-						{
-							final double yfactor = (localY + 0.5D - par8) / d7;
-							final double yfactorSq = yfactor * yfactor;
+                        for (int localX = l1; localX < i2; localX++)
+                        {
+                            final double zfactor = (localX + par3 * 16 + 0.5D - par6) / d6;
+                            final double zfactorSq = zfactor * zfactor;
 
-							for (int localX = l1; localX < i2; localX++)
-							{
-								final double zfactor = (localX + par3 * 16 + 0.5D - par6) / d6;
-								final double zfactorSq = zfactor * zfactor;
+                            for (int localZ = l2; localZ < i3; localZ++)
+                            {
+                                final double xfactor = (localZ + par4 * 16 + 0.5D - par10) / d6;
+                                final double xfactorSq = xfactor * xfactor;
 
-								for (int localZ = l2; localZ < i3; localZ++)
-								{
-									final double xfactor = (localZ + par4 * 16 + 0.5D - par10) / d6;
-									final double xfactorSq = xfactor * xfactor;
+                                if (xfactorSq + zfactorSq < 1.0D)
+                                {
+                                    final int coords = (localX * 16 + localZ) * 256 + localY;
 
-									if (xfactorSq + zfactorSq < 1.0D)
-									{
-										final int coords = (localX * 16 + localZ) * 256 + localY;
+                                    if (yfactor > -0.7D && xfactorSq + yfactorSq + zfactorSq < 1.0D)
+                                    {
+                                        if (blockIdArray[coords] == MoonBlocks.moonBasicBlocks)
+                                        {
+                                            if (metaArray[coords] == 1 || metaArray[coords] == 2)
+                                            {
+                                                blockIdArray[coords] = Blocks.air;
+                                            }
+                                            else if (metaArray[coords] == 0 && random.nextInt(MapGenCaveMoon.BREAK_THROUGH_CHANCE) == 0)
+                                            {
+                                                blockIdArray[coords] = Blocks.air;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
 
-										if (yfactor > -0.7D && xfactorSq + yfactorSq + zfactorSq < 1.0D)
-										{
-											if (blockIdArray[coords] == MoonBlocks.moonBasicBlocks)
-											{
-												if (metaArray[coords] == 1 || metaArray[coords] == 2)
-												{
-													blockIdArray[coords] = Blocks.air;
-												}
-												else if (metaArray[coords] == 0 && random.nextInt(MapGenCaveMoon.BREAK_THROUGH_CHANCE) == 0)
-												{
-													blockIdArray[coords] = Blocks.air;
-												}
-											}
-										}
-									}
-								}
-							}
-						}
-
-						if (flag)
-						{
-							break;
-						}
-					}
+					if (flag)
+                    {
+                        break;
+                    }
 				}
 			}
 		}

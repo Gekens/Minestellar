@@ -17,9 +17,11 @@
 package com.minestellar.api.world.gen;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
+import com.minestellar.api.world.IMinestellarBiomeDecorator;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFalling;
 import net.minecraft.entity.EnumCreatureType;
@@ -179,7 +181,7 @@ public abstract class ChunkProviderMinestellar extends ChunkProviderGenerate
 				{
 					final int index = this.getIndex(var8, var16, var9);
 
-					if (var16 <= 0 + this.rand.nextInt(5))
+					if (var16 <= this.rand.nextInt(5))
 					{
 						arrayOfIDs[index] = Blocks.bedrock;
 					}
@@ -398,10 +400,7 @@ public abstract class ChunkProviderMinestellar extends ChunkProviderGenerate
 		{
 			final List monsters = new ArrayList();
 
-			for (SpawnListEntry monster : this.getMonsters())
-			{
-				monsters.add(monster);
-			}
+			Collections.addAll(monsters, this.getMonsters());
 
 			return monsters;
 		}
@@ -409,10 +408,7 @@ public abstract class ChunkProviderMinestellar extends ChunkProviderGenerate
 		{
 			final List creatures = new ArrayList();
 
-			for (SpawnListEntry creature : this.getCreatures())
-			{
-				creatures.add(creature);
-			}
+			Collections.addAll(creatures, this.getCreatures());
 
 			return creatures;
 		}
@@ -425,10 +421,9 @@ public abstract class ChunkProviderMinestellar extends ChunkProviderGenerate
 	/**
 	 * Do not return null
 	 *
-	 * @return The biome generator for this world, handles ore, flower, etc
-	 *         generation.
+	 * @return The biome generator for this world, handles ore, flower, etc generation.
 	 */
-	protected abstract BiomeDecoratorMinestellar getBiomeGenerator();
+	protected abstract IMinestellarBiomeDecorator getBiomeGenerator();
 
 	/**
 	 * Do not return null, have at least one biome for generation
@@ -444,10 +439,8 @@ public abstract class ChunkProviderMinestellar extends ChunkProviderGenerate
 
 	/**
 	 * List of all world generators to use. Caves, ravines, structures, etc.
-	 * <p/>
-	 * Return an empty list for no world generators. Do not return null.
 	 *
-	 * @return
+	 * @return Empty list for no world generators. Do not return null.
 	 */
 	protected abstract List<MapGenBaseMeta> getWorldGenerators();
 
@@ -479,8 +472,7 @@ public abstract class ChunkProviderMinestellar extends ChunkProviderGenerate
 	/**
 	 * The stone block to be generated. Doesn't have to be stone of course.
 	 *
-	 * @return BlockMetaPair instance containing ID and metadata for stone
-	 *         block.
+	 * @return BlockMetaPair instance containing ID and metadata for stone block.
 	 */
 	protected abstract BlockMetaPair getStoneBlock();
 

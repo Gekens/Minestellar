@@ -78,12 +78,12 @@ public class BlockOreCore extends Block
 	{
 		final int meta = par1World.getBlockMetadata(par2, par3, par4);
 
-		if (meta == 0 && meta < 6)
+		if (meta == 5)
 		{
-			return 2.25F;
+			return 2.0F;
 		}
 
-		return 1.0F;
+		return 1.75F;
 	}
 
 	@Override

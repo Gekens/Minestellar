@@ -14,7 +14,7 @@
  * this program; if not, see <http://www.gnu.org/licenses>.
  */
 
-package com.minestellar.core.entities.render;
+package com.minestellar.core.render.entitys;
 
 import net.minecraft.client.model.ModelZombie;
 import net.minecraft.client.renderer.entity.RenderLiving;
@@ -26,11 +26,11 @@ import net.minecraft.util.ResourceLocation;
 import com.minestellar.core.MinestellarCore;
 import com.minestellar.core.entities.EntityZombieCore;
 
-public class RenderZombieCore extends RenderLiving
+public class RenderEntityAdvancedZombie extends RenderLiving
 {
 	private static final ResourceLocation moonZombie = new ResourceLocation(MinestellarCore.TEXTURE_PREFIX + "textures/model/entities/advancedZombie.png");
 
-	public RenderZombieCore()
+	public RenderEntityAdvancedZombie()
 	{
 		super(new ModelZombie(), 0.5F);
 	}

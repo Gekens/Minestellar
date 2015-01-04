@@ -18,10 +18,10 @@ package com.minestellar.core;
 
 public class Constants
 {
-	public static final int LOCALMAJVERSION = 0;
-	public static final int LOCALMINVERSION = 0;
-	public static final int LOCALBUILDVERSION = 1;
-	public static final String VERSION = (LOCALMAJVERSION + "." + LOCALMINVERSION + "." + LOCALBUILDVERSION);
+	public static final int LOCAL_MAJ_VERSION = 0;
+	public static final int LOCAL_MIN_VERSION = 0;
+	public static final int LOCAL_BUILD_VERSION = 1;
+	public static final String VERSION = (LOCAL_MAJ_VERSION + "." + LOCAL_MIN_VERSION + "." + LOCAL_BUILD_VERSION);
 
 	public static final String MOD_NAME = "Minestellar";
 

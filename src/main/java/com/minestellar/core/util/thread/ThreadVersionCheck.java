@@ -73,7 +73,7 @@ public class ThreadVersionCheck extends Thread
 
 				final BufferedReader in = new BufferedReader(new InputStreamReader(http.getInputStream()));
 				String str;
-				String str2[] = null;
+				String str2[];
 
 				while ((str = in.readLine()) != null)
 				{
@@ -91,7 +91,7 @@ public class ThreadVersionCheck extends Thread
 							remoteBuildVer = Integer.parseInt(str2[2]);
 						}
 
-						if (remoteMajVer > Constants.LOCALMAJVERSION || remoteMajVer == Constants.LOCALMAJVERSION && remoteMinVer > Constants.LOCALMINVERSION || remoteMajVer == Constants.LOCALMAJVERSION && remoteMinVer == Constants.LOCALMINVERSION && remoteBuildVer > Constants.LOCALBUILDVERSION)
+						if (remoteMajVer > Constants.LOCAL_MAJ_VERSION || remoteMajVer == Constants.LOCAL_MAJ_VERSION && remoteMinVer > Constants.LOCAL_MIN_VERSION || remoteMajVer == Constants.LOCAL_MAJ_VERSION && remoteMinVer == Constants.LOCAL_MIN_VERSION && remoteBuildVer > Constants.LOCAL_BUILD_VERSION)
 						{
 							Thread.sleep(5000);
 
@@ -102,7 +102,7 @@ public class ThreadVersionCheck extends Thread
 				}
 			}
 
-			catch (final Exception e)
+			catch (final Exception ignored)
 			{
 			}
 
@@ -115,7 +115,7 @@ public class ThreadVersionCheck extends Thread
 					Thread.sleep(30000);
 				}
 
-				catch (final InterruptedException e)
+				catch (final InterruptedException ignored)
 				{
 				}
 			}

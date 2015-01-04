@@ -49,7 +49,7 @@ public class BlockTeleporterMoon extends BlockBreakable
 
 	public BlockTeleporterMoon(String name)
 	{
-		super(MinestellarMoon.MODID + name, Material.portal, false);
+		super(MinestellarMoon.MOD_ID + name, Material.portal, false);
 		this.setTickRandomly(true);
 		this.setBlockName(name);
 		// this.setBlockTextureName(name);
@@ -189,7 +189,7 @@ public class BlockTeleporterMoon extends BlockBreakable
 		boolean flag3 = p_149646_1_.getBlock(p_149646_2_, p_149646_3_, p_149646_4_ + 1) == this && p_149646_1_.getBlock(p_149646_2_, p_149646_3_, p_149646_4_ + 2) != this;
 		boolean flag4 = flag || flag1 || i1 == 1;
 		boolean flag5 = flag2 || flag3 || i1 == 2;
-		return flag4 && p_149646_5_ == 4 ? true : (flag4 && p_149646_5_ == 5 ? true : (flag5 && p_149646_5_ == 2 ? true : flag5 && p_149646_5_ == 3));
+		return flag4 && p_149646_5_ == 4 || (flag4 && p_149646_5_ == 5 || (flag5 && p_149646_5_ == 2 || flag5 && p_149646_5_ == 3));
 	}
 
 	/**

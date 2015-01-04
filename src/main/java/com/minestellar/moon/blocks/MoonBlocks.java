@@ -16,11 +16,11 @@
 
 package com.minestellar.moon.blocks;
 
+import com.minestellar.core.util.ItemBlockUtil;
 import net.minecraft.block.Block;
 
 import com.minestellar.moon.MinestellarMoon;
 import com.minestellar.moon.blocks.items.ItemBlockBasic;
-import com.minestellar.moon.blocks.items.ItemBlockTeleporter;
 
 public class MoonBlocks
 {
@@ -40,7 +40,7 @@ public class MoonBlocks
 	private static void registerBlocks()
 	{
 		MinestellarMoon.registerBlock(MoonBlocks.moonBasicBlocks, ItemBlockBasic.class);
-		MinestellarMoon.registerBlock(MoonBlocks.moonPortal, ItemBlockTeleporter.class);
+		MinestellarMoon.registerBlock(MoonBlocks.moonPortal, ItemBlockUtil.class);
 	}
 
 	public static void oreDictRegistration()

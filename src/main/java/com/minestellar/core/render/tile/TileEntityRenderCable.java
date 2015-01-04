@@ -14,7 +14,7 @@
  * this program; if not, see <http://www.gnu.org/licenses>.
  */
 
-package com.minestellar.core.render;
+package com.minestellar.core.render.tile;
 
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
@@ -29,7 +29,6 @@ import com.minestellar.core.blocks.tileEntities.TileEntityCable;
 
 public class TileEntityRenderCable extends TileEntitySpecialRenderer
 {
-
 	ResourceLocation blockTexture;
 
 	boolean drawInside = true;
@@ -41,8 +40,8 @@ public class TileEntityRenderCable extends TileEntitySpecialRenderer
 	public void renderTileEntityAt(TileEntity tileEntity, double translationX, double translationY, double translationZ, float f)
 	{
 
-		blockTexture = new ResourceLocation(MinestellarCore.TEXTURE_PREFIX + "textures/model/tile/blockCable" + tileEntity.blockMetadata + ".png");
-		
+		blockTexture = new ResourceLocation(MinestellarCore.TEXTURE_PREFIX + "textures/model/tile/wireLight" + tileEntity.blockMetadata + ".png");
+
 		GL11.glTranslated(translationX, translationY, translationZ);
 		GL11.glDisable(GL11.GL_LIGHTING);
 		this.bindTexture(blockTexture);
@@ -59,7 +58,7 @@ public class TileEntityRenderCable extends TileEntitySpecialRenderer
 					}
 				}
 			}*/
-			
+
 			if(!cable.onlyOneOpposite(cable.connections))
 			{
 				drawCore(tileEntity);
@@ -161,11 +160,11 @@ public class TileEntityRenderCable extends TileEntitySpecialRenderer
 		{
 			GL11.glRotatef(-90, 0, 0, 1);
 		}
-		GL11.glTranslatef(-0.5F, -0.5F, -0.5F);	
+		GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
 	}
 
 	public void drawConnector(ForgeDirection direction)
-	{	
+	{
 		Tessellator tessellator = Tessellator.instance;
 
 		tessellator.startDrawingQuads();
@@ -174,7 +173,7 @@ public class TileEntityRenderCable extends TileEntitySpecialRenderer
 			GL11.glTranslatef(0.5F, 0.5F, 0.5F);
 			if (direction.equals(ForgeDirection.UP))
 			{
-				//ROTATE
+				// ROTATE
 			}
 			else if (direction.equals(ForgeDirection.DOWN))
 			{
@@ -247,7 +246,7 @@ public class TileEntityRenderCable extends TileEntitySpecialRenderer
 		GL11.glTranslatef(0.5F, 0.5F, 0.5F);
 		if (direction.equals(ForgeDirection.UP))
 		{
-			//NOPE
+			// NOPE
 		}
 		else if (direction.equals(ForgeDirection.DOWN))
 		{
@@ -311,7 +310,6 @@ public class TileEntityRenderCable extends TileEntitySpecialRenderer
 
 			if (drawInside)
 			{
-
 				tessellator.addVertexWithUV(11 * pixel / 2, 11 * pixel / 2, 1 - 11 * pixel / 2, 0 * texturePixel, 5 * texturePixel);
 				tessellator.addVertexWithUV(11 * pixel / 2, 1 - 11 * pixel / 2, 1 - 11 * pixel / 2, 0 * texturePixel, 0 * texturePixel);
 				tessellator.addVertexWithUV(1 - 11 * pixel / 2, 1 - 11 * pixel / 2, 1 - 11 * pixel / 2, 5 * texturePixel, 0 * texturePixel);
@@ -345,6 +343,5 @@ public class TileEntityRenderCable extends TileEntitySpecialRenderer
 			}
 		}
 		tessellator.draw();
-
 	}
 }

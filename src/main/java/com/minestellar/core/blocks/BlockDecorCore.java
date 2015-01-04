@@ -75,16 +75,16 @@ public class BlockDecorCore extends Block
 	}
 
 	@Override
-	public float getBlockHardness(World par1World, int par2, int par3, int par4) // FIX
+	public float getBlockHardness(World par1World, int par2, int par3, int par4)
 	{
 		final int meta = par1World.getBlockMetadata(par2, par3, par4);
 
-		if (meta == 0 && meta < 7)
+		if (meta == 2 || meta == 6)
 		{
-			return 2.25F;
+			return 2.50F;
 		}
 
-		return 1.0F;
+		return 2.25F;
 	}
 
 	@Override
