@@ -16,6 +16,7 @@
 
 package com.minestellar.moon.proxy;
 
+import net.minecraft.entity.player.EntityPlayer;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
@@ -31,5 +32,8 @@ public class CommonProxyMoon {
 	}
 
 	public void spawnParticle(String string, double x, double y, double z) {
+	}
+	
+	public void spawnFootprint(EntityPlayer player){
 	}
 }

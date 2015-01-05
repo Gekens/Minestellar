@@ -16,27 +16,37 @@
 
 package com.minestellar.moon.proxy;
 
+import java.util.HashMap;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.WorldClient;
+import net.minecraft.entity.player.EntityPlayer;
 
 import com.minestellar.api.world.IMinestellarWorldProvider;
 import com.minestellar.core.world.CloudRenderer;
+import com.minestellar.moon.MinestellarMoon;
+import com.minestellar.moon.entity.EntityFootstep;
+import com.minestellar.moon.render.entity.EntityFootstepRender;
+import com.minestellar.moon.util.ConfigManagerMoon;
 import com.minestellar.moon.world.SkyRendererMoon;
 import com.minestellar.moon.world.WorldProviderMoon;
 
 import cpw.mods.fml.client.FMLClientHandler;
+import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.gameevent.TickEvent;
 import cpw.mods.fml.common.gameevent.TickEvent.ClientTickEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class ClientProxyMoon extends CommonProxyMoon {
 	private static Minecraft mc = FMLClientHandler.instance().getClient();
-
+	private final HashMap<EntityPlayer, EntityFootstep> footsteps = new HashMap<EntityPlayer, EntityFootstep>();
+	
 	@Override
 	public void preInit(FMLPreInitializationEvent event) {
 		super.preInit(event);
@@ -45,6 +55,7 @@ public class ClientProxyMoon extends CommonProxyMoon {
 	@Override
 	public void init(FMLInitializationEvent event) {
 		FMLCommonHandler.instance().bus().register(new TickHandlerClient());
+		FMLCommonHandler.instance().bus().register(new TickHandlerPlayer());
 
 		super.init(event);
 	}
@@ -53,7 +64,6 @@ public class ClientProxyMoon extends CommonProxyMoon {
 	public void postInit(FMLPostInitializationEvent event) {
 		this.registerTileEntityRenders();
 		this.registerEntityRenderers();
-
 		super.postInit(event);
 	}
 
@@ -61,12 +71,33 @@ public class ClientProxyMoon extends CommonProxyMoon {
 	}
 
 	private void registerEntityRenderers() {
+		RenderingRegistry.registerEntityRenderingHandler(EntityFootstep.class, new EntityFootstepRender());
 	}
 
 	@Override
 	public void spawnParticle(String string, double x, double y, double z) {
 	}
+	
+	@Override
+	public void spawnFootprint(EntityPlayer player) {
+        if (player.fallDistance == 0 && !player.isInWater() && !player.worldObj.isAirBlock((int) player.posX, (int) player.boundingBox.minY - 1, (int) player.posZ)) {
+            if ((this.footsteps.containsKey(player) && this.footsteps.get(player).getDistanceToEntity(player) > 1.4) || !this.footsteps.containsKey(player)) {
+                EntityFootstep footstep = new EntityFootstep(player);
+                player.worldObj.spawnEntityInWorld(footstep);
+                this.footsteps.put(player, footstep);
+            }
+        }
+    }
 
+	public static class TickHandlerPlayer{
+		@SideOnly(Side.CLIENT)
+		@SubscribeEvent
+		public void onPlayerTick(TickEvent.PlayerTickEvent e){
+			//if(e.player.dimension == ConfigManagerMoon.idDimensionMoon)
+				MinestellarMoon.proxy.spawnFootprint(e.player);
+		}
+	}
+	
 	public static class TickHandlerClient {
 		@SideOnly(Side.CLIENT)
 		@SubscribeEvent
