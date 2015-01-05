@@ -93,7 +93,7 @@ public class ClientProxyMoon extends CommonProxyMoon {
 		@SideOnly(Side.CLIENT)
 		@SubscribeEvent
 		public void onPlayerTick(TickEvent.PlayerTickEvent e){
-			//if(e.player.dimension == ConfigManagerMoon.idDimensionMoon)
+			if(e.player.dimension == ConfigManagerMoon.idDimensionMoon)
 				MinestellarMoon.proxy.spawnFootprint(e.player);
 		}
 	}
