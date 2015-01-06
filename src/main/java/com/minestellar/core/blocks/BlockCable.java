@@ -111,9 +111,9 @@ public class BlockCable extends BlockContainer {
 	@Override
 	public void registerBlockIcons(IIconRegister par1IconRegister) {
 		this.cableBlockIcon = new IIcon[3];
-		this.cableBlockIcon[0] = par1IconRegister.registerIcon(MinestellarCore.TEXTURE_PREFIX + "light_cable_icon");
-		this.cableBlockIcon[1] = par1IconRegister.registerIcon(MinestellarCore.TEXTURE_PREFIX + "medium_cable_icon");
-		this.cableBlockIcon[2] = par1IconRegister.registerIcon(MinestellarCore.TEXTURE_PREFIX + "heavy_cable_icon");
+		this.cableBlockIcon[0] = par1IconRegister.registerIcon(MinestellarCore.TEXTURE_PREFIX + "blockCable0");
+		this.cableBlockIcon[1] = par1IconRegister.registerIcon(MinestellarCore.TEXTURE_PREFIX + "blockCable1");
+		this.cableBlockIcon[2] = par1IconRegister.registerIcon(MinestellarCore.TEXTURE_PREFIX + "blockCable2");
 	}
 
 	@Override

@@ -112,9 +112,9 @@ public class BlockPipe extends BlockContainer {
 	@Override
 	public void registerBlockIcons(IIconRegister par1IconRegister) {
 		this.pipeBlockIcon = new IIcon[3];
-		this.pipeBlockIcon[0] = par1IconRegister.registerIcon(MinestellarCore.TEXTURE_PREFIX + "light_cable_icon");
-		this.pipeBlockIcon[1] = par1IconRegister.registerIcon(MinestellarCore.TEXTURE_PREFIX + "medium_cable_icon");
-		this.pipeBlockIcon[2] = par1IconRegister.registerIcon(MinestellarCore.TEXTURE_PREFIX + "heavy_cable_icon");
+		this.pipeBlockIcon[0] = par1IconRegister.registerIcon(MinestellarCore.TEXTURE_PREFIX + "blockPipe0");
+		this.pipeBlockIcon[1] = par1IconRegister.registerIcon(MinestellarCore.TEXTURE_PREFIX + "blockPipe1");
+		this.pipeBlockIcon[2] = par1IconRegister.registerIcon(MinestellarCore.TEXTURE_PREFIX + "blockPipe2");
 	}
 
 	@Override
