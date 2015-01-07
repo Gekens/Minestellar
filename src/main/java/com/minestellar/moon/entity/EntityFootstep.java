@@ -49,7 +49,7 @@ public class EntityFootstep extends Entity{
 		else if (this.scale < 1.5F) {
 			this.scale += 0.001F;
 		}
-
+		
 		if (this.fadeOutTimer < 0) {
 			this.setDead();
 		}

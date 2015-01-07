@@ -25,6 +25,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import com.minestellar.api.world.IMinestellarWorldProvider;
 import com.minestellar.core.world.CloudRenderer;
 import com.minestellar.moon.MinestellarMoon;
+import com.minestellar.moon.blocks.BlockBasicMoon;
 import com.minestellar.moon.entity.EntityFootstep;
 import com.minestellar.moon.render.entity.EntityFootstepRender;
 import com.minestellar.moon.util.ConfigManagerMoon;
@@ -46,7 +47,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class ClientProxyMoon extends CommonProxyMoon {
 	private static Minecraft mc = FMLClientHandler.instance().getClient();
 	private final HashMap<EntityPlayer, EntityFootstep> footsteps = new HashMap<EntityPlayer, EntityFootstep>();
-	
+
 	@Override
 	public void preInit(FMLPreInitializationEvent event) {
 		super.preInit(event);
@@ -77,17 +78,28 @@ public class ClientProxyMoon extends CommonProxyMoon {
 	@Override
 	public void spawnParticle(String string, double x, double y, double z) {
 	}
-	
+
 	@Override
 	public void spawnFootprint(EntityPlayer player) {
-        if (player.fallDistance == 0 && !player.isInWater() && !player.worldObj.isAirBlock((int) player.posX, (int) player.boundingBox.minY - 1, (int) player.posZ)) {
-            if ((this.footsteps.containsKey(player) && this.footsteps.get(player).getDistanceToEntity(player) > 1.4) || !this.footsteps.containsKey(player)) {
-                EntityFootstep footstep = new EntityFootstep(player);
-                player.worldObj.spawnEntityInWorld(footstep);
-                this.footsteps.put(player, footstep);
-            }
-        }
-    }
+		if(Math.random() > 0.8){
+			if (player.fallDistance == 0 && !player.isInWater() && !player.worldObj.isAirBlock((int) player.posX, (int) player.boundingBox.minY - 1, (int) player.posZ)){
+				//player.worldObj.getBlock((int) player.posX, (int) player.boundingBox.minY - 1, (int) player.posZ);
+				if(player.worldObj.getBlock((int) player.posX, (int) player.boundingBox.minY - 1, (int) player.posZ) instanceof BlockBasicMoon){
+					if(player.worldObj.getBlockMetadata((int) player.posX, (int) player.boundingBox.minY - 1, (int) player.posZ) == 0){
+						if ((this.footsteps.containsKey(player) && this.footsteps.get(player).getDistanceToEntity(player) > 1.4) || !this.footsteps.containsKey(player)) {
+							EntityFootstep footstep = new EntityFootstep(player);
+							player.worldObj.spawnEntityInWorld(footstep);
+							this.footsteps.put(player, footstep);
+						}
+
+					}
+				}
+
+
+			}
+		}
+	}
+
 
 	public static class TickHandlerPlayer{
 		@SideOnly(Side.CLIENT)
@@ -97,8 +109,8 @@ public class ClientProxyMoon extends CommonProxyMoon {
 				MinestellarMoon.proxy.spawnFootprint(e.player);
 		}
 	}
-	
-	public static class TickHandlerClient {
+
+	public static class TickHandlerClient{
 		@SideOnly(Side.CLIENT)
 		@SubscribeEvent
 		public void onClientTick(ClientTickEvent event) {
