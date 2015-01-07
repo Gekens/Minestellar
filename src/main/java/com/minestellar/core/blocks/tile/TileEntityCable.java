@@ -22,20 +22,19 @@ import net.minecraftforge.common.util.ForgeDirection;
 import cofh.api.energy.EnergyStorage;
 import cofh.api.energy.IEnergyHandler;
 import cofh.api.energy.IEnergyProvider;
+
+import com.minestellar.api.core.TileEntityWire;
+
 import cpw.mods.fml.common.Optional;
 import cpw.mods.fml.common.Optional.Method;
 
 @Optional.Interface(iface = "cofh.api.energy.IEnergyHandler", modid = "CoFHCore")
-public class TileEntityCable extends TileEntity implements IEnergyHandler {
-
-	/**
-	 * UP, DOWN, NORTH, EAST, SOUTH, WEST
-	 */
-	public ForgeDirection[] connections = new ForgeDirection[6];
+public class TileEntityCable extends TileEntityWire implements IEnergyHandler {
 
 	private EnergyStorage storage;
 
 	public TileEntityCable(int meta) {
+		super(meta);
 		this.blockMetadata = meta;
 
 		switch (this.blockMetadata) {
@@ -52,7 +51,7 @@ public class TileEntityCable extends TileEntity implements IEnergyHandler {
 
 	@Override
 	public void updateEntity() {
-		this.updateCableConnections();
+		super.updateCableConnections();
 		this.updateBlockConnections();
 		if (storage.getEnergyStored() > 0) {
 			for (int i = 0; i < 6; i++) {
@@ -76,99 +75,86 @@ public class TileEntityCable extends TileEntity implements IEnergyHandler {
 		}
 	}
 
-	public void updateCableConnections() {
-		if (this.worldObj.getTileEntity(xCoord, yCoord + 1, zCoord) instanceof TileEntityCable)
-			connections[0] = ForgeDirection.UP;
-		else
-			connections[0] = null;
-
-		if (this.worldObj.getTileEntity(xCoord, yCoord - 1, zCoord) instanceof TileEntityCable)
-			connections[1] = ForgeDirection.DOWN;
-		else
-			connections[1] = null;
-
-		if (this.worldObj.getTileEntity(xCoord, yCoord, zCoord - 1) instanceof TileEntityCable)
-			connections[2] = ForgeDirection.NORTH;
-		else
-			connections[2] = null;
-
-		if (this.worldObj.getTileEntity(xCoord + 1, yCoord, zCoord) instanceof TileEntityCable)
-			connections[3] = ForgeDirection.EAST;
-		else
-			connections[3] = null;
-
-		if (this.worldObj.getTileEntity(xCoord, yCoord, zCoord + 1) instanceof TileEntityCable)
-			connections[4] = ForgeDirection.SOUTH;
-		else
-			connections[4] = null;
-
-		if (this.worldObj.getTileEntity(xCoord - 1, yCoord, zCoord) instanceof TileEntityCable)
-			connections[5] = ForgeDirection.WEST;
-		else
-			connections[5] = null;
-	}
-
 	public void updateBlockConnections() {
-		if (this.worldObj.getTileEntity(xCoord, yCoord + 1, zCoord) instanceof IEnergyProvider)
-			connections[0] = ForgeDirection.UP;
-		else
-			connections[0] = null;
+		//super.updateCableConnections();
 
-		if (this.worldObj.getTileEntity(xCoord, yCoord - 1, zCoord) instanceof IEnergyProvider)
-			connections[1] = ForgeDirection.DOWN;
-		else
-			connections[1] = null;
-
-		if (this.worldObj.getTileEntity(xCoord, yCoord, zCoord - 1) instanceof IEnergyProvider)
-			connections[2] = ForgeDirection.NORTH;
-		else
-			connections[2] = null;
-
-		if (this.worldObj.getTileEntity(xCoord + 1, yCoord, zCoord) instanceof IEnergyProvider)
-			connections[3] = ForgeDirection.EAST;
-		else
-			connections[3] = null;
-
-		if (this.worldObj.getTileEntity(xCoord, yCoord, zCoord + 1) instanceof IEnergyProvider)
-			connections[4] = ForgeDirection.SOUTH;
-		else
-			connections[4] = null;
-
-		if (this.worldObj.getTileEntity(xCoord - 1, yCoord, zCoord) instanceof IEnergyProvider)
-			connections[5] = ForgeDirection.WEST;
-		else
-			connections[5] = null;
-	}
-
-	public boolean onlyOneOpposite(ForgeDirection[] directions) {
-		ForgeDirection mainDirection = null;
-
-		boolean isOpposite = false;
-
-		for (int i = 0; i < directions.length; i++) {
-			if (mainDirection == null && directions[i] != null)
-				mainDirection = directions[i];
-
-			if (directions[i] != null && mainDirection != directions[i]) {
-				if (!isOpposite(mainDirection, directions[i]))
-					return false;
-				else
-					isOpposite = true;
+		if (this.worldObj.getTileEntity(xCoord, yCoord + 1, zCoord) instanceof IEnergyProvider){
+			if (this.worldObj.getTileEntity(xCoord, yCoord + 1, zCoord) instanceof TileEntityCable){ 
+				if (this.worldObj.getTileEntity(xCoord, yCoord + 1, zCoord).getBlockMetadata() == this.getBlockMetadata()){
+					connections[0] = ForgeDirection.UP;
+				}else
+					connections[0] = null;
+			}else{
+				connections[0] = ForgeDirection.UP;
 			}
 		}
+		else
+			connections[0] = null;
 
-		return isOpposite;
-	}
-
-	public boolean isOpposite(ForgeDirection firstDirection, ForgeDirection secondDirection) {
-		if ((firstDirection.equals(ForgeDirection.NORTH) && secondDirection.equals(ForgeDirection.SOUTH)) || (firstDirection.equals(ForgeDirection.SOUTH) && secondDirection.equals(ForgeDirection.NORTH)))
-			return true;
-		if ((firstDirection.equals(ForgeDirection.EAST) && secondDirection.equals(ForgeDirection.WEST)) || (firstDirection.equals(ForgeDirection.WEST) && secondDirection.equals(ForgeDirection.EAST)))
-			return true;
-		if ((firstDirection.equals(ForgeDirection.UP) && secondDirection.equals(ForgeDirection.DOWN)) || (firstDirection.equals(ForgeDirection.DOWN) && secondDirection.equals(ForgeDirection.UP)))
-			return true;
-
-		return false;
+		if (this.worldObj.getTileEntity(xCoord, yCoord - 1, zCoord) instanceof IEnergyProvider){
+			if (this.worldObj.getTileEntity(xCoord, yCoord - 1, zCoord) instanceof TileEntityCable){ 
+				if (this.worldObj.getTileEntity(xCoord, yCoord - 1, zCoord).getBlockMetadata() == this.getBlockMetadata()){
+					connections[1] = ForgeDirection.DOWN;
+				}else
+					connections[1] = null;
+			}else{
+				connections[1] = ForgeDirection.DOWN;
+			}
+		}
+		else
+			connections[1] = null;
+		
+		if (this.worldObj.getTileEntity(xCoord, yCoord, zCoord - 1) instanceof IEnergyProvider){
+			if (this.worldObj.getTileEntity(xCoord, yCoord, zCoord - 1) instanceof TileEntityCable){ 
+				if (this.worldObj.getTileEntity(xCoord, yCoord, zCoord - 1).getBlockMetadata() == this.getBlockMetadata()){
+					connections[2] = ForgeDirection.NORTH;
+				}else
+					connections[2] = null;
+			}else{
+				connections[2] = ForgeDirection.NORTH;
+			}
+		}
+		else
+			connections[2] = null;
+		
+		if (this.worldObj.getTileEntity(xCoord + 1, yCoord, zCoord) instanceof IEnergyProvider){
+			if (this.worldObj.getTileEntity(xCoord + 1, yCoord, zCoord) instanceof TileEntityCable){ 
+				if (this.worldObj.getTileEntity(xCoord + 1, yCoord, zCoord).getBlockMetadata() == this.getBlockMetadata()){
+					connections[3] = ForgeDirection.EAST;
+				}else
+					connections[3] = null;
+			}else{
+				connections[3] = ForgeDirection.EAST;
+			}
+		}
+		else
+			connections[3] = null;
+		
+		if (this.worldObj.getTileEntity(xCoord, yCoord, zCoord + 1) instanceof IEnergyProvider){
+			if (this.worldObj.getTileEntity(xCoord, yCoord, zCoord + 1) instanceof TileEntityCable){ 
+				if (this.worldObj.getTileEntity(xCoord, yCoord, zCoord + 1).getBlockMetadata() == this.getBlockMetadata()){
+					connections[4] = ForgeDirection.SOUTH;
+				}else
+					connections[4] = null;
+			}else{
+				connections[4] = ForgeDirection.SOUTH;
+			}
+		}
+		else
+			connections[4] = null;
+		
+		if (this.worldObj.getTileEntity(xCoord - 1, yCoord, zCoord) instanceof IEnergyProvider){
+			if (this.worldObj.getTileEntity(xCoord - 1, yCoord, zCoord) instanceof TileEntityCable){ 
+				if (this.worldObj.getTileEntity(xCoord - 1, yCoord, zCoord).getBlockMetadata() == this.getBlockMetadata()){
+					connections[5] = ForgeDirection.WEST;
+				}else
+					connections[5] = null;
+			}else{
+				connections[5] = ForgeDirection.WEST;
+			}
+		}
+		else
+			connections[5] = null;
 	}
 
 	@Override
@@ -183,11 +169,6 @@ public class TileEntityCable extends TileEntity implements IEnergyHandler {
 
 		super.writeToNBT(nbt);
 		storage.writeToNBT(nbt);
-	}
-
-	@Override
-	public int getBlockMetadata() {
-		return blockMetadata;
 	}
 
 	// RF IMPLEMENTATION

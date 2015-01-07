@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 04/January/2015 Davide Cossu & Matthew Albrecht.
+ * Copyright (c) 07/gen/2015 Davide Cossu & Matthew Albrecht.
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -14,23 +14,16 @@
  * this program; if not, see <http://www.gnu.org/licenses>.
  */
 
-package com.minestellar.core.blocks.tile;
+package com.minestellar.api.core;
 
-import com.minestellar.api.core.TileEntityWire;
-
-import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
 
-public class TileEntityPipe extends TileEntityWire {
+public interface IWire{
 
-	public TileEntityPipe(int meta) {
-		super(meta);
-		this.blockMetadata = meta;
-	}
-
-	@Override
-	public void updateEntity() {
-		super.updateCableConnections();
-	}
+	public void updateCableConnections();
+	
+	public boolean onlyOneOpposite(ForgeDirection[] directions);
+	
+	public boolean isOpposite(ForgeDirection firstDirection, ForgeDirection secondDirection);
 	
 }
