@@ -76,7 +76,6 @@ public class TileEntityCable extends TileEntityWire implements IEnergyHandler {
 	}
 
 	public void updateBlockConnections() {
-		//super.updateCableConnections();
 
 		if (this.worldObj.getTileEntity(xCoord, yCoord + 1, zCoord) instanceof IEnergyProvider){
 			if (this.worldObj.getTileEntity(xCoord, yCoord + 1, zCoord) instanceof TileEntityCable){ 
