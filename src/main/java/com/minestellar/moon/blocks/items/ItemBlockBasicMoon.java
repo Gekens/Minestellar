@@ -10,6 +10,15 @@ import com.minestellar.core.proxy.ClientProxyCore;
 public class ItemBlockBasicMoon extends ItemBlock {
 	private static final String[] types = new String[] {
 		"surfaceStone", 
+		"surfaceStone1", 
+		"surfaceStone2", 
+		"surfaceStone3", 
+		"surfaceStone4", 
+		"surfaceStone5", 
+		"surfaceStone6", 
+		"surfaceStone7", 
+		"surfaceStone8", 
+		
 		"subSurfaceStone", 
 		"stone",
 		"cobblestone",

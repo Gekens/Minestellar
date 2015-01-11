@@ -33,7 +33,7 @@ import com.minestellar.core.MinestellarCore;
 import com.minestellar.core.blocks.tile.TileEntityCable;
 
 public class BlockCable extends BlockContainer {
-	
+
 	float pixel = 1F / 16F;
 
 	public static IIcon[] cableBlockIcon;

@@ -16,29 +16,27 @@
 
 package com.minestellar.api.core;
 
-import com.minestellar.core.blocks.tile.TileEntityPipe;
-
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
 
-public class TileEntityWire extends TileEntity implements IWire{
+public class TileEntityWire extends TileEntity implements IWire {
 
 	/**
 	 * UP, DOWN, NORTH, EAST, SOUTH, WEST
 	 */
 	public ForgeDirection[] connections = new ForgeDirection[6];
-	
-	public TileEntityWire(int meta){
+
+	public TileEntityWire(int meta) {
 		this.blockMetadata = meta;
 	}
-	
+
 	@Override
-	public void updateEntity(){
+	public void updateEntity() {
 		this.updateCableConnections();
 	}
-	
+
 	@Override
-	public void updateCableConnections(){
+	public void updateCableConnections() {
 
 		if ((this.worldObj.getTileEntity(xCoord, yCoord + 1, zCoord) instanceof TileEntityWire) && this.worldObj.getTileEntity(xCoord, yCoord + 1, zCoord).getBlockMetadata() == this.getBlockMetadata())
 			connections[0] = ForgeDirection.UP;
@@ -73,7 +71,7 @@ public class TileEntityWire extends TileEntity implements IWire{
 	}
 
 	@Override
-	public boolean onlyOneOpposite(ForgeDirection[] directions){
+	public boolean onlyOneOpposite(ForgeDirection[] directions) {
 		ForgeDirection mainDirection = null;
 
 		boolean isOpposite = false;
@@ -94,7 +92,7 @@ public class TileEntityWire extends TileEntity implements IWire{
 	}
 
 	@Override
-	public boolean isOpposite(ForgeDirection firstDirection, ForgeDirection secondDirection){
+	public boolean isOpposite(ForgeDirection firstDirection, ForgeDirection secondDirection) {
 		if ((firstDirection.equals(ForgeDirection.NORTH) && secondDirection.equals(ForgeDirection.SOUTH)) || (firstDirection.equals(ForgeDirection.SOUTH) && secondDirection.equals(ForgeDirection.NORTH)))
 			return true;
 		if ((firstDirection.equals(ForgeDirection.EAST) && secondDirection.equals(ForgeDirection.WEST)) || (firstDirection.equals(ForgeDirection.WEST) && secondDirection.equals(ForgeDirection.EAST)))

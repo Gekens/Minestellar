@@ -41,11 +41,20 @@ public class BlockBasicMoon extends Block {
 	@Override
 	public void registerBlockIcons(IIconRegister par1IconRegister) {
 		// UPDATE WHEN ADDING BLOCKS
-		this.blockIcon = new IIcon[4];
+		this.blockIcon = new IIcon[12];
 		this.blockIcon[0] = par1IconRegister.registerIcon(MinestellarMoon.TEXTURE_PREFIX + "moonSurfaceStone");
-		this.blockIcon[1] = par1IconRegister.registerIcon(MinestellarMoon.TEXTURE_PREFIX + "moonSubStone");
-		this.blockIcon[2] = par1IconRegister.registerIcon(MinestellarMoon.TEXTURE_PREFIX + "moonStone");
-		this.blockIcon[3] = par1IconRegister.registerIcon(MinestellarMoon.TEXTURE_PREFIX + "moonCobblestone");
+		this.blockIcon[1] = par1IconRegister.registerIcon(MinestellarMoon.TEXTURE_PREFIX + "grass_step_1");
+		this.blockIcon[2] = par1IconRegister.registerIcon(MinestellarMoon.TEXTURE_PREFIX + "grass_step_2");
+		this.blockIcon[3] = par1IconRegister.registerIcon(MinestellarMoon.TEXTURE_PREFIX + "grass_step_3");
+		this.blockIcon[4] = par1IconRegister.registerIcon(MinestellarMoon.TEXTURE_PREFIX + "grass_step_4");
+		this.blockIcon[5] = par1IconRegister.registerIcon(MinestellarMoon.TEXTURE_PREFIX + "grass_step_5");
+		this.blockIcon[6] = par1IconRegister.registerIcon(MinestellarMoon.TEXTURE_PREFIX + "grass_step_6");
+		this.blockIcon[7] = par1IconRegister.registerIcon(MinestellarMoon.TEXTURE_PREFIX + "grass_step_7");
+		this.blockIcon[8] = par1IconRegister.registerIcon(MinestellarMoon.TEXTURE_PREFIX + "grass_step_8");
+
+		this.blockIcon[9] = par1IconRegister.registerIcon(MinestellarMoon.TEXTURE_PREFIX + "moonSubStone");
+		this.blockIcon[10] = par1IconRegister.registerIcon(MinestellarMoon.TEXTURE_PREFIX + "moonStone");
+		this.blockIcon[11] = par1IconRegister.registerIcon(MinestellarMoon.TEXTURE_PREFIX + "moonCobblestone");
 	}
 
 	@Override
@@ -55,13 +64,59 @@ public class BlockBasicMoon extends Block {
 
 	@Override
 	public IIcon getIcon(int side, int meta) {
-		return this.blockIcon[meta];
+		if (meta >= 1 && meta <= 8) {
+			if (side == 1) {
+				switch (meta) {
+				case 1:
+					return this.blockIcon[1];
+				case 2:
+					return this.blockIcon[2];
+				case 3:
+					return this.blockIcon[3];
+				case 4:
+					return this.blockIcon[4];
+				case 5:
+					return this.blockIcon[5];
+				case 6:
+					return this.blockIcon[6];
+				case 7:
+					return this.blockIcon[7];
+				case 8:
+					return this.blockIcon[8];
+				}
+			}
+
+			else if (side == 0) {
+				return this.blockIcon[0];
+			}
+
+			else {
+				return this.blockIcon[0];
+			}
+		}
+
+		else {
+			switch (meta) {
+			case 0:
+				return this.blockIcon[0];
+			case 9:
+				return this.blockIcon[9];
+			case 10:
+				return this.blockIcon[10];
+			case 11:
+				return this.blockIcon[11];
+			default:
+				return this.blockIcon[0];
+			}
+		}
+
+		return null;
 	}
 
 	@Override
 	public void getSubBlocks(Item block, CreativeTabs creativeTabs, List list) {
 		// UPDATE WHEN ADDING BLOCKS
-		for (int i = 0; i < 4; ++i) {
+		for (int i = 0; i < 12; ++i) {
 			list.add(new ItemStack(this, 1, i));
 		}
 	}
@@ -70,31 +125,33 @@ public class BlockBasicMoon extends Block {
 	public float getBlockHardness(World par1World, int par2, int par3, int par4) {
 		final int meta = par1World.getBlockMetadata(par2, par3, par4);
 
-		if (meta == 0) {
+		if (meta >= 0 && meta <= 8) {
 			return 1.10F;
 		}
 
-		if (meta == 1) {
+		if (meta == 9) {
 			return 1.60F;
 		}
 
-		if (meta == 2) {
+		if (meta == 10) {
 			return 1.80F;
 		}
-		
-		if (meta == 3) {
+
+		if (meta == 11) {
 			return 1.80F;
 		}
 
 		return 1.0F;
 	}
-	
+
 	@Override
-	public int damageDropped(int meta)
-	{
-		if (meta == 2)
-		{
-			return 3;
+	public int damageDropped(int meta) {
+		if (meta >= 0 && meta <= 8) {
+			return 0;
+		}
+
+		if (meta == 10) {
+			return 11;
 		}
 
 		return meta;

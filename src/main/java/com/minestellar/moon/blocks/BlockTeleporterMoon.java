@@ -42,7 +42,13 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockTeleporterMoon extends BlockBreakable {
-	public static final int[][] field_150001_a = new int[][] { new int[0], { 3, 1 }, { 2, 0 } };
+	public static final int[][] field_150001_a = new int[][] {
+	new int[0], {
+	3, 1
+	}, {
+	2, 0
+	}
+	};
 
 	private static final String __OBFID = "CL_00000284";
 

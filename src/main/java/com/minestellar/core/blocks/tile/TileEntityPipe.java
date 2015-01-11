@@ -24,7 +24,6 @@ import mekanism.api.gas.IGasHandler;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
-import cofh.api.energy.IEnergyProvider;
 
 import com.minestellar.api.core.TileEntityWire;
 
@@ -32,7 +31,7 @@ import cpw.mods.fml.common.Optional;
 import cpw.mods.fml.common.Optional.Method;
 
 @Optional.Interface(iface = "mekanism.api.gas.IGasHandler", modid = "Mekanism")
-public class TileEntityPipe extends TileEntityWire implements IGasHandler{
+public class TileEntityPipe extends TileEntityWire implements IGasHandler {
 
 	GasStack gasStack = new GasStack(GasRegistry.getGas("oxygen"), 0);
 
@@ -64,97 +63,109 @@ public class TileEntityPipe extends TileEntityWire implements IGasHandler{
 	public void updateEntity() {
 		this.updateBlockConnections();
 		super.updateCableConnections();
-		//if(tank.stored.amount > 0){
-			for (int i = 0; i < 6; i++) {
+		// if(tank.stored.amount > 0){
+		for (int i = 0; i < 6; i++) {
 
-				// ForgeDirection is a useful helper class for handling directions.
-				int targetX = xCoord + ForgeDirection.getOrientation(i).offsetX;
-				int targetY = yCoord + ForgeDirection.getOrientation(i).offsetY;
-				int targetZ = zCoord + ForgeDirection.getOrientation(i).offsetZ;
+			// ForgeDirection is a useful helper class for handling directions.
+			int targetX = xCoord + ForgeDirection.getOrientation(i).offsetX;
+			int targetY = yCoord + ForgeDirection.getOrientation(i).offsetY;
+			int targetZ = zCoord + ForgeDirection.getOrientation(i).offsetZ;
 
-				TileEntity tile = worldObj.getTileEntity(targetX, targetY, targetZ);
-				if(tile instanceof IGasHandler){
-					System.out.println(gasStack.toString());
-					System.out.println("Tank: " + tank.getStored());
-				}
+			TileEntity tile = worldObj.getTileEntity(targetX, targetY, targetZ);
+			if (tile instanceof IGasHandler) {
+				System.out.println(gasStack.toString());
+				System.out.println("Tank: " + tank.getStored());
 			}
-		//}
+		}
+		// }
 
 	}
 
-	public void updateBlockConnections(){
-		if (this.worldObj.getTileEntity(xCoord, yCoord + 1, zCoord) instanceof IGasHandler){
-			if (this.worldObj.getTileEntity(xCoord, yCoord + 1, zCoord) instanceof TileEntityPipe){
-				if (this.worldObj.getTileEntity(xCoord, yCoord + 1, zCoord).getBlockMetadata() == this.getBlockMetadata()){
+	public void updateBlockConnections() {
+		if (this.worldObj.getTileEntity(xCoord, yCoord + 1, zCoord) instanceof IGasHandler) {
+			if (this.worldObj.getTileEntity(xCoord, yCoord + 1, zCoord) instanceof TileEntityPipe) {
+				if (this.worldObj.getTileEntity(xCoord, yCoord + 1, zCoord).getBlockMetadata() == this.getBlockMetadata()) {
 					connections[0] = ForgeDirection.UP;
-				}else
+				}
+				else
 					connections[0] = null;
-			}else{
+			}
+			else {
 				connections[0] = ForgeDirection.UP;
 			}
 		}
 		else
 			connections[0] = null;
 
-		if (this.worldObj.getTileEntity(xCoord, yCoord - 1, zCoord) instanceof IGasHandler){
-			if (this.worldObj.getTileEntity(xCoord, yCoord - 1, zCoord) instanceof TileEntityPipe){ 
-				if (this.worldObj.getTileEntity(xCoord, yCoord - 1, zCoord).getBlockMetadata() == this.getBlockMetadata()){
+		if (this.worldObj.getTileEntity(xCoord, yCoord - 1, zCoord) instanceof IGasHandler) {
+			if (this.worldObj.getTileEntity(xCoord, yCoord - 1, zCoord) instanceof TileEntityPipe) {
+				if (this.worldObj.getTileEntity(xCoord, yCoord - 1, zCoord).getBlockMetadata() == this.getBlockMetadata()) {
 					connections[1] = ForgeDirection.DOWN;
-				}else
+				}
+				else
 					connections[1] = null;
-			}else{
+			}
+			else {
 				connections[1] = ForgeDirection.DOWN;
 			}
 		}
 		else
 			connections[1] = null;
 
-		if (this.worldObj.getTileEntity(xCoord, yCoord, zCoord - 1) instanceof IGasHandler){
-			if (this.worldObj.getTileEntity(xCoord, yCoord, zCoord - 1) instanceof TileEntityPipe){ 
-				if (this.worldObj.getTileEntity(xCoord, yCoord, zCoord - 1).getBlockMetadata() == this.getBlockMetadata()){
+		if (this.worldObj.getTileEntity(xCoord, yCoord, zCoord - 1) instanceof IGasHandler) {
+			if (this.worldObj.getTileEntity(xCoord, yCoord, zCoord - 1) instanceof TileEntityPipe) {
+				if (this.worldObj.getTileEntity(xCoord, yCoord, zCoord - 1).getBlockMetadata() == this.getBlockMetadata()) {
 					connections[2] = ForgeDirection.NORTH;
-				}else
+				}
+				else
 					connections[2] = null;
-			}else{
+			}
+			else {
 				connections[2] = ForgeDirection.NORTH;
 			}
 		}
 		else
 			connections[2] = null;
 
-		if (this.worldObj.getTileEntity(xCoord + 1, yCoord, zCoord) instanceof IGasHandler){
-			if (this.worldObj.getTileEntity(xCoord + 1, yCoord, zCoord) instanceof TileEntityPipe){ 
-				if (this.worldObj.getTileEntity(xCoord + 1, yCoord, zCoord).getBlockMetadata() == this.getBlockMetadata()){
+		if (this.worldObj.getTileEntity(xCoord + 1, yCoord, zCoord) instanceof IGasHandler) {
+			if (this.worldObj.getTileEntity(xCoord + 1, yCoord, zCoord) instanceof TileEntityPipe) {
+				if (this.worldObj.getTileEntity(xCoord + 1, yCoord, zCoord).getBlockMetadata() == this.getBlockMetadata()) {
 					connections[3] = ForgeDirection.EAST;
-				}else
+				}
+				else
 					connections[3] = null;
-			}else{
+			}
+			else {
 				connections[3] = ForgeDirection.EAST;
 			}
 		}
 		else
 			connections[3] = null;
 
-		if (this.worldObj.getTileEntity(xCoord, yCoord, zCoord + 1) instanceof IGasHandler){
-			if (this.worldObj.getTileEntity(xCoord, yCoord, zCoord + 1) instanceof TileEntityPipe){ 
-				if (this.worldObj.getTileEntity(xCoord, yCoord, zCoord + 1).getBlockMetadata() == this.getBlockMetadata()){
+		if (this.worldObj.getTileEntity(xCoord, yCoord, zCoord + 1) instanceof IGasHandler) {
+			if (this.worldObj.getTileEntity(xCoord, yCoord, zCoord + 1) instanceof TileEntityPipe) {
+				if (this.worldObj.getTileEntity(xCoord, yCoord, zCoord + 1).getBlockMetadata() == this.getBlockMetadata()) {
 					connections[4] = ForgeDirection.SOUTH;
-				}else
+				}
+				else
 					connections[4] = null;
-			}else{
+			}
+			else {
 				connections[4] = ForgeDirection.SOUTH;
 			}
 		}
 		else
 			connections[4] = null;
 
-		if (this.worldObj.getTileEntity(xCoord - 1, yCoord, zCoord) instanceof IGasHandler){
-			if (this.worldObj.getTileEntity(xCoord - 1, yCoord, zCoord) instanceof TileEntityPipe){ 
-				if (this.worldObj.getTileEntity(xCoord - 1, yCoord, zCoord).getBlockMetadata() == this.getBlockMetadata()){
+		if (this.worldObj.getTileEntity(xCoord - 1, yCoord, zCoord) instanceof IGasHandler) {
+			if (this.worldObj.getTileEntity(xCoord - 1, yCoord, zCoord) instanceof TileEntityPipe) {
+				if (this.worldObj.getTileEntity(xCoord - 1, yCoord, zCoord).getBlockMetadata() == this.getBlockMetadata()) {
 					connections[5] = ForgeDirection.WEST;
-				}else
+				}
+				else
 					connections[5] = null;
-			}else{
+			}
+			else {
 				connections[5] = ForgeDirection.WEST;
 			}
 		}
@@ -176,27 +187,27 @@ public class TileEntityPipe extends TileEntityWire implements IGasHandler{
 
 	// GAS IMPLEMENTATION THANKS TO MEKANISM
 
-	@Method(modid="Mekanism")
+	@Method(modid = "Mekanism")
 	@Override
-	public boolean canDrawGas(ForgeDirection direction, Gas gas){
+	public boolean canDrawGas(ForgeDirection direction, Gas gas) {
 		return true;
 	}
 
-	@Method(modid="Mekanism")
+	@Method(modid = "Mekanism")
 	@Override
-	public boolean canReceiveGas(ForgeDirection direction, Gas gas){
+	public boolean canReceiveGas(ForgeDirection direction, Gas gas) {
 		return true;
 	}
 
-	@Method(modid="Mekanism")
+	@Method(modid = "Mekanism")
 	@Override
-	public GasStack drawGas(ForgeDirection direction, int ammount){
+	public GasStack drawGas(ForgeDirection direction, int ammount) {
 		return tank.draw(ammount, true);
 	}
 
-	@Method(modid="Mekanism")
+	@Method(modid = "Mekanism")
 	@Override
-	public int receiveGas(ForgeDirection direction, GasStack gas){
+	public int receiveGas(ForgeDirection direction, GasStack gas) {
 		return tank.receive(gas, true);
 	}
 

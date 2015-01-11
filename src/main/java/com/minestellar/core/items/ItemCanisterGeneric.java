@@ -61,7 +61,9 @@ public abstract class ItemCanisterGeneric extends ItemFluidContainer {
 		return MinestellarCore.stellarItemsTab;
 	}
 
-	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@SuppressWarnings({
+	"unchecked", "rawtypes"
+	})
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void getSubItems(Item par1, CreativeTabs par2CreativeTabs, List par3List) {

@@ -50,7 +50,9 @@ public class ChunkProviderMoon extends ChunkProviderMinestellar {
 
 	@Override
 	protected BiomeGenBase[] getBiomesForGeneration() {
-		return new BiomeGenBase[] { BiomeGenBaseMoon.moon };
+		return new BiomeGenBase[] {
+			BiomeGenBaseMoon.moon
+		};
 	}
 
 	@Override
@@ -87,12 +89,12 @@ public class ChunkProviderMoon extends ChunkProviderMinestellar {
 
 	@Override
 	protected BlockMetaPair getDirtBlock() {
-		return new BlockMetaPair(MoonBlocks.moonBasicBlocks, (byte) 1);
+		return new BlockMetaPair(MoonBlocks.moonBasicBlocks, (byte) 9);
 	}
 
 	@Override
 	protected BlockMetaPair getStoneBlock() {
-		return new BlockMetaPair(MoonBlocks.moonBasicBlocks, (byte) 2);
+		return new BlockMetaPair(MoonBlocks.moonBasicBlocks, (byte) 10);
 	}
 
 	@Override

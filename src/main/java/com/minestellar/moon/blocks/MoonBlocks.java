@@ -20,7 +20,6 @@ import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
-import com.minestellar.core.blocks.CoreBlocks;
 import com.minestellar.core.util.ItemBlockUtil;
 import com.minestellar.moon.MinestellarMoon;
 import com.minestellar.moon.blocks.items.ItemBlockBasicMoon;
@@ -47,7 +46,7 @@ public class MoonBlocks {
 	}
 
 	private static void oreDictRegistration() {
-		OreDictionary.registerOre("moonStone", new ItemStack(MoonBlocks.moonBasicBlocks, 1, 2));
+		OreDictionary.registerOre("moonStone", new ItemStack(MoonBlocks.moonBasicBlocks, 1, 10));
 	}
 
 	private static void setHarvestLevels() {

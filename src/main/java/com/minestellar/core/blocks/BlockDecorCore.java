@@ -77,8 +77,8 @@ public class BlockDecorCore extends Block {
 		if (meta >= 0 && meta <= 7) {
 			return 2.25F;
 		}
-		
-		if (meta == 8){
+
+		if (meta == 8) {
 			return 2.0f;
 		}
 

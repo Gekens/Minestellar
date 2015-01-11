@@ -18,12 +18,12 @@ package com.minestellar.api.core;
 
 import net.minecraftforge.common.util.ForgeDirection;
 
-public interface IWire{
+public interface IWire {
 
 	public void updateCableConnections();
-	
+
 	public boolean onlyOneOpposite(ForgeDirection[] directions);
-	
+
 	public boolean isOpposite(ForgeDirection firstDirection, ForgeDirection secondDirection);
-	
+
 }

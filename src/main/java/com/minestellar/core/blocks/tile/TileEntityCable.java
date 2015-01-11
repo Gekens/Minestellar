@@ -77,78 +77,90 @@ public class TileEntityCable extends TileEntityWire implements IEnergyHandler {
 
 	public void updateBlockConnections() {
 
-		if (this.worldObj.getTileEntity(xCoord, yCoord + 1, zCoord) instanceof IEnergyProvider){
-			if (this.worldObj.getTileEntity(xCoord, yCoord + 1, zCoord) instanceof TileEntityCable){ 
-				if (this.worldObj.getTileEntity(xCoord, yCoord + 1, zCoord).getBlockMetadata() == this.getBlockMetadata()){
+		if (this.worldObj.getTileEntity(xCoord, yCoord + 1, zCoord) instanceof IEnergyProvider) {
+			if (this.worldObj.getTileEntity(xCoord, yCoord + 1, zCoord) instanceof TileEntityCable) {
+				if (this.worldObj.getTileEntity(xCoord, yCoord + 1, zCoord).getBlockMetadata() == this.getBlockMetadata()) {
 					connections[0] = ForgeDirection.UP;
-				}else
+				}
+				else
 					connections[0] = null;
-			}else{
+			}
+			else {
 				connections[0] = ForgeDirection.UP;
 			}
 		}
 		else
 			connections[0] = null;
 
-		if (this.worldObj.getTileEntity(xCoord, yCoord - 1, zCoord) instanceof IEnergyProvider){
-			if (this.worldObj.getTileEntity(xCoord, yCoord - 1, zCoord) instanceof TileEntityCable){ 
-				if (this.worldObj.getTileEntity(xCoord, yCoord - 1, zCoord).getBlockMetadata() == this.getBlockMetadata()){
+		if (this.worldObj.getTileEntity(xCoord, yCoord - 1, zCoord) instanceof IEnergyProvider) {
+			if (this.worldObj.getTileEntity(xCoord, yCoord - 1, zCoord) instanceof TileEntityCable) {
+				if (this.worldObj.getTileEntity(xCoord, yCoord - 1, zCoord).getBlockMetadata() == this.getBlockMetadata()) {
 					connections[1] = ForgeDirection.DOWN;
-				}else
+				}
+				else
 					connections[1] = null;
-			}else{
+			}
+			else {
 				connections[1] = ForgeDirection.DOWN;
 			}
 		}
 		else
 			connections[1] = null;
-		
-		if (this.worldObj.getTileEntity(xCoord, yCoord, zCoord - 1) instanceof IEnergyProvider){
-			if (this.worldObj.getTileEntity(xCoord, yCoord, zCoord - 1) instanceof TileEntityCable){ 
-				if (this.worldObj.getTileEntity(xCoord, yCoord, zCoord - 1).getBlockMetadata() == this.getBlockMetadata()){
+
+		if (this.worldObj.getTileEntity(xCoord, yCoord, zCoord - 1) instanceof IEnergyProvider) {
+			if (this.worldObj.getTileEntity(xCoord, yCoord, zCoord - 1) instanceof TileEntityCable) {
+				if (this.worldObj.getTileEntity(xCoord, yCoord, zCoord - 1).getBlockMetadata() == this.getBlockMetadata()) {
 					connections[2] = ForgeDirection.NORTH;
-				}else
+				}
+				else
 					connections[2] = null;
-			}else{
+			}
+			else {
 				connections[2] = ForgeDirection.NORTH;
 			}
 		}
 		else
 			connections[2] = null;
-		
-		if (this.worldObj.getTileEntity(xCoord + 1, yCoord, zCoord) instanceof IEnergyProvider){
-			if (this.worldObj.getTileEntity(xCoord + 1, yCoord, zCoord) instanceof TileEntityCable){ 
-				if (this.worldObj.getTileEntity(xCoord + 1, yCoord, zCoord).getBlockMetadata() == this.getBlockMetadata()){
+
+		if (this.worldObj.getTileEntity(xCoord + 1, yCoord, zCoord) instanceof IEnergyProvider) {
+			if (this.worldObj.getTileEntity(xCoord + 1, yCoord, zCoord) instanceof TileEntityCable) {
+				if (this.worldObj.getTileEntity(xCoord + 1, yCoord, zCoord).getBlockMetadata() == this.getBlockMetadata()) {
 					connections[3] = ForgeDirection.EAST;
-				}else
+				}
+				else
 					connections[3] = null;
-			}else{
+			}
+			else {
 				connections[3] = ForgeDirection.EAST;
 			}
 		}
 		else
 			connections[3] = null;
-		
-		if (this.worldObj.getTileEntity(xCoord, yCoord, zCoord + 1) instanceof IEnergyProvider){
-			if (this.worldObj.getTileEntity(xCoord, yCoord, zCoord + 1) instanceof TileEntityCable){ 
-				if (this.worldObj.getTileEntity(xCoord, yCoord, zCoord + 1).getBlockMetadata() == this.getBlockMetadata()){
+
+		if (this.worldObj.getTileEntity(xCoord, yCoord, zCoord + 1) instanceof IEnergyProvider) {
+			if (this.worldObj.getTileEntity(xCoord, yCoord, zCoord + 1) instanceof TileEntityCable) {
+				if (this.worldObj.getTileEntity(xCoord, yCoord, zCoord + 1).getBlockMetadata() == this.getBlockMetadata()) {
 					connections[4] = ForgeDirection.SOUTH;
-				}else
+				}
+				else
 					connections[4] = null;
-			}else{
+			}
+			else {
 				connections[4] = ForgeDirection.SOUTH;
 			}
 		}
 		else
 			connections[4] = null;
-		
-		if (this.worldObj.getTileEntity(xCoord - 1, yCoord, zCoord) instanceof IEnergyProvider){
-			if (this.worldObj.getTileEntity(xCoord - 1, yCoord, zCoord) instanceof TileEntityCable){ 
-				if (this.worldObj.getTileEntity(xCoord - 1, yCoord, zCoord).getBlockMetadata() == this.getBlockMetadata()){
+
+		if (this.worldObj.getTileEntity(xCoord - 1, yCoord, zCoord) instanceof IEnergyProvider) {
+			if (this.worldObj.getTileEntity(xCoord - 1, yCoord, zCoord) instanceof TileEntityCable) {
+				if (this.worldObj.getTileEntity(xCoord - 1, yCoord, zCoord).getBlockMetadata() == this.getBlockMetadata()) {
 					connections[5] = ForgeDirection.WEST;
-				}else
+				}
+				else
 					connections[5] = null;
-			}else{
+			}
+			else {
 				connections[5] = ForgeDirection.WEST;
 			}
 		}

@@ -348,7 +348,9 @@ public abstract class ChunkProviderMinestellar extends ChunkProviderGenerate {
 		return "RandomLevelSource";
 	}
 
-	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@SuppressWarnings({
+	"unchecked", "rawtypes"
+	})
 	@Override
 	public List getPossibleCreatures(EnumCreatureType par1EnumCreatureType, int i, int j, int k) {
 		if (par1EnumCreatureType == EnumCreatureType.monster) {
