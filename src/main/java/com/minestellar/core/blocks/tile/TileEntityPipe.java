@@ -33,9 +33,10 @@ import cpw.mods.fml.common.Optional.Method;
 @Optional.Interface(iface = "mekanism.api.gas.IGasHandler", modid = "Mekanism")
 public class TileEntityPipe extends TileEntityWire implements IGasHandler {
 
-	GasStack gasStack = new GasStack(GasRegistry.getGas("oxygen"), 0);
+	GasTank gasTank;
 
-	GasTank tank;
+	/** How fast this tank can output gas. */
+	public int output = 256;
 
 	public TileEntityPipe(int meta) {
 		super(meta);
@@ -43,19 +44,19 @@ public class TileEntityPipe extends TileEntityWire implements IGasHandler {
 
 		switch (meta) {
 		case 0:
-			tank = new GasTank(300);
+			gasTank = new GasTank(300);
 			break;
 		case 1:
-			tank = new GasTank(600);
+			gasTank = new GasTank(600);
 			break;
 		case 2:
-			tank = new GasTank(1000);
+			gasTank = new GasTank(1000);
 			break;
 		default:
 			break;
 		}
 
-		tank.setGas(gasStack);
+		gasTank.setGas(new GasStack(GasRegistry.getGas("oxygen"), 0));
 
 	}
 
@@ -63,22 +64,24 @@ public class TileEntityPipe extends TileEntityWire implements IGasHandler {
 	public void updateEntity() {
 		this.updateBlockConnections();
 		super.updateCableConnections();
-		// if(tank.stored.amount > 0){
-		for (int i = 0; i < 6; i++) {
+		if(gasTank.getGas() != null && gasTank.getStored() != 0 && gasTank.getGas().getGas() != null){
+			for (int i = 0; i < 6; i++) {
 
-			// ForgeDirection is a useful helper class for handling directions.
-			int targetX = xCoord + ForgeDirection.getOrientation(i).offsetX;
-			int targetY = yCoord + ForgeDirection.getOrientation(i).offsetY;
-			int targetZ = zCoord + ForgeDirection.getOrientation(i).offsetZ;
+				GasStack toSend = new GasStack(gasTank.getGas().getGas(), Math.min(gasTank.getStored(), output));
 
-			TileEntity tile = worldObj.getTileEntity(targetX, targetY, targetZ);
-			if (tile instanceof IGasHandler) {
-				System.out.println(gasStack.toString());
-				System.out.println("Tank: " + tank.getStored());
+				// ForgeDirection is a useful helper class for handling directions.
+				int targetX = xCoord + ForgeDirection.getOrientation(i).offsetX;
+				int targetY = yCoord + ForgeDirection.getOrientation(i).offsetY;
+				int targetZ = zCoord + ForgeDirection.getOrientation(i).offsetZ;
+
+				TileEntity tile = worldObj.getTileEntity(targetX, targetY, targetZ);
+				if (tile instanceof IGasHandler) {
+					System.out.println("Tank: " + gasTank.getStored());
+					if(((IGasHandler)tile).canReceiveGas(ForgeDirection.getOrientation(i).getOpposite(), gasTank.getGas().getGas()))
+						gasTank.draw(((IGasHandler)tile).receiveGas(ForgeDirection.getOrientation(i).getOpposite(), toSend), true);
+				}
 			}
 		}
-		// }
-
 	}
 
 	public void updateBlockConnections() {
@@ -173,24 +176,13 @@ public class TileEntityPipe extends TileEntityWire implements IGasHandler {
 			connections[5] = null;
 	}
 
-	@Override
-	public void readFromNBT(NBTTagCompound nbt) {
-		super.readFromNBT(nbt);
-		gasStack.amount = nbt.getInteger("ammount");
-	}
-
-	@Override
-	public void writeToNBT(NBTTagCompound nbt) {
-		super.writeToNBT(nbt);
-		nbt.setInteger("ammount", tank.getStored());
-	}
-
 	// GAS IMPLEMENTATION THANKS TO MEKANISM
 
 	@Method(modid = "Mekanism")
 	@Override
-	public boolean canDrawGas(ForgeDirection direction, Gas gas) {
-		return true;
+	public boolean canDrawGas(ForgeDirection side, Gas type)
+	{
+		return gasTank.canDraw(type);
 	}
 
 	@Method(modid = "Mekanism")
@@ -201,14 +193,14 @@ public class TileEntityPipe extends TileEntityWire implements IGasHandler {
 
 	@Method(modid = "Mekanism")
 	@Override
-	public GasStack drawGas(ForgeDirection direction, int ammount) {
-		return tank.draw(ammount, true);
+	public GasStack drawGas(ForgeDirection side, int amount){
+		return gasTank.draw(amount, true);
 	}
 
 	@Method(modid = "Mekanism")
 	@Override
-	public int receiveGas(ForgeDirection direction, GasStack gas) {
-		return tank.receive(gas, true);
+	public int receiveGas(ForgeDirection side, GasStack stack){
+		return gasTank.receive(stack, true);
 	}
 
 }
