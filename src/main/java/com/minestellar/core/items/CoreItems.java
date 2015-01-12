@@ -56,10 +56,11 @@ public class CoreItems {
 	public static Item extractorOil;
 
 	public static Item oilBucket;
+	public static Item oxygenBucket;
+	public static Item hydrogenBucket;
+	public static Item nitrogenBucket;
 
-	public static ArmorMaterial ARMOR_CARBON = EnumHelper.addArmorMaterial("carbon", 30, new int[] {
-	3, 8, 6, 3
-	}, 12);
+	public static ArmorMaterial ARMOR_CARBON = EnumHelper.addArmorMaterial("carbon", 30, new int[] { 3, 8, 6, 3 }, 12);
 	public static ToolMaterial TOOL_CARBON = EnumHelper.addToolMaterial("carbon", 3, 768, 5.0F, 2, 8);
 
 	private static void initItems() {
@@ -80,6 +81,10 @@ public class CoreItems {
 		CoreItems.extractorOil = new ItemExtractorOil("extractorOil");
 
 		CoreItems.oilBucket = new ItemBucketOil("oil_bucket");
+		CoreItems.oxygenBucket = new ItemBucketOxygen("oxygen_bucket");
+		
+		CoreItems.hydrogenBucket = new ItemBucketHydrogen("hydrogen_bucket");
+		CoreItems.nitrogenBucket = new ItemBucketNitrogen("nitrogen_bucket");
 	}
 
 	private static void registerItems() {
@@ -100,6 +105,10 @@ public class CoreItems {
 		MinestellarCore.registerItem(CoreItems.extractorOil);
 
 		MinestellarCore.registerItem(oilBucket);
+		MinestellarCore.registerItem(oxygenBucket);
+		
+		MinestellarCore.registerItem(hydrogenBucket);
+		MinestellarCore.registerItem(nitrogenBucket);
 	}
 
 	private static void oreDictRegistration() {

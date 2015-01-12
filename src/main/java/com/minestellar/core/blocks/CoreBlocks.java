@@ -24,7 +24,10 @@ import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.oredict.OreDictionary;
 
 import com.minestellar.core.MinestellarCore;
+import com.minestellar.core.blocks.fluid.FluidBlockHydrogen;
+import com.minestellar.core.blocks.fluid.FluidBlockNitrogen;
 import com.minestellar.core.blocks.fluid.FluidBlockOil;
+import com.minestellar.core.blocks.fluid.FluidBlockOxygen;
 import com.minestellar.core.blocks.items.ItemBlockCable;
 import com.minestellar.core.blocks.items.ItemBlockDecorCore;
 import com.minestellar.core.blocks.items.ItemBlockOreCore;
@@ -49,6 +52,15 @@ public class CoreBlocks {
 	public static Block oilFluidBlock;
 	public static Fluid oilFluid;
 
+	public static Block oxygenFluidBlock;
+	public static Fluid oxygenFluid;
+
+	public static Block hydrogenFluidBlock;
+	public static Fluid hydrogenFluid;
+
+	public static Block nitrogenFluidBlock;
+	public static Fluid nitrogenFluid;
+
 	private static void initBlocks() {
 		CoreBlocks.coreOreBlocks = new BlockOreCore("core_ore");
 		CoreBlocks.coreDecorBlocks = new BlockDecorCore("core_decor");
@@ -60,6 +72,18 @@ public class CoreBlocks {
 		CoreBlocks.oilFluid = new FluidBlockOil("oil").setBlock(CoreBlocks.oilFluidBlock);
 		FluidRegistry.registerFluid(CoreBlocks.oilFluid);
 		CoreBlocks.oilFluidBlock = new BlockFluidOil("oil", CoreBlocks.oilFluid, Material.water);
+
+		CoreBlocks.oxygenFluid = new FluidBlockOxygen("oxygen").setBlock(CoreBlocks.oxygenFluidBlock);
+		FluidRegistry.registerFluid(CoreBlocks.oxygenFluid);
+		CoreBlocks.oxygenFluidBlock = new BlockFluidOil("oxygen", CoreBlocks.oxygenFluid, Material.water);
+
+		CoreBlocks.hydrogenFluid = new FluidBlockHydrogen("hydrogen").setBlock(CoreBlocks.hydrogenFluidBlock);
+		FluidRegistry.registerFluid(CoreBlocks.hydrogenFluid);
+		CoreBlocks.hydrogenFluidBlock = new BlockFluidOil("hydrogen", CoreBlocks.hydrogenFluid, Material.water);
+
+		CoreBlocks.nitrogenFluid = new FluidBlockNitrogen("nitrogen").setBlock(CoreBlocks.nitrogenFluidBlock);
+		FluidRegistry.registerFluid(CoreBlocks.nitrogenFluid);
+		CoreBlocks.nitrogenFluidBlock = new BlockFluidOil("nitrogen", CoreBlocks.nitrogenFluid, Material.water);
 	}
 
 	private static void registerBlocks() {
@@ -71,6 +95,9 @@ public class CoreBlocks {
 		MinestellarCore.registerBlock(CoreBlocks.pipeBlock, ItemBlockPipe.class);
 
 		MinestellarCore.registerBlock(CoreBlocks.oilFluidBlock, ItemBlockUtil.class);
+		MinestellarCore.registerBlock(CoreBlocks.oxygenFluidBlock, ItemBlockUtil.class);
+		MinestellarCore.registerBlock(CoreBlocks.hydrogenFluidBlock, ItemBlockUtil.class);
+		MinestellarCore.registerBlock(CoreBlocks.nitrogenFluidBlock, ItemBlockUtil.class);
 	}
 
 	private static void oreDictRegistration() {

@@ -26,9 +26,7 @@ import com.minestellar.core.proxy.ClientProxyCore;
 public class ItemBlockPipe extends ItemBlock {
 
 	public static String[] types = new String[] {
-		"light_pipe", 
-		"medium_pipe", 
-		"heavy_pipe"
+	"light_pipe", "medium_pipe", "heavy_pipe"
 	};
 
 	public ItemBlockPipe(Block par1) {

@@ -16,6 +16,7 @@
 
 package com.minestellar.core.proxy;
 
+import net.minecraft.entity.player.EntityPlayer;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
@@ -35,5 +36,11 @@ public class CommonProxyCore {
 
 	public int getCarbonArmorRenderIndex() {
 		return 0;
+	}
+
+	public void spawnFootprint(EntityPlayer player) {
+	}
+
+	public void onUpdate() {
 	}
 }

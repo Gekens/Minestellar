@@ -26,9 +26,7 @@ import com.minestellar.core.proxy.ClientProxyCore;
 public class ItemBlockCable extends ItemBlock {
 
 	public static String[] types = new String[] {
-		"light_wire", 
-		"medium_wire", 
-		"heavy_wire"
+	"light_wire", "medium_wire", "heavy_wire"
 	};
 
 	public ItemBlockCable(Block par1) {

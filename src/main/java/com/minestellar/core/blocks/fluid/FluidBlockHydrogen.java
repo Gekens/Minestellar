@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 04/January/2015 Davide Cossu & Matthew Albrecht.
+ * Copyright (c) 11/January/2015 Davide Cossu & Matthew Albrecht.
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -14,19 +14,15 @@
  * this program; if not, see <http://www.gnu.org/licenses>.
  */
 
-package com.minestellar.core.entities.player;
+package com.minestellar.core.blocks.fluid;
 
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.server.MinecraftServer;
-import net.minecraft.server.management.ItemInWorldManager;
-import net.minecraft.world.WorldServer;
+import net.minecraftforge.fluids.Fluid;
 
-import com.mojang.authlib.GameProfile;
+import com.minestellar.core.blocks.BlockFluidHydrogen;
 
-public class GCCorePlayerMP extends EntityPlayerMP {
-	public GCCorePlayerMP(MinecraftServer server, WorldServer world, GameProfile profile, ItemInWorldManager itemInWorldManager) {
-		super(server, world, profile, itemInWorldManager);
+public class FluidBlockHydrogen extends Fluid {
+	public FluidBlockHydrogen(String fluidName) {
+		super(fluidName);
+		this.setIcons(BlockFluidHydrogen.hydrogenStillIcon, BlockFluidHydrogen.hydrogenFlowingIcon);
 	}
-
-	// Server-only methods
 }

@@ -25,13 +25,7 @@ import com.minestellar.core.proxy.ClientProxyCore;
 
 public class ItemBlockOreCore extends ItemBlock {
 	private static final String[] types = new String[] {
-		"oreCopper", 
-		"oreTin", 
-		"oreLithium", 
-		"oreSilicon", 
-		"oreAluminum", 
-		"oreTitanium", 
-		"oreCarbon",
+	"oreCopper", "oreTin", "oreLithium", "oreSilicon", "oreAluminum", "oreTitanium", "oreCarbon",
 	};
 
 	public ItemBlockOreCore(Block par1) {

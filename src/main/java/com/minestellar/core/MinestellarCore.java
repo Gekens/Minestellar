@@ -29,14 +29,13 @@ import net.minecraft.item.ItemStack;
 import com.minestellar.core.blocks.CoreBlocks;
 import com.minestellar.core.blocks.tile.TileEntityCable;
 import com.minestellar.core.blocks.tile.TileEntityPipe;
-import com.minestellar.core.entities.EntityZombieCore;
 import com.minestellar.core.entities.player.GCCorePlayerMP;
+import com.minestellar.core.entities.player.GCCorePlayerSP;
 import com.minestellar.core.items.CoreItems;
 import com.minestellar.core.proxy.CommonProxyCore;
 import com.minestellar.core.recipe.RecipeManagerCore;
 import com.minestellar.core.util.ConfigManagerCore;
 import com.minestellar.core.util.MinestellarCreativeTab;
-import com.minestellar.core.util.MinestellarUtil;
 import com.minestellar.core.world.gen.OverworldGenerator;
 
 import cpw.mods.fml.common.Mod;
@@ -62,11 +61,9 @@ public class MinestellarCore {
 	public static HashMap<String, ItemStack> blocksList = new HashMap<String, ItemStack>();
 	public static HashMap<String, ItemStack> itemList = new HashMap<String, ItemStack>();
 
-
-//	public static Map<String, GCCorePlayerSP> playersClient = new HashMap<String, GCCorePlayerSP>();
+	public static Map<String, GCCorePlayerSP> playersClient = new HashMap<String, GCCorePlayerSP>();
 	public static Map<String, GCCorePlayerMP> playersServer = new HashMap<String, GCCorePlayerMP>();
 
-	
 	@Instance(MinestellarCore.MOD_ID)
 	public static MinestellarCore instance = new MinestellarCore();
 
@@ -126,7 +123,6 @@ public class MinestellarCore {
 	}
 
 	private void registerCreatures() {
-		MinestellarUtil.registerMinestellarCreature(EntityZombieCore.class, "entityAdvancedZombie", -030201, -102030);
 	}
 
 	private void registerOtherEntities() {

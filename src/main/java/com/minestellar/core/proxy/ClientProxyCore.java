@@ -25,9 +25,7 @@ import net.minecraftforge.common.util.EnumHelper;
 
 import com.minestellar.core.blocks.tile.TileEntityCable;
 import com.minestellar.core.blocks.tile.TileEntityPipe;
-import com.minestellar.core.entities.EntityZombieCore;
 import com.minestellar.core.particles.EntityCoreOilDripFX;
-import com.minestellar.core.render.entity.RenderEntityAdvancedZombie;
 import com.minestellar.core.render.tile.TileEntityRenderCable;
 import com.minestellar.core.render.tile.TileEntityRenderPipe;
 
@@ -77,7 +75,6 @@ public class ClientProxyCore extends CommonProxyCore {
 	}
 
 	private void registerEntityRenderers() {
-		RenderingRegistry.registerEntityRenderingHandler(EntityZombieCore.class, new RenderEntityAdvancedZombie());
 	}
 
 	@Override
