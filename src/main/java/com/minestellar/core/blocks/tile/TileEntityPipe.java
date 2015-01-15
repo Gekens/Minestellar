@@ -38,6 +38,8 @@ public class TileEntityPipe extends TileEntityWire implements IGasHandler {
 	/** How fast this tank can output gas. */
 	public int output = 256;
 
+	public int currentGasAmount;
+
 	public TileEntityPipe(int meta) {
 		super(meta);
 		this.blockMetadata = meta;
@@ -56,33 +58,52 @@ public class TileEntityPipe extends TileEntityWire implements IGasHandler {
 			break;
 		}
 
-		gasTank.setGas(new GasStack(GasRegistry.getGas("oxygen"), 0));
-
 	}
 
 	@Override
 	public void updateEntity() {
 		this.updateBlockConnections();
 		super.updateCableConnections();
-		if(gasTank.getGas() != null && gasTank.getStored() != 0 && gasTank.getGas().getGas() != null){
-			for (int i = 0; i < 6; i++) {
+		if(!worldObj.isRemote && gasTank.getGas() != null){
+			if(gasTank.getGas().getGas() != null){
+				for(int i = 0; i < 6; i++) {
+					try{ // This is necessary, I don't know why I keep getting an NPE at line 75
+						//System.out.println(gasTank + " " + gasTank.getGas() + " " + gasTank.getGas().getGas());
 
-				GasStack toSend = new GasStack(gasTank.getGas().getGas(), Math.min(gasTank.getStored(), output));
+						GasStack toSend = new GasStack(gasTank.getGas().getGas(), Math.min(gasTank.getStored(), output));
 
-				// ForgeDirection is a useful helper class for handling directions.
-				int targetX = xCoord + ForgeDirection.getOrientation(i).offsetX;
-				int targetY = yCoord + ForgeDirection.getOrientation(i).offsetY;
-				int targetZ = zCoord + ForgeDirection.getOrientation(i).offsetZ;
+						// ForgeDirection is a useful helper class for handling directions.
+						int targetX = xCoord + ForgeDirection.getOrientation(i).offsetX;
+						int targetY = yCoord + ForgeDirection.getOrientation(i).offsetY;
+						int targetZ = zCoord + ForgeDirection.getOrientation(i).offsetZ;
 
-				TileEntity tile = worldObj.getTileEntity(targetX, targetY, targetZ);
-				if (tile instanceof IGasHandler) {
-					System.out.println("Tank: " + gasTank.getStored());
-					if(((IGasHandler)tile).canReceiveGas(ForgeDirection.getOrientation(i).getOpposite(), gasTank.getGas().getGas()))
-						gasTank.draw(((IGasHandler)tile).receiveGas(ForgeDirection.getOrientation(i).getOpposite(), toSend), true);
+						TileEntity tile = worldObj.getTileEntity(targetX, targetY, targetZ);
+
+						if (tile instanceof IGasHandler) {
+							//System.out.println("Tank: " + gasTank.getStored());
+							if(((IGasHandler)tile).canReceiveGas(ForgeDirection.getOrientation(i).getOpposite(), gasTank.getGas().getGas()))
+								gasTank.draw(((IGasHandler)tile).receiveGas(ForgeDirection.getOrientation(i), toSend), true);
+						}
+					}catch(Exception e){}
+
 				}
 			}
+
+			if(!worldObj.isRemote){
+				int newGasAmount = gasTank.getStored();
+
+				if(newGasAmount != this.currentGasAmount){
+					markDirty();
+					this.currentGasAmount = newGasAmount;
+				}
+			}
+
 		}
 	}
+
+	/**
+	 * Connects the cable to the <code>IGasHandler<code> blocks
+	 */
 
 	public void updateBlockConnections() {
 		if (this.worldObj.getTileEntity(xCoord, yCoord + 1, zCoord) instanceof IGasHandler) {
