@@ -49,6 +49,10 @@ public class TileEntityCable extends TileEntityWire implements IEnergyHandler {
 		}
 	}
 
+	/**
+	 * Called many times per second, it checks if it can transfer energy to any adjacent to our block   
+	 */
+	
 	@Override
 	public void updateEntity() {
 		super.updateCableConnections();
@@ -75,6 +79,10 @@ public class TileEntityCable extends TileEntityWire implements IEnergyHandler {
 		}
 	}
 
+	/**
+	 * Connects the cable to the <code>IEnergyProvider<code> blocks
+	 */
+	
 	public void updateBlockConnections() {
 
 		if (this.worldObj.getTileEntity(xCoord, yCoord + 1, zCoord) instanceof IEnergyProvider) {

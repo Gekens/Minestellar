@@ -36,7 +36,7 @@ public class TileEntityPipe extends TileEntityWire implements IGasHandler {
 	GasTank gasTank;
 
 	/** How fast this tank can output gas. */
-	public int output = 256;
+	public int output;
 
 	public int currentGasAmount;
 
@@ -47,18 +47,25 @@ public class TileEntityPipe extends TileEntityWire implements IGasHandler {
 		switch (meta) {
 		case 0:
 			gasTank = new GasTank(300);
+			output = 300;
 			break;
 		case 1:
 			gasTank = new GasTank(600);
+			output = 600;
 			break;
 		case 2:
 			gasTank = new GasTank(1000);
+			output = 1000;
 			break;
 		default:
 			break;
 		}
 
 	}
+	
+	/**
+	 * Called many times per second, it checks if it can transfer gas to any adjacent to our block   
+	 */
 
 	@Override
 	public void updateEntity() {
@@ -67,11 +74,10 @@ public class TileEntityPipe extends TileEntityWire implements IGasHandler {
 		if(!worldObj.isRemote && gasTank.getGas() != null){
 			if(gasTank.getGas().getGas() != null){
 				for(int i = 0; i < 6; i++) {
-					try{ // This is necessary, I don't know why I keep getting an NPE at line 75
-						//System.out.println(gasTank + " " + gasTank.getGas() + " " + gasTank.getGas().getGas());
+					try{ // This is necessary, I don't know why I keep getting an NPE at line 72
 
 						GasStack toSend = new GasStack(gasTank.getGas().getGas(), Math.min(gasTank.getStored(), output));
-
+						
 						// ForgeDirection is a useful helper class for handling directions.
 						int targetX = xCoord + ForgeDirection.getOrientation(i).offsetX;
 						int targetY = yCoord + ForgeDirection.getOrientation(i).offsetY;
@@ -80,7 +86,6 @@ public class TileEntityPipe extends TileEntityWire implements IGasHandler {
 						TileEntity tile = worldObj.getTileEntity(targetX, targetY, targetZ);
 
 						if (tile instanceof IGasHandler) {
-							//System.out.println("Tank: " + gasTank.getStored());
 							if(((IGasHandler)tile).canReceiveGas(ForgeDirection.getOrientation(i).getOpposite(), gasTank.getGas().getGas()))
 								gasTank.draw(((IGasHandler)tile).receiveGas(ForgeDirection.getOrientation(i), toSend), true);
 						}
@@ -106,6 +111,7 @@ public class TileEntityPipe extends TileEntityWire implements IGasHandler {
 	 */
 
 	public void updateBlockConnections() {
+		
 		if (this.worldObj.getTileEntity(xCoord, yCoord + 1, zCoord) instanceof IGasHandler) {
 			if (this.worldObj.getTileEntity(xCoord, yCoord + 1, zCoord) instanceof TileEntityPipe) {
 				if (this.worldObj.getTileEntity(xCoord, yCoord + 1, zCoord).getBlockMetadata() == this.getBlockMetadata()) {
@@ -197,7 +203,7 @@ public class TileEntityPipe extends TileEntityWire implements IGasHandler {
 			connections[5] = null;
 	}
 
-	// GAS IMPLEMENTATION THANKS TO MEKANISM
+	// MEKANISM GAS IMPLEMENTATION
 
 	@Method(modid = "Mekanism")
 	@Override
