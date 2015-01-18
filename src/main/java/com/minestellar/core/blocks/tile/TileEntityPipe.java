@@ -16,12 +16,12 @@
 
 package com.minestellar.core.blocks.tile;
 
+import java.util.Random;
+
 import mekanism.api.gas.Gas;
-import mekanism.api.gas.GasRegistry;
 import mekanism.api.gas.GasStack;
 import mekanism.api.gas.GasTank;
 import mekanism.api.gas.IGasHandler;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
 
@@ -62,7 +62,7 @@ public class TileEntityPipe extends TileEntityWire implements IGasHandler {
 		}
 
 	}
-	
+
 	/**
 	 * Called many times per second, it checks if it can transfer gas to any adjacent to our block   
 	 */
@@ -71,13 +71,14 @@ public class TileEntityPipe extends TileEntityWire implements IGasHandler {
 	public void updateEntity() {
 		this.updateBlockConnections();
 		super.updateCableConnections();
+
 		if(!worldObj.isRemote && gasTank.getGas() != null){
 			if(gasTank.getGas().getGas() != null){
 				for(int i = 0; i < 6; i++) {
-					try{ // This is necessary, I don't know why I keep getting an NPE at line 72
+					try{ // This is necessary, I don't know why I keep getting an NPE at line 80
 
 						GasStack toSend = new GasStack(gasTank.getGas().getGas(), Math.min(gasTank.getStored(), output));
-						
+
 						// ForgeDirection is a useful helper class for handling directions.
 						int targetX = xCoord + ForgeDirection.getOrientation(i).offsetX;
 						int targetY = yCoord + ForgeDirection.getOrientation(i).offsetY;
@@ -93,7 +94,21 @@ public class TileEntityPipe extends TileEntityWire implements IGasHandler {
 
 				}
 			}
+			
+			for(int i = 0; i < connections.length; i++){
+				if(connections[i] == null){
+					Random rand = new Random();
+					float f = xCoord + 0.6F;
+			        float f1 = yCoord + 0.0F + rand.nextFloat() * 6.0F / 16.0F;
+			        float f2 = zCoord + 0.6F;
+			        float f3 = 0.6F;
+			        float f4 = rand.nextFloat() * 0.4F - 0.2F;
 
+			        // In the middle of the block
+			        worldObj.spawnParticle("flame", this.xCoord+0.5D, this.yCoord+0.5D, this.zCoord+0.5D, 0.0D, 0.0D, 0.0D);
+				}
+			}
+			
 			if(!worldObj.isRemote){
 				int newGasAmount = gasTank.getStored();
 
@@ -111,7 +126,7 @@ public class TileEntityPipe extends TileEntityWire implements IGasHandler {
 	 */
 
 	public void updateBlockConnections() {
-		
+
 		if (this.worldObj.getTileEntity(xCoord, yCoord + 1, zCoord) instanceof IGasHandler) {
 			if (this.worldObj.getTileEntity(xCoord, yCoord + 1, zCoord) instanceof TileEntityPipe) {
 				if (this.worldObj.getTileEntity(xCoord, yCoord + 1, zCoord).getBlockMetadata() == this.getBlockMetadata()) {
