@@ -35,6 +35,10 @@ public class TileEntityWire extends TileEntity implements IWire {
 		this.updateCableConnections();
 	}
 
+	/**
+	 * Checks if in any direction there's a block with the same meta 
+	 */
+	
 	@Override
 	public void updateCableConnections() {
 
@@ -69,6 +73,10 @@ public class TileEntityWire extends TileEntity implements IWire {
 			connections[5] = null;
 
 	}
+	
+	/**
+	 * Checks if there's only one opposite cable
+	 */
 
 	@Override
 	public boolean onlyOneOpposite(ForgeDirection[] directions) {
@@ -91,6 +99,13 @@ public class TileEntityWire extends TileEntity implements IWire {
 		return isOpposite;
 	}
 
+	/**
+	 * Checks if the first direction is opposite to the second one
+	 * 
+	 * @param firstDirection The first direction
+	 * @param secondDirection The direction to check with
+	 */
+	
 	@Override
 	public boolean isOpposite(ForgeDirection firstDirection, ForgeDirection secondDirection) {
 		if ((firstDirection.equals(ForgeDirection.NORTH) && secondDirection.equals(ForgeDirection.SOUTH)) || (firstDirection.equals(ForgeDirection.SOUTH) && secondDirection.equals(ForgeDirection.NORTH)))

@@ -75,7 +75,7 @@ public class TileEntityPipe extends TileEntityWire implements IGasHandler {
 		if(!worldObj.isRemote && gasTank.getGas() != null){
 			if(gasTank.getGas().getGas() != null){
 				for(int i = 0; i < 6; i++) {
-					try{ // This is necessary, I don't know why I keep getting an NPE at line 80
+					try{ // This is necessary, I don't know why I keep getting an NPE at the line below
 
 						GasStack toSend = new GasStack(gasTank.getGas().getGas(), Math.min(gasTank.getStored(), output));
 
@@ -92,20 +92,6 @@ public class TileEntityPipe extends TileEntityWire implements IGasHandler {
 						}
 					}catch(Exception e){}
 
-				}
-			}
-			
-			for(int i = 0; i < connections.length; i++){
-				if(connections[i] == null){
-					Random rand = new Random();
-					float f = xCoord + 0.6F;
-			        float f1 = yCoord + 0.0F + rand.nextFloat() * 6.0F / 16.0F;
-			        float f2 = zCoord + 0.6F;
-			        float f3 = 0.6F;
-			        float f4 = rand.nextFloat() * 0.4F - 0.2F;
-
-			        // In the middle of the block
-			        worldObj.spawnParticle("flame", this.xCoord+0.5D, this.yCoord+0.5D, this.zCoord+0.5D, 0.0D, 0.0D, 0.0D);
 				}
 			}
 			
