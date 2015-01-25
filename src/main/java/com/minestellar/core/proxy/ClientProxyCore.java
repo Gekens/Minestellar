@@ -20,13 +20,18 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.EntityFX;
 import net.minecraft.item.EnumRarity;
+import net.minecraft.item.Item;
 import net.minecraft.util.EnumChatFormatting;
+import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.common.util.EnumHelper;
 
+import com.minestellar.core.blocks.CoreBlocks;
 import com.minestellar.core.blocks.tile.TileEntityCable;
+import com.minestellar.core.blocks.tile.TileEntityOxygenCollector;
 import com.minestellar.core.blocks.tile.TileEntityPipe;
 import com.minestellar.core.particles.EntityCoreOilDripFX;
 import com.minestellar.core.render.tile.TileEntityRenderCable;
+import com.minestellar.core.render.tile.TileEntityRenderOxygenCollector;
 import com.minestellar.core.render.tile.TileEntityRenderPipe;
 
 import cpw.mods.fml.client.FMLClientHandler;
@@ -72,8 +77,9 @@ public class ClientProxyCore extends CommonProxyCore {
 	private void registerTileEntityRenders() {
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityCable.class, new TileEntityRenderCable());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityPipe.class, new TileEntityRenderPipe());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityOxygenCollector.class, new TileEntityRenderOxygenCollector());
 	}
-
+	
 	private void registerEntityRenderers() {
 	}
 

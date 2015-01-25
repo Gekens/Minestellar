@@ -16,6 +16,8 @@
 
 package com.minestellar.core.blocks.tile;
 
+import java.util.ArrayList;
+
 import mekanism.api.gas.Gas;
 import mekanism.api.gas.GasStack;
 import mekanism.api.gas.GasTank;
@@ -33,7 +35,9 @@ public class TileEntityOxygenCollector extends TileEntity implements IGasHandler
 
 	private GasTank gasTank;
 
-	private int currentGasAmount, natureBlocks;
+	private int currentGasAmount;
+	
+	private ArrayList<Block> blocks;
 
 	public TileEntityOxygenCollector(){
 		gasTank = new GasTank(15000);
@@ -42,45 +46,59 @@ public class TileEntityOxygenCollector extends TileEntity implements IGasHandler
 
 	@Override
 	public void updateEntity(){
-		natureBlocks = getNatureBlocks(5);
-
-		//System.out.println("Blocks: " + natureBlocks);
+		blocks = getNatureBlocks(5);
 
 		if(!worldObj.isRemote && gasTank.getGas() != null){
 			if(gasTank.getGas().getGas() != null){
 				if(gasTank.stored.amount < gasTank.getMaxGas()){
-					gasTank.stored.amount += 5 * natureBlocks; // Augments the stored gas amount based on the amount of nature blocks
+					
+					for(int i = 0; i < blocks.size(); i++){
+						
+						if(blocks.get(i) == Blocks.leaves || blocks.get(i) == Blocks.leaves2){
+							gasTank.stored.amount += 5; // Augments the stored gas amount based on the nature of the nature blocks
+						}else if(blocks.get(i) == Blocks.cactus){
+							gasTank.stored.amount += 1; // Augments the stored gas amount based on the nature of the nature blocks
+						}else if(blocks.get(i) == Blocks.grass){
+							gasTank.stored.amount += 2; // Augments the stored gas amount based on the nature of the nature blocks
+						}else if(blocks.get(i) == Blocks.log || blocks.get(i) == Blocks.log2){
+							gasTank.stored.amount += 1; // Augments the stored gas amount based on the nature of the nature blocks
+						}else{
+							continue;
+						}
+						
+					}
 
-					System.out.println("Amount: " + gasTank.stored.amount + " Mult: " + 5 * natureBlocks);
+					System.out.println("Amount: " + gasTank.stored.amount);
 				}
 			}
 		}
 	}
 
 	/**
-	 * Gets the amount of "nature" blocks
+	 * Gets a list of the nature blocks in the around area
 	 * 
 	 * @param maxDistanceAway The max radius
-	 * @return the number of nature blocks
+	 * @return The list of blocks in the area
 	 */
 
-	private int getNatureBlocks(int maxDistanceAway){
+	private ArrayList<Block> getNatureBlocks(int maxDistanceAway){
 
 		int xMov = 0 - maxDistanceAway;
 		int yMov = maxDistanceAway;
 		int zMov = 0 - maxDistanceAway;
 
-		int natureBlocks = 0;
+		ArrayList<Block> list = new ArrayList<Block>();
 
 		while(true){
 			final Block currentBlock = worldObj.getBlock(this.xCoord + xMov, this.yCoord + yMov, this.zCoord + zMov);
 
-			if(currentBlock == Blocks.leaves || currentBlock == Blocks.leaves2 || currentBlock == Blocks.grass || currentBlock == Blocks.cactus){
-				natureBlocks++;
+			if(currentBlock == Blocks.leaves || currentBlock == Blocks.leaves2 || currentBlock == Blocks.grass || currentBlock == Blocks.cactus
+					|| currentBlock == Blocks.log || currentBlock == Blocks.log2){
+				list.add(currentBlock);
 			}
 
 			if (zMov == maxDistanceAway && xMov == maxDistanceAway && yMov == -maxDistanceAway){
-				return natureBlocks;
+				return list;
 			}
 
 			if (zMov == maxDistanceAway && xMov == maxDistanceAway){

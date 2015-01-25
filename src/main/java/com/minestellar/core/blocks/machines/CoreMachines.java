@@ -35,12 +35,12 @@ import net.minecraft.world.World;
 public class CoreMachines extends Block implements ITileEntityProvider{
 
 	private IIcon[] blockIcon;
-	
+
 	public CoreMachines(String name){
 		super(Material.anvil);
 		this.setBlockName(name);
 	}
-	
+
 	@Override
 	public TileEntity createNewTileEntity(World world, int meta){
 		switch(meta){
@@ -49,14 +49,14 @@ public class CoreMachines extends Block implements ITileEntityProvider{
 		}
 		return null;
 	}
-	
+
 	@Override
 	public void registerBlockIcons(IIconRegister par1IconRegister) {
 		// UPDATE WHEN ADDING BLOCKS
 		this.blockIcon = new IIcon[1];
-		this.blockIcon[0] = par1IconRegister.registerIcon("minecraft:bedrock");
+		this.blockIcon[0] = par1IconRegister.registerIcon("minecraft:bedrock"); //It's like this until a better texture
 	}
-	
+
 	@Override
 	public CreativeTabs getCreativeTabToDisplayOn() {
 		return MinestellarCore.stellarBlocksTab;
@@ -86,6 +86,22 @@ public class CoreMachines extends Block implements ITileEntityProvider{
 		return 1.0F;
 	}
 
+	@Override
+	public int getRenderType()
+	{
+		return -2;
+	}
+
+	@Override
+	public boolean isOpaqueCube() {
+		return false;
+	}
+
+	@Override
+	public boolean renderAsNormalBlock() {
+		return false;
+	}
+	
 	@Override
 	public int damageDropped(int meta) {
 		return meta;
