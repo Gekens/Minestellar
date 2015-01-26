@@ -23,8 +23,8 @@ import mekanism.api.gas.GasStack;
 import mekanism.api.gas.GasTank;
 import mekanism.api.gas.IGasHandler;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockLeavesBase;
 import net.minecraft.init.Blocks;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
 import cpw.mods.fml.common.Optional;
@@ -47,7 +47,7 @@ public class TileEntityOxygenCollector extends TileEntity implements IGasHandler
 	@Override
 	public void updateEntity(){
 		blocks = getNatureBlocks(5);
-
+		
 		if(!worldObj.isRemote && gasTank.getGas() != null){
 			if(gasTank.getGas().getGas() != null){
 				if(gasTank.stored.amount < gasTank.getMaxGas()){
@@ -67,11 +67,20 @@ public class TileEntityOxygenCollector extends TileEntity implements IGasHandler
 						}
 						
 					}
-
 					System.out.println("Amount: " + gasTank.stored.amount);
 				}
 			}
 		}
+		
+		if(!worldObj.isRemote){
+			int newGasAmount = gasTank.getStored();
+
+			if(newGasAmount != this.currentGasAmount){
+				markDirty();
+				this.currentGasAmount = newGasAmount;
+			}
+		}
+		
 	}
 
 	/**
@@ -120,6 +129,18 @@ public class TileEntityOxygenCollector extends TileEntity implements IGasHandler
 
 	}
 
+	@Override
+	public void readFromNBT(NBTTagCompound nbt){
+		super.readFromNBT(nbt);
+		currentGasAmount = nbt.getInteger("Oxygen");
+	}
+	
+	@Override
+	public void writeToNBT(NBTTagCompound nbt){
+		super.writeToNBT(nbt);
+		nbt.setInteger("Oxygen", currentGasAmount);
+	}
+	
 	// MEKANISM IMPLEMENTATION
 
 	@Method(modid = "Mekanism")
