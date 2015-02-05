@@ -27,10 +27,12 @@ import net.minecraftforge.common.util.EnumHelper;
 
 import com.minestellar.core.blocks.CoreBlocks;
 import com.minestellar.core.blocks.tile.TileEntityCable;
+import com.minestellar.core.blocks.tile.TileEntityGasSink;
 import com.minestellar.core.blocks.tile.TileEntityOxygenCollector;
 import com.minestellar.core.blocks.tile.TileEntityPipe;
 import com.minestellar.core.particles.EntityCoreOilDripFX;
 import com.minestellar.core.render.tile.TileEntityRenderCable;
+import com.minestellar.core.render.tile.TileEntityRenderGasSink;
 import com.minestellar.core.render.tile.TileEntityRenderOxygenCollector;
 import com.minestellar.core.render.tile.TileEntityRenderPipe;
 
@@ -78,6 +80,7 @@ public class ClientProxyCore extends CommonProxyCore {
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityCable.class, new TileEntityRenderCable());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityPipe.class, new TileEntityRenderPipe());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityOxygenCollector.class, new TileEntityRenderOxygenCollector());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityGasSink.class, new TileEntityRenderGasSink());
 	}
 	
 	private void registerEntityRenderers() {

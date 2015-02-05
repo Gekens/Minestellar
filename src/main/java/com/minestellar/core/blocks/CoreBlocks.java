@@ -30,11 +30,13 @@ import com.minestellar.core.blocks.fluid.FluidBlockOil;
 import com.minestellar.core.blocks.fluid.FluidBlockOxygen;
 import com.minestellar.core.blocks.items.ItemBlockCable;
 import com.minestellar.core.blocks.items.ItemBlockDecorCore;
-import com.minestellar.core.blocks.items.ItemBlockMachines;
 import com.minestellar.core.blocks.items.ItemBlockOreCore;
 import com.minestellar.core.blocks.items.ItemBlockPipe;
-import com.minestellar.core.blocks.machines.CoreMachines;
+import com.minestellar.core.blocks.machines.GasSinkMachine;
+import com.minestellar.core.blocks.machines.OxygenCollectorMachine;
 import com.minestellar.core.util.ItemBlockUtil;
+
+import cpw.mods.fml.common.registry.GameRegistry;
 
 public class CoreBlocks {
 	public static void init() {
@@ -49,6 +51,7 @@ public class CoreBlocks {
 	public static Block teleportBlock;
 
 	public static Block oxygenCollector;
+	public static Block gasSink;
 	
 	public static Block cableBlock;
 	public static Block pipeBlock;
@@ -73,7 +76,8 @@ public class CoreBlocks {
 		CoreBlocks.cableBlock = new BlockCable("core_cable");
 		CoreBlocks.pipeBlock = new BlockPipe("core_pipe");
 
-		CoreBlocks.oxygenCollector = new CoreMachines("oxygen_collector");
+		CoreBlocks.gasSink = new GasSinkMachine("gas_sink");
+		CoreBlocks.oxygenCollector = new OxygenCollectorMachine("oxygen_collector");
 		
 		CoreBlocks.oilFluid = new FluidBlockOil("oil").setBlock(CoreBlocks.oilFluidBlock);
 		FluidRegistry.registerFluid(CoreBlocks.oilFluid);
@@ -100,7 +104,8 @@ public class CoreBlocks {
 		MinestellarCore.registerBlock(CoreBlocks.cableBlock, ItemBlockCable.class);
 		MinestellarCore.registerBlock(CoreBlocks.pipeBlock, ItemBlockPipe.class);
 		
-		MinestellarCore.registerBlock(CoreBlocks.oxygenCollector, ItemBlockMachines.class);
+		GameRegistry.registerBlock(CoreBlocks.oxygenCollector, "oxygen_collector");
+		GameRegistry.registerBlock(CoreBlocks.gasSink, "gas_sink");
 
 		MinestellarCore.registerBlock(CoreBlocks.oilFluidBlock, ItemBlockUtil.class);
 		MinestellarCore.registerBlock(CoreBlocks.oxygenFluidBlock, ItemBlockUtil.class);
