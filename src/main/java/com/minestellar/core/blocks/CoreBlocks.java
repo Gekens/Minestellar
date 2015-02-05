@@ -34,6 +34,7 @@ import com.minestellar.core.blocks.items.ItemBlockOreCore;
 import com.minestellar.core.blocks.items.ItemBlockPipe;
 import com.minestellar.core.blocks.machines.GasSinkMachine;
 import com.minestellar.core.blocks.machines.OxygenCollectorMachine;
+import com.minestellar.core.blocks.machines.SolarGenerator;
 import com.minestellar.core.util.ItemBlockUtil;
 
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -52,6 +53,7 @@ public class CoreBlocks {
 
 	public static Block oxygenCollector;
 	public static Block gasSink;
+	public static Block solarGenerator;
 	
 	public static Block cableBlock;
 	public static Block pipeBlock;
@@ -78,6 +80,7 @@ public class CoreBlocks {
 
 		CoreBlocks.gasSink = new GasSinkMachine("gas_sink");
 		CoreBlocks.oxygenCollector = new OxygenCollectorMachine("oxygen_collector");
+		CoreBlocks.solarGenerator = new SolarGenerator("solar_generator");
 		
 		CoreBlocks.oilFluid = new FluidBlockOil("oil").setBlock(CoreBlocks.oilFluidBlock);
 		FluidRegistry.registerFluid(CoreBlocks.oilFluid);
@@ -106,6 +109,7 @@ public class CoreBlocks {
 		
 		GameRegistry.registerBlock(CoreBlocks.oxygenCollector, "oxygen_collector");
 		GameRegistry.registerBlock(CoreBlocks.gasSink, "gas_sink");
+		GameRegistry.registerBlock(CoreBlocks.solarGenerator, "solar_generator");
 
 		MinestellarCore.registerBlock(CoreBlocks.oilFluidBlock, ItemBlockUtil.class);
 		MinestellarCore.registerBlock(CoreBlocks.oxygenFluidBlock, ItemBlockUtil.class);

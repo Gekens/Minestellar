@@ -16,33 +16,37 @@
 
 package com.minestellar.core.blocks.machines;
 
-import com.minestellar.core.MinestellarCore;
-import com.minestellar.core.blocks.tile.TileEntityGasSink;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.MathHelper;
+import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
 
-public class GasSinkMachine extends Block implements ITileEntityProvider{
+import com.minestellar.core.MinestellarCore;
+import com.minestellar.core.blocks.tile.TileEntitySolarGenerator;
 
-	public GasSinkMachine(String name){
+public class SolarGenerator extends Block implements ITileEntityProvider{
+
+	public SolarGenerator(String name){
 		super(Material.anvil);
 		this.setBlockName(name);
 	}
 
 	@Override
-	public TileEntity createNewTileEntity(World world, int meta) {
-		return new TileEntityGasSink(meta);
+	public TileEntity createNewTileEntity(World world, int meta){
+		return new TileEntitySolarGenerator();
 	}
 
 	@Override
 	public CreativeTabs getCreativeTabToDisplayOn() {
 		return MinestellarCore.stellarBlocksTab;
 	}
+
 	
+
 	@Override
 	public int getRenderType()
 	{
@@ -63,4 +67,5 @@ public class GasSinkMachine extends Block implements ITileEntityProvider{
 	public int damageDropped(int meta) {
 		return meta;
 	}
+
 }
