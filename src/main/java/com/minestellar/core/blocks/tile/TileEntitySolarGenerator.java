@@ -46,7 +46,7 @@ public class TileEntitySolarGenerator extends TileEntity implements IEnergyHandl
 			int stored = storage.getEnergyStored();
 			//MinestellarLog.info("Solar Light: " + this.getSolarLight(this.worldObj, this.xCoord, this.yCoord, this.zCoord));
 			storage.setEnergyStored(stored += this.getSolarLight(this.worldObj, this.xCoord, this.yCoord, this.zCoord));
-			//MinestellarLog.info("Energy: " + storage.getEnergyStored());
+			MinestellarLog.info("Energy: " + storage.getEnergyStored());
 		}
 	}
 

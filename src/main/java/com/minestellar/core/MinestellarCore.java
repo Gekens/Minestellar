@@ -28,7 +28,10 @@ import net.minecraft.item.ItemStack;
 
 import com.minestellar.core.blocks.CoreBlocks;
 import com.minestellar.core.blocks.tile.TileEntityCable;
+import com.minestellar.core.blocks.tile.TileEntityGasSink;
+import com.minestellar.core.blocks.tile.TileEntityOxygenCollector;
 import com.minestellar.core.blocks.tile.TileEntityPipe;
+import com.minestellar.core.blocks.tile.TileEntitySolarGenerator;
 import com.minestellar.core.entities.player.GCCorePlayerMP;
 import com.minestellar.core.entities.player.GCCorePlayerSP;
 import com.minestellar.core.items.CoreItems;
@@ -120,6 +123,9 @@ public class MinestellarCore {
 	private void registerTileEntities() {
 		GameRegistry.registerTileEntity(TileEntityCable.class, "cable");
 		GameRegistry.registerTileEntity(TileEntityPipe.class, "pipe");
+		GameRegistry.registerTileEntity(TileEntityOxygenCollector.class, "oxygen_collector");
+		GameRegistry.registerTileEntity(TileEntitySolarGenerator.class, "solar_generator");
+		GameRegistry.registerTileEntity(TileEntityGasSink.class, "gas_sink");
 	}
 
 	private void registerCreatures() {
