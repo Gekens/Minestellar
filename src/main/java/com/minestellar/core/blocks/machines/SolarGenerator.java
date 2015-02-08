@@ -45,8 +45,6 @@ public class SolarGenerator extends Block implements ITileEntityProvider{
 		return MinestellarCore.stellarBlocksTab;
 	}
 
-	
-
 	@Override
 	public int getRenderType()
 	{

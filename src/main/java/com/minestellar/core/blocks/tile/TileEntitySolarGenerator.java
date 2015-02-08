@@ -43,14 +43,17 @@ public class TileEntitySolarGenerator extends TileEntity implements IEnergyHandl
 	@Override
 	public void updateEntity(){
 		if(!this.worldObj.provider.hasNoSky){
-			if (storage.getEnergyStored() > 0){
-				int stored = storage.getEnergyStored();
-				storage.setEnergyStored(stored += this.getSolarLight(this.worldObj, this.xCoord, this.yCoord, this.zCoord));
-				MinestellarLog.info("Energy: " + storage.getEnergyStored());
-			}
+			int stored = storage.getEnergyStored();
+			//MinestellarLog.info("Solar Light: " + this.getSolarLight(this.worldObj, this.xCoord, this.yCoord, this.zCoord));
+			storage.setEnergyStored(stored += this.getSolarLight(this.worldObj, this.xCoord, this.yCoord, this.zCoord));
+			//MinestellarLog.info("Energy: " + storage.getEnergyStored());
 		}
 	}
-	
+
+	/**
+	 * Gets the solar light of the given block
+	 */
+
 	public int getSolarLight(World world, int x, int y, int z){
 		int i = world.getBlockMetadata(x, y, z);
 		int j = world.getSavedLightValue(EnumSkyBlock.Sky, x, y, z) - world.skylightSubtracted;

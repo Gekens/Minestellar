@@ -34,10 +34,8 @@ import com.minestellar.core.blocks.tile.TileEntityGasSink;
 import com.minestellar.core.blocks.tile.TileEntityOxygenCollector;
 import com.minestellar.core.blocks.tile.TileEntityPipe;
 import com.minestellar.core.particles.EntityCoreOilDripFX;
-import com.minestellar.core.render.tile.TileEntityRenderCable;
 import com.minestellar.core.render.tile.TileEntityRenderGasSink;
 import com.minestellar.core.render.tile.TileEntityRenderOxygenCollector;
-import com.minestellar.core.render.tile.TileEntityRenderPipe;
 
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.client.registry.ClientRegistry;
@@ -80,7 +78,7 @@ public class ClientProxyCore extends CommonProxyCore {
 	}
 
 	private void registerTileEntityRenders() {
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityCable.class, new TileEntityRenderCable());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityCable.class, new WireSpecialRender(0, 32, 5, false));
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityPipe.class, new WireSpecialRender(1, 32, 5, true));
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityOxygenCollector.class, new TileEntityRenderOxygenCollector());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityGasSink.class, new TileEntityRenderGasSink());
