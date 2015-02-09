@@ -36,10 +36,9 @@ public class GCCorePlayerSP extends EntityPlayerSP {
 	@Override
 	public void onUpdate() {
 		super.onUpdate();
-
 		this.updateStep();
 	}
-
+	
 	private void updateStep() {
 		if (this.worldObj != null && this.worldObj.provider instanceof WorldProviderMoon && !this.isAirBorne && this.ridingEntity == null) {
 			if (this.worldObj.getBlock(MathHelper.floor_double(this.posX), MathHelper.floor_double(this.posY - 1), MathHelper.floor_double(this.posZ)) == MoonBlocks.moonBasicBlocks) {
