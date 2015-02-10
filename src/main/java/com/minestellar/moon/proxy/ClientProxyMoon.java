@@ -18,6 +18,8 @@ package com.minestellar.moon.proxy;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.WorldClient;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingJumpEvent;
 
 import com.minestellar.api.world.IMinestellarWorldProvider;
@@ -32,7 +34,6 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent.ClientTickEvent;
-import cpw.mods.fml.common.gameevent.TickEvent.PlayerTickEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -47,8 +48,6 @@ public class ClientProxyMoon extends CommonProxyMoon {
 	@Override
 	public void init(FMLInitializationEvent event) {
 		FMLCommonHandler.instance().bus().register(new TickHandlerClient());
-		FMLCommonHandler.instance().bus().register(new TickHandlerEntity());
-		FMLCommonHandler.instance().bus().register(new JumpHandlerClient());
 
 		super.init(event);
 	}
@@ -68,34 +67,6 @@ public class ClientProxyMoon extends CommonProxyMoon {
 
 	@Override
 	public void spawnParticle(String string, double x, double y, double z) {
-	}
-
-	public static class TickHandlerEntity {
-		@SubscribeEvent
-		public void onPlayerTick(PlayerTickEvent e) {
-			double addY = 0.7D; // change to the entity's Y motion.
-			e.player.motionY *= addY;
-			e.player.velocityChanged = true;
-			System.out.println("Motion: " + e.player.motionY);
-		}
-		
-		@SubscribeEvent
-		public void onLivingJumpEvent(LivingJumpEvent e){
-			double addY = 0.7D; // change to the entity's Y motion.
-			e.entityLiving.jumpMovementFactor += addY;
-			e.entityLiving.velocityChanged = true;
-			System.out.println("Motion1: " + e.entityLiving.motionY);	
-		}
-	}
-	
-	public static class JumpHandlerClient{
-		@SubscribeEvent
-		public void onLivingJumpEvent(LivingJumpEvent e){
-			double addY = 0.7D; // change to the entity's Y motion.
-			e.entityLiving.jumpMovementFactor += addY;
-			e.entityLiving.velocityChanged = true;
-			System.out.println("Motion1: " + e.entityLiving.motionY);	
-		}
 	}
 
 	public static class TickHandlerClient {
