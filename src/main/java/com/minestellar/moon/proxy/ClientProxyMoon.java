@@ -38,7 +38,6 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class ClientProxyMoon extends CommonProxyMoon {
-	private static Minecraft mc = FMLClientHandler.instance().getClient();
 
 	@Override
 	public void preInit(FMLPreInitializationEvent event) {
