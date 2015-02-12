@@ -17,13 +17,20 @@
 package com.minestellar.space.world;
 
 import net.minecraft.world.WorldProvider;
+import net.minecraft.world.chunk.IChunkProvider;
 
 import com.minestellar.api.world.IMinestellarWorldProvider;
 import com.minestellar.space.util.ConfigManagerSpace;
+import com.minestellar.space.world.gen.ChunkProviderSpace;
 import com.minestellar.space.world.gen.WorldChunkManagerSpace;
 
 public class WorldProviderSpace extends WorldProvider implements IMinestellarWorldProvider{
 
+	@Override
+	public IChunkProvider createChunkGenerator() {
+		return new ChunkProviderSpace(this.worldObj, this.worldObj.getSeed(), true);
+	}
+	
 	@Override
 	public void registerWorldChunkManager() {
 		this.worldChunkMgr = new WorldChunkManagerSpace();
@@ -62,7 +69,7 @@ public class WorldProviderSpace extends WorldProvider implements IMinestellarWor
 
 	@Override
 	public String getDimensionName() {
-		return null;
+		return "Spaaaace!";
 	}
 
 }

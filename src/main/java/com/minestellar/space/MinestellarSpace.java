@@ -60,6 +60,8 @@ public class MinestellarSpace {
 		new ConfigManagerSpace(new File(event.getModConfigurationDirectory(), Constants.MOD_NAME + "/space.cfg"));
 		
 		DimensionSpace.init();
+		
+		this.proxy.preInit(event);
 	}
 	
 	@EventHandler

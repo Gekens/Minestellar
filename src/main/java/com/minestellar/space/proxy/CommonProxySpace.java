@@ -19,6 +19,7 @@ package com.minestellar.space.proxy;
 import net.minecraft.entity.player.EntityPlayerMP;
 
 import com.minestellar.space.util.ConfigManagerSpace;
+import com.minestellar.space.world.TeleporterSpace;
 
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
@@ -47,18 +48,16 @@ public class CommonProxySpace {
 	public static class PlayerTickHandlerCommon{
 		@SubscribeEvent
 		public void onPlayerTick(PlayerTickEvent event){
-			if(event.player.worldObj.isRemote && event.player != null && event.player instanceof EntityPlayerMP){
+			if(event.player != null && event.player instanceof EntityPlayerMP){
 				EntityPlayerMP playerMP = (EntityPlayerMP) event.player;
-				System.out.println("Dimension: " + event.player.posY);
+				System.out.println("Dimension: " + event.player.dimension);
 				if(playerMP.posY >= 270){
-					if(playerMP.dimension != ConfigManagerSpace.idDimensionSpace){
-						playerMP.mcServer.getConfigurationManager().transferPlayerToDimension(playerMP, ConfigManagerSpace.idDimensionSpace);
-					}else{
-						playerMP.mcServer.getConfigurationManager().transferPlayerToDimension(playerMP, 0);
+					if(playerMP.dimension == 0){
+						playerMP.mcServer.getConfigurationManager().transferPlayerToDimension(playerMP, ConfigManagerSpace.idDimensionSpace, new TeleporterSpace(playerMP.mcServer.worldServerForDimension(ConfigManagerSpace.idDimensionSpace)));  
 					}
 				}
 			}
 		}
-	}
 
+	}
 }

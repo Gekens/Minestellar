@@ -16,7 +16,6 @@
 
 package com.minestellar.space.world.gen;
 
-import com.minestellar.moon.world.gen.BiomeGenBaseMoon;
 import com.minestellar.space.util.ConfigManagerSpace;
 
 import net.minecraft.entity.monster.EntityCreeper;
@@ -26,7 +25,7 @@ import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.biome.BiomeGenBase.SpawnListEntry;
 
 public class BiomeGenBaseSpace extends BiomeGenBase{
-	public static final BiomeGenBase space = new BiomeGenBaseMoon(ConfigManagerSpace.idBiomeSpace).setBiomeName("Space");
+	public static final BiomeGenBase space = new BiomeGenBaseSpace(ConfigManagerSpace.idBiomeSpace).setBiomeName("Space");
 	
 	public BiomeGenBaseSpace(int var1) {
 		super(var1);
@@ -38,8 +37,8 @@ public class BiomeGenBaseSpace extends BiomeGenBase{
 	}
 	
 	@Override
-	public BiomeGenBaseMoon setColor(int var1) {
-		return (BiomeGenBaseMoon) super.setColor(var1);
+	public BiomeGenBaseSpace setColor(int var1) {
+		return (BiomeGenBaseSpace) super.setColor(var1);
 	}
 
 	@Override
