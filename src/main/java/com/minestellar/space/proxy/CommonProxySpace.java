@@ -50,7 +50,6 @@ public class CommonProxySpace {
 		public void onPlayerTick(PlayerTickEvent event){
 			if(event.player != null && event.player instanceof EntityPlayerMP){
 				EntityPlayerMP playerMP = (EntityPlayerMP) event.player;
-				System.out.println("Dimension: " + event.player.dimension);
 				if(playerMP.posY >= 270){
 					if(playerMP.dimension == 0){
 						playerMP.mcServer.getConfigurationManager().transferPlayerToDimension(playerMP, ConfigManagerSpace.idDimensionSpace, new TeleporterSpace(playerMP.mcServer.worldServerForDimension(ConfigManagerSpace.idDimensionSpace)));  

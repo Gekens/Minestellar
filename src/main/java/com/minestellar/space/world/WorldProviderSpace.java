@@ -16,13 +16,20 @@
 
 package com.minestellar.space.world;
 
+import net.minecraft.entity.Entity;
+import net.minecraft.util.MathHelper;
+import net.minecraft.util.Vec3;
 import net.minecraft.world.WorldProvider;
 import net.minecraft.world.chunk.IChunkProvider;
+import net.minecraftforge.client.IRenderHandler;
 
 import com.minestellar.api.world.IMinestellarWorldProvider;
 import com.minestellar.space.util.ConfigManagerSpace;
 import com.minestellar.space.world.gen.ChunkProviderSpace;
 import com.minestellar.space.world.gen.WorldChunkManagerSpace;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class WorldProviderSpace extends WorldProvider implements IMinestellarWorldProvider{
 
@@ -65,6 +72,49 @@ public class WorldProviderSpace extends WorldProvider implements IMinestellarWor
 	@Override
 	public float getAirPressure() {
 		return 0;
+	}
+	
+	@SideOnly(Side.CLIENT)
+	public boolean renderVoidFog() {
+		return true;
+	}
+
+	@Override
+	public boolean canRespawnHere() {
+		return false;
+	}
+
+	@Override
+	public boolean isSurfaceWorld() {
+		return false;
+	}
+	
+	@Override
+	public IRenderHandler getSkyRenderer(){
+		return new SkyRendererSpace();
+	}
+	
+	@Override
+	@SideOnly(Side.CLIENT)
+	public float getStarBrightness(float par1) {
+		final float var2 = this.worldObj.getCelestialAngle(par1);
+		float var3 = 1.0F - (MathHelper.cos(var2 * (float) Math.PI * 2.0F) * 2.0F + 0.25F);
+
+		var3 = 0.0F;
+
+		return var3 * var3 * 0.5F + 0.3F;
+	}
+	
+	@Override
+	@SideOnly(Side.CLIENT)
+	public Vec3 getSkyColor(Entity cameraEntity, float partialTicks) {
+		return Vec3.createVectorHelper(0.01F, 0.01F, 0.01F);
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public Vec3 getFogColor(float par1, float par2) {
+		return Vec3.createVectorHelper(0.0F, 0.0F, 0.0F);
 	}
 
 	@Override
