@@ -35,7 +35,7 @@ public class GasSinkMachine extends Block implements ITileEntityProvider{
 
 	@Override
 	public TileEntity createNewTileEntity(World world, int meta) {
-		return new TileEntityGasSink(meta);
+		return new TileEntityGasSink();
 	}
 
 	@Override

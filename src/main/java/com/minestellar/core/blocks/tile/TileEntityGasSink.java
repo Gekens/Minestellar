@@ -35,9 +35,8 @@ public class TileEntityGasSink extends TileEntity implements IGasHandler{
 
 	private int currentGasAmount;
 
-	public TileEntityGasSink(int meta){
+	public TileEntityGasSink(){
 		gasTank = new GasTank(1500);
-		this.blockMetadata = meta;
 	}
 
 	@Override

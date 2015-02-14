@@ -22,20 +22,25 @@ import net.minecraft.client.particle.EntityFX;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.common.util.EnumHelper;
 
 import com.minestellar.api.core.WireSpecialRender;
-import com.minestellar.core.MinestellarCore;
 import com.minestellar.core.blocks.CoreBlocks;
 import com.minestellar.core.blocks.tile.TileEntityCable;
 import com.minestellar.core.blocks.tile.TileEntityGasSink;
 import com.minestellar.core.blocks.tile.TileEntityOxygenCollector;
 import com.minestellar.core.blocks.tile.TileEntityPipe;
+import com.minestellar.core.blocks.tile.TileEntitySolarGenerator;
 import com.minestellar.core.particles.EntityCoreOilDripFX;
+import com.minestellar.core.render.item.CableItemRender;
+import com.minestellar.core.render.item.GasSinkItemRender;
+import com.minestellar.core.render.item.OxygenCollectorItemRender;
+import com.minestellar.core.render.item.PipeItemRender;
+import com.minestellar.core.render.item.SolarGeneratorItemRender;
 import com.minestellar.core.render.tile.TileEntityRenderGasSink;
 import com.minestellar.core.render.tile.TileEntityRenderOxygenCollector;
+import com.minestellar.core.render.tile.TileEntityRenderSolarPanel;
 
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.client.registry.ClientRegistry;
@@ -73,6 +78,7 @@ public class ClientProxyCore extends CommonProxyCore {
 	public void postInit(FMLPostInitializationEvent event) {
 		this.registerTileEntityRenders();
 		this.registerEntityRenderers();
+		this.registerItemRenders();
 
 		super.postInit(event);
 	}
@@ -82,11 +88,20 @@ public class ClientProxyCore extends CommonProxyCore {
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityPipe.class, new WireSpecialRender(1, 32, 5, true));
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityOxygenCollector.class, new TileEntityRenderOxygenCollector());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityGasSink.class, new TileEntityRenderGasSink());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntitySolarGenerator.class, new TileEntityRenderSolarPanel());
 	}
 	
 	private void registerEntityRenderers() {
 	}
 
+	private void registerItemRenders(){
+		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(CoreBlocks.solarGenerator), new SolarGeneratorItemRender());
+		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(CoreBlocks.gasSink), new GasSinkItemRender());
+		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(CoreBlocks.oxygenCollector), new OxygenCollectorItemRender());
+		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(CoreBlocks.cableBlock), new CableItemRender(0));
+		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(CoreBlocks.pipeBlock), new PipeItemRender(0));
+	}
+	
 	@Override
 	public void spawnParticle(String string, double x, double y, double z) {
 		EntityFX entityfx = null;

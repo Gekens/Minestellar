@@ -121,7 +121,7 @@ public class BlockCable extends BlockContainer {
 	public IIcon getIcon(int side, int meta) {
 		return this.cableBlockIcon[meta];
 	}
-
+	
 	@Override
 	public void getSubBlocks(Item block, CreativeTabs creativeTabs, List list) {
 		for (int i = 0; i < 3; ++i) // UPDATE WHEN ADDING BLOCKS

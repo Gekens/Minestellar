@@ -21,8 +21,6 @@ import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.MathHelper;
-import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
 
 import com.minestellar.core.MinestellarCore;
@@ -39,7 +37,7 @@ public class SolarGenerator extends Block implements ITileEntityProvider{
 	public TileEntity createNewTileEntity(World world, int meta){
 		return new TileEntitySolarGenerator();
 	}
-
+	
 	@Override
 	public CreativeTabs getCreativeTabToDisplayOn() {
 		return MinestellarCore.stellarBlocksTab;
