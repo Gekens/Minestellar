@@ -23,9 +23,11 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 
 import com.minestellar.core.Constants;
+import com.minestellar.space.blocks.SpaceBlocks;
 import com.minestellar.space.proxy.CommonProxySpace;
 import com.minestellar.space.util.ConfigManagerSpace;
 import com.minestellar.space.world.DimensionSpace;
+import com.minestellar.space.world.gen.WorldGeneratorSpace;
 
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -47,6 +49,8 @@ public class MinestellarSpace {
 	@SidedProxy(clientSide = "com.minestellar.space.proxy.ClientProxySpace", serverSide = "com.minestellar.space.proxy.CommonProxySpace")
 	public static CommonProxySpace proxy;
 	
+	//private static WorldGeneratorSpace gen = new WorldGeneratorSpace();
+	
 	public static void registerBlock(Block block, Class<? extends ItemBlock> itemBlockClass) {
 		GameRegistry.registerBlock(block, itemBlockClass, block.getUnlocalizedName().replace("tile.", ""));
 	}
@@ -58,6 +62,10 @@ public class MinestellarSpace {
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
 		new ConfigManagerSpace(new File(event.getModConfigurationDirectory(), Constants.MOD_NAME + "/space.cfg"));
+		
+		SpaceBlocks.init();
+		
+		//GameRegistry.registerWorldGenerator(gen, 1);
 		
 		DimensionSpace.init();
 		

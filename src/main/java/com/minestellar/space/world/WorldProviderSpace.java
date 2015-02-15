@@ -76,7 +76,7 @@ public class WorldProviderSpace extends WorldProvider implements IMinestellarWor
 	
 	@SideOnly(Side.CLIENT)
 	public boolean renderVoidFog() {
-		return true;
+		return false;
 	}
 
 	@Override

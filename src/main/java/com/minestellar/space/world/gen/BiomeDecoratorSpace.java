@@ -19,11 +19,12 @@ package com.minestellar.space.world.gen;
 import net.minecraft.world.World;
 
 import com.minestellar.api.world.gen.BiomeDecoratorMinestellar;
+import com.minestellar.space.world.gen.structure.WorldGenStructureAsteroid;
 
 public class BiomeDecoratorSpace extends BiomeDecoratorMinestellar{
 
 	private World currentWorld;
-	
+
 	@Override
 	protected void setCurrentWorld(World world) {
 		this.currentWorld = world;
@@ -36,6 +37,7 @@ public class BiomeDecoratorSpace extends BiomeDecoratorMinestellar{
 
 	@Override
 	protected void decorate() {
+		this.generateOre(1, new WorldGenStructureAsteroid(), 20, 230);
 	}
 
 }

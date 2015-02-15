@@ -63,12 +63,14 @@ public class ChunkProviderSpace extends ChunkProviderMinestellar{
 
 	@Override
 	protected SpawnListEntry[] getMonsters() {
-		return null;
+		SpawnListEntry[] l = new SpawnListEntry[0];
+		return l;
 	}
 
 	@Override
 	protected SpawnListEntry[] getCreatures() {
-		return null;
+		SpawnListEntry[] l = new SpawnListEntry[0];
+		return l;
 	}
 
 	@Override

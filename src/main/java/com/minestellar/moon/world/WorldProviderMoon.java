@@ -133,7 +133,7 @@ public class WorldProviderMoon extends WorldProvider implements IMinestellarWorl
 	public long getDayLength() {
 		return 655200L;
 	}
-
+	
 	@Override
 	public float getHeatLevelsDay() {
 		return 100F;
