@@ -29,7 +29,7 @@ This mod crashes every time?  Have a suggestion?  Found a bug?  Create an issue 
 1. Make sure your issue hasn't already been answered or fixed.  Also think about whether your issue is a valid one before submitting it.
 2. Go to [the issues page](https://github.com/gjkf/MineStellar/issues).
 3. Click `New Issue` right below `Star` and `Fork`.
-4. Enter your Issue's title (something that summarizes your issue), and then create a detailed description ("Hey, could you add/change xxx?" or "Hey, I found an exploit.", etc.).
+4. Enter your Issue's title (something that summarizes your issue), and then create a detailed description ("Hey, could you add/change xxx?" or "Hey, I found an exploit.", etc.). Post on [pastebin](http://pastebin.com/) the crash-report, in case you have one.
 5. Click `Submit new issue`, and wait for feedback!
 
 ### Licensing
