@@ -16,6 +16,8 @@
 
 package com.minestellar.space.world.gen;
 
+import java.util.Random;
+
 import net.minecraft.world.World;
 
 import com.minestellar.api.world.gen.BiomeDecoratorMinestellar;
@@ -25,6 +27,12 @@ public class BiomeDecoratorSpace extends BiomeDecoratorMinestellar{
 
 	private World currentWorld;
 
+	private WorldGenStructureAsteroid generator;
+	
+	public BiomeDecoratorSpace() {
+		generator = new WorldGenStructureAsteroid();
+	}
+	
 	@Override
 	protected void setCurrentWorld(World world) {
 		this.currentWorld = world;
@@ -37,7 +45,12 @@ public class BiomeDecoratorSpace extends BiomeDecoratorMinestellar{
 
 	@Override
 	protected void decorate() {
-		this.generateOre(1, new WorldGenStructureAsteroid(), 20, 230);
+		//this.generateOre(1, generator, 30, 220);
+		/*Random random = new Random();
+		int x = this.chunkX + random.nextInt(16);
+		int y = random.nextInt(256);
+		int z = this.chunkZ + random.nextInt(16);
+		generator.generate(this.getCurrentWorld(), rand, x, y, z);*/
 	}
 
 }

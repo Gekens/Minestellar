@@ -29,20 +29,63 @@ public class WorldGenStructureAsteroid extends WorldGenerator{
 	@Override
 	public boolean generate(World world, Random rand, int x, int y, int z){
 		if(world.provider instanceof WorldProviderSpace){
-			while(world.isAirBlock(x, y, z) && y >= 50 && rand.nextInt(30) <= 5){
-				y--;
+			//Draws a sphere
+
+			{//5x5
+				world.setBlock(x, y, z, SpaceBlocks.spaceBasicBlocks, 0, 2);
+				world.setBlock(x-1, y, z, SpaceBlocks.spaceBasicBlocks, 0, 2);
+				world.setBlock(x+1, y, z, SpaceBlocks.spaceBasicBlocks, 0, 2);
+				world.setBlock(x, y, z-1, SpaceBlocks.spaceBasicBlocks, 0, 2);
+				world.setBlock(x, y, z+1, SpaceBlocks.spaceBasicBlocks, 0, 2);
+				world.setBlock(x+1, y, z+1, SpaceBlocks.spaceBasicBlocks, 0, 2);
+				world.setBlock(x-1, y, z-1, SpaceBlocks.spaceBasicBlocks, 0, 2);
+				world.setBlock(x+1, y, z-1, SpaceBlocks.spaceBasicBlocks, 0, 2);
+				world.setBlock(x-1, y, z+1, SpaceBlocks.spaceBasicBlocks, 0, 2);
+				world.setBlock(x+2, y, z, SpaceBlocks.spaceBasicBlocks, 0, 2);
+				world.setBlock(x-2, y, z, SpaceBlocks.spaceBasicBlocks, 0, 2);
+				world.setBlock(x, y, z+2, SpaceBlocks.spaceBasicBlocks, 0, 2);
+				world.setBlock(x, y, z-2, SpaceBlocks.spaceBasicBlocks, 0, 2);
+				world.setBlock(x+2, y, z+2, SpaceBlocks.spaceBasicBlocks, 0, 2);
+				world.setBlock(x-2, y, z-2, SpaceBlocks.spaceBasicBlocks, 0, 2);
+				world.setBlock(x+2, y, z-2, SpaceBlocks.spaceBasicBlocks, 0, 2);
+				world.setBlock(x-2, y, z+2, SpaceBlocks.spaceBasicBlocks, 0, 2);
+				world.setBlock(x+1, y, z+2, SpaceBlocks.spaceBasicBlocks, 0, 2);
+				world.setBlock(x-1, y, z+2, SpaceBlocks.spaceBasicBlocks, 0, 2);
+				world.setBlock(x+1, y, z-2, SpaceBlocks.spaceBasicBlocks, 0, 2);
+				world.setBlock(x-1, y, z-2, SpaceBlocks.spaceBasicBlocks, 0, 2);
+				world.setBlock(x+2, y, z-1, SpaceBlocks.spaceBasicBlocks, 0, 2);
+				world.setBlock(x+2, y, z+1, SpaceBlocks.spaceBasicBlocks, 0, 2);
+				world.setBlock(x-2, y, z+1, SpaceBlocks.spaceBasicBlocks, 0, 2);
+				world.setBlock(x-2, y, z-1, SpaceBlocks.spaceBasicBlocks, 0, 2);
+			}
+			
+			{//3x3, up and down
+				world.setBlock(x, y+1, z, SpaceBlocks.spaceBasicBlocks, 0, 2);
+				world.setBlock(x-1, y+1, z, SpaceBlocks.spaceBasicBlocks, 0, 2);
+				world.setBlock(x+1, y+1, z, SpaceBlocks.spaceBasicBlocks, 0, 2);
+				world.setBlock(x, y+1, z-1, SpaceBlocks.spaceBasicBlocks, 0, 2);
+				world.setBlock(x, y+1, z+1, SpaceBlocks.spaceBasicBlocks, 0, 2);
+				world.setBlock(x+1, y+1, z+1, SpaceBlocks.spaceBasicBlocks, 0, 2);
+				world.setBlock(x-1, y+1, z-1, SpaceBlocks.spaceBasicBlocks, 0, 2);
+				world.setBlock(x+1, y+1, z-1, SpaceBlocks.spaceBasicBlocks, 0, 2);
+				world.setBlock(x-1, y+1, z+1, SpaceBlocks.spaceBasicBlocks, 0, 2);
+				
+				world.setBlock(x, y-1, z, SpaceBlocks.spaceBasicBlocks, 0, 2);
+				world.setBlock(x-1, y-1, z, SpaceBlocks.spaceBasicBlocks, 0, 2);
+				world.setBlock(x+1, y-1, z, SpaceBlocks.spaceBasicBlocks, 0, 2);
+				world.setBlock(x, y-1, z-1, SpaceBlocks.spaceBasicBlocks, 0, 2);
+				world.setBlock(x, y-1, z+1, SpaceBlocks.spaceBasicBlocks, 0, 2);
+				world.setBlock(x+1, y-1, z+1, SpaceBlocks.spaceBasicBlocks, 0, 2);
+				world.setBlock(x-1, y-1, z-1, SpaceBlocks.spaceBasicBlocks, 0, 2);
+				world.setBlock(x+1, y-1, z-1, SpaceBlocks.spaceBasicBlocks, 0, 2);
+				world.setBlock(x-1, y-1, z+1, SpaceBlocks.spaceBasicBlocks, 0, 2);
+			}
+			
+			{//1x1, up and down
+				world.setBlock(x, y+2, z, SpaceBlocks.spaceBasicBlocks, 0, 2);
+				world.setBlock(x, y-2, z, SpaceBlocks.spaceBasicBlocks, 0, 2);
 			}
 
-			world.setBlock(x, y, z, SpaceBlocks.spaceBasicBlocks, 0, 2);
-			world.setBlock(x-1, y, z, SpaceBlocks.spaceBasicBlocks, 0, 2);
-			world.setBlock(x+1, y, z, SpaceBlocks.spaceBasicBlocks, 0, 2);
-			world.setBlock(x, y, z-1, SpaceBlocks.spaceBasicBlocks, 0, 2);
-			world.setBlock(x, y, z+1, SpaceBlocks.spaceBasicBlocks, 0, 2);
-			world.setBlock(x+1, y, z+1, SpaceBlocks.spaceBasicBlocks, 0, 2);
-			world.setBlock(x-1, y, z-1, SpaceBlocks.spaceBasicBlocks, 0, 2);
-			world.setBlock(x+1, y, z-1, SpaceBlocks.spaceBasicBlocks, 0, 2);
-			world.setBlock(x-1, y, z+1, SpaceBlocks.spaceBasicBlocks, 0, 2);
-			
 			System.out.println(x + " " + y + " " + z);
 
 			return true;

@@ -49,7 +49,7 @@ public class MinestellarSpace {
 	@SidedProxy(clientSide = "com.minestellar.space.proxy.ClientProxySpace", serverSide = "com.minestellar.space.proxy.CommonProxySpace")
 	public static CommonProxySpace proxy;
 	
-	//private static WorldGeneratorSpace gen = new WorldGeneratorSpace();
+	private static WorldGeneratorSpace asteroidGenerator = new WorldGeneratorSpace();
 	
 	public static void registerBlock(Block block, Class<? extends ItemBlock> itemBlockClass) {
 		GameRegistry.registerBlock(block, itemBlockClass, block.getUnlocalizedName().replace("tile.", ""));
@@ -65,7 +65,7 @@ public class MinestellarSpace {
 		
 		SpaceBlocks.init();
 		
-		//GameRegistry.registerWorldGenerator(gen, 1);
+		GameRegistry.registerWorldGenerator(asteroidGenerator, 1);
 		
 		DimensionSpace.init();
 		
