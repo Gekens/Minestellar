@@ -30,7 +30,22 @@ public class WorldGenStructureAsteroid extends WorldGenerator{
 	public boolean generate(World world, Random rand, int x, int y, int z){
 		if(world.provider instanceof WorldProviderSpace){
 			//Draws a sphere
-
+			
+	/* This would create any size sphere from 0x0 to 5x5 shape. You might have to modify a couple things to it but it makes the code more modular	
+			int r = nextInt(5);
+			for(int a = -r; a < r; a++){
+				for(int b = -r; b < r; b++){ 
+					for(int c = -r; c < r; c++){					
+						double dist = MathHelper.sqrt_double((a*a + b*b + c*c)); //Calculates the distance
+						if(dist > r)
+							continue;
+						if(worldObj == null)worldObj = ModLoader.getMinecraftInstance().theWorld;
+							worldObj.setBlockWithNotify(x+a, y+b, z+c, 0);
+					
+					}
+				}
+			}
+	*/
 			{//5x5
 				world.setBlock(x, y, z, SpaceBlocks.spaceBasicBlocks, 0, 2);
 				world.setBlock(x-1, y, z, SpaceBlocks.spaceBasicBlocks, 0, 2);
