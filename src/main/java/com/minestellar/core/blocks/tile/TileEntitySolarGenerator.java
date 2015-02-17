@@ -35,13 +35,36 @@ import cpw.mods.fml.common.Optional.Method;
 public class TileEntitySolarGenerator extends TileEntity implements IEnergyHandler{
 
 	private EnergyStorage storage;
-
+	public boolean Light = false;
+	
+	
 	public TileEntitySolarGenerator(){
 		storage = new EnergyStorage(150000);
 	}
 
 	@Override
 	public void updateEntity(){
+		/* Check if this helps.
+	
+		super.updateEntity();
+		
+		if(!worldObj.isRemote)
+		{
+			if(worldObj.isDaytime() && ((!worldObj.isRaining() && !worldObj.isThundering())) && !worldObj.provider.hasNoSky && worldObj.canBlockSeeTheSky(xCoord, yCoord+1, zCoord))
+			{
+				Light = true;
+			}
+			else
+			{
+				Light - false;
+			}
+			
+			if(canWork())
+			{
+				storage.setEnergyStored(stored += this.getSolarLight(this.worldObj, this.xCoord, this.yCoord, this.zCoord));	
+			}
+		}
+		*/
 		if(!this.worldObj.provider.hasNoSky){
 			int stored = storage.getEnergyStored();
 			//MinestellarLog.info("Solar Light: " + this.getSolarLight(this.worldObj, this.xCoord, this.yCoord, this.zCoord));
@@ -49,6 +72,12 @@ public class TileEntitySolarGenerator extends TileEntity implements IEnergyHandl
 			MinestellarLog.info("Energy: " + storage.getEnergyStored());
 		}
 	}
+	// This checks if the energy that is store is not greater than the max amount and if their is light in the sky
+	public boolean canWork(){
+		
+		return getEnergyStored() < getMaxEnergyStored() && Light;
+	}
+	
 
 	/**
 	 * Gets the solar light of the given block
