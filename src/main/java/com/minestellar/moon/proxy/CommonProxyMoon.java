@@ -53,7 +53,6 @@ public class CommonProxyMoon {
 					double addY = 0.5D; // change to the entity's Y motion.
 					player.addVelocity(0, addY, 0);
 					player.velocityChanged = true;
-					System.out.println("Motion: " + player.motionY);
 				}
 			}	
 		}
@@ -67,7 +66,6 @@ public class CommonProxyMoon {
 					double addY = 0.95D; // change to the entity's Y motion.
 					e.player.motionY *= addY;
 					e.player.velocityChanged = true;
-					System.out.println("Motion1: " + e.player.motionY);
 				}
 			}
 		}

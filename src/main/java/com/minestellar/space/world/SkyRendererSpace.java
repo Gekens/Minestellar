@@ -126,6 +126,12 @@ public class SkyRendererSpace extends IRenderHandler{
 		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE);
 		GL11.glPushMatrix();
 		
+		GL11.glPopMatrix();
+
+		GL11.glPushMatrix();
+		
+		
+		//SUN
 		GL11.glRotatef(-90.0F, 0.0F, 1.0F, 0.0F);
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 5F);
 		GL11.glRotatef(world.getCelestialAngle(partialTicks) * 360.0F, 1.0F, 0.0F, 0.0F);
@@ -137,8 +143,12 @@ public class SkyRendererSpace extends IRenderHandler{
 		var23.addVertexWithUV(var12, 150.0D, var12, 1.0D, 1.0D);
 		var23.addVertexWithUV(-var12, 150.0D, var12, 0.0D, 1.0D);
 		var23.draw();
-		
+
 		GL11.glPopMatrix();
+
+		GL11.glDisable(GL11.GL_BLEND);
+		GL11.glDepthMask(true);
+		
 	}
 
 	private void renderStars() {
@@ -189,23 +199,4 @@ public class SkyRendererSpace extends IRenderHandler{
 		var2.draw();
 	}
 
-	private Vec3 getCustomSkyColor() {
-		return Vec3.createVectorHelper(0.26796875D, 0.1796875D, 0.0D);
-	}
-
-	public float getSkyBrightness(float par1) {
-		final float var2 = FMLClientHandler.instance().getClient().theWorld.getCelestialAngle(par1);
-		float var3 = 1.0F - (MathHelper.sin(var2 * (float) Math.PI * 2.0F) * 2.0F + 0.25F);
-
-		if (var3 < 0.0F) {
-			var3 = 0.0F;
-		}
-
-		if (var3 > 1.0F) {
-			var3 = 1.0F;
-		}
-
-		return var3 * var3 * 1F;
-	}
-	
 }
