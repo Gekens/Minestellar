@@ -99,7 +99,6 @@ public class SkyRendererSpace extends IRenderHandler{
 		GL11.glColor3f(1, 1, 1);
 		final Tessellator var23 = Tessellator.instance;
 		GL11.glDepthMask(false);
-		GL11.glEnable(GL11.GL_FOG);
 		GL11.glColor3f(0, 0, 0);
 		GL11.glCallList(this.glSkyList);
 		GL11.glDisable(GL11.GL_FOG);

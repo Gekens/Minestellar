@@ -21,6 +21,8 @@ import java.util.Random;
 import com.minestellar.space.blocks.SpaceBlocks;
 import com.minestellar.space.world.WorldProviderSpace;
 
+import cpw.mods.fml.client.FMLClientHandler;
+import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
@@ -29,24 +31,27 @@ public class WorldGenStructureAsteroid extends WorldGenerator{
 	@Override
 	public boolean generate(World world, Random rand, int x, int y, int z){
 		if(world.provider instanceof WorldProviderSpace){
-			//Draws a sphere
-			
-	/* This would create any size sphere from 0x0 to 5x5 shape. You might have to modify a couple things to it but it makes the code more modular	
-			int r = nextInt(5);
-			for(int a = -r; a < r; a++){
-				for(int b = -r; b < r; b++){ 
-					for(int c = -r; c < r; c++){					
-						double dist = MathHelper.sqrt_double((a*a + b*b + c*c)); //Calculates the distance
-						if(dist > r)
-							continue;
-						if(worldObj == null)worldObj = ModLoader.getMinecraftInstance().theWorld;
-							worldObj.setBlockWithNotify(x+a, y+b, z+c, 0);
-					
+
+			if(rand.nextInt() == 1){
+				//This would create any size sphere from 0x0 to 7x7 shape. You might have to modify a couple things to it but it makes the code more modular	
+				int r = rand.nextInt(7);
+				for(int a = -r; a < r; a++){
+					for(int b = -r; b < r; b++){ 
+						for(int c = -r; c < r; c++){					
+							double dist = MathHelper.sqrt_double((a*a + b*b + c*c)); //Calculates the distance
+							if(dist > r)
+								continue;
+							if(world == null)
+								world = FMLClientHandler.instance().getClient().theWorld;
+
+							world.setBlock(x+a, y+b, z+c, SpaceBlocks.spaceBasicBlocks, 0, 2);
+
+						}
 					}
 				}
 			}
-	*/
-			{//5x5
+
+			/*{//5x5
 				world.setBlock(x, y, z, SpaceBlocks.spaceBasicBlocks, 0, 2);
 				world.setBlock(x-1, y, z, SpaceBlocks.spaceBasicBlocks, 0, 2);
 				world.setBlock(x+1, y, z, SpaceBlocks.spaceBasicBlocks, 0, 2);
@@ -73,7 +78,7 @@ public class WorldGenStructureAsteroid extends WorldGenerator{
 				world.setBlock(x-2, y, z+1, SpaceBlocks.spaceBasicBlocks, 0, 2);
 				world.setBlock(x-2, y, z-1, SpaceBlocks.spaceBasicBlocks, 0, 2);
 			}
-			
+
 			{//3x3, up and down
 				world.setBlock(x, y+1, z, SpaceBlocks.spaceBasicBlocks, 0, 2);
 				world.setBlock(x-1, y+1, z, SpaceBlocks.spaceBasicBlocks, 0, 2);
@@ -84,7 +89,7 @@ public class WorldGenStructureAsteroid extends WorldGenerator{
 				world.setBlock(x-1, y+1, z-1, SpaceBlocks.spaceBasicBlocks, 0, 2);
 				world.setBlock(x+1, y+1, z-1, SpaceBlocks.spaceBasicBlocks, 0, 2);
 				world.setBlock(x-1, y+1, z+1, SpaceBlocks.spaceBasicBlocks, 0, 2);
-				
+
 				world.setBlock(x, y-1, z, SpaceBlocks.spaceBasicBlocks, 0, 2);
 				world.setBlock(x-1, y-1, z, SpaceBlocks.spaceBasicBlocks, 0, 2);
 				world.setBlock(x+1, y-1, z, SpaceBlocks.spaceBasicBlocks, 0, 2);
@@ -95,11 +100,11 @@ public class WorldGenStructureAsteroid extends WorldGenerator{
 				world.setBlock(x+1, y-1, z-1, SpaceBlocks.spaceBasicBlocks, 0, 2);
 				world.setBlock(x-1, y-1, z+1, SpaceBlocks.spaceBasicBlocks, 0, 2);
 			}
-			
+
 			{//1x1, up and down
 				world.setBlock(x, y+2, z, SpaceBlocks.spaceBasicBlocks, 0, 2);
 				world.setBlock(x, y-2, z, SpaceBlocks.spaceBasicBlocks, 0, 2);
-			}
+			}*/
 
 			System.out.println(x + " " + y + " " + z);
 
