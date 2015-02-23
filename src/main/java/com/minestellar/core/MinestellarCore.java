@@ -18,7 +18,6 @@ package com.minestellar.core;
 
 import java.io.File;
 import java.util.HashMap;
-import java.util.Map;
 
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
@@ -28,10 +27,12 @@ import net.minecraft.item.ItemStack;
 
 import com.minestellar.core.blocks.CoreBlocks;
 import com.minestellar.core.blocks.tile.TileEntityCable;
+import com.minestellar.core.blocks.tile.TileEntityComputer;
 import com.minestellar.core.blocks.tile.TileEntityGasSink;
 import com.minestellar.core.blocks.tile.TileEntityOxygenCollector;
 import com.minestellar.core.blocks.tile.TileEntityPipe;
 import com.minestellar.core.blocks.tile.TileEntitySolarGenerator;
+import com.minestellar.core.handler.GuiHandler;
 import com.minestellar.core.items.CoreItems;
 import com.minestellar.core.proxy.CommonProxyCore;
 import com.minestellar.core.recipe.RecipeManagerCore;
@@ -46,6 +47,7 @@ import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 @Mod(modid = MinestellarCore.MOD_ID, name = MinestellarCore.MOD_NAME, version = Constants.VERSION)
@@ -107,6 +109,8 @@ public class MinestellarCore {
 		this.registerCreatures();
 		this.registerOtherEntities();
 
+		NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
+		
 		MinestellarCore.proxy.init(event);
 	}
 
@@ -121,6 +125,7 @@ public class MinestellarCore {
 		GameRegistry.registerTileEntity(TileEntityOxygenCollector.class, "oxygen_collector");
 		GameRegistry.registerTileEntity(TileEntitySolarGenerator.class, "solar_generator");
 		GameRegistry.registerTileEntity(TileEntityGasSink.class, "gas_sink");
+		GameRegistry.registerTileEntity(TileEntityComputer.class, "computer");
 	}
 
 	private void registerCreatures() {
