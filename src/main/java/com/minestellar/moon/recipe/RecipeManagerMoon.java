@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 04/January/2015 Davide Cossu & Matthew Albrecht.
+ * Copyright (c) 22/Feb/2015 Davide Cossu & Matthew Albrecht.
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -27,9 +27,7 @@ import com.minestellar.moon.items.MoonItems;
 public class RecipeManagerMoon {
 	private static void addUniversalRecipes() {
 		// OTHER CRAFTING
-		RecipeUtil.addRecipe(new ItemStack(MoonItems.moonPortalTrigger, 1, 0), new Object[] {
-		"X X", "XXX", " X ", 'X', "pipeSteel"
-		});
+		RecipeUtil.addRecipe(new ItemStack(MoonItems.moonPortalTrigger, 1, 0), new Object[] {"X X", "XXX", " X ", 'X', "pipeSteel"});
 
 		// SMELTING
 		FurnaceRecipes.smelting().func_151394_a(new ItemStack(MoonBlocks.moonBasicBlocks, 1, 3), OreDictionary.getOres("moonStone").get(0), 0.2F);

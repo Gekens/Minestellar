@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 04/January/2015 Davide Cossu & Matthew Albrecht.
+ * Copyright (c) 22/Feb/2015 Davide Cossu & Matthew Albrecht.
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -40,8 +40,7 @@ public class BlockBasicMoon extends Block {
 
 	@Override
 	public void registerBlockIcons(IIconRegister par1IconRegister) {
-		// UPDATE WHEN ADDING BLOCKS
-		this.blockIcon = new IIcon[12];
+		this.blockIcon = new IIcon[12]; // UPDATE WHEN ADDING BLOCKS
 		this.blockIcon[0] = par1IconRegister.registerIcon(MinestellarMoon.TEXTURE_PREFIX + "moonSurfaceStone");
 		this.blockIcon[1] = par1IconRegister.registerIcon(MinestellarMoon.TEXTURE_PREFIX + "grass_step_1");
 		this.blockIcon[2] = par1IconRegister.registerIcon(MinestellarMoon.TEXTURE_PREFIX + "grass_step_2");
@@ -115,8 +114,7 @@ public class BlockBasicMoon extends Block {
 
 	@Override
 	public void getSubBlocks(Item block, CreativeTabs creativeTabs, List list) {
-		// UPDATE WHEN ADDING BLOCKS
-		for (int i = 0; i < 12; ++i) {
+		for (int i = 0; i < 12; ++i) { // UPDATE WHEN ADDING BLOCKS
 			list.add(new ItemStack(this, 1, i));
 		}
 	}

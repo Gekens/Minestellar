@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 04/January/2015 Davide Cossu & Matthew Albrecht.
+ * Copyright (c) 22/Feb/2015 Davide Cossu & Matthew Albrecht.
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -36,7 +36,6 @@ import com.minestellar.core.blocks.CoreBlocks;
 import com.minestellar.moon.blocks.MoonBlocks;
 
 public class TeleporterMoon extends Teleporter {
-
 	private final WorldServer worldServerInstance;
 	private final Random random;
 	private final LongHashMap destinationCoordinateCache = new LongHashMap();
@@ -49,14 +48,14 @@ public class TeleporterMoon extends Teleporter {
 		this.random = new Random(par1WorldServer.getSeed());
 	}
 
+	@Override
 	public void placeInPortal(Entity par1Entity, double par2, double par4, double par6, float par8) {
 		if (this.worldServerInstance.provider.dimensionId != 1) {
 			if (!this.placeInExistingPortal(par1Entity, par2, par4, par6, par8)) {
 				this.makePortal(par1Entity);
 				this.placeInExistingPortal(par1Entity, par2, par4, par6, par8);
 			}
-		}
-		else {
+		} else {
 			int i = MathHelper.floor_double(par1Entity.posX);
 			int j = MathHelper.floor_double(par1Entity.posY) - 1;
 			int k = MathHelper.floor_double(par1Entity.posZ);
@@ -80,6 +79,7 @@ public class TeleporterMoon extends Teleporter {
 		}
 	}
 
+	@Override
 	public boolean placeInExistingPortal(Entity par1Entity, double par2, double par4, double par6, float par8) {
 		short short1 = 128;
 		double d3 = -1.0D;
@@ -101,8 +101,7 @@ public class TeleporterMoon extends Teleporter {
 			k = portalposition.posZ;
 			portalposition.lastUpdateTime = this.worldServerInstance.getTotalWorldTime();
 			flag = false;
-		}
-		else {
+		} else {
 			for (l3 = l - short1; l3 <= l + short1; ++l3) {
 				double d4 = (double) l3 + 0.5D - par1Entity.posX;
 
@@ -188,11 +187,9 @@ public class TeleporterMoon extends Teleporter {
 
 				if (!flag1 && flag2) {
 					f1 = 1.0F;
-				}
-				else if (flag1 && !flag2) {
+				} else if (flag1 && !flag2) {
 					f1 = 0.0F;
-				}
-				else if (flag1 && flag2) {
+				} else if (flag1 && flag2) {
 					f2 = 0.0F;
 				}
 
@@ -206,16 +203,13 @@ public class TeleporterMoon extends Teleporter {
 				if (i4 == j2) {
 					f3 = 1.0F;
 					f4 = 1.0F;
-				}
-				else if (i4 == Direction.rotateOpposite[j2]) {
+				} else if (i4 == Direction.rotateOpposite[j2]) {
 					f3 = -1.0F;
 					f4 = -1.0F;
-				}
-				else if (i4 == Direction.rotateRight[j2]) {
+				} else if (i4 == Direction.rotateRight[j2]) {
 					f5 = 1.0F;
 					f6 = -1.0F;
-				}
-				else {
+				} else {
 					f5 = -1.0F;
 					f6 = 1.0F;
 				}
@@ -225,19 +219,19 @@ public class TeleporterMoon extends Teleporter {
 				par1Entity.motionX = d9 * (double) f3 + d10 * (double) f6;
 				par1Entity.motionZ = d9 * (double) f5 + d10 * (double) f4;
 				par1Entity.rotationYaw = par8 - (float) (j2 * 90) + (float) (i4 * 90);
-			}
-			else {
+			} else {
 				par1Entity.motionX = par1Entity.motionY = par1Entity.motionZ = 0.0D;
 			}
 
 			par1Entity.setLocationAndAngles(d11, d6, d7, par1Entity.rotationYaw, par1Entity.rotationPitch);
+			
 			return true;
-		}
-		else {
+		} else {
 			return false;
 		}
 	}
 
+	@Override
 	public boolean makePortal(Entity par1Entity) {
 		byte b0 = 16;
 		double d0 = -1.0D;
@@ -425,6 +419,7 @@ public class TeleporterMoon extends Teleporter {
 		return true;
 	}
 
+	@Override
 	public void removeStalePortalLocations(long par1) {
 		if (par1 % 100L == 0L) {
 			Iterator iterator = this.destinationCoordinateKeys.iterator();

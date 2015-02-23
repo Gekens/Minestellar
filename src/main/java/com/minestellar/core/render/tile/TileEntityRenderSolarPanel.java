@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 14/feb/2015 Davide Cossu.
+ * Copyright (c) 22/Feb/2015 Davide Cossu & Matthew Albrecht.
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -25,8 +25,7 @@ import net.minecraft.util.ResourceLocation;
 import com.minestellar.core.MinestellarCore;
 import com.minestellar.core.model.ModelSolarPanel;
 
-public class TileEntityRenderSolarPanel extends TileEntitySpecialRenderer{
-
+public class TileEntityRenderSolarPanel extends TileEntitySpecialRenderer {
 	private ResourceLocation texture;
 
 	public static ModelSolarPanel model;
@@ -34,20 +33,18 @@ public class TileEntityRenderSolarPanel extends TileEntitySpecialRenderer{
 	public TileEntityRenderSolarPanel() {
 		model = new ModelSolarPanel();
 	}
-	
+
 	@Override
-	public void renderTileEntityAt(TileEntity tile, double translationX, double translationY, double translationZ, float f){
+	public void renderTileEntityAt(TileEntity tile, double translationX, double translationY, double translationZ, float f) {
 		texture = new ResourceLocation(MinestellarCore.TEXTURE_PREFIX + "textures/model/tile/solarPanel.png");
-		
+
 		this.bindTexture(texture);
 
 		GL11.glPushMatrix();
-		GL11.glTranslatef((float)translationX + 0.5F, (float)translationY + 1.5F, (float)translationZ + 0.5F);
+		GL11.glTranslatef((float) translationX + 0.5F, (float) translationY + 1.5F, (float) translationZ + 0.5F);
 		GL11.glScalef(1.0F, -1F, -1F);
 		GL11.glRotatef(0.0F, 0.0F, 1.0F, 0.0F);
 		model.render(null, 0.04F, 1.0F, 1.0F, 1.0F, 1.0F, 0.0625F);
-		GL11.glPopMatrix(); //end
-
+		GL11.glPopMatrix();
 	}
-	
 }

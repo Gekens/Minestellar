@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 04/January/2015 Davide Cossu & Matthew Albrecht.
+ * Copyright (c) 22/Feb/2015 Davide Cossu & Matthew Albrecht.
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -165,16 +165,12 @@ public abstract class ChunkProviderMinestellar extends ChunkProviderGenerate {
 
 					if (var16 <= 0 + this.rand.nextInt(5)) {
 						arrayOfIDs[index] = Blocks.bedrock;
-					}
-
-					else {
+					} else {
 						final Block var18 = arrayOfIDs[index];
 
 						if (Blocks.air == var18) {
 							var13 = -1;
-						}
-
-						else if (var18 == this.getStoneBlock().getBlock()) {
+						} else if (var18 == this.getStoneBlock().getBlock()) {
 							arrayOfMeta[index] = this.getStoneBlock().getMetadata();
 
 							if (var13 == -1) {
@@ -183,9 +179,7 @@ public abstract class ChunkProviderMinestellar extends ChunkProviderGenerate {
 									var14m = 0;
 									var15 = this.getStoneBlock().getBlock();
 									var15m = this.getStoneBlock().getMetadata();
-								}
-
-								else if (var16 >= var5 - -16 && var16 <= var5 + 1) {
+								} else if (var16 >= var5 - -16 && var16 <= var5 + 1) {
 									var14 = this.getGrassBlock().getBlock();
 									var14m = this.getGrassBlock().getMetadata();
 									var14 = this.getDirtBlock().getBlock();
@@ -197,15 +191,11 @@ public abstract class ChunkProviderMinestellar extends ChunkProviderGenerate {
 								if (var16 >= var5 - 1) {
 									arrayOfIDs[index] = var14;
 									arrayOfMeta[index] = var14m;
-								}
-
-								else {
+								} else {
 									arrayOfIDs[index] = var15;
 									arrayOfMeta[index] = var15m;
 								}
-							}
-
-							else if (var13 > 0) {
+							} else if (var13 > 0) {
 								--var13;
 								arrayOfIDs[index] = var15;
 								arrayOfMeta[index] = var15m;
@@ -349,7 +339,7 @@ public abstract class ChunkProviderMinestellar extends ChunkProviderGenerate {
 	}
 
 	@SuppressWarnings({
-	"unchecked", "rawtypes"
+			"unchecked", "rawtypes"
 	})
 	@Override
 	public List getPossibleCreatures(EnumCreatureType par1EnumCreatureType, int i, int j, int k) {
@@ -361,9 +351,7 @@ public abstract class ChunkProviderMinestellar extends ChunkProviderGenerate {
 			}
 
 			return monsters;
-		}
-
-		else if (par1EnumCreatureType == EnumCreatureType.creature) {
+		} else if (par1EnumCreatureType == EnumCreatureType.creature) {
 			final List creatures = new ArrayList();
 
 			for (SpawnListEntry creature : this.getCreatures()) {
@@ -371,9 +359,7 @@ public abstract class ChunkProviderMinestellar extends ChunkProviderGenerate {
 			}
 
 			return creatures;
-		}
-
-		else {
+		} else {
 			return null;
 		}
 	}
@@ -399,7 +385,7 @@ public abstract class ChunkProviderMinestellar extends ChunkProviderGenerate {
 
 	/**
 	 * List of all world generators to use. Caves, ravines, structures, etc.
-	 * <p/>
+	 *
 	 * Return an empty list for no world generators. Do not return null.
 	 *
 	 * @return

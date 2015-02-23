@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 04/January/2015 Davide Cossu & Matthew Albrecht.
+ * Copyright (c) 22/Feb/2015 Davide Cossu & Matthew Albrecht.
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -46,7 +46,7 @@ public class MinestellarMoon {
 	public static final String MODID = "MinestellarMoon";
 	public static final String MODNAME = "Minestellar Moon";
 
-	public static final String ASSET_PREFIX = "minestellarmoon";
+	public static final String ASSET_PREFIX = "minestellar_moon";
 	public static final String TEXTURE_PREFIX = MinestellarMoon.ASSET_PREFIX + ":";
 
 	public static HashMap<String, ItemStack> blocksList = new HashMap<String, ItemStack>();
@@ -75,7 +75,7 @@ public class MinestellarMoon {
 
 		DimensionMoon.init();
 
-		this.proxy.preInit(event);
+		MinestellarMoon.proxy.preInit(event);
 	}
 
 	@EventHandler
@@ -86,12 +86,12 @@ public class MinestellarMoon {
 		this.registerCreatures();
 		this.registerOtherEntities();
 
-		this.proxy.init(event);
+		MinestellarMoon.proxy.init(event);
 	}
 
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event) {
-		this.proxy.postInit(event);
+		MinestellarMoon.proxy.postInit(event);
 	}
 
 	private void registerTileEntities() {

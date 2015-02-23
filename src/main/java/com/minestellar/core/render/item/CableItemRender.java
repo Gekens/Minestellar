@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 14/feb/2015 Davide Cossu.
+ * Copyright (c) 22/Feb/2015 Davide Cossu & Matthew Albrecht.
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -18,21 +18,19 @@ package com.minestellar.core.render.item;
 
 import org.lwjgl.opengl.GL11;
 
-import com.minestellar.api.core.TileEntityWire;
 import com.minestellar.core.blocks.tile.TileEntityCable;
 
 import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.IItemRenderer;
 
-public class CableItemRender implements IItemRenderer{
-
+public class CableItemRender implements IItemRenderer {
 	private int meta;
-	
+
 	public CableItemRender(int meta) {
 		this.meta = meta;
 	}
-	
+
 	@Override
 	public boolean handleRenderType(ItemStack item, ItemRenderType type) {
 		return true;
@@ -71,5 +69,4 @@ public class CableItemRender implements IItemRenderer{
 			break;
 		}
 	}
-
 }

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 11/January/2015 Davide Cossu & Matthew Albrecht.
+ * Copyright (c) 22/Feb/2015 Davide Cossu & Matthew Albrecht.
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -48,8 +48,7 @@ public class WorldUtil {
 		if (entity.worldObj.provider instanceof IMinestellarWorldProvider) {
 			final IMinestellarWorldProvider customProvider = (IMinestellarWorldProvider) entity.worldObj.provider;
 			return 0.08D - customProvider.getGravity();
-		}
-		else {
+		} else {
 			return 0.08D;
 		}
 	}
@@ -58,8 +57,7 @@ public class WorldUtil {
 		if (e.worldObj.provider instanceof IMinestellarWorldProvider) {
 			final IMinestellarWorldProvider customProvider = (IMinestellarWorldProvider) e.worldObj.provider;
 			return Math.max(0.002D, 0.03999999910593033D - (customProvider.getGravity()) / 1.75D);
-		}
-		else {
+		} else {
 			return 0.03999999910593033D;
 		}
 	}
@@ -78,7 +76,7 @@ public class WorldUtil {
 
 	@SideOnly(Side.CLIENT)
 	public static float getWorldBrightness(WorldClient world) {
-		if (world.provider instanceof WorldProviderMoon) {
+		if (world.provider instanceof WorldProviderMoon) { // TODO: Remove moon reliance
 			float f1 = world.getCelestialAngle(1.0F);
 			float f2 = 1.0F - (MathHelper.cos(f1 * (float) Math.PI * 2.0F) * 2.0F + 0.2F);
 
@@ -138,13 +136,18 @@ public class WorldUtil {
 	public static WorldProvider getProviderForDimension(int id) {
 		WorldProvider provider = null;
 		MinecraftServer theServer = FMLCommonHandler.instance().getMinecraftServerInstance();
+		
 		if (theServer != null) {
 			WorldServer ws = theServer.worldServerForDimension(id);
-			if (ws != null)
+			if (ws != null) {
 				provider = ws.provider;
+			}
 		}
-		if (provider == null)
+		
+		if (provider == null) {
 			provider = WorldProvider.getProviderForDimension(id);
+		}
+		
 		return provider;
 	}
 
@@ -152,6 +155,7 @@ public class WorldUtil {
 	public static EntityPlayer forceRespawnClient(int dimID, int par2, String par3, int par4) {
 		S07PacketRespawn fakePacket = new S07PacketRespawn(dimID, EnumDifficulty.getDifficultyEnum(par2), WorldType.parseWorldType(par3), WorldSettings.GameType.getByID(par4));
 		Minecraft.getMinecraft().getNetHandler().handleRespawn(fakePacket);
+		
 		return FMLClientHandler.instance().getClientPlayerEntity();
 	}
 }

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 05/feb/2015 Davide Cossu & Matthew Albrecht.
+ * Copyright (c) 22/Feb/2015 Davide Cossu & Matthew Albrecht.
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -16,7 +16,6 @@
 
 package com.minestellar.core.blocks.tile;
 
-import net.minecraft.block.Block;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.EnumSkyBlock;
@@ -25,69 +24,64 @@ import net.minecraftforge.common.util.ForgeDirection;
 import cofh.api.energy.EnergyStorage;
 import cofh.api.energy.IEnergyHandler;
 
-import com.minestellar.core.blocks.machines.SolarGenerator;
 import com.minestellar.core.util.MinestellarLog;
 
 import cpw.mods.fml.common.Optional;
 import cpw.mods.fml.common.Optional.Method;
 
 @Optional.Interface(iface = "cofh.api.energy.IEnergyHandler", modid = "CoFHCore")
-public class TileEntitySolarGenerator extends TileEntity implements IEnergyHandler{
+public class TileEntitySolarGenerator extends TileEntity implements IEnergyHandler {
 
 	private EnergyStorage storage;
 	public boolean Light = false;
 
-
-	public TileEntitySolarGenerator(){
+	public TileEntitySolarGenerator() {
 		storage = new EnergyStorage(150000);
 	}
 
 	@Override
-	public void updateEntity(){
-		/* Check if this helps.
-
-		super.updateEntity();
-
-		if(!worldObj.isRemote)
-		{
-			if(worldObj.isDaytime() && ((!worldObj.isRaining() && !worldObj.isThundering())) && !worldObj.provider.hasNoSky && worldObj.canBlockSeeTheSky(xCoord, yCoord+1, zCoord))
-			{
-				Light = true;
-			}
-			else
-			{
-				Light - false;
-			}
-
-			if(canWork())
-			{
-				storage.setEnergyStored(stored += this.getSolarLight(this.worldObj, this.xCoord, this.yCoord, this.zCoord));	
-			}
-		}
+	public void updateEntity() {
+		/*
+		 * Check if this helps.
+		 * 
+		 * super.updateEntity();
+		 * 
+		 * if(!worldObj.isRemote)
+		 * {
+		 * if(worldObj.isDaytime() && ((!worldObj.isRaining() && !worldObj.isThundering())) && !worldObj.provider.hasNoSky && worldObj.canBlockSeeTheSky(xCoord, yCoord+1, zCoord))
+		 * {
+		 * Light = true;
+		 * }
+		 * else
+		 * {
+		 * Light - false;
+		 * }
+		 * 
+		 * if(canWork())
+		 * {
+		 * storage.setEnergyStored(stored += this.getSolarLight(this.worldObj, this.xCoord, this.yCoord, this.zCoord));
+		 * }
+		 * }
 		 */
-		if(!this.worldObj.provider.hasNoSky){
+		if (!this.worldObj.provider.hasNoSky) {
 			int stored = storage.getEnergyStored();
-			//MinestellarLog.info("Solar Light: " + this.getSolarLight(this.worldObj, this.xCoord, this.yCoord, this.zCoord));
+			// MinestellarLog.info("Solar Light: " + this.getSolarLight(this.worldObj, this.xCoord, this.yCoord, this.zCoord));
 			storage.setEnergyStored(stored += this.getSolarLight(this.worldObj, this.xCoord, this.yCoord, this.zCoord));
-			MinestellarLog.info("Energy: " + storage.getEnergyStored());
 		}
 	}
-	
+
 	/**
 	 * This checks if the energy that is store is not greater than the max amount and if their is light in the sky
 	 */
-	
-	public boolean canWork(){
+	public boolean canWork() {
 
 		return storage.getEnergyStored() < storage.getMaxEnergyStored() && Light;
 	}
 
-
 	/**
 	 * Gets the solar light of the given block
 	 */
-
-	public int getSolarLight(World world, int x, int y, int z){
+	public int getSolarLight(World world, int x, int y, int z) {
 		int i = world.getBlockMetadata(x, y, z);
 		int j = world.getSavedLightValue(EnumSkyBlock.Sky, x, y, z) - world.skylightSubtracted;
 		float f = world.getCelestialAngleRadians(1.0F);
@@ -106,8 +100,9 @@ public class TileEntitySolarGenerator extends TileEntity implements IEnergyHandl
 		return j;
 	}
 
-	// RF IMPLEMENTATION
-
+	/**
+	 *  RF IMPLEMENTATION
+	 */
 	@Method(modid = "CoFHCore")
 	@Override
 	public boolean canConnectEnergy(ForgeDirection direction) {
@@ -137,5 +132,4 @@ public class TileEntitySolarGenerator extends TileEntity implements IEnergyHandl
 	public int receiveEnergy(ForgeDirection direction, int maxReceive, boolean simulate) {
 		return 0;
 	}
-
 }

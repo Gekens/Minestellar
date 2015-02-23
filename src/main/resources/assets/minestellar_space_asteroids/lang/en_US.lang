@@ -1,0 +1,19 @@
+# Minestellar Asteroids Language File = UNITED STATES ENGLISH
+
+# GENERAL ITEMS
+item.asteroids_trigger.name=Asteroids Portal Triggerer
+
+# TOOLS
+
+# ARMOR
+
+# BLOCKS
+tile.asteroids_basic.asteroidStone.name=Asteroid Stone
+tile.asteroids_portal.name=Asteroids Portal
+
+# GUIS
+
+# ENITYS
+
+# OTHERS
+asteroids.Asteroids=Asteroids

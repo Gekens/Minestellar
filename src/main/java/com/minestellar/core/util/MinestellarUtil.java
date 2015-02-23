@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 04/January/2015 Davide Cossu & Matthew Albrecht.
+ * Copyright (c) 22/Feb/2015 Davide Cossu & Matthew Albrecht.
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -53,7 +53,8 @@ public class MinestellarUtil {
 			LanguageRegistry.instance().addStringLocalization("entity." + var1 + ".name", MinestellarUtil.translate("entity.minestellar." + var1 + ".name"));
 		}
 
-		int newID = EntityRegistry.instance().findGlobalUniqueEntityId();
+		EntityRegistry.instance();
+		int newID = EntityRegistry.findGlobalUniqueEntityId();
 		EntityRegistry.registerGlobalEntityID(var0, var1, newID, back, fore);
 		EntityRegistry.registerModEntity(var0, var1, nextInternalID(), MinestellarCore.instance, 80, 3, true);
 	}

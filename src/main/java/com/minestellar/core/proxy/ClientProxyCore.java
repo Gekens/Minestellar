@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 04/January/2015 Davide Cossu & Matthew Albrecht.
+ * Copyright (c) 22/Feb/2015 Davide Cossu & Matthew Albrecht.
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -90,18 +90,18 @@ public class ClientProxyCore extends CommonProxyCore {
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityGasSink.class, new TileEntityRenderGasSink());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntitySolarGenerator.class, new TileEntityRenderSolarPanel());
 	}
-	
+
 	private void registerEntityRenderers() {
 	}
 
-	private void registerItemRenders(){
+	private void registerItemRenders() {
 		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(CoreBlocks.solarGenerator), new SolarGeneratorItemRender());
 		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(CoreBlocks.gasSink), new GasSinkItemRender());
 		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(CoreBlocks.oxygenCollector), new OxygenCollectorItemRender());
 		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(CoreBlocks.cableBlock), new CableItemRender(0));
 		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(CoreBlocks.pipeBlock), new PipeItemRender(0));
 	}
-	
+
 	@Override
 	public void spawnParticle(String string, double x, double y, double z) {
 		EntityFX entityfx = null;

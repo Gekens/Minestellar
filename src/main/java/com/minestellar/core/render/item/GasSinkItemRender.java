@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 14/feb/2015 Davide Cossu.
+ * Copyright (c) 22/Feb/2015 Davide Cossu & Matthew Albrecht.
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -23,11 +23,8 @@ import com.minestellar.core.blocks.tile.TileEntityGasSink;
 import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.IItemRenderer;
-import net.minecraftforge.client.IItemRenderer.ItemRenderType;
-import net.minecraftforge.client.IItemRenderer.ItemRendererHelper;
 
-public class GasSinkItemRender implements IItemRenderer{
-
+public class GasSinkItemRender implements IItemRenderer {
 	@Override
 	public boolean handleRenderType(ItemStack item, ItemRenderType type) {
 		return true;
@@ -40,7 +37,7 @@ public class GasSinkItemRender implements IItemRenderer{
 
 	@Override
 	public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
-		switch(type){
+		switch (type) {
 		case EQUIPPED_FIRST_PERSON:
 			GL11.glPushMatrix();
 			GL11.glTranslated(0, 0.25, 0);
@@ -65,5 +62,4 @@ public class GasSinkItemRender implements IItemRenderer{
 			break;
 		}
 	}
-	
 }

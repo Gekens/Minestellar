@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 04/January/2015 Davide Cossu & Matthew Albrecht.
+ * Copyright (c) 22/Feb/2015 Davide Cossu & Matthew Albrecht.
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -133,7 +133,7 @@ public class WorldProviderMoon extends WorldProvider implements IMinestellarWorl
 	public long getDayLength() {
 		return 655200L;
 	}
-	
+
 	@Override
 	public float getHeatLevelsDay() {
 		return 100F;

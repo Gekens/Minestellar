@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 04/January/2015 Davide Cossu & Matthew Albrecht.
+ * Copyright (c) 22/Feb/2015 Davide Cossu & Matthew Albrecht.
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -94,9 +94,7 @@ public abstract class WorldChunkManagerMinestellar extends WorldChunkManager {
 			final BiomeGenBase[] var9 = this.biomeCache.getCachedBiomes(par2, par3);
 			System.arraycopy(var9, 0, par1ArrayOfBiomeGenBase, 0, par4 * par5);
 			return par1ArrayOfBiomeGenBase;
-		}
-
-		else {
+		} else {
 			for (int var8 = 0; var8 < par4 * par5; ++var8) {
 				par1ArrayOfBiomeGenBase[var8] = this.getBiome();
 			}

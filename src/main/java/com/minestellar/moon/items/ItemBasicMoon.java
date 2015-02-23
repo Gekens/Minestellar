@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 04/January/2015 Davide Cossu & Matthew Albrecht.
+ * Copyright (c) 22/Feb/2015 Davide Cossu & Matthew Albrecht.
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -74,9 +74,7 @@ public class ItemBasicMoon extends Item {
 		return super.getIconFromDamage(damage);
 	}
 
-	@SuppressWarnings({
-	"unchecked", "rawtypes"
-	})
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	@Override
 	public void getSubItems(Item par1, CreativeTabs par2CreativeTabs, List par3List) {
 		for (int i = 0; i < ItemBasicMoon.names.length; i++) {

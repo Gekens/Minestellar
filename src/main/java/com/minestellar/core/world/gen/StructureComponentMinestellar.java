@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 04/January/2015 Davide Cossu & Matthew Albrecht.
+ * Copyright (c) 22/Feb/2015 Davide Cossu & Matthew Albrecht.
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -69,15 +69,15 @@ public abstract class StructureComponentMinestellar extends StructureComponent {
 		final int var7 = this.getYWithOffset(var2);
 		final int var8 = this.getZWithOffset(var1, var3);
 		return var5 == 0 ? new int[] {
-		var6 + 1, var7 - 1, var8 - var4 / 2
+				var6 + 1, var7 - 1, var8 - var4 / 2
 		} : var5 == 1 ? new int[] {
-		var6 + var4 / 2, var7 - 1, var8 + 1
+				var6 + var4 / 2, var7 - 1, var8 + 1
 		} : var5 == 2 ? new int[] {
-		var6 - 1, var7 - 1, var8 + var4 / 2
+				var6 - 1, var7 - 1, var8 + var4 / 2
 		} : var5 == 3 ? new int[] {
-		var6 - var4 / 2, var7 - 1, var8 - 1
+				var6 - var4 / 2, var7 - 1, var8 - 1
 		} : new int[] {
-		var1, var2, var3
+				var1, var2, var3
 		};
 	}
 

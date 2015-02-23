@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 04/January/2015 Davide Cossu & Matthew Albrecht.
+ * Copyright (c) 22/Feb/2015 Davide Cossu & Matthew Albrecht.
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -25,7 +25,13 @@ import com.minestellar.core.proxy.ClientProxyCore;
 
 public class ItemBlockOreCore extends ItemBlock {
 	private static final String[] types = new String[] {
-	"oreCopper", "oreTin", "oreLithium", "oreSilicon", "oreAluminum", "oreTitanium", "oreCarbon",
+			"oreCopper", 
+			"oreTin", 
+			"oreLithium", 
+			"oreSilicon", 
+			"oreAluminum", 
+			"oreTitanium", 
+			"oreCarbon",
 	};
 
 	public ItemBlockOreCore(Block par1) {

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 04/January/2015 Davide Cossu & Matthew Albrecht.
+ * Copyright (c) 22/Feb/2015 Davide Cossu & Matthew Albrecht.
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -25,7 +25,15 @@ import com.minestellar.core.proxy.ClientProxyCore;
 
 public class ItemBlockDecorCore extends ItemBlock {
 	private static final String[] types = new String[] {
-	"blockCopper", "blockTin", "blockSteel", "blockLithium", "blockSilicon", "blockAluminum", "blockTitanium", "blockCarbon", "blockTinMix",
+			"blockCopper", 
+			"blockTin", 
+			"blockSteel", 
+			"blockLithium", 
+			"blockSilicon", 
+			"blockAluminum", 
+			"blockTitanium", 
+			"blockCarbon", 
+			"blockTinMix",
 	};
 
 	public ItemBlockDecorCore(Block par1) {

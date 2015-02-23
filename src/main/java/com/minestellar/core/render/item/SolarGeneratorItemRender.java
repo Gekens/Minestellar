@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 14/feb/2015 Davide Cossu.
+ * Copyright (c) 22/Feb/2015 Davide Cossu & Matthew Albrecht.
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -19,15 +19,11 @@ package com.minestellar.core.render.item;
 import org.lwjgl.opengl.GL11;
 
 import com.minestellar.core.blocks.tile.TileEntitySolarGenerator;
-import com.minestellar.core.model.ModelSolarPanel;
-import com.minestellar.core.render.tile.TileEntityRenderSolarPanel;
-
 import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.IItemRenderer;
 
-public class SolarGeneratorItemRender implements IItemRenderer{
-	
+public class SolarGeneratorItemRender implements IItemRenderer {
 	@Override
 	public boolean handleRenderType(ItemStack item, ItemRenderType type) {
 		return true;
@@ -40,7 +36,7 @@ public class SolarGeneratorItemRender implements IItemRenderer{
 
 	@Override
 	public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
-		switch(type){
+		switch (type) {
 		case EQUIPPED_FIRST_PERSON:
 			GL11.glPushMatrix();
 			GL11.glTranslated(0, 0.25, 0);
@@ -66,5 +62,4 @@ public class SolarGeneratorItemRender implements IItemRenderer{
 			break;
 		}
 	}
-
 }

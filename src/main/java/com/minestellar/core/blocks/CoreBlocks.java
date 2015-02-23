@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 04/January/2015 Davide Cossu & Matthew Albrecht.
+ * Copyright (c) 22/Feb/2015 Davide Cossu & Matthew Albrecht.
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -54,7 +54,7 @@ public class CoreBlocks {
 	public static Block oxygenCollector;
 	public static Block gasSink;
 	public static Block solarGenerator;
-	
+
 	public static Block cableBlock;
 	public static Block pipeBlock;
 
@@ -81,7 +81,7 @@ public class CoreBlocks {
 		CoreBlocks.gasSink = new GasSinkMachine("gas_sink");
 		CoreBlocks.oxygenCollector = new OxygenCollectorMachine("oxygen_collector");
 		CoreBlocks.solarGenerator = new SolarGenerator("solar_generator");
-		
+
 		CoreBlocks.oilFluid = new FluidBlockOil("oil").setBlock(CoreBlocks.oilFluidBlock);
 		FluidRegistry.registerFluid(CoreBlocks.oilFluid);
 		CoreBlocks.oilFluidBlock = new BlockFluidOil("oil", CoreBlocks.oilFluid, Material.water);
@@ -106,7 +106,7 @@ public class CoreBlocks {
 
 		MinestellarCore.registerBlock(CoreBlocks.cableBlock, ItemBlockCable.class);
 		MinestellarCore.registerBlock(CoreBlocks.pipeBlock, ItemBlockPipe.class);
-		
+
 		GameRegistry.registerBlock(CoreBlocks.oxygenCollector, "oxygen_collector");
 		GameRegistry.registerBlock(CoreBlocks.gasSink, "gas_sink");
 		GameRegistry.registerBlock(CoreBlocks.solarGenerator, "solar_generator");

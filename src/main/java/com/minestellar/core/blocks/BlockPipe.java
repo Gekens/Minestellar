@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 04/January/2015 Davide Cossu & Matthew Albrecht.
+ * Copyright (c) 22/Feb/2015 Davide Cossu & Matthew Albrecht.
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -111,21 +111,20 @@ public class BlockPipe extends BlockContainer {
 
 	@Override
 	public void registerBlockIcons(IIconRegister par1IconRegister) {
-		this.pipeBlockIcon = new IIcon[3];
-		this.pipeBlockIcon[0] = par1IconRegister.registerIcon(MinestellarCore.TEXTURE_PREFIX + "blockPipe0");
-		this.pipeBlockIcon[1] = par1IconRegister.registerIcon(MinestellarCore.TEXTURE_PREFIX + "blockPipe1");
-		this.pipeBlockIcon[2] = par1IconRegister.registerIcon(MinestellarCore.TEXTURE_PREFIX + "blockPipe2");
+		BlockPipe.pipeBlockIcon = new IIcon[3]; // UPDATE WHEN ADDING BLOCKS
+		BlockPipe.pipeBlockIcon[0] = par1IconRegister.registerIcon(MinestellarCore.TEXTURE_PREFIX + "blockPipe0");
+		BlockPipe.pipeBlockIcon[1] = par1IconRegister.registerIcon(MinestellarCore.TEXTURE_PREFIX + "blockPipe1");
+		BlockPipe.pipeBlockIcon[2] = par1IconRegister.registerIcon(MinestellarCore.TEXTURE_PREFIX + "blockPipe2");
 	}
 
 	@Override
 	public IIcon getIcon(int side, int meta) {
-		return this.pipeBlockIcon[meta];
+		return BlockPipe.pipeBlockIcon[meta];
 	}
 
 	@Override
 	public void getSubBlocks(Item block, CreativeTabs creativeTabs, List list) {
-		for (int i = 0; i < 3; ++i) // UPDATE WHEN ADDING BLOCKS
-		{
+		for (int i = 0; i < 3; ++i) { // UPDATE WHEN ADDING BLOCKS
 			list.add(new ItemStack(this, 1, i));
 		}
 	}

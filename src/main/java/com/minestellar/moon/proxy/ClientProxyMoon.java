@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 04/January/2015 Davide Cossu & Matthew Albrecht.
+ * Copyright (c) 22/Feb/2015 Davide Cossu & Matthew Albrecht.
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -18,10 +18,6 @@ package com.minestellar.moon.proxy;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.WorldClient;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.entity.living.LivingEvent.LivingJumpEvent;
-
 import com.minestellar.api.world.IMinestellarWorldProvider;
 import com.minestellar.core.world.CloudRenderer;
 import com.minestellar.moon.world.SkyRendererMoon;
@@ -38,7 +34,6 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class ClientProxyMoon extends CommonProxyMoon {
-
 	@Override
 	public void preInit(FMLPreInitializationEvent event) {
 		super.preInit(event);

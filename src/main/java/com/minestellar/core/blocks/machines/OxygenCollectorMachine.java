@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 05/feb/2015 Davide Cossu & Matthew Albrecht.
+ * Copyright (c) 22/Feb/2015 Davide Cossu & Matthew Albrecht.
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -20,21 +20,14 @@ import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
 import com.minestellar.core.MinestellarCore;
 import com.minestellar.core.blocks.tile.TileEntityOxygenCollector;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
-public class OxygenCollectorMachine extends Block implements ITileEntityProvider{
-
-	public OxygenCollectorMachine(String name){
+public class OxygenCollectorMachine extends Block implements ITileEntityProvider {
+	public OxygenCollectorMachine(String name) {
 		super(Material.anvil);
 		this.setBlockName(name);
 	}
@@ -43,15 +36,14 @@ public class OxygenCollectorMachine extends Block implements ITileEntityProvider
 	public TileEntity createNewTileEntity(World world, int meta) {
 		return new TileEntityOxygenCollector();
 	}
-	
+
 	@Override
 	public CreativeTabs getCreativeTabToDisplayOn() {
 		return MinestellarCore.stellarBlocksTab;
 	}
-	
+
 	@Override
-	public int getRenderType()
-	{
+	public int getRenderType() {
 		return -2;
 	}
 
@@ -69,5 +61,4 @@ public class OxygenCollectorMachine extends Block implements ITileEntityProvider
 	public int damageDropped(int meta) {
 		return meta;
 	}
-	
 }

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 04/January/2015 Davide Cossu & Matthew Albrecht.
+ * Copyright (c) 22/Feb/2015 Davide Cossu & Matthew Albrecht.
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -33,33 +33,33 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemBasicCore extends Item {
 	private static String[] names = {
-	"ingotCopper", // 0
-	"ingotTin", // 1
-	"ingotSteel", // 2
-	"ingotLithium", // 3
-	"ingotSilicon", // 4
-	"ingotAluminum", // 5
-	"ingotTitanium", // 6
-	"ingotCarbon", // 7
+			"ingotCopper", // 0
+			"ingotTin", // 1
+			"ingotSteel", // 2
+			"ingotLithium", // 3
+			"ingotSilicon", // 4
+			"ingotAluminum", // 5
+			"ingotTitanium", // 6
+			"ingotCarbon", // 7
 
-	"dustSteel", // 8
+			"dustSteel", // 8
 
-	"compressedCopper", // 9
-	"compressedTin", // 10
-	"compressedSteel", // 11
-	"compressedLithium", // 12
-	"compressedSilicon", // 13
-	"compressedAluminum", // 14
-	"compressedTitanium", // 15
-	"compressedCarbon", // 16
+			"compressedCopper", // 9
+			"compressedTin", // 10
+			"compressedSteel", // 11
+			"compressedLithium", // 12
+			"compressedSilicon", // 13
+			"compressedAluminum", // 14
+			"compressedTitanium", // 15
+			"compressedCarbon", // 16
 
-	"electricMotor", // 17
-	"electricPump", // 18
-	"filterAir", // 19
-	"filterOil", // 20
-	"nozzleSteel", // 21
-	"pipeSteel", // 22
-	"pipeMagnetic", // 23
+			"electricMotor", // 17
+			"electricPump", // 18
+			"filterAir", // 19
+			"filterOil", // 20
+			"nozzleSteel", // 21
+			"pipeSteel", // 22
+			"pipeMagnetic", // 23
 	};
 
 	protected IIcon[] icons = new IIcon[ItemBasicCore.names.length];
@@ -102,7 +102,7 @@ public class ItemBasicCore extends Item {
 	}
 
 	@SuppressWarnings({
-	"unchecked", "rawtypes"
+			"unchecked", "rawtypes"
 	})
 	@Override
 	public void getSubItems(Item par1, CreativeTabs par2CreativeTabs, List par3List) {

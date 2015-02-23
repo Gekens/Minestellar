@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 07/gen/2015 Davide Cossu & Matthew Albrecht.
+ * Copyright (c) 22/Feb/2015 Davide Cossu & Matthew Albrecht.
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -19,11 +19,9 @@ package com.minestellar.api.core;
 import net.minecraftforge.common.util.ForgeDirection;
 
 public interface IWire {
-
 	public void updateCableConnections();
 
 	public boolean onlyOneOpposite(ForgeDirection[] directions);
 
 	public boolean isOpposite(ForgeDirection firstDirection, ForgeDirection secondDirection);
-
 }

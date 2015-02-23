@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 14/feb/2015 Davide Cossu.
+ * Copyright (c) 22/Feb/2015 Davide Cossu & Matthew Albrecht.
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -23,11 +23,8 @@ import com.minestellar.core.blocks.tile.TileEntityPipe;
 import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.IItemRenderer;
-import net.minecraftforge.client.IItemRenderer.ItemRenderType;
-import net.minecraftforge.client.IItemRenderer.ItemRendererHelper;
 
-public class PipeItemRender implements IItemRenderer{
-
+public class PipeItemRender implements IItemRenderer {
 	private int meta;
 
 	public PipeItemRender(int meta) {
@@ -71,6 +68,5 @@ public class PipeItemRender implements IItemRenderer{
 		default:
 			break;
 		}
-
 	}
 }

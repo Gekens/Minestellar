@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 04/January/2015 Davide Cossu & Matthew Albrecht.
+ * Copyright (c) 22/Feb/2015 Davide Cossu & Matthew Albrecht.
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -32,8 +32,6 @@ import com.minestellar.core.blocks.tile.TileEntityGasSink;
 import com.minestellar.core.blocks.tile.TileEntityOxygenCollector;
 import com.minestellar.core.blocks.tile.TileEntityPipe;
 import com.minestellar.core.blocks.tile.TileEntitySolarGenerator;
-import com.minestellar.core.entities.player.GCCorePlayerMP;
-import com.minestellar.core.entities.player.GCCorePlayerSP;
 import com.minestellar.core.items.CoreItems;
 import com.minestellar.core.proxy.CommonProxyCore;
 import com.minestellar.core.recipe.RecipeManagerCore;
@@ -55,7 +53,7 @@ public class MinestellarCore {
 	public static final String MOD_ID = "MinestellarCore";
 	public static final String MOD_NAME = "Minestellar Core";
 
-	public static final String ASSET_PREFIX = "minestellarcore";
+	public static final String ASSET_PREFIX = "minestellar_core";
 	public static final String TEXTURE_PREFIX = MinestellarCore.ASSET_PREFIX + ":";
 
 	public static CreativeTabs stellarBlocksTab;
@@ -63,9 +61,6 @@ public class MinestellarCore {
 
 	public static HashMap<String, ItemStack> blocksList = new HashMap<String, ItemStack>();
 	public static HashMap<String, ItemStack> itemList = new HashMap<String, ItemStack>();
-
-	public static Map<String, GCCorePlayerSP> playersClient = new HashMap<String, GCCorePlayerSP>();
-	public static Map<String, GCCorePlayerMP> playersServer = new HashMap<String, GCCorePlayerMP>();
 
 	@Instance(MinestellarCore.MOD_ID)
 	public static MinestellarCore instance = new MinestellarCore();
@@ -88,7 +83,7 @@ public class MinestellarCore {
 		CoreBlocks.init();
 		CoreItems.init();
 
-		this.proxy.preInit(event);
+		MinestellarCore.proxy.preInit(event);
 	}
 
 	@EventHandler
@@ -112,12 +107,12 @@ public class MinestellarCore {
 		this.registerCreatures();
 		this.registerOtherEntities();
 
-		this.proxy.init(event);
+		MinestellarCore.proxy.init(event);
 	}
 
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event) {
-		this.proxy.postInit(event);
+		MinestellarCore.proxy.postInit(event);
 	}
 
 	private void registerTileEntities() {

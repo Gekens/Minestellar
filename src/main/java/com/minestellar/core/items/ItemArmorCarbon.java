@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 04/January/2015 Davide Cossu & Matthew Albrecht.
+ * Copyright (c) 22/Feb/2015 Davide Cossu & Matthew Albrecht.
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -51,11 +51,9 @@ public class ItemArmorCarbon extends ItemArmor {
 		if (this.getArmorMaterial() == CoreItems.ARMOR_CARBON) {
 			if (stack.getItem() == CoreItems.carbonHelmet) {
 				return MinestellarCore.TEXTURE_PREFIX + "textures/model/armor/carbon_1.png";
-			}
-			else if (stack.getItem() == CoreItems.carbonChestplate || stack.getItem() == CoreItems.carbonBoots) {
+			} else if (stack.getItem() == CoreItems.carbonChestplate || stack.getItem() == CoreItems.carbonBoots) {
 				return MinestellarCore.TEXTURE_PREFIX + "textures/model/armor/carbon_2.png";
-			}
-			else if (stack.getItem() == CoreItems.carbonLeggings) {
+			} else if (stack.getItem() == CoreItems.carbonLeggings) {
 				return MinestellarCore.TEXTURE_PREFIX + "textures/model/armor/carbon_3.png";
 			}
 		}

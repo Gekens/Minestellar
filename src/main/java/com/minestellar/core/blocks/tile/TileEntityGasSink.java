@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 27/gen/2015 Davide Cossu & Matthew Albrecht.
+ * Copyright (c) 22/Feb/2015 Davide Cossu & Matthew Albrecht.
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -16,11 +16,7 @@
 
 package com.minestellar.core.blocks.tile;
 
-import com.minestellar.core.model.ModelGasSink;
-import com.minestellar.core.render.tile.TileEntityRenderGasSink;
 import com.minestellar.core.util.MinestellarLog;
-import com.minestellar.core.util.MinestellarUtil;
-
 import cpw.mods.fml.common.Optional.Method;
 import mekanism.api.gas.Gas;
 import mekanism.api.gas.GasStack;
@@ -29,43 +25,42 @@ import mekanism.api.gas.IGasHandler;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
 
-public class TileEntityGasSink extends TileEntity implements IGasHandler{
-
+public class TileEntityGasSink extends TileEntity implements IGasHandler {
 	private GasTank gasTank;
 
 	private int currentGasAmount;
 
-	public TileEntityGasSink(){
+	public TileEntityGasSink() {
 		gasTank = new GasTank(1500);
 	}
 
 	@Override
-	public void updateEntity(){
-		if(!worldObj.isRemote && gasTank.getGas() != null){
-			if(gasTank.getGas().getGas() != null){
-				if(gasTank.stored.amount < gasTank.getMaxGas()){
+	public void updateEntity() {
+		if (!worldObj.isRemote && gasTank.getGas() != null) {
+			if (gasTank.getGas().getGas() != null) {
+				if (gasTank.stored.amount < gasTank.getMaxGas()) {
 					gasTank.stored.amount -= 1;
-					MinestellarLog.info("Ammount: " + gasTank.stored.amount);
 				}
 			}
 		}
-		
-		if(!worldObj.isRemote){
+
+		if (!worldObj.isRemote) {
 			int newGasAmount = gasTank.getStored();
 
-			if(newGasAmount != this.currentGasAmount){
+			if (newGasAmount != this.currentGasAmount) {
 				markDirty();
 				this.currentGasAmount = newGasAmount;
 			}
 		}
-		
+
 	}
 
-	// MEKANISM IMPLEMENTATION
-
+	/**
+	 *  MEKANISM IMPLEMENTATION
+	 */
 	@Method(modid = "Mekanism")
 	@Override
-	public boolean canDrawGas(ForgeDirection side, Gas type){
+	public boolean canDrawGas(ForgeDirection side, Gas type) {
 		return true;
 	}
 
@@ -77,14 +72,13 @@ public class TileEntityGasSink extends TileEntity implements IGasHandler{
 
 	@Method(modid = "Mekanism")
 	@Override
-	public GasStack drawGas(ForgeDirection side, int amount){
+	public GasStack drawGas(ForgeDirection side, int amount) {
 		return gasTank.draw(amount, true);
 	}
 
 	@Method(modid = "Mekanism")
 	@Override
-	public int receiveGas(ForgeDirection side, GasStack stack){
+	public int receiveGas(ForgeDirection side, GasStack stack) {
 		return gasTank.receive(stack, true);
 	}
-
 }

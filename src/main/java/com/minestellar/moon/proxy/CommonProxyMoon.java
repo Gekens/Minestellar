@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 04/January/2015 Davide Cossu & Matthew Albrecht.
+ * Copyright (c) 22/Feb/2015 Davide Cossu & Matthew Albrecht.
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -34,7 +34,7 @@ public class CommonProxyMoon {
 
 	public void init(FMLInitializationEvent event) {
 		MinecraftForge.EVENT_BUS.register(new JumpHandlerCommon());
-		//MinecraftForge.EVENT_BUS.register(new PlayerTickHandlerCommon());
+		// MinecraftForge.EVENT_BUS.register(new PlayerTickHandlerCommon());
 		FMLCommonHandler.instance().bus().register(new PlayerTickHandlerCommon());
 	}
 
@@ -44,25 +44,25 @@ public class CommonProxyMoon {
 	public void spawnParticle(String string, double x, double y, double z) {
 	}
 
-	public static class JumpHandlerCommon{
+	public static class JumpHandlerCommon {
 		@SubscribeEvent
-		public void onLivingJumpEvent(LivingJumpEvent event){
-			if(event.entityLiving instanceof EntityPlayer){
+		public void onLivingJumpEvent(LivingJumpEvent event) {
+			if (event.entityLiving instanceof EntityPlayer) {
 				EntityPlayer player = (EntityPlayer) event.entityLiving;
-				if(player.dimension == ConfigManagerMoon.idDimensionMoon){
+				if (player.dimension == ConfigManagerMoon.idDimensionMoon) {
 					double addY = 0.5D; // change to the entity's Y motion.
 					player.addVelocity(0, addY, 0);
 					player.velocityChanged = true;
 				}
-			}	
+			}
 		}
 	}
 
-	public static class PlayerTickHandlerCommon{
+	public static class PlayerTickHandlerCommon {
 		@SubscribeEvent
 		public void onPlayerTick(PlayerTickEvent e) {
-			if(e.player.dimension == ConfigManagerMoon.idDimensionMoon){
-				if(e.player.motionY <= 0){
+			if (e.player.dimension == ConfigManagerMoon.idDimensionMoon) {
+				if (e.player.motionY <= 0) {
 					double addY = 0.95D; // change to the entity's Y motion.
 					e.player.motionY *= addY;
 					e.player.velocityChanged = true;
@@ -70,5 +70,4 @@ public class CommonProxyMoon {
 			}
 		}
 	}
-
 }

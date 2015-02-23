@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 04/January/2015 Davide Cossu & Matthew Albrecht.
+ * Copyright (c) 22/Feb/2015 Davide Cossu & Matthew Albrecht.
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -47,13 +47,9 @@ public class ConfigManagerCore {
 
 			ConfigManagerCore.idStarMultiplier = ConfigManagerCore.configuration.get(Constants.CONFIGURATION_GENERAL, "Star count multiplyer. Causes more lag when in space. (Default '1.0')", 1.0).getDouble(1.0);
 			ConfigManagerCore.idDayLength = ConfigManagerCore.configuration.get(Constants.CONFIGURATION_GENERAL, "Realistic Day Length. (Default 'true')", true).getBoolean(true);
-		}
-
-		catch (final Exception e) {
+		} catch (final Exception e) {
 			FMLLog.log(Level.ERROR, e, Constants.MOD_NAME + " Core Config has a problem loading it's configuration");
-		}
-
-		finally {
+		} finally {
 			ConfigManagerCore.configuration.save();
 			ConfigManagerCore.loaded = true;
 		}

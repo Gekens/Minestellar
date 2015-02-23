@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 04/January/2015 Davide Cossu & Matthew Albrecht.
+ * Copyright (c) 22/Feb/2015 Davide Cossu & Matthew Albrecht.
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -26,7 +26,9 @@ import com.minestellar.core.proxy.ClientProxyCore;
 public class ItemBlockPipe extends ItemBlock {
 
 	public static String[] types = new String[] {
-	"light_pipe", "medium_pipe", "heavy_pipe"
+			"light_pipe", 
+			"medium_pipe", 
+			"heavy_pipe"
 	};
 
 	public ItemBlockPipe(Block par1) {
@@ -47,10 +49,11 @@ public class ItemBlockPipe extends ItemBlock {
 	@Override
 	public String getUnlocalizedName(ItemStack itemstack) {
 		int meta = itemstack.getItemDamage();
+		
 		if (meta < 0 || meta >= ItemBlockPipe.types.length) {
 			meta = 0;
 		}
+		
 		return super.getUnlocalizedName() + "." + ItemBlockPipe.types[meta];
 	}
-
 }

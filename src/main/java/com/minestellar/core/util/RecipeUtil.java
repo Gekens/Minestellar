@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 04/January/2015 Davide Cossu & Matthew Albrecht.
+ * Copyright (c) 22/Feb/2015 Davide Cossu & Matthew Albrecht.
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -30,15 +30,9 @@ public class RecipeUtil {
 
 	public static void addBlockRecipe(ItemStack result, String oreDictIngot, ItemStack msIngot) {
 		if (OreDictionary.getOres(oreDictIngot).size() > 1) {
-			CraftingManager.getInstance().getRecipeList().add(new ShapelessOreRecipe(result, new Object[] {
-			msIngot, oreDictIngot, oreDictIngot, oreDictIngot, oreDictIngot, oreDictIngot, oreDictIngot, oreDictIngot, oreDictIngot
-			}));
-		}
-
-		else {
-			RecipeUtil.addRecipe(result, new Object[] {
-			"XXX", "XXX", "XXX", 'X', msIngot
-			});
+			CraftingManager.getInstance().getRecipeList().add(new ShapelessOreRecipe(result, new Object[] {msIngot, oreDictIngot, oreDictIngot, oreDictIngot, oreDictIngot, oreDictIngot, oreDictIngot, oreDictIngot, oreDictIngot}));
+		} else {
+			RecipeUtil.addRecipe(result, new Object[] {"XXX", "XXX", "XXX", 'X', msIngot});
 		}
 	}
 }

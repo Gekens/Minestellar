@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 22/gen/2015 Davide Cossu & Matthew Albrecht.
+ * Copyright (c) 22/Feb/2015 Davide Cossu & Matthew Albrecht.
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -34,58 +34,57 @@ import cpw.mods.fml.common.Optional;
 import cpw.mods.fml.common.Optional.Method;
 
 @Optional.Interface(iface = "mekanism.api.gas.IGasHandler", modid = "Mekanism")
-public class TileEntityOxygenCollector extends TileEntity implements IGasHandler{
+public class TileEntityOxygenCollector extends TileEntity implements IGasHandler {
 
 	private GasTank gasTank;
 
 	private int currentGasAmount;
-	
+
 	private ArrayList<Block> blocks;
 	private ArrayList<Vec3> coords;
 
-	public TileEntityOxygenCollector(){
+	public TileEntityOxygenCollector() {
 		gasTank = new GasTank(15000);
 		gasTank.setGas(new GasStack(new Gas("oxygen"), 0));
 	}
 
 	@Override
-	public void updateEntity(){
+	public void updateEntity() {
 		blocks = getNatureBlocks(5);
 		coords = getNatureBlocksCoords(5);
-		
-		if(!worldObj.isRemote && gasTank.getGas() != null){
-			if(gasTank.getGas().getGas() != null){
-				if(gasTank.stored.amount < gasTank.getMaxGas()){
-					
-					for(int i = 0; i < blocks.size(); i++){
-						
-						if(blocks.get(i) == Blocks.leaves || blocks.get(i) == Blocks.leaves2){
+
+		if (!worldObj.isRemote && gasTank.getGas() != null) {
+			if (gasTank.getGas().getGas() != null) {
+				if (gasTank.stored.amount < gasTank.getMaxGas()) {
+
+					for (int i = 0; i < blocks.size(); i++) {
+
+						if (blocks.get(i) == Blocks.leaves || blocks.get(i) == Blocks.leaves2) {
 							gasTank.stored.amount += 5; // Augments the stored gas amount based on the nature of the nature blocks
-						}else if(blocks.get(i) == Blocks.cactus){
+						} else if (blocks.get(i) == Blocks.cactus) {
 							gasTank.stored.amount += 1; // Augments the stored gas amount based on the nature of the nature blocks
-						}else if(blocks.get(i) == Blocks.grass){
+						} else if (blocks.get(i) == Blocks.grass) {
 							gasTank.stored.amount += 2; // Augments the stored gas amount based on the nature of the nature blocks
-						}else if(blocks.get(i) == Blocks.log || blocks.get(i) == Blocks.log2){
+						} else if (blocks.get(i) == Blocks.log || blocks.get(i) == Blocks.log2) {
 							gasTank.stored.amount += 1; // Augments the stored gas amount based on the nature of the nature blocks
-						}else{
+						} else {
 							continue;
 						}
-						
+
 					}
-					MinestellarLog.info("Ammount: " + gasTank.stored.amount);
 				}
 			}
 		}
-		
-		if(!worldObj.isRemote){
+
+		if (!worldObj.isRemote) {
 			int newGasAmount = gasTank.getStored();
 
-			if(newGasAmount != this.currentGasAmount){
+			if (newGasAmount != this.currentGasAmount) {
 				markDirty();
 				this.currentGasAmount = newGasAmount;
 			}
 		}
-		
+
 	}
 
 	/**
@@ -94,8 +93,7 @@ public class TileEntityOxygenCollector extends TileEntity implements IGasHandler
 	 * @param maxDistanceAway The max radius
 	 * @return The list of blocks in the area
 	 */
-
-	private ArrayList<Block> getNatureBlocks(int maxDistanceAway){
+	private ArrayList<Block> getNatureBlocks(int maxDistanceAway) {
 
 		int xMov = 0 - maxDistanceAway;
 		int yMov = maxDistanceAway;
@@ -103,68 +101,63 @@ public class TileEntityOxygenCollector extends TileEntity implements IGasHandler
 
 		ArrayList<Block> list = new ArrayList<Block>();
 
-		while(true){
+		while (true) {
 			final Block currentBlock = worldObj.getBlock(this.xCoord + xMov, this.yCoord + yMov, this.zCoord + zMov);
 
-			if(currentBlock == Blocks.leaves || currentBlock == Blocks.leaves2 || currentBlock == Blocks.grass || currentBlock == Blocks.cactus
-					|| currentBlock == Blocks.log || currentBlock == Blocks.log2){
+			if (currentBlock == Blocks.leaves || currentBlock == Blocks.leaves2 || currentBlock == Blocks.grass || currentBlock == Blocks.cactus || currentBlock == Blocks.log || currentBlock == Blocks.log2) {
 				list.add(currentBlock);
 			}
 
-			if (zMov == maxDistanceAway && xMov == maxDistanceAway && yMov == -maxDistanceAway){
+			if (zMov == maxDistanceAway && xMov == maxDistanceAway && yMov == -maxDistanceAway) {
 				return list;
 			}
 
-			if (zMov == maxDistanceAway && xMov == maxDistanceAway){
+			if (zMov == maxDistanceAway && xMov == maxDistanceAway) {
 				yMov--;
 				xMov = 0 - maxDistanceAway;
 				zMov = 0 - maxDistanceAway;
 				continue;
 			}
 
-			if (xMov == maxDistanceAway){
+			if (xMov == maxDistanceAway) {
 				zMov++;
 				xMov = 0 - maxDistanceAway;
 				continue;
 			}
 
 			xMov++;
-
 		}
-
 	}
-	
+
 	/**
 	 * Gets the coordinates of the nature blocks
 	 */
-	
-	private ArrayList<Vec3> getNatureBlocksCoords(int maxDistanceAway){
+	private ArrayList<Vec3> getNatureBlocksCoords(int maxDistanceAway) {
 		int xMov = 0 - maxDistanceAway;
 		int yMov = maxDistanceAway;
 		int zMov = 0 - maxDistanceAway;
 
 		ArrayList<Vec3> list = new ArrayList<Vec3>();
 
-		while(true){
+		while (true) {
 			final Block currentBlock = worldObj.getBlock(this.xCoord + xMov, this.yCoord + yMov, this.zCoord + zMov);
 
-			if(currentBlock == Blocks.leaves || currentBlock == Blocks.leaves2 || currentBlock == Blocks.grass || currentBlock == Blocks.cactus
-					|| currentBlock == Blocks.log || currentBlock == Blocks.log2){
+			if (currentBlock == Blocks.leaves || currentBlock == Blocks.leaves2 || currentBlock == Blocks.grass || currentBlock == Blocks.cactus || currentBlock == Blocks.log || currentBlock == Blocks.log2) {
 				list.add(Vec3.createVectorHelper(this.xCoord + xMov, this.yCoord + yMov, this.zCoord + zMov));
 			}
 
-			if (zMov == maxDistanceAway && xMov == maxDistanceAway && yMov == -maxDistanceAway){
+			if (zMov == maxDistanceAway && xMov == maxDistanceAway && yMov == -maxDistanceAway) {
 				return list;
 			}
 
-			if (zMov == maxDistanceAway && xMov == maxDistanceAway){
+			if (zMov == maxDistanceAway && xMov == maxDistanceAway) {
 				yMov--;
 				xMov = 0 - maxDistanceAway;
 				zMov = 0 - maxDistanceAway;
 				continue;
 			}
 
-			if (xMov == maxDistanceAway){
+			if (xMov == maxDistanceAway) {
 				zMov++;
 				xMov = 0 - maxDistanceAway;
 				continue;
@@ -176,19 +169,20 @@ public class TileEntityOxygenCollector extends TileEntity implements IGasHandler
 	}
 
 	@Override
-	public void readFromNBT(NBTTagCompound nbt){
+	public void readFromNBT(NBTTagCompound nbt) {
 		super.readFromNBT(nbt);
 		currentGasAmount = nbt.getInteger("Oxygen");
 	}
-	
+
 	@Override
-	public void writeToNBT(NBTTagCompound nbt){
+	public void writeToNBT(NBTTagCompound nbt) {
 		super.writeToNBT(nbt);
 		nbt.setInteger("Oxygen", currentGasAmount);
 	}
-	
-	// MEKANISM IMPLEMENTATION
 
+	/**
+	 *  MEKANISM IMPLEMENTATION
+	 */
 	@Method(modid = "Mekanism")
 	@Override
 	public int receiveGas(ForgeDirection side, GasStack stack) {
@@ -212,5 +206,4 @@ public class TileEntityOxygenCollector extends TileEntity implements IGasHandler
 	public boolean canDrawGas(ForgeDirection side, Gas type) {
 		return side == ForgeDirection.EAST;
 	}
-
 }

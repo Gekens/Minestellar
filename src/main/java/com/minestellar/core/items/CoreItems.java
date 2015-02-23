@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 04/January/2015 Davide Cossu & Matthew Albrecht.
+ * Copyright (c) 22/Feb/2015 Davide Cossu & Matthew Albrecht.
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -60,7 +60,7 @@ public class CoreItems {
 	public static Item hydrogenBucket;
 	public static Item nitrogenBucket;
 
-	public static ArmorMaterial ARMOR_CARBON = EnumHelper.addArmorMaterial("carbon", 30, new int[] { 3, 8, 6, 3 }, 12);
+	public static ArmorMaterial ARMOR_CARBON = EnumHelper.addArmorMaterial("carbon", 30, new int[] {3, 8, 6, 3}, 12);
 	public static ToolMaterial TOOL_CARBON = EnumHelper.addToolMaterial("carbon", 3, 768, 5.0F, 2, 8);
 
 	private static void initItems() {
@@ -82,7 +82,7 @@ public class CoreItems {
 
 		CoreItems.oilBucket = new ItemBucketOil("oil_bucket");
 		CoreItems.oxygenBucket = new ItemBucketOxygen("oxygen_bucket");
-		
+
 		CoreItems.hydrogenBucket = new ItemBucketHydrogen("hydrogen_bucket");
 		CoreItems.nitrogenBucket = new ItemBucketNitrogen("nitrogen_bucket");
 	}
@@ -106,7 +106,7 @@ public class CoreItems {
 
 		MinestellarCore.registerItem(oilBucket);
 		MinestellarCore.registerItem(oxygenBucket);
-		
+
 		MinestellarCore.registerItem(hydrogenBucket);
 		MinestellarCore.registerItem(nitrogenBucket);
 	}

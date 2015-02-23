@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 04/January/2015 Davide Cossu & Matthew Albrecht.
+ * Copyright (c) 22/Feb/2015 Davide Cossu & Matthew Albrecht.
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -47,13 +47,9 @@ public class ConfigManagerMoon {
 
 			ConfigManagerMoon.idDimensionMoon = ConfigManagerMoon.configuration.get(Constants.CONFIGURATION_DIMENSIONS, "Moon Dimension", -25).getInt(-25);
 			ConfigManagerMoon.idBiomeMoon = ConfigManagerMoon.configuration.get(Constants.CONFIGURATION_BIOMES, "Moon Biome", 225).getInt(225);
-		}
-
-		catch (final Exception e) {
+		} catch (final Exception e) {
 			FMLLog.log(Level.ERROR, e, Constants.MOD_NAME + " Moon Config has a problem loading it's configuration");
-		}
-
-		finally {
+		} finally {
 			ConfigManagerMoon.configuration.save();
 			ConfigManagerMoon.loaded = true;
 		}

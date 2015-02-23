@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 05/feb/2015 Davide Cossu & Matthew Albrecht.
+ * Copyright (c) 22/Feb/2015 Davide Cossu & Matthew Albrecht.
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -26,26 +26,24 @@ import net.minecraft.world.World;
 import com.minestellar.core.MinestellarCore;
 import com.minestellar.core.blocks.tile.TileEntitySolarGenerator;
 
-public class SolarGenerator extends Block implements ITileEntityProvider{
-
-	public SolarGenerator(String name){
+public class SolarGenerator extends Block implements ITileEntityProvider {
+	public SolarGenerator(String name) {
 		super(Material.anvil);
 		this.setBlockName(name);
 	}
 
 	@Override
-	public TileEntity createNewTileEntity(World world, int meta){
+	public TileEntity createNewTileEntity(World world, int meta) {
 		return new TileEntitySolarGenerator();
 	}
-	
+
 	@Override
 	public CreativeTabs getCreativeTabToDisplayOn() {
 		return MinestellarCore.stellarBlocksTab;
 	}
 
 	@Override
-	public int getRenderType()
-	{
+	public int getRenderType() {
 		return -2;
 	}
 
@@ -63,5 +61,4 @@ public class SolarGenerator extends Block implements ITileEntityProvider{
 	public int damageDropped(int meta) {
 		return meta;
 	}
-
 }

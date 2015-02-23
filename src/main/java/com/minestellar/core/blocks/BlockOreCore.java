@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 04/January/2015 Davide Cossu & Matthew Albrecht.
+ * Copyright (c) 22/Feb/2015 Davide Cossu & Matthew Albrecht.
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -39,8 +39,7 @@ public class BlockOreCore extends Block {
 
 	@Override
 	public void registerBlockIcons(IIconRegister par1IconRegister) {
-		// UPDATE WHEN ADDING BLOCKS
-		this.blockIcon = new IIcon[7];
+		this.blockIcon = new IIcon[7]; // UPDATE WHEN ADDING BLOCKS
 		this.blockIcon[0] = par1IconRegister.registerIcon(MinestellarCore.TEXTURE_PREFIX + "oreCopper");
 		this.blockIcon[1] = par1IconRegister.registerIcon(MinestellarCore.TEXTURE_PREFIX + "oreTin");
 		this.blockIcon[2] = par1IconRegister.registerIcon(MinestellarCore.TEXTURE_PREFIX + "oreLithium");
@@ -62,8 +61,7 @@ public class BlockOreCore extends Block {
 
 	@Override
 	public void getSubBlocks(Item block, CreativeTabs creativeTabs, List list) {
-		// UPDATE WHEN ADDING BLOCKS
-		for (int i = 0; i < 7; ++i) {
+		for (int i = 0; i < 7; ++i) { // UPDATE WHEN ADDING BLOCKS
 			list.add(new ItemStack(this, 1, i));
 		}
 	}

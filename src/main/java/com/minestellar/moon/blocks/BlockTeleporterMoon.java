@@ -43,11 +43,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockTeleporterMoon extends BlockBreakable {
 	public static final int[][] field_150001_a = new int[][] {
-	new int[0], {
-	3, 1
-	}, {
-	2, 0
-	}
+		new int[0], {3, 1}, {2, 0}
 	};
 
 	private static final String __OBFID = "CL_00000284";
@@ -95,9 +91,7 @@ public class BlockTeleporterMoon extends BlockBreakable {
 		if (l == 0) {
 			if (blockaccess.getBlock(x - 1, y, z) != this && blockaccess.getBlock(x + 1, y, z) != this) {
 				l = 2;
-			}
-
-			else {
+			} else {
 				l = 1;
 			}
 
@@ -167,14 +161,10 @@ public class BlockTeleporterMoon extends BlockBreakable {
 
 			if (thePlayer.timeUntilPortal > 0) {
 				thePlayer.timeUntilPortal = 10;
-			}
-
-			else if (thePlayer.dimension != ConfigManagerMoon.idDimensionMoon) {
+			} else if (thePlayer.dimension != ConfigManagerMoon.idDimensionMoon) {
 				thePlayer.timeUntilPortal = 10;
 				thePlayer.mcServer.getConfigurationManager().transferPlayerToDimension(thePlayer, ConfigManagerMoon.idDimensionMoon, new TeleporterMoon(thePlayer.mcServer.worldServerForDimension(ConfigManagerMoon.idDimensionMoon)));
-			}
-
-			else {
+			} else {
 				thePlayer.timeUntilPortal = 10;
 				thePlayer.mcServer.getConfigurationManager().transferPlayerToDimension(thePlayer, 0, new TeleporterMoon(thePlayer.mcServer.worldServerForDimension(0)));
 			}

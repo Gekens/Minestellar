@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 04/January/2015 Davide Cossu & Matthew Albrecht.
+ * Copyright (c) 22/Feb/2015 Davide Cossu & Matthew Albrecht.
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -43,9 +43,7 @@ public class ItemCanisterOil extends ItemCanisterGeneric {
 		this.setTextureName(MinestellarCore.TEXTURE_PREFIX + assetName);
 	}
 
-	@SuppressWarnings({
-	"unchecked", "rawtypes"
-	})
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void getSubItems(Item par1, CreativeTabs par2CreativeTabs, List par3List) {
@@ -89,9 +87,7 @@ public class ItemCanisterOil extends ItemCanisterGeneric {
 		return super.getIconFromDamage(damage);
 	}
 
-	@SuppressWarnings({
-	"unchecked", "rawtypes"
-	})
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, boolean par4) {

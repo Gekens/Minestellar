@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 04/January/2015 Davide Cossu & Matthew Albrecht.
+ * Copyright (c) 22/Feb/2015 Davide Cossu & Matthew Albrecht.
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -83,8 +83,7 @@ public class EntityCoreOilDripFX extends EntityFX {
 			this.motionY *= 0.02D;
 			this.motionZ *= 0.02D;
 			this.setParticleTextureIndex(113);
-		}
-		else {
+		} else {
 			this.setParticleTextureIndex(112);
 		}
 

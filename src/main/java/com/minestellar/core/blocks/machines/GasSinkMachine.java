@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 05/feb/2015 Davide Cossu & Matthew Albrecht.
+ * Copyright (c) 22/Feb/2015 Davide Cossu & Matthew Albrecht.
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -26,9 +26,8 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
-public class GasSinkMachine extends Block implements ITileEntityProvider{
-
-	public GasSinkMachine(String name){
+public class GasSinkMachine extends Block implements ITileEntityProvider {
+	public GasSinkMachine(String name) {
 		super(Material.anvil);
 		this.setBlockName(name);
 	}
@@ -42,10 +41,9 @@ public class GasSinkMachine extends Block implements ITileEntityProvider{
 	public CreativeTabs getCreativeTabToDisplayOn() {
 		return MinestellarCore.stellarBlocksTab;
 	}
-	
+
 	@Override
-	public int getRenderType()
-	{
+	public int getRenderType() {
 		return -2;
 	}
 
