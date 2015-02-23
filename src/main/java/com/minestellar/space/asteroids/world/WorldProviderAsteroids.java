@@ -111,6 +111,12 @@ public class WorldProviderAsteroids extends WorldProvider implements IMinestella
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
+    public float[] calcSunriseSunsetColors(float par1, float par2){
+        return null;
+    }
+	
+	@Override
 	public String getDimensionName() {
 		return "Space";
 	}

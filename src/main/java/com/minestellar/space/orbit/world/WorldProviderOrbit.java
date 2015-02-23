@@ -109,6 +109,12 @@ public class WorldProviderOrbit extends WorldProvider implements IMinestellarWor
 	public Vec3 getFogColor(float par1, float par2) {
 		return Vec3.createVectorHelper(0.0F, 0.0F, 0.0F);
 	}
+	
+	@Override
+	@SideOnly(Side.CLIENT)
+    public float[] calcSunriseSunsetColors(float par1, float par2){
+        return null;
+    }
 
 	@Override
 	public String getDimensionName() {
