@@ -20,6 +20,7 @@ import net.minecraft.entity.player.EntityPlayerMP;
 
 import com.minestellar.space.asteroids.util.ConfigManagerAsteroids;
 import com.minestellar.space.asteroids.world.TeleporterAsteroids;
+import com.minestellar.space.orbit.util.ConfigManagerOrbit;
 
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
@@ -51,7 +52,7 @@ public class CommonProxyAsteroids {
 			if (event.player != null && event.player instanceof EntityPlayerMP) {
 				EntityPlayerMP playerMP = (EntityPlayerMP) event.player;
 				if (playerMP.posY >= 270) {
-					if (playerMP.dimension == 0) {
+					if (playerMP.dimension == ConfigManagerOrbit.idDimensionOrbit) {
 						playerMP.mcServer.getConfigurationManager().transferPlayerToDimension(playerMP, ConfigManagerAsteroids.idDimensionAsteroids, new TeleporterAsteroids(playerMP.mcServer.worldServerForDimension(ConfigManagerAsteroids.idDimensionAsteroids)));
 					}
 				}

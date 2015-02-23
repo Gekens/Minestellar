@@ -31,7 +31,7 @@ public class WorldGenStructureAsteroids extends WorldGenerator {
 	@Override
 	public boolean generate(World world, Random rand, int x, int y, int z) {
 		if (world.provider instanceof WorldProviderAsteroids) {
-			if (rand.nextInt() == 1) {
+			if (rand.nextBoolean()) {
 				// This would create any size sphere from 0x0 to 7x7 shape. You might have to modify a couple things to it but it makes the code more modular
 				int r = rand.nextInt(7);
 				for (int a = -r; a < r; a++) {

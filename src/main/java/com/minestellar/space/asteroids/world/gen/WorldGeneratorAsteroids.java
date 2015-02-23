@@ -34,12 +34,12 @@ public class WorldGeneratorAsteroids implements IWorldGenerator {
 	}
 
 	private void generateAsteroids(World world, Random random, int x, int z) {
-		if (random.nextInt(30) >= 10) {
+		//if (random.nextInt(30) >= 10) {
 			int Xcoord1 = x + random.nextInt(16);
 			int Ycoord1 = random.nextInt(256);
 			int Zcoord1 = z + random.nextInt(16);
 
 			(new WorldGenStructureAsteroids()).generate(world, random, Xcoord1, Ycoord1, Zcoord1);
-		}
+		//}
 	}
 }

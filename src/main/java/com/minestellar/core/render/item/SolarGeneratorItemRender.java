@@ -46,7 +46,7 @@ public class SolarGeneratorItemRender implements IItemRenderer {
 			break;
 		case INVENTORY:
 			GL11.glPushMatrix();
-			GL11.glScaled(0.75, 0.75, 0.75);
+			GL11.glScaled(0.45, 0.45, 0.45);
 			GL11.glTranslated(0, -0.75, 0);
 			TileEntityRendererDispatcher.instance.renderTileEntityAt(new TileEntitySolarGenerator(), 0.0D, 0.0D, 0.0D, 0.0F);
 			GL11.glTranslated(0, 0.75, 0);
