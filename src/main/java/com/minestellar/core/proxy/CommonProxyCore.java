@@ -16,16 +16,25 @@
 
 package com.minestellar.core.proxy;
 
+import com.minestellar.core.util.WorldUtil;
+import com.minestellar.moon.util.ConfigManagerMoon;
+import com.minestellar.space.asteroids.util.ConfigManagerAsteroids;
+import com.minestellar.space.orbit.util.ConfigManagerOrbit;
+
 import net.minecraft.entity.player.EntityPlayer;
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.gameevent.TickEvent.PlayerTickEvent;
 
 public class CommonProxyCore {
 	public void preInit(FMLPreInitializationEvent event) {
 	}
 
 	public void init(FMLInitializationEvent event) {
+		FMLCommonHandler.instance().bus().register(new TickHandler());
 	}
 
 	public void postInit(FMLPostInitializationEvent event) {
@@ -42,5 +51,21 @@ public class CommonProxyCore {
 	}
 
 	public void onUpdate() {
+	}
+	
+	public static class TickHandler{
+		@SubscribeEvent
+		public void onTick(PlayerTickEvent event){
+			if(event.player.dimension == ConfigManagerAsteroids.idDimensionAsteroids ||
+				event.player.dimension == ConfigManagerOrbit.idDimensionOrbit ||
+				event.player.dimension == ConfigManagerMoon.idDimensionMoon){
+				double g = WorldUtil.getGravityForEntity(event.player);
+				if(!event.player.onGround && event.player.motionY >= 0.1){
+					event.player.motionY *= g;
+					event.player.velocityChanged = true;
+				}
+			}
+			System.out.println("MotionY: " + event.player.motionY);
+		}
 	}
 }
