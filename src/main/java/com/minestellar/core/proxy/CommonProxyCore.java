@@ -65,7 +65,6 @@ public class CommonProxyCore {
 					event.player.velocityChanged = true;
 				}
 			}
-			System.out.println("MotionY: " + event.player.motionY);
 		}
 	}
 }
