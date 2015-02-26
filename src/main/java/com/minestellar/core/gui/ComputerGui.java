@@ -16,15 +16,21 @@
 
 package com.minestellar.core.gui;
 
+import net.minecraft.util.ResourceLocation;
+
 import org.lwjgl.opengl.GL11;
 
+import com.minestellar.core.MinestellarCore;
 import com.minestellar.core.gui.widget.GuiDraw;
 import com.minestellar.core.gui.widget.GuiMSButton;
 import com.minestellar.core.gui.widget.GuiScreenWidget;
+import com.minestellar.core.gui.widget.planets.GuiPlanet;
 
 public class ComputerGui extends GuiScreenWidget{
 
 	private GuiMSButton testButton;
+
+	private GuiPlanet sun;
 	
 	public ComputerGui() {
 		super(GuiDraw.displaySize().width, GuiDraw.displaySize().height); // 0,0 is in the top left corner
@@ -38,12 +44,13 @@ public class ComputerGui extends GuiScreenWidget{
 	@Override
 	public void addWidgets(){
 		add(testButton = new GuiMSButton(0, 0, 30, 20, "test").setActionCommand("test"));
+		add(sun = new GuiPlanet(100, 100, "sun"));
 	}
 	
 	@Override
 	public void drawBackground(){
-		drawDefaultBackground();
-		drawRect(10, 10, width-10, height-10, 0xFF000000);
+		//drawDefaultBackground();
+		//drawRect(10, 10, width-10, height-10, 0xFF000000);
 	}
 	
 	@Override
@@ -52,7 +59,7 @@ public class ComputerGui extends GuiScreenWidget{
 		GL11.glDisable(GL11.GL_DEPTH_TEST);
 		
 		//Stuff
-		GuiDraw.drawLine(10, 20, width, height, 5F, 0xFF000000);
+		//GuiDraw.drawLine(10, 20, width, height, 5F, 0xFF000000);
 		
 		GL11.glEnable(GL11.GL_LIGHTING);
 		GL11.glEnable(GL11.GL_DEPTH_TEST);
