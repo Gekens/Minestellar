@@ -24,13 +24,14 @@ import com.minestellar.core.MinestellarCore;
 import com.minestellar.core.gui.widget.GuiDraw;
 import com.minestellar.core.gui.widget.GuiMSButton;
 import com.minestellar.core.gui.widget.GuiScreenWidget;
+import com.minestellar.core.gui.widget.GuiWidget;
 import com.minestellar.core.gui.widget.planets.GuiPlanet;
 
 public class ComputerGui extends GuiScreenWidget{
 
 	private GuiMSButton testButton;
 
-	private GuiPlanet sun;
+	private GuiPlanet sun, earth, moon;
 	
 	public ComputerGui() {
 		super(GuiDraw.displaySize().width, GuiDraw.displaySize().height); // 0,0 is in the top left corner
@@ -45,12 +46,13 @@ public class ComputerGui extends GuiScreenWidget{
 	public void addWidgets(){
 		add(testButton = new GuiMSButton(0, 0, 30, 20, "test").setActionCommand("test"));
 		add(sun = new GuiPlanet(100, 100, "sun"));
+		add(earth = new GuiPlanet(200, 100, "earth"));
+		add(moon = new GuiPlanet(300, 100, "moon"));
 	}
 	
 	@Override
 	public void drawBackground(){
-		//drawDefaultBackground();
-		//drawRect(10, 10, width-10, height-10, 0xFF000000);
+		drawDefaultBackground();
 	}
 	
 	@Override
@@ -59,7 +61,6 @@ public class ComputerGui extends GuiScreenWidget{
 		GL11.glDisable(GL11.GL_DEPTH_TEST);
 		
 		//Stuff
-		//GuiDraw.drawLine(10, 20, width, height, 5F, 0xFF000000);
 		
 		GL11.glEnable(GL11.GL_LIGHTING);
 		GL11.glEnable(GL11.GL_DEPTH_TEST);

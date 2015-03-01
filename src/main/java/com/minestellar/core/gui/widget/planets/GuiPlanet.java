@@ -16,12 +16,13 @@
 
 package com.minestellar.core.gui.widget.planets;
 
-import org.lwjgl.opengl.GL11;
-
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.util.ResourceLocation;
 
+import org.lwjgl.opengl.GL11;
+
 import com.minestellar.core.MinestellarCore;
+import com.minestellar.core.gui.widget.GuiDraw;
 import com.minestellar.core.gui.widget.GuiWidget;
 
 public class GuiPlanet extends GuiWidget{
@@ -33,7 +34,7 @@ public class GuiPlanet extends GuiWidget{
 	private ResourceLocation texture;
 
 	public GuiPlanet(int x, int y, String name){
-		super(x, y, 16, 16);
+		super(x, y, 8, 8);
 		this.name = name;
 		this.texture = new ResourceLocation(MinestellarCore.TEXTURE_PREFIX + "textures/gui/planets/" + name + ".png");
 	}
@@ -41,8 +42,8 @@ public class GuiPlanet extends GuiWidget{
 	@Override
 	public void mouseClicked(int x, int y, int button){
 		if(isEnabled && pointInside(x, y)){
-			isSelected = !isSelected;
-			System.out.println(isSelected);
+			setSelected(!isSelected());
+			System.out.println(isSelected());
 		}
 	}
 
@@ -51,23 +52,36 @@ public class GuiPlanet extends GuiWidget{
 		super.draw(mousex, mousey, frame);
 		renderEngine.bindTexture(texture);
 		GL11.glColor4f(1, 1, 1, 1);
+		
+		if(isSelected()){
+			drawSelectedBox();
+		}
 
 		Tessellator tessellator = Tessellator.instance;
 		tessellator.startDrawingQuads();
 		{
 			tessellator.addVertexWithUV(x, y, zLevel, 0, 0);
-			tessellator.addVertexWithUV(x+16, y, zLevel, 8, 0);
-			tessellator.addVertexWithUV(x, y+16, zLevel, 8, 8);
-			tessellator.addVertexWithUV(x+16, y+16, zLevel, 0, 8);
+			tessellator.addVertexWithUV(x+8, y, zLevel, 8, 0);
+			tessellator.addVertexWithUV(x, y+8, zLevel, 8, 8);
+			tessellator.addVertexWithUV(x+8, y+8, zLevel, 0, 8);
 
-			tessellator.addVertexWithUV(x+16, y+16, zLevel, 0, 8);
-			tessellator.addVertexWithUV(x, y+16, zLevel, 8, 8);
-			tessellator.addVertexWithUV(x+16, y, zLevel, 8, 0);
+			tessellator.addVertexWithUV(x+8, y+8, zLevel, 0, 8);
+			tessellator.addVertexWithUV(x, y+8, zLevel, 8, 8);
+			tessellator.addVertexWithUV(x+8, y, zLevel, 8, 0);
 			tessellator.addVertexWithUV(x, y, zLevel, 0, 0);
 		}
 		tessellator.draw();
 	}
 
+	/**
+	 * Draws the <i>selected box</i>
+	 */
+	
+	public void drawSelectedBox(){
+		int away = 2;
+		GuiDraw.drawRect(x-away, y-away, this.width+away*2, this.height+away*2, 0xDD006666);
+	}
+	
 	public boolean isEnabled(){
 		return isEnabled;
 	}
@@ -76,6 +90,14 @@ public class GuiPlanet extends GuiWidget{
 		isEnabled = b;
 	}	
 
+	public boolean isSelected(){
+		return isSelected;
+	}
+
+	public void setSelected(boolean b){
+		isSelected = b;
+	}	
+	
 	public void setTexture(ResourceLocation texture){
 		this.texture = texture;
 	}

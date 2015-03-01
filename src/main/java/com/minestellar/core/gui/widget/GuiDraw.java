@@ -251,12 +251,38 @@ public class GuiDraw{
         tessellator.draw();
     }
     
-    public static void drawLine(int x1, int y1, int x2, int y2, float thickness, int colour){
-    	float red = (float)(colour >> 16 & 255) / 255.0F;
-    	float blue = (float)(colour >> 8 & 255) / 255.0F;
-    	float green = (float)(colour & 255) / 255.0F;
-    	float alpha = (float)(colour >> 24 & 255) / 255.0F;
+    public static void drawLine(int x1, int y1, int x2, int y2, float thickness, int red, int green, int blue, int alpha){
+    	GL11.glColor4f(red, green, blue, alpha);
+    	GL11.glDisable(GL11.GL_LIGHTING);
+        GL11.glDisable(GL11.GL_DEPTH_TEST);
+        GL11.glDepthMask(false);
+        GL11.glEnable(GL11.GL_BLEND);
+        GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+        GL11.glLineWidth(thickness);
+        GL11.glDisable(GL11.GL_TEXTURE_2D);
+        GL11.glEnable(GL11.GL_LINE_SMOOTH);
+
     	
+    	GL11.glBegin(GL11.GL_LINES);
+    	GL11.glVertex2i(x1, x1);
+    	GL11.glVertex2i(x2, y2);
+    	GL11.glEnd();
+    	
+    	GL11.glEnable(GL11.GL_LIGHTING);
+        GL11.glEnable(GL11.GL_DEPTH_TEST);
+        GL11.glDepthMask(true);
+        GL11.glDisable(GL11.GL_BLEND);
+        GL11.glEnable(GL11.GL_TEXTURE_2D);
+        GL11.glDisable(GL11.GL_LINE_SMOOTH);
+    }
+    
+    public static void drawLine(int x1, int y1, int x2, int y2, float thickness, int colour){
+    	float f3 = (float)(colour >> 24 & 255) / 255.0F;
+        float f = (float)(colour >> 16 & 255) / 255.0F;
+        float f1 = (float)(colour >> 8 & 255) / 255.0F;
+        float f2 = (float)(colour & 255) / 255.0F;
+    	
+    	GL11.glColor4f(f, f1, f2, f3);
     	GL11.glDisable(GL11.GL_LIGHTING);
         GL11.glDisable(GL11.GL_DEPTH_TEST);
         GL11.glDepthMask(false);
