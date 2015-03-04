@@ -52,7 +52,6 @@ public class GuiPlanet extends GuiWidget{
 		super.draw(mousex, mousey, frame);
 		renderEngine.bindTexture(texture);
 		GL11.glColor4f(1, 1, 1, 1);
-		
 		if(isSelected()){
 			drawSelectedBox();
 		}
