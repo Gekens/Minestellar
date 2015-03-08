@@ -16,12 +16,19 @@
 
 package com.minestellar.core.gui.widget;
 
+/**
+ * SideBar element used for planet's information <p>Use <i>setColors(int, int)</i></p>
+ */
+
 public class GuiSideBarWidget extends GuiWidget{
 
 	private int side, frameTime = 0, screenWidth, screenHeight, color1, color2;
 
 	/**
+	 * SideBar element used for planet's information <p>Use <i>setColors(int, int)</i></p>
+	 * 
 	 * @param side 0=top 1=left 2=bottom 3=right
+	 * @see GuiSideBarWidget#setColors(int, int)
 	 */
 
 	public GuiSideBarWidget(int screenWidth, int screenHeight, int width, int height, int side){

@@ -16,22 +16,34 @@
 
 package com.minestellar.core.gui.widget.planets;
 
+import java.util.Iterator;
+
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
 import com.minestellar.core.MinestellarCore;
+import com.minestellar.core.gui.ComputerGui;
 import com.minestellar.core.gui.widget.GuiDraw;
+import com.minestellar.core.gui.widget.GuiScreenWidget;
+import com.minestellar.core.gui.widget.GuiSideBarWidget;
 import com.minestellar.core.gui.widget.GuiWidget;
+
+/**
+ * The <i>planet</i> element for the {@link ComputerGui}
+ */
 
 public class GuiPlanet extends GuiWidget{
 
 	private String name;
 	private boolean isEnabled = true;
 	private boolean isSelected = false;
+	private boolean isSelectable = true;
 
 	private ResourceLocation texture;
+
+	private GuiScreenWidget parent;
 
 	public GuiPlanet(int x, int y, String name){
 		super(x, y, 8, 8);
@@ -41,9 +53,23 @@ public class GuiPlanet extends GuiWidget{
 
 	@Override
 	public void mouseClicked(int x, int y, int button){
-		if(isEnabled && pointInside(x, y)){
-			setSelected(!isSelected());
-			System.out.println(isSelected());
+		if(isEnabled() && isSelectable() && pointInside(x, y)){
+			if(parentScreen instanceof GuiScreenWidget){
+				parent = (GuiScreenWidget)parentScreen;
+				if(parent instanceof ComputerGui){
+					parent = (ComputerGui)parent;
+					for(Iterator iterator = parent.widgets.iterator(); iterator.hasNext();){
+						GuiWidget widget = (GuiWidget)iterator.next();
+						if(widget instanceof GuiPlanet){
+							if(widget != this)
+								((GuiPlanet) widget).setSelected(false);
+						}else{
+							continue;
+						}
+					}
+					setSelected(!isSelected());
+				}
+			}
 		}
 	}
 
@@ -52,6 +78,7 @@ public class GuiPlanet extends GuiWidget{
 		super.draw(mousex, mousey, frame);
 		renderEngine.bindTexture(texture);
 		GL11.glColor4f(1, 1, 1, 1);
+
 		if(isSelected()){
 			drawSelectedBox();
 		}
@@ -75,12 +102,16 @@ public class GuiPlanet extends GuiWidget{
 	/**
 	 * Draws the <i>selected box</i>
 	 */
-	
+
 	public void drawSelectedBox(){
 		int away = 2;
 		GuiDraw.drawRect(x-away, y-away, this.width+away*2, this.height+away*2, 0xDD006666);
 	}
-	
+
+	/**
+	 * To make sure this is <i>visible</i>
+	 */
+
 	public boolean isEnabled(){
 		return isEnabled;
 	}
@@ -89,6 +120,11 @@ public class GuiPlanet extends GuiWidget{
 		isEnabled = b;
 	}	
 
+	/**
+	 * To draw the background and the informations
+	 * @see GuiSideBarWidget
+	 */
+
 	public boolean isSelected(){
 		return isSelected;
 	}
@@ -96,7 +132,19 @@ public class GuiPlanet extends GuiWidget{
 	public void setSelected(boolean b){
 		isSelected = b;
 	}	
-	
+
+	/**
+	 * Used to make sure that only one planet is selected at time, no more than one
+	 */
+
+	public boolean isSelectable(){
+		return isSelectable;
+	}
+
+	public void setSelectable(boolean b){
+		isSelectable = b;
+	}
+
 	public void setTexture(ResourceLocation texture){
 		this.texture = texture;
 	}
