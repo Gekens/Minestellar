@@ -16,6 +16,11 @@
 
 package com.minestellar.core.gui.widget;
 
+import java.util.HashMap;
+import java.util.Iterator;
+
+import net.minecraft.client.resources.I18n;
+
 /**
  * SideBar element used for planet's information <p>Use <i>setColors(int, int)</i></p>
  */
@@ -23,6 +28,8 @@ package com.minestellar.core.gui.widget;
 public class GuiSideBarWidget extends GuiWidget{
 
 	private int side, frameTime = 0, screenWidth, screenHeight, color1, color2;
+	private String title;
+	private HashMap<String, String> map = new HashMap<String, String>();
 
 	/**
 	 * SideBar element used for planet's information <p>Use <i>setColors(int, int)</i></p>
@@ -44,38 +51,126 @@ public class GuiSideBarWidget extends GuiWidget{
 		case 0:
 			if(frameTime <= height){
 				frameTime += 1;
+			}else{
+				drawTitle();
+				drawContent();
 			}
 			GuiDraw.drawGradientRect(0, 0, width, frameTime, color1, color2);
 			break;
 		case 1:
 			if(frameTime <= width){
 				frameTime += 1;
+			}else{
+				drawTitle();
+				drawContent();
 			}
 			GuiDraw.drawGradientRect(0, 0, frameTime, height, color1, color2);
 			break;
 		case 2:
 			if(frameTime <= height){
 				frameTime += 1;
+			}else{
+				drawTitle();
+				drawContent();
 			}
 			GuiDraw.drawGradientRect(0, screenHeight-frameTime, width, height, color1, color2);
 			break;
 		case 3:
 			if(frameTime <= width){
 				frameTime += 1;
+			}else{
+				drawTitle();
+				drawContent();
 			}
 			GuiDraw.drawGradientRect(screenWidth-frameTime, 0, width, height, color1, color2);
 			break;
 		}
 	}
-	
+
 	/**
 	 * The colors are in this format <code>0xAARRGGBB</code>, A is <code>alpha</code>, R is <code>red</code>, G is <code>green</code> and B is <code>blue</code>
 	 */
-	
+
 	public GuiSideBarWidget setColors(int color1, int color2){
 		this.color1 = color1;
 		this.color2 = color2;
 		return this;
+	}
+
+	/**
+	 * Sets the title of the SideBar widget
+	 */
+
+	public GuiSideBarWidget setTitle(String title){
+		this.title = title;
+		return this;
+	}
+
+	/**
+	 * Draws the title
+	 */
+
+	public GuiSideBarWidget drawTitle(){
+		switch(side){
+		case 0:
+			GuiDraw.drawCentered(this.title, width/2, y+10, 0xFFFFFFFF);
+			break;
+		case 1:
+			GuiDraw.drawCentered(this.title, width/2, y+10, 0xFFFFFFFF);
+			break;
+		case 2:
+			GuiDraw.drawCentered(this.title, width/2, height+height/2, 0xFFFFFFFF);
+			break;
+		case 3:
+			GuiDraw.drawCentered(this.title, screenWidth-width/2, y+10, 0xFFFFFFFF);
+			break;
+		}
+		return this;
+	}
+
+	/**
+	 * Sets the content of the SideBar
+	 */
+
+	public GuiSideBarWidget setContent(String contest, String content){
+		map.put(contest, content);
+		return this;
+	}
+
+	/**
+	 * Draws the content
+	 */
+
+	public void drawContent(){
+		for (Iterator iterator = map.values().iterator(); iterator.hasNext();) {
+			String s = (String) iterator.next();
+			if(s == null){
+				
+			}
+		}
+		try{
+			switch(side){
+			case 0:
+				GuiDraw.drawString("Dimension: ", 10, y+40, 0xFFFFFFFF);
+				GuiDraw.drawString(I18n.format(map.get("dimension")), 15+GuiDraw.getStringWidth("Dimension: "), y+40, 0xFFFFFFFF);
+				break;
+			case 1:
+				GuiDraw.drawString("Dimension: ", 10, y+40, 0xFFFFFFFF);
+				GuiDraw.drawCentered(I18n.format(map.get("dimension")), GuiDraw.getStringWidth("Dimension: "), y+40, 0xFFFFFFFF);
+				break;
+			case 2:
+				GuiDraw.drawString("Dimension: ", 10, y+40, 0xFFFFFFFF);
+				GuiDraw.drawCentered(I18n.format(map.get("dimension")), 15+GuiDraw.getStringWidth("Dimension: "), height+height/2+40, 0xFFFFFFFF);
+				break;
+			case 3:
+				GuiDraw.drawString("Dimension: ", 10, y+40, 0xFFFFFFFF);
+				GuiDraw.drawCentered(I18n.format(map.get("dimension")), screenWidth-GuiDraw.getStringWidth("Dimension: "), y+40, 0xFFFFFFFF);
+				break;
+			}
+		}catch(Exception e){
+
+		}
+
 	}
 
 }

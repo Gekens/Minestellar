@@ -73,6 +73,7 @@ tile.teleporter.name=Planetary Teleporter Block
 itemGroup.MinestellarBlocks=Minestellar Blocks
 itemGroup.MinestellarItems=Minestellar Items
 gui.info.oil.name=Oil
+data.moon.dimension=1,080
 
 # ENITYS
 

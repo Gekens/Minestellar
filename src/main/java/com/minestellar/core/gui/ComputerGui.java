@@ -36,7 +36,7 @@ import com.minestellar.core.gui.widget.planets.GuiPlanet;
 
 public class ComputerGui extends GuiScreenWidget{
 
-	private int screenWidth, screenHeight;
+	public int screenWidth, screenHeight;
 
 	private GuiMSButton testButton;
 	private GuiPlanet sun, earth, moon;
@@ -59,15 +59,15 @@ public class ComputerGui extends GuiScreenWidget{
 		add(sun = new GuiPlanet(100, 100, "sun"));
 		add(earth = new GuiPlanet(200, 100, "earth"));
 		add(moon = new GuiPlanet(300, 100, "moon"));
-		add(planetInfoTop = new GuiSideBarWidget(screenWidth, screenHeight, screenWidth, 100, 0).setColors(0xAA555555, 0xAA000000));
-		add(planetInfoLeft = new GuiSideBarWidget(screenWidth, screenHeight, 100, screenHeight, 1).setColors(0xAA555555, 0xAA000000));
-		add(planetInfoBottom = new GuiSideBarWidget(screenWidth, screenHeight, screenWidth, 100, 2).setColors(0xAA555555, 0xAA000000));
-		add(planetInfoRight = new GuiSideBarWidget(screenWidth, screenHeight, 100, screenHeight, 3).setColors(0xAA555555, 0xAA000000));
+		//add(planetInfoTop = new GuiSideBarWidget(screenWidth, screenHeight, screenWidth, 100, 0).setColors(0xAA555555, 0xAA000000).setTitle("Test Title").setContent("gravity", "data.moon.gravity"));
+		//add(planetInfoLeft = new GuiSideBarWidget(screenWidth, screenHeight, 100, screenHeight, 1).setColors(0xAA555555, 0xAA000000).setTitle("Test Title"));
+		//add(planetInfoBottom = new GuiSideBarWidget(screenWidth, screenHeight, screenWidth, 100, 2).setColors(0xAA555555, 0xAA000000).setTitle("Test Title"));
+		//add(planetInfoRight = new GuiSideBarWidget(screenWidth, screenHeight, 100, screenHeight, 3).setColors(0xAA555555, 0xAA000000).setTitle("Test Title"));
 	}
 
 	@Override
 	public void drawBackground(){
-		drawDefaultBackground();
+		//drawDefaultBackground();
 	}
 
 	@Override

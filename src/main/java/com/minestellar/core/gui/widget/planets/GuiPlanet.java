@@ -68,6 +68,11 @@ public class GuiPlanet extends GuiWidget{
 						}
 					}
 					setSelected(!isSelected());
+					if(isSelected()){ // Crashes so hard
+						((ComputerGui) parent).add(((ComputerGui) parent).planetInfoLeft = new GuiSideBarWidget(((ComputerGui) parent).screenWidth, ((ComputerGui) parent).screenHeight, 100, ((ComputerGui) parent).screenHeight, 1).setColors(0xAA555555, 0xAA000000));
+						((ComputerGui) parent).planetInfoLeft.setTitle(name);
+						((ComputerGui) parent).planetInfoLeft.setContent("dimension", "data." + name + ".dimension");
+					}
 				}
 			}
 		}
