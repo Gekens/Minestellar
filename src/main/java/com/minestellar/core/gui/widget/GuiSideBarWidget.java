@@ -22,7 +22,7 @@ import java.util.Iterator;
 import net.minecraft.client.resources.I18n;
 
 /**
- * SideBar element used for planet's information <p>Use <i>setColors(int, int)</i></p>
+ * SideBar element used for planet's information <p>Don't forget to use <i>setColors(int, int)</i></p>
  */
 
 public class GuiSideBarWidget extends GuiWidget{
@@ -87,6 +87,12 @@ public class GuiSideBarWidget extends GuiWidget{
 		}
 	}
 
+	@Override
+	public void update(){
+		drawTitle();
+		drawContent();
+	}
+	
 	/**
 	 * The colors are in this format <code>0xAARRGGBB</code>, A is <code>alpha</code>, R is <code>red</code>, G is <code>green</code> and B is <code>blue</code>
 	 */
@@ -167,9 +173,7 @@ public class GuiSideBarWidget extends GuiWidget{
 				GuiDraw.drawCentered(I18n.format(map.get("dimension")), screenWidth-GuiDraw.getStringWidth("Dimension: "), y+40, 0xFFFFFFFF);
 				break;
 			}
-		}catch(Exception e){
-
-		}
+		}catch(Exception e){}
 
 	}
 

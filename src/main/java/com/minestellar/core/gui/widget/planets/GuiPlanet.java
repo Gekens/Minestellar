@@ -61,17 +61,22 @@ public class GuiPlanet extends GuiWidget{
 					for(Iterator iterator = parent.widgets.iterator(); iterator.hasNext();){
 						GuiWidget widget = (GuiWidget)iterator.next();
 						if(widget instanceof GuiPlanet){
-							if(widget != this)
+							if(widget != this){
 								((GuiPlanet) widget).setSelected(false);
+								((ComputerGui) parent).setDraw(false);
+								((ComputerGui) parent).setSelectedPlanet(null);
+							}
 						}else{
 							continue;
 						}
 					}
 					setSelected(!isSelected());
-					if(isSelected()){ // Crashes so hard
-						((ComputerGui) parent).add(((ComputerGui) parent).planetInfoLeft = new GuiSideBarWidget(((ComputerGui) parent).screenWidth, ((ComputerGui) parent).screenHeight, 100, ((ComputerGui) parent).screenHeight, 1).setColors(0xAA555555, 0xAA000000));
-						((ComputerGui) parent).planetInfoLeft.setTitle(name);
-						((ComputerGui) parent).planetInfoLeft.setContent("dimension", "data." + name + ".dimension");
+					if(isSelected()){
+						((ComputerGui) parent).setSelectedPlanet(this);
+						((ComputerGui) parent).setDraw(true);
+					}else{
+						((ComputerGui) parent).setSelectedPlanet(null);
+						((ComputerGui) parent).setDraw(false);
 					}
 				}
 			}
@@ -148,6 +153,10 @@ public class GuiPlanet extends GuiWidget{
 
 	public void setSelectable(boolean b){
 		isSelectable = b;
+	}
+
+	public String getName(){
+		return name;
 	}
 
 	public void setTexture(ResourceLocation texture){

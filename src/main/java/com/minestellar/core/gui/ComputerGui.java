@@ -37,9 +37,10 @@ import com.minestellar.core.gui.widget.planets.GuiPlanet;
 public class ComputerGui extends GuiScreenWidget{
 
 	public int screenWidth, screenHeight;
+	private boolean doesDraw = false;
 
 	private GuiMSButton testButton;
-	private GuiPlanet sun, earth, moon;
+	private GuiPlanet selectedPlanet, sun, earth, moon;
 	public GuiSideBarWidget planetInfoTop, planetInfoLeft, planetInfoBottom, planetInfoRight;
 
 	public ComputerGui() {
@@ -51,11 +52,19 @@ public class ComputerGui extends GuiScreenWidget{
 	@Override
 	public void updateScreen(){
 		super.updateScreen();
+		if(this.selectedPlanet != null){
+			if(doesDraw){
+				setDraw(false);
+				add(planetInfoLeft = new GuiSideBarWidget(screenWidth, screenHeight, 100, screenHeight, 1).setColors(0xAA555555, 0xAA000000).setTitle(selectedPlanet.getName()));
+			}
+		}else if(this.selectedPlanet == null || !doesDraw){
+			removeSidebars();
+		}
 	}
 
 	@Override
 	public void addWidgets(){
-		add(testButton = new GuiMSButton(0, 0, 30, 20, "test").setActionCommand("test"));
+		//add(testButton = new GuiMSButton(0, 0, 30, 20, "test").setActionCommand("test"));
 		add(sun = new GuiPlanet(100, 100, "sun"));
 		add(earth = new GuiPlanet(200, 100, "earth"));
 		add(moon = new GuiPlanet(300, 100, "moon"));
@@ -67,7 +76,7 @@ public class ComputerGui extends GuiScreenWidget{
 
 	@Override
 	public void drawBackground(){
-		//drawDefaultBackground();
+		drawDefaultBackground();
 	}
 
 	@Override
@@ -93,6 +102,39 @@ public class ComputerGui extends GuiScreenWidget{
 	@Override
 	public boolean doesGuiPauseGame(){
 		return false;
+	}
+
+	/**
+	 * Sets the <code>doesDraw</code> variable to the parameter 
+	 * <p><code>doesDraw</code> is used to draw only one time the {@link GuiSideBarWidget}</p>
+	 * 
+	 * @param b The boolean
+	 * @see GuiSideBarWidget
+	 */
+	
+	public void setDraw(boolean b){
+		this.doesDraw = b;
+	}
+
+	/**
+	 * Sets the selected planet to draw the {@link GuiSideBarWidget}
+	 * 
+	 * @see GuiSideBarWidget
+	 */
+	
+	public void setSelectedPlanet(GuiPlanet planet){
+		this.selectedPlanet = planet;
+	}
+	
+	public void removeSidebars(){
+		widgets.remove(planetInfoBottom);
+		widgets.remove(planetInfoLeft);
+		widgets.remove(planetInfoRight);
+		widgets.remove(planetInfoTop);
+		planetInfoBottom = null;
+		planetInfoLeft = null;
+		planetInfoRight = null;
+		planetInfoTop = null;
 	}
 
 }
