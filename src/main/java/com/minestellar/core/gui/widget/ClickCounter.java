@@ -1,9 +1,9 @@
 package com.minestellar.core.gui.widget;
 
-import com.google.common.base.Objects;
-
 import java.util.Map;
 import java.util.TreeMap;
+
+import com.google.common.base.Objects;
 
 public class ClickCounter<T>{
     public class ClickCount{

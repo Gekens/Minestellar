@@ -1,9 +1,9 @@
 package com.minestellar.core.perlin.generator;
 
+import java.util.Random;
+
 import com.minestellar.core.perlin.FishyNoise;
 import com.minestellar.core.perlin.NoiseModule;
-
-import java.util.Random;
 
 public class Billowed extends NoiseModule
 {

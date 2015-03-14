@@ -16,13 +16,7 @@
 
 package com.minestellar.core.proxy;
 
-import com.minestellar.core.util.WorldUtil;
-import com.minestellar.moon.util.ConfigManagerMoon;
-import com.minestellar.space.asteroids.util.ConfigManagerAsteroids;
-import com.minestellar.space.orbit.util.ConfigManagerOrbit;
-
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.MathHelper;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
@@ -57,20 +51,6 @@ public class CommonProxyCore {
 	public static class TickHandler{
 		@SubscribeEvent
 		public void onTick(PlayerTickEvent event){
-			if(event.player.dimension == ConfigManagerAsteroids.idDimensionAsteroids ||
-				event.player.dimension == ConfigManagerOrbit.idDimensionOrbit ||
-				event.player.dimension == ConfigManagerMoon.idDimensionMoon){
-				double g = WorldUtil.getGravityForEntity(event.player);
-				if(!event.player.onGround && event.player.motionY >= 0.1){
-					event.player.motionY = event.player.motionY * g * 0.32;
-					if (event.player.isSprinting()){
-			            float f = event.player.rotationYaw * 0.017453292F;
-			            event.player.motionX -= (double)(MathHelper.sin(f) * 0.2F);
-			            event.player.motionZ += (double)(MathHelper.cos(f) * 0.2F);
-			        }
-					event.player.velocityChanged = true;
-				}
-			}
 		}
 	}
 }

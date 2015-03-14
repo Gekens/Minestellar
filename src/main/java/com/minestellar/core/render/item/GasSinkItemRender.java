@@ -16,13 +16,13 @@
 
 package com.minestellar.core.render.item;
 
-import org.lwjgl.opengl.GL11;
-
-import com.minestellar.core.blocks.tile.TileEntityGasSink;
-
 import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.IItemRenderer;
+
+import org.lwjgl.opengl.GL11;
+
+import com.minestellar.core.blocks.tile.TileEntityGasSink;
 
 public class GasSinkItemRender implements IItemRenderer {
 	@Override

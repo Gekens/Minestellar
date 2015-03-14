@@ -23,9 +23,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 import cofh.api.energy.EnergyStorage;
 import cofh.api.energy.IEnergyHandler;
-
-import com.minestellar.core.util.MinestellarLog;
-
 import cpw.mods.fml.common.Optional;
 import cpw.mods.fml.common.Optional.Method;
 

@@ -21,6 +21,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
+
 import com.minestellar.core.MinestellarCore;
 import com.minestellar.core.model.ModelOxygenCollector;
 

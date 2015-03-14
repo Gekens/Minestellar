@@ -18,16 +18,14 @@ package com.minestellar.core.util;
 
 import org.apache.logging.log4j.Level;
 
-import com.minestellar.core.Constants;
-
 import cpw.mods.fml.relauncher.FMLRelaunchLog;
 
 public class MinestellarLog {
 	public static void info(String message) {
-		FMLRelaunchLog.log(Constants.MOD_NAME, Level.INFO, message);
+		FMLRelaunchLog.log("Minestellar", Level.INFO, message);
 	}
 
 	public static void severe(String message) {
-		FMLRelaunchLog.log(Constants.MOD_NAME, Level.ERROR, message);
+		FMLRelaunchLog.log("Minestellar", Level.ERROR, message);
 	}
 }

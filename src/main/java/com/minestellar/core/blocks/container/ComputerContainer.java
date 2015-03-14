@@ -16,10 +16,10 @@
 
 package com.minestellar.core.blocks.container;
 
-import com.minestellar.core.blocks.tile.TileEntityComputer;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
+
+import com.minestellar.core.blocks.tile.TileEntityComputer;
 
 public class ComputerContainer extends Container{
 

@@ -3,11 +3,11 @@ package com.minestellar.core.gui.widget;
 import java.awt.Point;
 import java.util.ArrayList;
 
-import org.lwjgl.input.Mouse;
-import org.lwjgl.opengl.GL11;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
+
+import org.lwjgl.input.Mouse;
+import org.lwjgl.opengl.GL11;
 
 public class GuiScreenWidget extends GuiScreen implements IGuiActionListener{    
 

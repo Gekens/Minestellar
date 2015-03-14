@@ -1,7 +1,5 @@
 package com.minestellar.core.gui.widget;
 
-import net.minecraft.client.Minecraft;
-
 import org.lwjgl.opengl.GL11;
 
 public class GuiMSButton extends GuiWidget{

@@ -16,10 +16,6 @@
 
 package com.minestellar.core.blocks.machines;
 
-import com.minestellar.core.GUIs;
-import com.minestellar.core.MinestellarCore;
-import com.minestellar.core.blocks.tile.TileEntityComputer;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
@@ -27,6 +23,10 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
+
+import com.minestellar.core.MinestellarCore;
+import com.minestellar.core.blocks.tile.TileEntityComputer;
+import com.minestellar.core.gui.GUIs;
 
 public class Computer extends Block implements ITileEntityProvider{
 

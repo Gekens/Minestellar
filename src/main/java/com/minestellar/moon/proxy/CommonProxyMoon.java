@@ -16,58 +16,20 @@
 
 package com.minestellar.moon.proxy;
 
-import com.minestellar.moon.util.ConfigManagerMoon;
-
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.entity.living.LivingEvent.LivingJumpEvent;
-import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.gameevent.TickEvent.PlayerTickEvent;
 
 public class CommonProxyMoon {
 	public void preInit(FMLPreInitializationEvent event) {
 	}
 
 	public void init(FMLInitializationEvent event) {
-		MinecraftForge.EVENT_BUS.register(new JumpHandlerCommon());
-		// MinecraftForge.EVENT_BUS.register(new PlayerTickHandlerCommon());
-		FMLCommonHandler.instance().bus().register(new PlayerTickHandlerCommon());
 	}
 
 	public void postInit(FMLPostInitializationEvent event) {
 	}
 
 	public void spawnParticle(String string, double x, double y, double z) {
-	}
-
-	public static class JumpHandlerCommon {
-		@SubscribeEvent
-		public void onLivingJumpEvent(LivingJumpEvent event) {
-			if (event.entityLiving instanceof EntityPlayer) {
-				EntityPlayer player = (EntityPlayer) event.entityLiving;
-				if (player.dimension == ConfigManagerMoon.idDimensionMoon) {
-					double addY = 0.5D; // change to the entity's Y motion.
-					player.addVelocity(0, addY, 0);
-					player.velocityChanged = true;
-				}
-			}
-		}
-	}
-
-	public static class PlayerTickHandlerCommon {
-		@SubscribeEvent
-		public void onPlayerTick(PlayerTickEvent e) {
-			if (e.player.dimension == ConfigManagerMoon.idDimensionMoon) {
-				if (e.player.motionY <= 0) {
-					double addY = 0.95D; // change to the entity's Y motion.
-					e.player.motionY *= addY;
-					e.player.velocityChanged = true;
-				}
-			}
-		}
 	}
 }

@@ -36,7 +36,6 @@ import net.minecraft.world.WorldType;
 
 import com.minestellar.api.vector.Vector3;
 import com.minestellar.api.world.IMinestellarWorldProvider;
-import com.minestellar.moon.world.WorldProviderMoon;
 
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -76,7 +75,7 @@ public class WorldUtil {
 
 	@SideOnly(Side.CLIENT)
 	public static float getWorldBrightness(WorldClient world) {
-		if (world.provider instanceof WorldProviderMoon) { // TODO: Remove moon reliance
+		if (world.provider instanceof IMinestellarWorldProvider) {
 			float f1 = world.getCelestialAngle(1.0F);
 			float f2 = 1.0F - (MathHelper.cos(f1 * (float) Math.PI * 2.0F) * 2.0F + 0.2F);
 

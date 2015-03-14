@@ -16,14 +16,14 @@
 
 package com.minestellar.core.render.tile;
 
+import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ResourceLocation;
+
 import org.lwjgl.opengl.GL11;
 
 import com.minestellar.core.MinestellarCore;
 import com.minestellar.core.model.ModelGasSink;
-
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ResourceLocation;
 
 public class TileEntityRenderGasSink extends TileEntitySpecialRenderer {
 	private ResourceLocation texture;

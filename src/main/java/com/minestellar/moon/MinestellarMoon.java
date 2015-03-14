@@ -68,7 +68,7 @@ public class MinestellarMoon {
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
-		new ConfigManagerMoon(new File(event.getModConfigurationDirectory(), Constants.MOD_NAME + "/moon.cfg"));
+		new ConfigManagerMoon(new File(event.getModConfigurationDirectory(), "Minestellar/moon.cfg"));
 
 		MoonBlocks.init();
 		MoonItems.init();

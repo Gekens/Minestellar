@@ -16,14 +16,13 @@
 
 package com.minestellar.core.blocks.tile;
 
-import com.minestellar.core.util.MinestellarLog;
-import cpw.mods.fml.common.Optional.Method;
 import mekanism.api.gas.Gas;
 import mekanism.api.gas.GasStack;
 import mekanism.api.gas.GasTank;
 import mekanism.api.gas.IGasHandler;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
+import cpw.mods.fml.common.Optional.Method;
 
 public class TileEntityGasSink extends TileEntity implements IGasHandler {
 	private GasTank gasTank;

@@ -48,7 +48,7 @@ public class ConfigManagerMoon {
 			ConfigManagerMoon.idDimensionMoon = ConfigManagerMoon.configuration.get(Constants.CONFIGURATION_DIMENSIONS, "Moon Dimension", -25).getInt(-25);
 			ConfigManagerMoon.idBiomeMoon = ConfigManagerMoon.configuration.get(Constants.CONFIGURATION_BIOMES, "Moon Biome", 225).getInt(225);
 		} catch (final Exception e) {
-			FMLLog.log(Level.ERROR, e, Constants.MOD_NAME + " Moon Config has a problem loading it's configuration");
+			FMLLog.log(Level.ERROR, e, "Minestellar Moon Config has a problem loading it's configuration");
 		} finally {
 			ConfigManagerMoon.configuration.save();
 			ConfigManagerMoon.loaded = true;

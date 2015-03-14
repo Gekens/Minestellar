@@ -80,7 +80,7 @@ public class MinestellarCore {
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
-		new ConfigManagerCore(new File(event.getModConfigurationDirectory(), Constants.MOD_NAME + "/core.cfg"));
+		new ConfigManagerCore(new File(event.getModConfigurationDirectory(), "Minestellar/core.cfg"));
 
 		CoreBlocks.init();
 		CoreItems.init();

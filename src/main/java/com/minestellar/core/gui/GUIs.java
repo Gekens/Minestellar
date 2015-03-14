@@ -14,7 +14,7 @@
  * this program; if not, see <http://www.gnu.org/licenses>.
  */
 
-package com.minestellar.core;
+package com.minestellar.core.gui;
 
 public class GUIs {
 

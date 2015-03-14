@@ -18,8 +18,6 @@ package com.minestellar.core.blocks.tile;
 
 import java.util.ArrayList;
 
-import com.minestellar.core.util.MinestellarLog;
-
 import mekanism.api.gas.Gas;
 import mekanism.api.gas.GasStack;
 import mekanism.api.gas.GasTank;

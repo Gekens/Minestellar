@@ -16,18 +16,14 @@
 
 package com.minestellar.core.gui;
 
-import net.minecraft.util.ResourceLocation;
-
 import org.lwjgl.opengl.GL11;
 
-import com.minestellar.core.MinestellarCore;
 import com.minestellar.core.blocks.machines.Computer;
 import com.minestellar.core.blocks.tile.TileEntityComputer;
 import com.minestellar.core.gui.widget.GuiDraw;
 import com.minestellar.core.gui.widget.GuiMSButton;
 import com.minestellar.core.gui.widget.GuiScreenWidget;
 import com.minestellar.core.gui.widget.GuiSideBarWidget;
-import com.minestellar.core.gui.widget.GuiWidget;
 import com.minestellar.core.gui.widget.planets.GuiPlanet;
 
 /**

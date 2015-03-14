@@ -37,6 +37,9 @@ item.carbon_axe.name=Carbon Axe
 item.carbon_hoe.name=Carbon Hoe
 item.carbon_shovel.name=Carbon Shovel
 item.carbon_sword.name=Carbon Sword
+item.oxygen_bucket.name=Oxygen Bucket
+item.hydrogen_bucket.name=Hydrogen Bucket
+item.nitrogen_bucket.name=Nitrogen Bucket
 
 # ARMOR
 item.carbon_helmet.name=Carbon Helmet
@@ -68,6 +71,12 @@ tile.core_pipe.light_pipe.name=Gas Pipe (Light)
 tile.core_pipe.medium_pipe.name=Gas Pipe (Medium)
 tile.core_pipe.heavy_pipe.name=Gas Pipe (Heavy)
 tile.teleporter.name=Planetary Teleporter Block
+
+#TILE
+tile.oxygen_collector.name=Oxygen Collector
+tile.gas_sink.name=Gas Sink
+tile.solar_generator.name=Solar Generator
+tile.computer.name=Rocket Computer
 
 # GUIS
 itemGroup.MinestellarBlocks=Minestellar Blocks

@@ -1,8 +1,8 @@
 package com.minestellar.core.gui.widget;
 
-import org.lwjgl.input.Keyboard;
+import java.awt.Rectangle;
 
-import java.awt.*;
+import org.lwjgl.input.Keyboard;
 
 public abstract class GuiScrollSlot extends GuiScrollPane
 {

@@ -16,14 +16,14 @@
 
 package com.minestellar.core.handler;
 
-import com.minestellar.core.GUIs;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.world.World;
+
 import com.minestellar.core.blocks.container.ComputerContainer;
 import com.minestellar.core.blocks.tile.TileEntityComputer;
 import com.minestellar.core.gui.ComputerGui;
+import com.minestellar.core.gui.GUIs;
 
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.World;
 import cpw.mods.fml.common.network.IGuiHandler;
 
 public class GuiHandler implements IGuiHandler{

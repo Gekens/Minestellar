@@ -1,0 +1,16 @@
+[
+{
+  "modid": "minestellar",
+  "name": "MineStellar",
+  "description": "Galactic exploration and more!",
+  "version": "0.0.1",
+  "mcversion": "1.7",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["Mattparks"],
+  "credits": "",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
