@@ -82,7 +82,9 @@ tile.computer.name=Rocket Computer
 itemGroup.MinestellarBlocks=Minestellar Blocks
 itemGroup.MinestellarItems=Minestellar Items
 gui.info.oil.name=Oil
+
 data.moon.dimension=1,080 miles
+data.moon.gravity=1.622m/s^2
 
 # ENITYS
 

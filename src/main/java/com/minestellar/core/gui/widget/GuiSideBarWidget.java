@@ -148,12 +148,6 @@ public class GuiSideBarWidget extends GuiWidget{
 	 */
 
 	public void drawContent(){
-		for (Iterator iterator = map.values().iterator(); iterator.hasNext();) {
-			String s = (String) iterator.next();
-			if(s == null){
-				
-			}
-		}
 		try{
 			switch(side){
 			case 0:
@@ -162,7 +156,10 @@ public class GuiSideBarWidget extends GuiWidget{
 				break;
 			case 1:
 				GuiDraw.drawString("Dimension: ", 10, y+40, 0xFFFFFFFF);
-				GuiDraw.drawCentered(I18n.format(map.get("dimension")), GuiDraw.getStringWidth("Dimension: "), y+40, 0xFFFFFFFF);
+				GuiDraw.drawCentered(I18n.format(map.get("dimension")), GuiDraw.getStringWidth(I18n.format(map.get("dimension")))+GuiDraw.getStringWidth("Dimension: "), y+40, 0xFFFFFFFF);
+				
+				GuiDraw.drawString("Gravity: ", 10, y+80, 0xFFFFFFFF);
+				GuiDraw.drawCentered(I18n.format(map.get("gravity")), GuiDraw.getStringWidth(I18n.format(map.get("gravity")))+GuiDraw.getStringWidth("Gravity: "), y+80, 0xFFFFFFFF);
 				break;
 			case 2:
 				GuiDraw.drawString("Dimension: ", 10, y+40, 0xFFFFFFFF);
@@ -174,7 +171,6 @@ public class GuiSideBarWidget extends GuiWidget{
 				break;
 			}
 		}catch(Exception e){}
-
 	}
 
 }

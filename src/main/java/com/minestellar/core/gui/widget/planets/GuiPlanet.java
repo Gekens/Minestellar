@@ -63,14 +63,15 @@ public class GuiPlanet extends GuiWidget{
 						if(widget instanceof GuiPlanet){
 							if(widget != this){
 								((GuiPlanet) widget).setSelected(false);
-								((ComputerGui) parent).setDraw(false);
 								((ComputerGui) parent).setSelectedPlanet(null);
+								((ComputerGui) parent).setDraw(false);
 							}
 						}else{
 							continue;
 						}
 					}
 					setSelected(!isSelected());
+					System.out.println(name);
 					if(isSelected()){
 						((ComputerGui) parent).setSelectedPlanet(this);
 						((ComputerGui) parent).setDraw(true);
@@ -92,21 +93,8 @@ public class GuiPlanet extends GuiWidget{
 		if(isSelected()){
 			drawSelectedBox();
 		}
-
-		Tessellator tessellator = Tessellator.instance;
-		tessellator.startDrawingQuads();
-		{
-			tessellator.addVertexWithUV(x, y, zLevel, 0, 0);
-			tessellator.addVertexWithUV(x+8, y, zLevel, 8, 0);
-			tessellator.addVertexWithUV(x, y+8, zLevel, 8, 8);
-			tessellator.addVertexWithUV(x+8, y+8, zLevel, 0, 8);
-
-			tessellator.addVertexWithUV(x+8, y+8, zLevel, 0, 8);
-			tessellator.addVertexWithUV(x, y+8, zLevel, 8, 8);
-			tessellator.addVertexWithUV(x+8, y, zLevel, 8, 0);
-			tessellator.addVertexWithUV(x, y, zLevel, 0, 0);
-		}
-		tessellator.draw();
+		
+		drawTexturedModalRect(x, y, 0, 0, 8, 8);
 	}
 
 	/**
@@ -154,7 +142,7 @@ public class GuiPlanet extends GuiWidget{
 	public void setSelectable(boolean b){
 		isSelectable = b;
 	}
-
+	
 	public String getName(){
 		return name;
 	}

@@ -16,6 +16,8 @@
 
 package com.minestellar.core.gui;
 
+import net.minecraft.client.resources.I18n;
+
 import org.lwjgl.opengl.GL11;
 
 import com.minestellar.core.blocks.machines.Computer;
@@ -51,7 +53,8 @@ public class ComputerGui extends GuiScreenWidget{
 		if(this.selectedPlanet != null){
 			if(doesDraw){
 				setDraw(false);
-				add(planetInfoLeft = new GuiSideBarWidget(screenWidth, screenHeight, 100, screenHeight, 1).setColors(0xAA555555, 0xAA000000).setTitle(selectedPlanet.getName()));
+				add(planetInfoLeft = new GuiSideBarWidget(screenWidth, screenHeight, 200, screenHeight, 1).setColors(0xAA555555, 0xAA000000).setTitle(selectedPlanet.getName())
+						.setContent("dimension", I18n.format("data." + selectedPlanet.getName() + ".dimension")).setContent("gravity", I18n.format("data." + selectedPlanet.getName() + ".gravity")));
 			}
 		}else if(this.selectedPlanet == null || !doesDraw){
 			removeSidebars();
