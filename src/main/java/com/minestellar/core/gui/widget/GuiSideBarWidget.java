@@ -17,7 +17,6 @@
 package com.minestellar.core.gui.widget;
 
 import java.util.HashMap;
-import java.util.Iterator;
 
 import net.minecraft.client.resources.I18n;
 
@@ -152,18 +151,18 @@ public class GuiSideBarWidget extends GuiWidget{
 			switch(side){
 			case 0:
 				GuiDraw.drawString("Dimension: ", 10, y+40, 0xFFFFFFFF);
-				GuiDraw.drawString(I18n.format(map.get("dimension")), 15+GuiDraw.getStringWidth("Dimension: "), y+40, 0xFFFFFFFF);
+				GuiDraw.drawString(I18n.format(map.get("dimension")), 2*GuiDraw.getStringWidth("Dimension: "), y+40, 0xFFFFFFFF);
 				break;
 			case 1:
 				GuiDraw.drawString("Dimension: ", 10, y+40, 0xFFFFFFFF);
-				GuiDraw.drawCentered(I18n.format(map.get("dimension")), GuiDraw.getStringWidth(I18n.format(map.get("dimension")))+GuiDraw.getStringWidth("Dimension: "), y+40, 0xFFFFFFFF);
+				GuiDraw.drawCentered(I18n.format(map.get("dimension")), 2*GuiDraw.getStringWidth("Dimension: "), y+40, 0xFFFFFFFF);
 				
 				GuiDraw.drawString("Gravity: ", 10, y+80, 0xFFFFFFFF);
-				GuiDraw.drawCentered(I18n.format(map.get("gravity")), GuiDraw.getStringWidth(I18n.format(map.get("gravity")))+GuiDraw.getStringWidth("Gravity: "), y+80, 0xFFFFFFFF);
+				GuiDraw.drawCentered(I18n.format(map.get("gravity")), 2*GuiDraw.getStringWidth("Gravity: "), y+80, 0xFFFFFFFF);
 				break;
 			case 2:
 				GuiDraw.drawString("Dimension: ", 10, y+40, 0xFFFFFFFF);
-				GuiDraw.drawCentered(I18n.format(map.get("dimension")), 15+GuiDraw.getStringWidth("Dimension: "), height+height/2+40, 0xFFFFFFFF);
+				GuiDraw.drawCentered(I18n.format(map.get("dimension")), GuiDraw.getStringWidth("Dimension: "), height+height/2+40, 0xFFFFFFFF);
 				break;
 			case 3:
 				GuiDraw.drawString("Dimension: ", 10, y+40, 0xFFFFFFFF);

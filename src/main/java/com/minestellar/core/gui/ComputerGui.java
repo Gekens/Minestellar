@@ -16,6 +16,8 @@
 
 package com.minestellar.core.gui;
 
+import java.util.ArrayList;
+
 import net.minecraft.client.resources.I18n;
 
 import org.lwjgl.opengl.GL11;
@@ -35,8 +37,10 @@ import com.minestellar.core.gui.widget.planets.GuiPlanet;
 public class ComputerGui extends GuiScreenWidget{
 
 	public int screenWidth, screenHeight;
+	public ArrayList<GuiPlanet> planets = new ArrayList<GuiPlanet>();
 	private boolean doesDraw = false;
 
+	
 	private GuiMSButton testButton;
 	private GuiPlanet selectedPlanet, sun, earth, moon;
 	public GuiSideBarWidget planetInfoTop, planetInfoLeft, planetInfoBottom, planetInfoRight;
@@ -56,21 +60,20 @@ public class ComputerGui extends GuiScreenWidget{
 				add(planetInfoLeft = new GuiSideBarWidget(screenWidth, screenHeight, 200, screenHeight, 1).setColors(0xAA555555, 0xAA000000).setTitle(selectedPlanet.getName())
 						.setContent("dimension", I18n.format("data." + selectedPlanet.getName() + ".dimension")).setContent("gravity", I18n.format("data." + selectedPlanet.getName() + ".gravity")));
 			}
-		}else if(this.selectedPlanet == null || !doesDraw){
+		}
+		if(this.selectedPlanet == null && !this.doesDraw){
 			removeSidebars();
 		}
 	}
 
 	@Override
 	public void addWidgets(){
-		//add(testButton = new GuiMSButton(0, 0, 30, 20, "test").setActionCommand("test"));
 		add(sun = new GuiPlanet(100, 100, "sun"));
 		add(earth = new GuiPlanet(200, 100, "earth"));
 		add(moon = new GuiPlanet(300, 100, "moon"));
-		//add(planetInfoTop = new GuiSideBarWidget(screenWidth, screenHeight, screenWidth, 100, 0).setColors(0xAA555555, 0xAA000000).setTitle("Test Title").setContent("gravity", "data.moon.gravity"));
-		//add(planetInfoLeft = new GuiSideBarWidget(screenWidth, screenHeight, 100, screenHeight, 1).setColors(0xAA555555, 0xAA000000).setTitle("Test Title"));
-		//add(planetInfoBottom = new GuiSideBarWidget(screenWidth, screenHeight, screenWidth, 100, 2).setColors(0xAA555555, 0xAA000000).setTitle("Test Title"));
-		//add(planetInfoRight = new GuiSideBarWidget(screenWidth, screenHeight, 100, screenHeight, 3).setColors(0xAA555555, 0xAA000000).setTitle("Test Title"));
+		planets.add(earth);
+		planets.add(moon);
+		planets.add(sun);
 	}
 
 	@Override
@@ -123,6 +126,16 @@ public class ComputerGui extends GuiScreenWidget{
 	
 	public void setSelectedPlanet(GuiPlanet planet){
 		this.selectedPlanet = planet;
+	}
+	
+	/**
+	 * Returns the current selected planet
+	 * 
+	 * @return The current selected planet
+	 */
+	
+	public GuiPlanet getSelectedPlanet() {
+		return selectedPlanet;
 	}
 	
 	public void removeSidebars(){

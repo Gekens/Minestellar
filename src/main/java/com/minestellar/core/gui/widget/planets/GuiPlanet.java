@@ -18,7 +18,6 @@ package com.minestellar.core.gui.widget.planets;
 
 import java.util.Iterator;
 
-import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
@@ -53,25 +52,22 @@ public class GuiPlanet extends GuiWidget{
 
 	@Override
 	public void mouseClicked(int x, int y, int button){
-		if(isEnabled() && isSelectable() && pointInside(x, y)){
+		if(isEnabled() && pointInside(x, y)){
 			if(parentScreen instanceof GuiScreenWidget){
 				parent = (GuiScreenWidget)parentScreen;
 				if(parent instanceof ComputerGui){
-					parent = (ComputerGui)parent;
-					for(Iterator iterator = parent.widgets.iterator(); iterator.hasNext();){
-						GuiWidget widget = (GuiWidget)iterator.next();
-						if(widget instanceof GuiPlanet){
-							if(widget != this){
-								((GuiPlanet) widget).setSelected(false);
-								((ComputerGui) parent).setSelectedPlanet(null);
-								((ComputerGui) parent).setDraw(false);
+					ComputerGui gui = (ComputerGui)parent;
+					for(Iterator iterator = gui.planets.iterator(); iterator.hasNext();){
+						try{
+							GuiPlanet planet = (GuiPlanet)iterator.next();
+							if(planet != this){
+								((GuiPlanet) planet).setSelected(false);
+								gui.setSelectedPlanet(null);
+								gui.setDraw(false);
 							}
-						}else{
-							continue;
-						}
+						}catch(Exception e){}
 					}
 					setSelected(!isSelected());
-					System.out.println(name);
 					if(isSelected()){
 						((ComputerGui) parent).setSelectedPlanet(this);
 						((ComputerGui) parent).setDraw(true);
@@ -93,7 +89,7 @@ public class GuiPlanet extends GuiWidget{
 		if(isSelected()){
 			drawSelectedBox();
 		}
-		
+
 		drawTexturedModalRect(x, y, 0, 0, 8, 8);
 	}
 
@@ -131,18 +127,6 @@ public class GuiPlanet extends GuiWidget{
 		isSelected = b;
 	}	
 
-	/**
-	 * Used to make sure that only one planet is selected at time, no more than one
-	 */
-
-	public boolean isSelectable(){
-		return isSelectable;
-	}
-
-	public void setSelectable(boolean b){
-		isSelectable = b;
-	}
-	
 	public String getName(){
 		return name;
 	}

@@ -83,8 +83,12 @@ itemGroup.MinestellarBlocks=Minestellar Blocks
 itemGroup.MinestellarItems=Minestellar Items
 gui.info.oil.name=Oil
 
-data.moon.dimension=1,080 miles
+data.moon.dimension=2,159 miles
 data.moon.gravity=1.622m/s^2
+data.sun.dimension=0.8643*10^9 miles
+data.sun.gravity=264m/s^2
+data.earth.dimension=7,919 miles
+data.earth.gravity=9.81m/s^2
 
 # ENITYS
 
