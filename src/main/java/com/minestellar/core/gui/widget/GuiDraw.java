@@ -297,8 +297,101 @@ public class GuiDraw{
     	GL11.glVertex2i(x1, x1);
     	GL11.glVertex2i(x2, y2);
     	GL11.glEnd();
-    	
+
     	GL11.glEnable(GL11.GL_LIGHTING);
+        GL11.glEnable(GL11.GL_DEPTH_TEST);
+        GL11.glDepthMask(true);
+        GL11.glDisable(GL11.GL_BLEND);
+        GL11.glEnable(GL11.GL_TEXTURE_2D);
+        GL11.glDisable(GL11.GL_LINE_SMOOTH);
+    }
+    
+    /**
+     * Draws a circle with the center in P(x,y)
+     * 
+     * @param x The x coordinate of the center
+     * @param y The y coordinate of the center
+     * @param radius The radius of the circle
+     * @param colour The color of the circle
+     * @param definition How often it draws a line. The higher it is the more smooth it looks. You'll see definition/2 lines
+     * @param isFilled Whether or not this circle is filled
+     */
+    
+    public static void drawCircle(int x, int y, int radius, int definition, int colour, boolean isFilled){
+    	float f3 = (float)(colour >> 24 & 255) / 255.0F;
+        float f = (float)(colour >> 16 & 255) / 255.0F;
+        float f1 = (float)(colour >> 8 & 255) / 255.0F;
+        float f2 = (float)(colour & 255) / 255.0F;
+    	
+    	GL11.glColor4f(f, f1, f2, f3);
+		GL11.glDisable(GL11.GL_LIGHTING);
+        GL11.glDisable(GL11.GL_DEPTH_TEST);
+        GL11.glDepthMask(false);
+        GL11.glEnable(GL11.GL_BLEND);
+        GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+        GL11.glDisable(GL11.GL_TEXTURE_2D);
+		
+		Tessellator tes = Tessellator.instance;
+		if(isFilled)
+			tes.startDrawing(GL11.GL_TRIANGLE_FAN);
+		else
+			tes.startDrawing(GL11.GL_LINES);
+		
+        double end = Math.PI * 2.0;
+        double incr = end / definition;
+        for (double theta = -incr; theta < end; theta += incr) {
+        	tes.addVertex(x + (radius * Math.cos(-theta)), y + (radius * Math.sin(-theta)), 0.0);
+        }
+        tes.draw();
+		
+        GL11.glEnable(GL11.GL_LIGHTING);
+        GL11.glEnable(GL11.GL_DEPTH_TEST);
+        GL11.glDepthMask(true);
+        GL11.glDisable(GL11.GL_BLEND);
+        GL11.glEnable(GL11.GL_TEXTURE_2D);
+        GL11.glDisable(GL11.GL_LINE_SMOOTH);
+    }
+    
+    /**
+     * Draws a ellipse with the center in P(x,y)
+     * 
+     * @param x The x coordinate of the center
+     * @param y The y coordinate of the center
+     * @param radiusX The radius on the "x" axis of the circle
+     * @param radiusY The radius on the "y" axis of the circle
+     * @param colour The color of the ellipse
+     * @param definition How often it draws a line. The higher it is the more smooth it looks. You'll see definition/2 lines
+     * @param isFilled Whether or not this ellipse is filled
+     */
+    
+    public static void drawEllipse(int x, int y, int radiusX, int radiusY, int definition, int colour, boolean isFilled){
+    	float f3 = (float)(colour >> 24 & 255) / 255.0F;
+        float f = (float)(colour >> 16 & 255) / 255.0F;
+        float f1 = (float)(colour >> 8 & 255) / 255.0F;
+        float f2 = (float)(colour & 255) / 255.0F;
+    	
+    	GL11.glColor4f(f, f1, f2, f3);
+		GL11.glDisable(GL11.GL_LIGHTING);
+        GL11.glDisable(GL11.GL_DEPTH_TEST);
+        GL11.glDepthMask(false);
+        GL11.glEnable(GL11.GL_BLEND);
+        GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+        GL11.glDisable(GL11.GL_TEXTURE_2D);
+		
+		Tessellator tes = Tessellator.instance;
+		if(isFilled)
+			tes.startDrawing(GL11.GL_TRIANGLE_FAN);
+		else
+			tes.startDrawing(GL11.GL_LINES);
+		
+        double end = Math.PI * 2.0;
+        double incr = end / definition;
+        for (double theta = -incr; theta < end; theta += incr) {
+        	tes.addVertex(x + (radiusX * Math.cos(-theta)), y + (radiusY * Math.sin(-theta)), 0.0);
+        }
+        tes.draw();
+		
+        GL11.glEnable(GL11.GL_LIGHTING);
         GL11.glEnable(GL11.GL_DEPTH_TEST);
         GL11.glDepthMask(true);
         GL11.glDisable(GL11.GL_BLEND);

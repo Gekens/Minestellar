@@ -18,6 +18,7 @@ package com.minestellar.core.gui;
 
 import java.util.ArrayList;
 
+import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.resources.I18n;
 
 import org.lwjgl.opengl.GL11;
@@ -30,17 +31,18 @@ import com.minestellar.core.gui.widget.GuiScreenWidget;
 import com.minestellar.core.gui.widget.GuiSideBarWidget;
 import com.minestellar.core.gui.widget.planets.GuiPlanet;
 
+import cpw.mods.fml.client.FMLClientHandler;
+
 /**
  * GuiScreen for the {@link Computer} and {@link TileEntityComputer}
  */
 
 public class ComputerGui extends GuiScreenWidget{
 
-	public int screenWidth, screenHeight;
+	public int screenWidth, screenHeight, spaceX, spaceY, spaceWidth, spaceHeight;
 	public ArrayList<GuiPlanet> planets = new ArrayList<GuiPlanet>();
 	private boolean doesDraw = false;
 
-	
 	private GuiMSButton testButton;
 	private GuiPlanet selectedPlanet, sun, earth, moon;
 	public GuiSideBarWidget planetInfoTop, planetInfoLeft, planetInfoBottom, planetInfoRight;
@@ -49,6 +51,9 @@ public class ComputerGui extends GuiScreenWidget{
 		super(GuiDraw.displaySize().width, GuiDraw.displaySize().height); // 0,0 is in the top left corner
 		this.screenWidth = GuiDraw.displaySize().width;
 		this.screenHeight = GuiDraw.displaySize().height;
+		this.spaceX = this.spaceY = 10;
+		this.spaceWidth = this.screenWidth-this.spaceX*2;
+		this.spaceHeight = this.screenHeight-this.spaceY*2;
 	}
 
 	@Override
@@ -64,12 +69,20 @@ public class ComputerGui extends GuiScreenWidget{
 		if(this.selectedPlanet == null && !this.doesDraw){
 			removeSidebars();
 		}
+		
+		for(GuiPlanet planet : planets){
+			if(planet.getName().equals("sun")){
+				continue;
+			}
+			//Here will move the planet using planet.setSize();
+		}
+		setWorldAndResolution(FMLClientHandler.instance().getClient(), screenWidth, screenHeight);
 	}
 
 	@Override
 	public void addWidgets(){
-		add(sun = new GuiPlanet(100, 100, "sun"));
-		add(earth = new GuiPlanet(200, 100, "earth"));
+		add(sun = new GuiPlanet(getMid(screenWidth)-8, getMid(screenHeight)-8, "sun"));
+		add(earth = new GuiPlanet(100, 100, "earth"));
 		add(moon = new GuiPlanet(300, 100, "moon"));
 		planets.add(earth);
 		planets.add(moon);
@@ -79,15 +92,19 @@ public class ComputerGui extends GuiScreenWidget{
 	@Override
 	public void drawBackground(){
 		drawDefaultBackground();
+		GuiDraw.drawRect(spaceX, spaceY, spaceWidth, spaceHeight, 0xFF000000);
 	}
 
 	@Override
 	public void drawForeground(){
 		GL11.glDisable(GL11.GL_LIGHTING);
 		GL11.glDisable(GL11.GL_DEPTH_TEST);
-
+		GL11.glDisable(GL11.GL_TEXTURE_2D);
+		
 		//Stuff
+		GuiDraw.drawEllipse(getMid(screenWidth), getMid(screenHeight), 190, 100, 200, 0xAA55ACEE, false);
 
+		GL11.glEnable(GL11.GL_TEXTURE_2D);
 		GL11.glEnable(GL11.GL_LIGHTING);
 		GL11.glEnable(GL11.GL_DEPTH_TEST);
 	}
