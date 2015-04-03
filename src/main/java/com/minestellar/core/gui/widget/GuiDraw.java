@@ -378,7 +378,7 @@ public class GuiDraw{
         GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
         GL11.glDisable(GL11.GL_TEXTURE_2D);
 		
-		Tessellator tes = Tessellator.instance;
+        Tessellator tes = Tessellator.instance;
 		if(isFilled)
 			tes.startDrawing(GL11.GL_TRIANGLE_FAN);
 		else
@@ -386,7 +386,7 @@ public class GuiDraw{
 		
         double end = Math.PI * 2.0;
         double incr = end / definition;
-        for (double theta = -incr; theta < end; theta += incr) {
+        for(double theta = -incr; theta < end; theta += incr){
         	tes.addVertex(x + (radiusX * Math.cos(-theta)), y + (radiusY * Math.sin(-theta)), 0.0);
         }
         tes.draw();

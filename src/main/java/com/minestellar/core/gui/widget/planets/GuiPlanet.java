@@ -90,9 +90,13 @@ public class GuiPlanet extends GuiWidget{
 			drawSelectedBox();
 		}
 
-		drawTexturedModalRect(x, y, 0, 0, 8, 8);
+		drawTexturedModalRect(x, y, 0, 0, width, height);
 	}
 
+	public void setCoords(int x, int y){
+		this.x = x; this.y = y;
+	}
+	
 	/**
 	 * Draws the <i>selected box</i>
 	 */
