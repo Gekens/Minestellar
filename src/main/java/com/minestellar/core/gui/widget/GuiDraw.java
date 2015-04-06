@@ -2,6 +2,7 @@ package com.minestellar.core.gui.widget;
 
 import java.awt.Dimension;
 import java.awt.Point;
+import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -398,5 +399,31 @@ public class GuiDraw{
         GL11.glEnable(GL11.GL_TEXTURE_2D);
         GL11.glDisable(GL11.GL_LINE_SMOOTH);
     }
+    
+    /**
+	 * Fills the array used to describe an ellipse
+	 * 
+	 * @param a The a coefficient of the ellipse
+	 * @param b The b coefficient of the ellipse
+	 * @param array The array to be filled
+	 */
+
+	public static void fillEllipseCoordsArray(double a, double b, ArrayList<Point2D.Double> array){
+		double y = 0.0D;
+		for(double x = a; x >= -a; x -= 0.05){
+			if(x == 0.0D){
+				continue;
+			}
+			y = -Math.sqrt((b*b)*(-((x*x)/(a*a))+1));
+			array.add(new Point2D.Double(x, y));
+		}
+		for(double x = -a; x <= a; x += 0.05){
+			if(x == 0.0D){
+				continue;
+			}
+			y = Math.sqrt((b*b)*(-((x*x)/(a*a))+1));
+			array.add(new Point2D.Double(x, y));
+		}
+	}
     
 }

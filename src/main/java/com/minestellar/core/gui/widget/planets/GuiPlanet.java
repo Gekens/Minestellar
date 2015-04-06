@@ -90,7 +90,10 @@ public class GuiPlanet extends GuiWidget{
 			drawSelectedBox();
 		}
 
-		drawTexturedModalRect(x, y, 0, 0, width, height);
+		drawTexturedModalRect(x, y, 0, 0, width/2, height/2);
+		drawTexturedModalRect(x+width/2, y, 4, 0, width/2, height/2);
+		drawTexturedModalRect(x, y+height/2, 0, 4, width/2, height/2);
+		drawTexturedModalRect(x+width/2, y+height/2, 4, 4, width/2, height/2);
 	}
 
 	public void setCoords(int x, int y){
@@ -141,6 +144,11 @@ public class GuiPlanet extends GuiWidget{
 
 	public ResourceLocation getTexture(){
 		return this.texture;
+	}
+	
+	@Override
+	public String toString() {
+		return this.name + " " + this.x + " " + this.y;
 	}
 
 }

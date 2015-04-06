@@ -133,4 +133,5 @@ public class MinestellarCore {
 
 	private void registerOtherEntities() {
 	}
+	
 }
