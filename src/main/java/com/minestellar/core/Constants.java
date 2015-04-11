@@ -25,4 +25,6 @@ public class Constants {
 	public static final String CONFIGURATION_GENERAL = "general";
 	public static final String CONFIGURATION_BIOMES = "biomes";
 	public static final String CONFIGURATION_DIMENSIONS = "dimensions";
+	
+	public static boolean runTimer = false;
 }

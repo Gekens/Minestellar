@@ -34,6 +34,7 @@ import com.minestellar.core.blocks.tile.TileEntityPipe;
 import com.minestellar.core.blocks.tile.TileEntitySolarGenerator;
 import com.minestellar.core.handler.GuiHandler;
 import com.minestellar.core.items.CoreItems;
+import com.minestellar.core.network.NetworkHandler;
 import com.minestellar.core.proxy.CommonProxyCore;
 import com.minestellar.core.recipe.RecipeManagerCore;
 import com.minestellar.core.util.ConfigManagerCore;
@@ -90,6 +91,8 @@ public class MinestellarCore {
 
 	@EventHandler
 	public void init(FMLInitializationEvent event) {
+		NetworkHandler.init();
+		
 		MinestellarCore.stellarBlocksTab = new MinestellarCreativeTab(CreativeTabs.getNextID(), "MinestellarBlocks", Item.getItemFromBlock(CoreBlocks.coreOreBlocks), 0);
 		MinestellarCore.stellarItemsTab = new MinestellarCreativeTab(CreativeTabs.getNextID(), "MinestellarItems", CoreItems.coreBasicItems, 0);
 

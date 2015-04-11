@@ -17,19 +17,26 @@
 package com.minestellar.core.proxy;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
+
+import com.minestellar.core.Constants;
+import com.minestellar.core.network.NetworkHandler;
+import com.minestellar.core.network.message.MessageLogin;
+import com.minestellar.core.network.message.MessageLogout;
+
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.gameevent.TickEvent.PlayerTickEvent;
+import cpw.mods.fml.common.gameevent.PlayerEvent;
 
-public class CommonProxyCore {
+public abstract class CommonProxyCore {
 	public void preInit(FMLPreInitializationEvent event) {
 	}
 
 	public void init(FMLInitializationEvent event) {
-		FMLCommonHandler.instance().bus().register(new TickHandler());
+		FMLCommonHandler.instance().bus().register(new PlayerInteractor());
 	}
 
 	public void postInit(FMLPostInitializationEvent event) {
@@ -47,10 +54,23 @@ public class CommonProxyCore {
 
 	public void onUpdate() {
 	}
-	
-	public static class TickHandler{
+
+	public EntityPlayer getClientPlayer(){
+		return null;
+	}
+
+	public class PlayerInteractor{
 		@SubscribeEvent
-		public void onTick(PlayerTickEvent event){
+		public void onLogin(PlayerEvent.PlayerLoggedInEvent event){
+			NetworkHandler.sendToServer(new MessageLogin(Constants.runTimer));
+			System.out.println(event.player.getDisplayName());
+		}
+
+		@SubscribeEvent
+		public void onLogout(PlayerEvent.PlayerLoggedOutEvent event){ //Log-out isn't working. I think it loggs out too soon.
+			NetworkHandler.sendToServer(new MessageLogout("state.txt"));
+			System.out.println(event.player.getDisplayName());
 		}
 	}
+
 }

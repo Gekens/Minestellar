@@ -19,6 +19,7 @@ package com.minestellar.core.proxy;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.EntityFX;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.util.EnumChatFormatting;
@@ -70,7 +71,6 @@ public class ClientProxyCore extends CommonProxyCore {
 
 	@Override
 	public void init(FMLInitializationEvent event) {
-		FMLCommonHandler.instance().bus().register(new TickHandlerClient());
 		super.init(event);
 	}
 
@@ -112,7 +112,10 @@ public class ClientProxyCore extends CommonProxyCore {
 
 		mc.effectRenderer.addEffect(entityfx);
 	}
-
-	public static class TickHandlerClient {
+	
+	@Override
+	public EntityPlayer getClientPlayer(){
+		return Minecraft.getMinecraft().thePlayer;
 	}
+
 }
