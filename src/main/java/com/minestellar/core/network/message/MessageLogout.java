@@ -16,12 +16,13 @@
 
 package com.minestellar.core.network.message;
 
+import io.netty.buffer.ByteBuf;
+import net.minecraft.entity.player.EntityPlayer;
+
 import com.minestellar.core.Constants;
 import com.minestellar.core.handler.FileHandler;
 
 import cpw.mods.fml.common.network.ByteBufUtils;
-import io.netty.buffer.ByteBuf;
-import net.minecraft.entity.player.EntityPlayer;
 
 public class MessageLogout extends MessageBase<MessageLogout>{
 

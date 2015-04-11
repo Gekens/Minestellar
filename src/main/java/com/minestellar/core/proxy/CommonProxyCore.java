@@ -17,7 +17,6 @@
 package com.minestellar.core.proxy;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 
 import com.minestellar.core.Constants;
 import com.minestellar.core.network.NetworkHandler;
