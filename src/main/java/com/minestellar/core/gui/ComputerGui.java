@@ -25,6 +25,7 @@ import net.minecraft.client.resources.I18n;
 
 import org.lwjgl.opengl.GL11;
 
+import com.minestellar.core.Constants;
 import com.minestellar.core.blocks.machines.Computer;
 import com.minestellar.core.blocks.tile.TileEntityComputer;
 import com.minestellar.core.gui.widget.GuiDraw;
@@ -32,6 +33,7 @@ import com.minestellar.core.gui.widget.GuiMSButton;
 import com.minestellar.core.gui.widget.GuiScreenWidget;
 import com.minestellar.core.gui.widget.GuiSideBarWidget;
 import com.minestellar.core.gui.widget.planets.GuiPlanet;
+import com.minestellar.core.handler.FileHandler;
 
 import cpw.mods.fml.client.FMLClientHandler;
 
@@ -66,9 +68,12 @@ public class ComputerGui extends GuiScreenWidget{
 		GuiDraw.fillEllipseCoordsArray(384/152, 383/147, moonCoordsArray);
 		GuiDraw.fillEllipseCoordsArray(108/2, 107/2, venusCoordsArray);
 		GuiDraw.fillEllipseCoordsArray(57/2, 56/2, mercuryCoordsArray);
-		this.timer = new Timer(false);
-		this.timer.scheduleAtFixedRate(new PlanetTimer("earth"), 10, 100);
-		this.timer.scheduleAtFixedRate(new PlanetTimer("moon"), 10, 100);
+		if(Constants.runTimer){
+			FileHandler.writeToFile(Constants.fileName, "false");
+			this.timer = new Timer(false);
+			this.timer.scheduleAtFixedRate(new PlanetTimer("earth"), 10, 100);
+			this.timer.scheduleAtFixedRate(new PlanetTimer("moon"), 10, 100);
+		}
 
 	}
 
@@ -83,7 +88,7 @@ public class ComputerGui extends GuiScreenWidget{
 						.setContent("dimension", I18n.format("data." + selectedPlanet.getName() + ".dimension")).setContent("gravity", I18n.format("data." + selectedPlanet.getName() + ".gravity")));
 			}
 		}
-		
+
 		if(this.selectedPlanet == null && !this.doesDraw){
 			removeSidebars();
 		}
@@ -132,7 +137,7 @@ public class ComputerGui extends GuiScreenWidget{
 					tess.addVertex(getMid(screenWidth)+4+earthCoordsArray.get(i).x, getMid(screenHeight)+4+earthCoordsArray.get(i).y, 0.0D);
 				}
 				tess.draw();
-				
+
 				//Moon
 				GL11.glColor4d(0.89, 0.89, 0.89, 1);
 				tess.startDrawing(GL11.GL_LINES);

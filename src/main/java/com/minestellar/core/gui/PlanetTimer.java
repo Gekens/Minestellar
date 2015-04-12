@@ -90,7 +90,7 @@ public class PlanetTimer extends TimerTask{
 			break;
 		}
 
-		System.out.println("X: " + x + " Y: " + y + " DoTop: " + doTop + " Planet: " + planet);
+		//System.out.println("X: " + x + " Y: " + y + " DoTop: " + doTop + " Planet: " + planet);
 	}
 
 }

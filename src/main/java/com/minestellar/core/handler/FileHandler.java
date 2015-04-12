@@ -23,12 +23,17 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import cpw.mods.fml.relauncher.FMLInjectionData;
+import net.minecraft.client.Minecraft;
+
+/**
+ * Custom file handler for writing and reading files
+ */
 
 public class FileHandler{
 
 	/**
-	 * Writes the given text in the given file. The file will be created in the <code>mods<code> folder
+	 * Writes the given text in the given file. 
+	 * <p><b>Note:</b> a new folder will be created in the <i>mods</i> folder. The file will be put there.</p>
 	 * 
 	 * @param fileName The name of the file that should be written
 	 * @param text The text that should be written
@@ -41,17 +46,17 @@ public class FileHandler{
 
 		try{
 
-			String basePath = ((File)(FMLInjectionData.data()[6])).getAbsolutePath().replace(File.separatorChar, '/').replace("/.", ""); //This is the minecraft folder
-			basePath = basePath + "/mods/";
-			String file = basePath + fileName.replace(File.separatorChar, '/').replace("/./", "/");
+			File modsFolder = new File(new File(Minecraft.getMinecraft().mcDataDir.getAbsolutePath().replace(File.separatorChar, '/').replace("/.", "/")), "mods");
+			File myFolder = new File(modsFolder, "minestellarCore");
+			myFolder.mkdir();
+			File myFile = new File(myFolder, fileName);
 			
-			System.out.println("basePath: " + basePath);
-			System.out.println("file: " + file);
-			
-			fileWriter = new FileWriter(file);
+			fileWriter = new FileWriter(myFile.getAbsolutePath());
 			
 			BufferedWriter writer = new BufferedWriter(fileWriter);
 
+			System.out.println("String: " + text);
+			
 			writer.write(text);
 			writer.newLine();
 			writer.close();
@@ -61,20 +66,27 @@ public class FileHandler{
 		}
 	}
 
+	/**
+	 * Reads all the lines on the given file name. The file will be checked in the custom folder.
+	 * 
+	 * @param fileName The name of the file
+	 * @see FileHandler#writeToFile(String, String)
+	 * @throws IOException In case, for any reason, the file can't be read
+	 */
+	
 	public static String readFromFile(String fileName){
 		String line, text = "";
 		
 		FileReader fileReader;
+		
 		try {
 			
-			String basePath = ((File)(FMLInjectionData.data()[6])).getAbsolutePath().replace(File.separatorChar, '/').replace("/.", ""); //This is the minecraft folder
-			basePath = basePath + "/mods/";
-			String file = basePath + fileName.replace(File.separatorChar, '/').replace("/./", "/");
-
-			System.out.println("basePath: " + basePath);
-			System.out.println("file: " + file);
+			File modsFolder = new File(new File(Minecraft.getMinecraft().mcDataDir.getAbsolutePath().replace(File.separatorChar, '/').replace("/.", "/")), "mods");
+			File myFolder = new File(modsFolder, "minestellarCore");
+			myFolder.mkdir();
+			File myFile = new File(myFolder, fileName);
 			
-			fileReader = new FileReader(file);
+			fileReader = new FileReader(myFile.getAbsolutePath());
 
 			BufferedReader bufferedReader = new BufferedReader(fileReader);
 

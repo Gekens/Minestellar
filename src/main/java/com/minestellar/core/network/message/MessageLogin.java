@@ -19,6 +19,7 @@ package com.minestellar.core.network.message;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
 
+import com.minestellar.core.Constants;
 import com.minestellar.core.handler.FileHandler;
 
 public class MessageLogin extends MessageBase<MessageLogin>{
@@ -48,7 +49,7 @@ public class MessageLogin extends MessageBase<MessageLogin>{
 
 	@Override
 	public void handleServerSide(MessageLogin message, EntityPlayer player) {
-		FileHandler.writeToFile("state.txt", message.value ?  "true" : "false");
+		FileHandler.writeToFile(Constants.fileName, message.value ?  "true" : "false");
 	}
 
 }

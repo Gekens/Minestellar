@@ -42,19 +42,19 @@ public class Computer extends Block implements ITileEntityProvider{
 
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ){
-		
+
 		TileEntityComputer te = (TileEntityComputer)world.getTileEntity(x, y, z);
-		
+
 		if(te != null){
 			player.openGui(MinestellarCore.instance, GUIs.COMPUTER_GUI, world, x, y, z);
 		}
-		
+
 		return true;
 	}
-	
+
 	@Override
 	public CreativeTabs getCreativeTabToDisplayOn() {
 		return MinestellarCore.stellarBlocksTab;
 	}
-	
+
 }
