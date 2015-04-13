@@ -70,6 +70,7 @@ public class ComputerGui extends GuiScreenWidget{
 		GuiDraw.fillEllipseCoordsArray(57/2, 56/2, mercuryCoordsArray);
 		if(Constants.runTimer){
 			FileHandler.writeToFile(Constants.fileName, "false");
+			Constants.runTimer = false;
 			this.timer = new Timer(false);
 			this.timer.scheduleAtFixedRate(new PlanetTimer("earth"), 10, 100);
 			this.timer.scheduleAtFixedRate(new PlanetTimer("moon"), 10, 100);

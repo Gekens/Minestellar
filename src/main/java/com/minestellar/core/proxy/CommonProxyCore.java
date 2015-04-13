@@ -23,9 +23,7 @@ import net.minecraftforge.event.entity.living.LivingEvent.LivingJumpEvent;
 import net.minecraftforge.event.entity.player.PlayerPickupXpEvent;
 
 import com.minestellar.core.Constants;
-import com.minestellar.core.network.NetworkHandler;
-import com.minestellar.core.network.message.MessageLogin;
-import com.minestellar.core.network.message.MessageLogout;
+import com.minestellar.core.handler.FileHandler;
 
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
@@ -65,12 +63,17 @@ public abstract class CommonProxyCore {
 	public class PlayerInteractor{
 		@SubscribeEvent
 		public void onLogin(LivingJumpEvent event){ //Log-in isn't working. I think it doesn't have enough time. PlayerEvent.PlayerLoggedInEvent
-			if(event.entity instanceof EntityPlayerMP) NetworkHandler.sendToServer(new MessageLogin(Constants.runTimer));
+			if(event.entity instanceof EntityPlayerMP){
+				if(FileHandler.readFromFile(Constants.fileName).equals("false")){
+					Constants.runTimer = true;
+				}
+				FileHandler.writeToFile(Constants.fileName, Constants.runTimer ?  "true" : "false");;
+			}
 		}
-
+		
 		@SubscribeEvent
-		public void onLogout(PlayerPickupXpEvent event){ //Log-out isn't working. I think it loggs out too soon. PlayerEvent.PlayerLoggedOutEvent
-			NetworkHandler.sendToServer(new MessageLogout(Constants.fileName));
+		public void onLogout(PlayerPickupXpEvent event){ //Log-out isn't working. I think it logs out too soon. PlayerEvent.PlayerLoggedOutEvent
+			Constants.runTimer = FileHandler.readFromFile(Constants.fileName).equals("true") ? true : false;
 		}
 	}
 

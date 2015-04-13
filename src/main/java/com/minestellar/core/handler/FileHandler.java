@@ -61,7 +61,7 @@ public class FileHandler{
 			writer.newLine();
 			writer.close();
 
-		}catch(IOException e){
+		}catch(Exception e){
 			e.printStackTrace();
 		}
 	}
@@ -79,7 +79,7 @@ public class FileHandler{
 		
 		FileReader fileReader;
 		
-		try {
+		try{
 			
 			File modsFolder = new File(new File(Minecraft.getMinecraft().mcDataDir.getAbsolutePath().replace(File.separatorChar, '/').replace("/.", "/")), "mods");
 			File myFolder = new File(modsFolder, "minestellarCore");
@@ -90,7 +90,7 @@ public class FileHandler{
 
 			BufferedReader bufferedReader = new BufferedReader(fileReader);
 
-			while((line = bufferedReader.readLine()) != null) {
+			while((line = bufferedReader.readLine()) != null){
 				text += line;
 			}
 			
@@ -99,7 +99,7 @@ public class FileHandler{
 			bufferedReader.close();
 			
 			return text;
-		} catch (IOException e) {
+		}catch(Exception e){
 			e.printStackTrace();
 		}
 		return null;

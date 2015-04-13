@@ -64,7 +64,7 @@ public class PlanetTimer extends TimerTask{
 		}
 
 		y = Math.sqrt(Math.abs((planet.getB()*planet.getB())*(-1.*((x*x)/(planet.getA()*planet.getA()))+1)));
-		
+
 		if((x == planet.getA() && !doTop) || (x == -planet.getA() && doTop)){
 			if(!doTop)
 				doTop = true;
@@ -85,6 +85,7 @@ public class PlanetTimer extends TimerTask{
 			break;
 		case MOON:
 			currentPlanet.setCoords(ComputerGui.earth.x+4+(int)x, ComputerGui.earth.y+4+(int)y);
+			System.out.println("X: " + x + " Y: " + y + " DoTop: " + doTop);
 			break;
 		default:
 			break;
