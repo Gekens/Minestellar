@@ -29,7 +29,6 @@ import com.minestellar.core.Constants;
 import com.minestellar.core.blocks.machines.Computer;
 import com.minestellar.core.blocks.tile.TileEntityComputer;
 import com.minestellar.core.gui.widget.GuiDraw;
-import com.minestellar.core.gui.widget.GuiMSButton;
 import com.minestellar.core.gui.widget.GuiScreenWidget;
 import com.minestellar.core.gui.widget.GuiSideBarWidget;
 import com.minestellar.core.gui.widget.planets.GuiPlanet;
@@ -44,16 +43,15 @@ public class ComputerGui extends GuiScreenWidget{
 
 	public int screenWidth, screenHeight, spaceX, spaceY, spaceWidth, spaceHeight, earthA, earthB;
 	public ArrayList<GuiPlanet> planets = new ArrayList<GuiPlanet>();
-	public static ArrayList<Point2D.Double> earthCoordsArray = new ArrayList<Point2D.Double>();
-	public static ArrayList<Point2D.Double> moonCoordsArray = new ArrayList<Point2D.Double>();
+	public ArrayList<Point2D.Double> earthCoordsArray = new ArrayList<Point2D.Double>();
+	public ArrayList<Point2D.Double> moonCoordsArray = new ArrayList<Point2D.Double>();
 	public ArrayList<Point2D.Double> mercuryCoordsArray = new ArrayList<Point2D.Double>();
 	public ArrayList<Point2D.Double> venusCoordsArray = new ArrayList<Point2D.Double>();
 
 	private Timer timer;
 	private boolean doesDraw = false;
 
-	private GuiMSButton testButton;
-	public static GuiPlanet selectedPlanet, sun, earth, moon;
+	public static GuiPlanet selectedPlanet, sun, earth, moon, venus;
 	public GuiSideBarWidget planetInfoTop, planetInfoLeft, planetInfoBottom, planetInfoRight;
 
 	public ComputerGui() {
@@ -74,6 +72,7 @@ public class ComputerGui extends GuiScreenWidget{
 			this.timer = new Timer(false);
 			this.timer.scheduleAtFixedRate(new PlanetTimer("earth"), 10, 100);
 			this.timer.scheduleAtFixedRate(new PlanetTimer("moon"), 10, 100);
+			this.timer.scheduleAtFixedRate(new PlanetTimer("venus"), 10, 100);
 		}
 
 	}
@@ -102,10 +101,12 @@ public class ComputerGui extends GuiScreenWidget{
 		add(sun = new GuiPlanet(getMid(screenWidth)-(int)Math.sqrt(earthA^2-earthB^2), getMid(screenHeight)-4, "sun"));
 		add(earth = new GuiPlanet(0, 0, "earth"));
 		add(moon = new GuiPlanet(0, 0, "moon"));
+		add(venus = new GuiPlanet(0, 0, "venus"));
 		moon.setSize(0, 0, 4, 4);
 		planets.add(earth);
 		planets.add(moon);
 		planets.add(sun);
+		planets.add(venus);
 	}
 
 	@Override
@@ -146,7 +147,23 @@ public class ComputerGui extends GuiScreenWidget{
 					tess.addVertex(earth.x+4+moonCoordsArray.get(i).x, earth.y+4+moonCoordsArray.get(i).y, 0.0D);
 				}
 				tess.draw();
+				
+				//Venus
+				GL11.glColor4d(0.84, 0.63, 0.29, 1);
+				tess.startDrawing(GL11.GL_LINES);
+				for(int i = 0; i < venusCoordsArray.size(); i++){
+					tess.addVertex(getMid(screenWidth)+4+venusCoordsArray.get(i).x, getMid(screenHeight)+4+venusCoordsArray.get(i).y, 0.0D);
+				}
+				tess.draw();
 
+				//Mercury
+				GL11.glColor4d(0.49, 0.29, 0.06, 1);
+				tess.startDrawing(GL11.GL_LINES);
+				for(int i = 0; i < mercuryCoordsArray.size(); i++){
+					tess.addVertex(getMid(screenWidth)+4+mercuryCoordsArray.get(i).x, getMid(screenHeight)+4+mercuryCoordsArray.get(i).y, 0.0D);
+				}
+				tess.draw();
+				
 				GL11.glEnable(GL11.GL_LIGHTING);
 				GL11.glEnable(GL11.GL_DEPTH_TEST);
 				GL11.glDepthMask(true);

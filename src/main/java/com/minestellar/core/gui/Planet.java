@@ -23,7 +23,8 @@ package com.minestellar.core.gui;
 public enum Planet{
 
 	EARTH(152./2., 147./2.),
-	MOON(384./152., 383./147);
+	MOON(384./152., 383./147),
+	VENUS(108./2., 107./2.);
 	
 	private double a, b;
 	
