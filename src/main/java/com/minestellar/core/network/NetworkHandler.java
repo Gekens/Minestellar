@@ -19,11 +19,14 @@ package com.minestellar.core.network;
 import net.minecraft.entity.player.EntityPlayerMP;
 
 import com.minestellar.core.MinestellarCore;
+import com.minestellar.core.network.message.MessageRadioFormed;
+import com.minestellar.core.network.message.MessageRadioUnformed;
 
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.network.NetworkRegistry.TargetPoint;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
+import cpw.mods.fml.relauncher.Side;
 
 public class NetworkHandler{
 
@@ -31,6 +34,9 @@ public class NetworkHandler{
 
 	public static void init(){
         INSTANCE = NetworkRegistry.INSTANCE.newSimpleChannel(MinestellarCore.MOD_ID);
+        
+        INSTANCE.registerMessage(MessageRadioFormed.class, MessageRadioFormed.class, 0, Side.SERVER);
+        INSTANCE.registerMessage(MessageRadioUnformed.class, MessageRadioUnformed.class, 1, Side.SERVER);
 	}
 	
 	public static void sendToServer(IMessage message){

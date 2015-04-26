@@ -60,6 +60,9 @@ public class CoreBlocks {
 	public static Block pipeBlock;
 	
 	public static Block computer;
+	
+	public static Block radioWall;
+	public static Block radioHead;
 
 	public static Block oilFluidBlock;
 	public static Fluid oilFluid;
@@ -77,6 +80,9 @@ public class CoreBlocks {
 		CoreBlocks.coreOreBlocks = new BlockOreCore("core_ore");
 		CoreBlocks.coreDecorBlocks = new BlockDecorCore("core_decor");
 		CoreBlocks.teleportBlock = new BlockTeleportCore("teleporter");
+		
+		CoreBlocks.radioWall = new BlockRadioWall("radio_wall");
+		CoreBlocks.radioHead = new BlockRadioHead("radio_head");
 
 		CoreBlocks.cableBlock = new BlockCable("core_cable");
 		CoreBlocks.pipeBlock = new BlockPipe("core_pipe");
@@ -109,6 +115,9 @@ public class CoreBlocks {
 		MinestellarCore.registerBlock(CoreBlocks.coreDecorBlocks, ItemBlockDecorCore.class);
 		MinestellarCore.registerBlock(CoreBlocks.teleportBlock, ItemBlockUtil.class);
 
+		GameRegistry.registerBlock(CoreBlocks.radioWall, "radio_wall");
+		GameRegistry.registerBlock(CoreBlocks.radioHead, "radio_head");
+		
 		MinestellarCore.registerBlock(CoreBlocks.cableBlock, ItemBlockCable.class);
 		MinestellarCore.registerBlock(CoreBlocks.pipeBlock, ItemBlockPipe.class);
 

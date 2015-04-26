@@ -31,6 +31,7 @@ import com.minestellar.core.blocks.tile.TileEntityComputer;
 import com.minestellar.core.blocks.tile.TileEntityGasSink;
 import com.minestellar.core.blocks.tile.TileEntityOxygenCollector;
 import com.minestellar.core.blocks.tile.TileEntityPipe;
+import com.minestellar.core.blocks.tile.TileEntityRadioHead;
 import com.minestellar.core.blocks.tile.TileEntitySolarGenerator;
 import com.minestellar.core.handler.GuiHandler;
 import com.minestellar.core.items.CoreItems;
@@ -129,6 +130,7 @@ public class MinestellarCore {
 		GameRegistry.registerTileEntity(TileEntitySolarGenerator.class, "solar_generator");
 		GameRegistry.registerTileEntity(TileEntityGasSink.class, "gas_sink");
 		GameRegistry.registerTileEntity(TileEntityComputer.class, "computer");
+		GameRegistry.registerTileEntity(TileEntityRadioHead.class, "radio_head");
 	}
 
 	private void registerCreatures() {
