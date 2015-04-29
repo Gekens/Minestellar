@@ -39,7 +39,7 @@ public class TileEntityRadioHeadTask extends TimerTask{
 	 * Insanely long method to check if the head is surrounded by a frame of walls in a 5x5 cube. Might not be the most efficient way.
 	 */
 	
-	public boolean isAllInPlace(){
+	public boolean isSurrondedCorrectly(){
 		World world = master.getWorldObj();
 		if(world.getBlock(master.xCoord, master.yCoord-2, master.zCoord-2) instanceof BlockRadioWall &&
 				world.getBlock(master.xCoord-2, master.yCoord-2, master.zCoord) instanceof BlockRadioWall &&
@@ -166,9 +166,20 @@ public class TileEntityRadioHeadTask extends TimerTask{
 															world.isAirBlock(master.xCoord+1, master.yCoord+2, master.zCoord-1) &&
 															world.isAirBlock(master.xCoord-1, master.yCoord+2, master.zCoord+1) &&
 															world.isAirBlock(master.xCoord-1, master.yCoord+2, master.zCoord-1)){
-														if(world.isAirBlock(master.xCoord, master.yCoord+1, master.zCoord) &&
-																world.isAirBlock(master.xCoord, master.yCoord-1, master.zCoord)){
-															return true;
+														if(world.isAirBlock(master.xCoord, master.yCoord-2, master.zCoord) &&
+																world.isAirBlock(master.xCoord+1, master.yCoord-2, master.zCoord) &&
+																world.isAirBlock(master.xCoord, master.yCoord-2, master.zCoord+1) &&
+																world.isAirBlock(master.xCoord-1, master.yCoord-2, master.zCoord) &&
+																world.isAirBlock(master.xCoord, master.yCoord-2, master.zCoord-1) &&
+																world.isAirBlock(master.xCoord+1, master.yCoord-2, master.zCoord+1) &&
+																world.isAirBlock(master.xCoord+1, master.yCoord-2, master.zCoord-1) &&
+																world.isAirBlock(master.xCoord-1, master.yCoord-2, master.zCoord+1) &&
+																world.isAirBlock(master.xCoord-1, master.yCoord-2, master.zCoord-1)){
+															if(world.isAirBlock(master.xCoord, master.yCoord+1, master.zCoord) &&
+																	world.isAirBlock(master.xCoord, master.yCoord-1, master.zCoord)){
+																return true;
+															}
+															return false;
 														}
 														return false;
 													}	
@@ -196,10 +207,10 @@ public class TileEntityRadioHeadTask extends TimerTask{
 		}
 		return false;
 	}
-
+	
 	@Override
 	public void run(){
-		if(isAllInPlace()){
+		if(isSurrondedCorrectly()){
 			NetworkHandler.sendToServer(new MessageRadioFormed(master.xCoord, master.yCoord, master.zCoord));
 			MinestellarLog.info("Constructed with metadata " + master.getBlockMetadata());
 		}else{

@@ -18,9 +18,12 @@ package com.minestellar.core.blocks.tile;
 
 import java.util.Timer;
 
+import com.minestellar.core.particles.EntitySparkleFX;
+
+import net.minecraft.client.Minecraft;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Vec3;
+
 
 public class TileEntityRadioHead extends TileEntity{
 	
@@ -39,6 +42,7 @@ public class TileEntityRadioHead extends TileEntity{
 			worldObj.spawnParticle("snowshovel", xCoord+0.5D + 2, yCoord+2, zCoord+0.5D - 2, -0.25D, -0.01D, 0.25D);
 			worldObj.spawnParticle("snowshovel", xCoord+0.5D - 2, yCoord+2, zCoord+0.5D + 2, 0.25D, -0.01D, -0.25D);
 			worldObj.spawnParticle("snowshovel", xCoord+0.5D + 2, yCoord+2, zCoord+0.5D + 2, -0.25D, -0.01D, -0.25D);
+			Minecraft.getMinecraft().effectRenderer.addEffect(new EntitySparkleFX(worldObj, xCoord+0.5D, yCoord+5D, zCoord+0.5D).setColor(0.0F, 0.0F, 0.0F));
 		}
 	}
 	
