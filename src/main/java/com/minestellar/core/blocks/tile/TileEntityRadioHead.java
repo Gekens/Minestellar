@@ -18,6 +18,7 @@ package com.minestellar.core.blocks.tile;
 
 import java.util.Timer;
 
+import com.minestellar.core.particles.EntityLightningFX;
 import com.minestellar.core.particles.EntitySparkleFX;
 
 import net.minecraft.client.Minecraft;
@@ -37,12 +38,12 @@ public class TileEntityRadioHead extends TileEntity{
 	@Override
 	public void updateEntity(){
 		if(this.getBlockMetadata() == 1){ // If the head is surrounded
-			//Just for now, we'll have custom ones in the future
 			worldObj.spawnParticle("snowshovel", xCoord+0.5D - 2, yCoord+2, zCoord+0.5D - 2, 0.25D, -0.01D, 0.25D);
 			worldObj.spawnParticle("snowshovel", xCoord+0.5D + 2, yCoord+2, zCoord+0.5D - 2, -0.25D, -0.01D, 0.25D);
 			worldObj.spawnParticle("snowshovel", xCoord+0.5D - 2, yCoord+2, zCoord+0.5D + 2, 0.25D, -0.01D, -0.25D);
 			worldObj.spawnParticle("snowshovel", xCoord+0.5D + 2, yCoord+2, zCoord+0.5D + 2, -0.25D, -0.01D, -0.25D);
-			Minecraft.getMinecraft().effectRenderer.addEffect(new EntitySparkleFX(worldObj, xCoord+0.5D, yCoord+5D, zCoord+0.5D).setColor(0.0F, 0.0F, 0.0F));
+			Minecraft.getMinecraft().effectRenderer.addEffect(new EntitySparkleFX(worldObj, xCoord+0.5D, yCoord+5D, zCoord+0.5D).setColor(1F, 0.0F, 0.0F));
+			Minecraft.getMinecraft().effectRenderer.addEffect(new EntityLightningFX(worldObj, xCoord, yCoord+2, zCoord, 15).setColor(1.0F, 1.0F, 0.0F));
 		}
 	}
 	
