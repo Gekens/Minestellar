@@ -18,14 +18,12 @@ package com.minestellar.core.blocks.tile;
 
 import java.util.TimerTask;
 
+import net.minecraft.world.World;
+
 import com.minestellar.core.blocks.BlockRadioWall;
 import com.minestellar.core.network.NetworkHandler;
 import com.minestellar.core.network.message.MessageRadioFormed;
 import com.minestellar.core.network.message.MessageRadioUnformed;
-import com.minestellar.core.util.MinestellarLog;
-import com.minestellar.core.util.MinestellarUtil;
-
-import net.minecraft.world.World;
 
 public class TileEntityRadioHeadTask extends TimerTask{
 
@@ -38,7 +36,7 @@ public class TileEntityRadioHeadTask extends TimerTask{
 	/**
 	 * Insanely long method to check if the head is surrounded by a frame of walls in a 5x5 cube. Might not be the most efficient way.
 	 */
-	
+
 	public boolean isSurrondedCorrectly(){
 		World world = master.getWorldObj();
 		if(world.getBlock(master.xCoord, master.yCoord-2, master.zCoord-2) instanceof BlockRadioWall &&
@@ -56,7 +54,12 @@ public class TileEntityRadioHeadTask extends TimerTask{
 				world.getBlock(master.xCoord-2, master.yCoord-2, master.zCoord-1) instanceof BlockRadioWall &&
 				world.getBlock(master.xCoord-2, master.yCoord-2, master.zCoord+1) instanceof BlockRadioWall &&
 				world.getBlock(master.xCoord+2, master.yCoord-2, master.zCoord-1) instanceof BlockRadioWall &&
-				world.getBlock(master.xCoord+2, master.yCoord-2, master.zCoord+1) instanceof BlockRadioWall){ // 5x5 base
+				world.getBlock(master.xCoord+2, master.yCoord-2, master.zCoord+1) instanceof BlockRadioWall &&
+				world.getBlock(master.xCoord, master.yCoord-2, master.zCoord) instanceof BlockRadioWall &&
+				world.getBlock(master.xCoord+1, master.yCoord-2, master.zCoord) instanceof BlockRadioWall &&
+				world.getBlock(master.xCoord-1, master.yCoord-2, master.zCoord) instanceof BlockRadioWall &&
+				world.getBlock(master.xCoord, master.yCoord-2, master.zCoord+1) instanceof BlockRadioWall &&
+				world.getBlock(master.xCoord, master.yCoord-2, master.zCoord-1) instanceof BlockRadioWall){ // 5x5 base
 			if(world.getBlock(master.xCoord-2, master.yCoord-1, master.zCoord+2) instanceof BlockRadioWall &&
 					world.getBlock(master.xCoord-2, master.yCoord-1, master.zCoord-2) instanceof BlockRadioWall &&
 					world.getBlock(master.xCoord+2, master.yCoord-1, master.zCoord+2) instanceof BlockRadioWall &&
@@ -166,12 +169,7 @@ public class TileEntityRadioHeadTask extends TimerTask{
 															world.isAirBlock(master.xCoord+1, master.yCoord+2, master.zCoord-1) &&
 															world.isAirBlock(master.xCoord-1, master.yCoord+2, master.zCoord+1) &&
 															world.isAirBlock(master.xCoord-1, master.yCoord+2, master.zCoord-1)){
-														if(world.isAirBlock(master.xCoord, master.yCoord-2, master.zCoord) &&
-																world.isAirBlock(master.xCoord+1, master.yCoord-2, master.zCoord) &&
-																world.isAirBlock(master.xCoord, master.yCoord-2, master.zCoord+1) &&
-																world.isAirBlock(master.xCoord-1, master.yCoord-2, master.zCoord) &&
-																world.isAirBlock(master.xCoord, master.yCoord-2, master.zCoord-1) &&
-																world.isAirBlock(master.xCoord+1, master.yCoord-2, master.zCoord+1) &&
+														if(world.isAirBlock(master.xCoord+1, master.yCoord-2, master.zCoord+1) &&
 																world.isAirBlock(master.xCoord+1, master.yCoord-2, master.zCoord-1) &&
 																world.isAirBlock(master.xCoord-1, master.yCoord-2, master.zCoord+1) &&
 																world.isAirBlock(master.xCoord-1, master.yCoord-2, master.zCoord-1)){
@@ -207,15 +205,128 @@ public class TileEntityRadioHeadTask extends TimerTask{
 		}
 		return false;
 	}
-	
+
+	/**
+	 * Checks if it has at least a 4 high pillar at the 4 corners.
+	 */
+
+	public boolean hasCorrectBase(){
+		World world = master.getWorldObj();
+		if(world.getBlock(master.xCoord, master.yCoord-2-1, master.zCoord) instanceof BlockRadioWall &&
+				world.getBlock(master.xCoord, master.yCoord-2-2, master.zCoord) instanceof BlockRadioWall &&
+				world.getBlock(master.xCoord, master.yCoord-2-3, master.zCoord) instanceof BlockRadioWall){ // 1x3 column under the cube
+			if(world.getBlock(master.xCoord, master.yCoord-2-4, master.zCoord-2) instanceof BlockRadioWall &&
+					world.getBlock(master.xCoord-2, master.yCoord-2-4, master.zCoord) instanceof BlockRadioWall &&
+					world.getBlock(master.xCoord, master.yCoord-2-4, master.zCoord+2) instanceof BlockRadioWall &&
+					world.getBlock(master.xCoord+2, master.yCoord-2-4, master.zCoord) instanceof BlockRadioWall &&
+					world.getBlock(master.xCoord-2, master.yCoord-2-4, master.zCoord-2) instanceof BlockRadioWall &&
+					world.getBlock(master.xCoord+2, master.yCoord-2-4, master.zCoord+2) instanceof BlockRadioWall &&
+					world.getBlock(master.xCoord-2, master.yCoord-2-4, master.zCoord+2) instanceof BlockRadioWall &&
+					world.getBlock(master.xCoord+2, master.yCoord-2-4, master.zCoord-2) instanceof BlockRadioWall &&
+					world.getBlock(master.xCoord-1, master.yCoord-2-4, master.zCoord-2) instanceof BlockRadioWall &&
+					world.getBlock(master.xCoord-1, master.yCoord-2-4, master.zCoord+2) instanceof BlockRadioWall &&
+					world.getBlock(master.xCoord+1, master.yCoord-2-4, master.zCoord+2) instanceof BlockRadioWall &&
+					world.getBlock(master.xCoord+1, master.yCoord-2-4, master.zCoord-2) instanceof BlockRadioWall &&
+					world.getBlock(master.xCoord-2, master.yCoord-2-4, master.zCoord-1) instanceof BlockRadioWall &&
+					world.getBlock(master.xCoord-2, master.yCoord-2-4, master.zCoord+1) instanceof BlockRadioWall &&
+					world.getBlock(master.xCoord+2, master.yCoord-2-4, master.zCoord-1) instanceof BlockRadioWall &&
+					world.getBlock(master.xCoord+2, master.yCoord-2-4, master.zCoord+1) instanceof BlockRadioWall &&
+					world.getBlock(master.xCoord, master.yCoord-2-4, master.zCoord) instanceof BlockRadioWall &&
+					world.getBlock(master.xCoord+1, master.yCoord-2-4, master.zCoord) instanceof BlockRadioWall &&
+					world.getBlock(master.xCoord-1, master.yCoord-2-4, master.zCoord) instanceof BlockRadioWall &&
+					world.getBlock(master.xCoord, master.yCoord-2-4, master.zCoord+1) instanceof BlockRadioWall &&
+					world.getBlock(master.xCoord, master.yCoord-2-4, master.zCoord-1) instanceof BlockRadioWall){ // 5x5 with a cross base
+				if(world.getBlock(master.xCoord-2, master.yCoord-2-5, master.zCoord+2) instanceof BlockRadioWall &&
+						world.getBlock(master.xCoord-2, master.yCoord-2-5, master.zCoord-2) instanceof BlockRadioWall &&
+						world.getBlock(master.xCoord+2, master.yCoord-2-5, master.zCoord+2) instanceof BlockRadioWall &&
+						world.getBlock(master.xCoord+2, master.yCoord-2-5, master.zCoord-2) instanceof BlockRadioWall){ // 4 corners
+					if(world.getBlock(master.xCoord-2, master.yCoord-2-6, master.zCoord+2) instanceof BlockRadioWall &&
+							world.getBlock(master.xCoord-2, master.yCoord-2-6, master.zCoord-2) instanceof BlockRadioWall &&
+							world.getBlock(master.xCoord+2, master.yCoord-2-6, master.zCoord+2) instanceof BlockRadioWall &&
+							world.getBlock(master.xCoord+2, master.yCoord-2-6, master.zCoord-2) instanceof BlockRadioWall){
+						if(world.getBlock(master.xCoord-2, master.yCoord-2-7, master.zCoord+2) instanceof BlockRadioWall &&
+								world.getBlock(master.xCoord-2, master.yCoord-2-7, master.zCoord-2) instanceof BlockRadioWall &&
+								world.getBlock(master.xCoord+2, master.yCoord-2-7, master.zCoord+2) instanceof BlockRadioWall &&
+								world.getBlock(master.xCoord+2, master.yCoord-2-7, master.zCoord-2) instanceof BlockRadioWall){
+							if(world.isAirBlock(master.xCoord+1, master.yCoord-2-4, master.zCoord+1) &&
+									world.isAirBlock(master.xCoord+1, master.yCoord-2-4, master.zCoord-1) &&
+									world.isAirBlock(master.xCoord-1, master.yCoord-2-4, master.zCoord+1) &&
+									world.isAirBlock(master.xCoord-1, master.yCoord-2-4, master.zCoord-1)){
+								if(world.isAirBlock(master.xCoord-2, master.yCoord-2-1, master.zCoord) &&
+										world.isAirBlock(master.xCoord+2, master.yCoord-2-1, master.zCoord) &&
+										world.isAirBlock(master.xCoord, master.yCoord-2-1, master.zCoord-2) &&
+										world.isAirBlock(master.xCoord, master.yCoord-2-1, master.zCoord+2) &&
+										world.isAirBlock(master.xCoord+2, master.yCoord-2-1, master.zCoord+2) &&
+										world.isAirBlock(master.xCoord+2, master.yCoord-2-1, master.zCoord-2) &&
+										world.isAirBlock(master.xCoord-2, master.yCoord-2-1, master.zCoord-2) &&
+										world.isAirBlock(master.xCoord-2, master.yCoord-2-1, master.zCoord+2) &&
+										world.isAirBlock(master.xCoord+1, master.yCoord-2-1, master.zCoord) &&
+										world.isAirBlock(master.xCoord-1, master.yCoord-2-1, master.zCoord) &&
+										world.isAirBlock(master.xCoord, master.yCoord-2-1, master.zCoord+1) &&
+										world.isAirBlock(master.xCoord, master.yCoord-2-1, master.zCoord-1) &&
+										world.isAirBlock(master.xCoord+1, master.yCoord-2-1, master.zCoord+1) &&
+										world.isAirBlock(master.xCoord+1, master.yCoord-2-1, master.zCoord-1) &&
+										world.isAirBlock(master.xCoord-1, master.yCoord-2-1, master.zCoord+1) &&
+										world.isAirBlock(master.xCoord-1, master.yCoord-2-1, master.zCoord-1)){
+									if(world.isAirBlock(master.xCoord-2, master.yCoord-2-2, master.zCoord) &&
+											world.isAirBlock(master.xCoord+2, master.yCoord-2-2, master.zCoord) &&
+											world.isAirBlock(master.xCoord, master.yCoord-2-2, master.zCoord-2) &&
+											world.isAirBlock(master.xCoord, master.yCoord-2-2, master.zCoord+2) &&
+											world.isAirBlock(master.xCoord+2, master.yCoord-2-2, master.zCoord+2) &&
+											world.isAirBlock(master.xCoord+2, master.yCoord-2-2, master.zCoord-2) &&
+											world.isAirBlock(master.xCoord-2, master.yCoord-2-2, master.zCoord-2) &&
+											world.isAirBlock(master.xCoord-2, master.yCoord-2-2, master.zCoord+2) &&
+											world.isAirBlock(master.xCoord+1, master.yCoord-2-2, master.zCoord) &&
+											world.isAirBlock(master.xCoord-1, master.yCoord-2-2, master.zCoord) &&
+											world.isAirBlock(master.xCoord, master.yCoord-2-2, master.zCoord+1) &&
+											world.isAirBlock(master.xCoord, master.yCoord-2-2, master.zCoord-1) &&
+											world.isAirBlock(master.xCoord+1, master.yCoord-2-2, master.zCoord+1) &&
+											world.isAirBlock(master.xCoord+1, master.yCoord-2-2, master.zCoord-1) &&
+											world.isAirBlock(master.xCoord-1, master.yCoord-2-2, master.zCoord+1) &&
+											world.isAirBlock(master.xCoord-1, master.yCoord-2-2, master.zCoord-1)){
+										if(world.isAirBlock(master.xCoord-2, master.yCoord-2-3, master.zCoord) &&
+												world.isAirBlock(master.xCoord+2, master.yCoord-2-3, master.zCoord) &&
+												world.isAirBlock(master.xCoord, master.yCoord-2-3, master.zCoord-2) &&
+												world.isAirBlock(master.xCoord, master.yCoord-2-3, master.zCoord+2) &&
+												world.isAirBlock(master.xCoord+2, master.yCoord-2-3, master.zCoord+2) &&
+												world.isAirBlock(master.xCoord+2, master.yCoord-2-3, master.zCoord-2) &&
+												world.isAirBlock(master.xCoord-2, master.yCoord-2-3, master.zCoord-2) &&
+												world.isAirBlock(master.xCoord-2, master.yCoord-2-3, master.zCoord+2) &&
+												world.isAirBlock(master.xCoord+1, master.yCoord-2-3, master.zCoord) &&
+												world.isAirBlock(master.xCoord-1, master.yCoord-2-3, master.zCoord) &&
+												world.isAirBlock(master.xCoord, master.yCoord-2-3, master.zCoord+1) &&
+												world.isAirBlock(master.xCoord, master.yCoord-2-3, master.zCoord-1) &&
+												world.isAirBlock(master.xCoord+1, master.yCoord-2-3, master.zCoord+1) &&
+												world.isAirBlock(master.xCoord+1, master.yCoord-2-3, master.zCoord-1) &&
+												world.isAirBlock(master.xCoord-1, master.yCoord-2-3, master.zCoord+1) &&
+												world.isAirBlock(master.xCoord-1, master.yCoord-2-3, master.zCoord-1)){
+											return true;
+										}
+										return false;
+									}
+									return false;
+								}
+								return false;
+							}
+							return false;
+						}
+						return false;
+					}
+					return false;
+				}
+				return false;
+			}
+			return false;
+		}
+		return false;
+	}
+
 	@Override
 	public void run(){
-		if(isSurrondedCorrectly()){
+		if(isSurrondedCorrectly() && hasCorrectBase()){
 			NetworkHandler.sendToServer(new MessageRadioFormed(master.xCoord, master.yCoord, master.zCoord));
-			MinestellarLog.info("Constructed with metadata " + master.getBlockMetadata());
 		}else{
 			NetworkHandler.sendToServer(new MessageRadioUnformed(master.xCoord, master.yCoord, master.zCoord));
-			MinestellarLog.info("Deconstructed with metadata " + master.getBlockMetadata());
 		}
 	}
 
