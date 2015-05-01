@@ -52,7 +52,6 @@ public class MessageRadioFormed extends MessageBase<MessageRadioFormed>{
 
 	@Override
 	public void handleServerSide(MessageRadioFormed message, EntityPlayer player) {
-		MinestellarLog.info("Received message, updating metadata to 1");
 		player.worldObj.setBlockMetadataWithNotify(message.x, message.y, message.z, 1, 1|2);
 	}
 

@@ -32,27 +32,29 @@ public class EntitySparkleFX extends EntityFX{
 
 	private static final ResourceLocation texture = new ResourceLocation(MinestellarCore.TEXTURE_PREFIX + "textures/fx/sparkle.png");
 
-	//TODO: Calculate the needed velocity between 2 or more given points
+	private int seconds;
+	private float endX, endY, endZ;
 	
-	public EntitySparkleFX(World world, double x, double y, double z){
+	public EntitySparkleFX(World world, double x, double y, double z, int seconds){
 		super(world, x, y, z);
+		this.seconds = seconds;
 		noClip = true;
-		setMaxAge(100);
-		setGravity(-0.2F);
 	}
 
 	@Override
 	public void renderParticle(Tessellator tessellator, float partialTicks, float par3, float par4, float par5, float par6, float par7){
 		Minecraft.getMinecraft().renderEngine.bindTexture(texture);
 
+		glDisable(GL11.GL_LIGHTING);
+		glEnable(GL11.GL_BLEND);
+		glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE);
 		glDepthMask(false);
-		glEnable(GL_BLEND);
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		glAlphaFunc(GL_GREATER, 0.003921569F);
 		{
 			tessellator.startDrawingQuads();
-			tessellator.setBrightness(getBrightnessForRender(partialTicks));
-			GL11.glColor4f(particleRed, particleGreen, particleBlue, 1);
+			
+			glColor4f(particleRed, particleGreen, particleBlue, 1);
+			
 			double scale = 0.1*particleScale;
 			float x = (float)(prevPosX+(posX-prevPosX)*partialTicks-interpPosX);
 			float y = (float)(prevPosY+(posY-prevPosY)*partialTicks-interpPosY);
@@ -66,6 +68,8 @@ public class EntitySparkleFX extends EntityFX{
 			tessellator.draw();
 
 		}
+
+		glEnable(GL11.GL_LIGHTING);
 		glDisable(GL_BLEND);
 		glDepthMask(true);
 		glAlphaFunc(GL_GREATER, 0.1F);
@@ -78,6 +82,7 @@ public class EntitySparkleFX extends EntityFX{
 	
 	@Override
 	public void onUpdate() {
+		setMaxAge(seconds*20);
 		this.prevPosX = this.posX;
 		this.prevPosY = this.posY;
 		this.prevPosZ = this.posZ;
@@ -86,18 +91,55 @@ public class EntitySparkleFX extends EntityFX{
 			this.setDead();
 		}
 
-		this.motionY -= 0.04D * (double)this.particleGravity;
+		this.motionX = calculateVelocityX(seconds*20);
+		this.motionY = calculateVelocityY(seconds*20);
+		this.motionZ = calculateVelocityZ(seconds*20);
+	
 		this.moveEntity(this.motionX, this.motionY, this.motionZ);
-		this.motionX *= 0.9800000190734863D;
-		this.motionY *= 0.9800000190734863D;
-		this.motionZ *= 0.9800000190734863D;
-
-		if(this.onGround){
-			this.motionX *= 0.699999988079071D;
-			this.motionZ *= 0.699999988079071D;
-		}
 	}
 
+	/**
+	 * Sets the coordinates of the point at which the particle should arrive. 
+	 */
+
+	public EntitySparkleFX setArrivalCoords(float x, float y, float z){
+		this.endX = x;
+		this.endY = y;
+		this.endZ = z;
+		return this;
+	}
+	
+	/**
+	 * Calculates the <code>x</code> component of the velocity needed to get to the end position.
+	 * 
+	 * @param time Time in in-game ticks. 
+	 */
+	
+	public float calculateVelocityX(int time){
+		return (float) ((this.endX-this.posX)/(time));
+	}
+	
+	/**
+	 * Calculates the <code>y</code> component of the velocity needed to get to the end position.
+	 * 
+	 * @param time Time in in-game ticks. 
+	 */
+	
+	public float calculateVelocityY(int time){
+		float angle = (float) (Math.atan((this.endY-this.posY)/(this.endX-this.posX)));
+		return (float) (calculateVelocityX(time)*Math.tan(angle));
+	}
+	
+	/**
+	 * Calculates the <code>z</code> component of the velocity needed to get to the end position.
+	 * 
+	 * @param time Time in in-game ticks. 
+	 */
+	
+	public float calculateVelocityZ(int time){
+		return (float) ((this.endZ-this.posZ)/(time));
+	}
+	
 	@Override
 	public int getFXLayer(){
 		return 3;

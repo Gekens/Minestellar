@@ -52,7 +52,6 @@ private int x, y, z;
 
 	@Override
 	public void handleServerSide(MessageRadioUnformed message, EntityPlayer player) {
-		MinestellarLog.info("Received message, updating metadata to 0");
 		player.worldObj.setBlockMetadataWithNotify(message.x, message.y, message.z, 0, 1|2);
 	}
 

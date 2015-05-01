@@ -26,73 +26,79 @@ import com.minestellar.core.util.MinestellarLog;
 
 import net.minecraft.client.particle.EntityFX;
 import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
 
 public class EntityLightningFX extends EntityFX{
-	
-	private int sections;
+
+	private int sections, seconds;
 	private float[] xCoords, yCoords, zCoords;
-	
-	//TODO: Calculate the needed velocity between 2 or more given points
-	
-	public EntityLightningFX(World world, double x, double y, double z, int sections){
+	private float endX, endY, endZ;
+
+	/**
+	 * @param sections The number of different sections. The higher it is, the more lines there will be.
+	 */
+
+	public EntityLightningFX(World world, double x, double y, double z, int sections, int seconds){
 		super(world, x, y, z);
-		
+
 		this.sections = sections;
+		this.seconds = seconds;
 		
 		xCoords = new float[sections];
 		yCoords = new float[sections];
 		zCoords = new float[sections];
-		
+
 		for(int i = 0; i < sections; i++){
 			xCoords[i] = (float) (rand.nextFloat()+x);
 			yCoords[i] = (float) (rand.nextFloat());
 			zCoords[i] = (float) (rand.nextFloat()+z);
 		}
-		
-		setGravity(-20F);
-		setMaxAge(100);
+
 		noClip = true;
 	}
 
 	@Override
 	public void renderParticle(Tessellator tessellator, float partialTicks, float par3, float par4, float par5, float par6, float par7){
 
-		GL11.glDisable(GL11.GL_TEXTURE_2D);
-        GL11.glEnable(GL11.GL_BLEND);
-        GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE);
-        glDepthMask(false);
+		glDisable(GL11.GL_TEXTURE_2D);
+		glDisable(GL11.GL_LIGHTING);
+		glEnable(GL11.GL_BLEND);
+		glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE);
+		glDepthMask(false);
 		glAlphaFunc(GL_GREATER, 0.003921569F);
-		
-		//tessellator.setColorRGBA_F(particleRed, particleGreen, particleBlue, 1);
-		GL11.glColor4f(particleRed, particleGreen, particleBlue, 1);
-		
+
+		glColor4f(particleRed, particleGreen, particleBlue, 1);
+
 		tessellator.startDrawing(3);
 		float x = (float)(prevPosX+(posX-prevPosX)*partialTicks-interpPosX);
 		float y = (float)(prevPosY+(posY-prevPosY)*partialTicks-interpPosY);
 		float z = (float)(prevPosZ+(posZ-prevPosZ)*partialTicks-interpPosZ);
 		{
 			for(int i = 0; i < xCoords.length && i < yCoords.length && i < zCoords.length; i++){
-				//MinestellarLog.info("xCoords[i] = " + xCoords[i] + " yCoords[i] = " + yCoords[i] + " zCoords[i] = " + zCoords[i]);
 				tessellator.addVertex(xCoords[i]+x, yCoords[i]+y, zCoords[i]+z);
 			}
 		}
 		tessellator.draw();
-		
-        glEnable(GL11.GL_TEXTURE_2D);
-        glDisable(GL_BLEND);
+
+		glEnable(GL11.GL_TEXTURE_2D);
+		glEnable(GL11.GL_LIGHTING);
+		glDisable(GL_BLEND);
 		glDepthMask(true);
 		glAlphaFunc(GL_GREATER, 0.1F);
-		
+
 	}
 
 	@Override
 	public void moveEntity(double p_70091_1_, double p_70091_3_, double p_70091_5_) {
 		super.moveEntity(p_70091_1_, p_70091_3_, p_70091_5_);
 	}
-	
+
 	@Override
 	public void onUpdate() {
+		setMaxAge(seconds*20);
 		this.prevPosX = this.posX;
 		this.prevPosY = this.posY;
 		this.prevPosZ = this.posZ;
@@ -101,28 +107,65 @@ public class EntityLightningFX extends EntityFX{
 			this.setDead();
 		}
 
-		this.motionY -= 0.04D * (double)this.particleGravity;
+		this.motionX = calculateVelocityX(seconds*20);
+		this.motionY = calculateVelocityY(seconds*20);
+		this.motionZ = calculateVelocityZ(seconds*20);
+	
 		this.moveEntity(this.motionX, this.motionY, this.motionZ);
-		this.motionX *= 0.9800000190734863D;
-		this.motionY *= 0.9800000190734863D;
-		this.motionZ *= 0.9800000190734863D;
+	}
+	
+	/**
+	 * Sets the coordinates of the point at which the particle should arrive. 
+	 */
 
-		if(this.onGround){
-			this.motionX *= 0.699999988079071D;
-			this.motionZ *= 0.699999988079071D;
-		}
+	public EntityLightningFX setArrivalCoords(float x, float y, float z){
+		this.endX = x;
+		this.endY = y;
+		this.endZ = z;
+		return this;
+	}
+	
+	/**
+	 * Calculates the <code>x</code> component of the velocity needed to get to the end position.
+	 * 
+	 * @param time Time in in-game ticks. 
+	 */
+	
+	public float calculateVelocityX(int time){
+		return (float) ((this.endX-this.posX)/(time));
+	}
+	
+	/**
+	 * Calculates the <code>y</code> component of the velocity needed to get to the end position.
+	 * 
+	 * @param time Time in in-game ticks. 
+	 */
+	
+	public float calculateVelocityY(int time){
+		float angle = (float) (Math.atan((this.endY-this.posY)/(this.endX-this.posX)));
+		return (float) (calculateVelocityX(time)*Math.tan(angle));
+	}
+	
+	/**
+	 * Calculates the <code>z</code> component of the velocity needed to get to the end position.
+	 * 
+	 * @param time Time in in-game ticks. 
+	 */
+	
+	public float calculateVelocityZ(int time){
+		return (float) ((this.endZ-this.posZ)/(time));
 	}
 	
 	@Override
 	public boolean canBeCollidedWith() {
 		return false;
 	}
-	
+
 	@Override
 	public boolean canBePushed() {
 		return false;
 	}
-	
+
 	@Override
 	public int getFXLayer(){
 		return 3;
