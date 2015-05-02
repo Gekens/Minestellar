@@ -10,13 +10,15 @@ buildscript {
             url = "https://oss.sonatype.org/content/repositories/snapshots/"
         }
     }
-	
+
     dependencies {
         classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT'
     }
 }
 
+apply plugin: 'java'
 apply plugin: 'forge'
+apply plugin: 'curseforge'
 
 version = "p0.0.3"
 group= "com" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
@@ -28,8 +30,8 @@ minecraft {
 }
 
 dependencies {
-	compile files("lib/CoFHCore-[1.7.10]3.0.0B3-dev-26.jar")
-	compile files("lib/Mekanism-1.7.10-7.1.1.127.jar")
+    compile files("lib/CoFHCore-[1.7.10]3.0.0B3-dev-26.jar")
+    compile files("lib/Mekanism-1.7.10-7.1.1.127.jar")
 }
 
 processResources {
@@ -40,13 +42,17 @@ processResources {
     // replace stuff in mcmod.info, nothing else
     from(sourceSets.main.resources.srcDirs) {
         include 'mcmod.info'
-                
+
         // replace version and mcversion
         expand 'version':project.version, 'mcversion':project.minecraft.version
     }
-        
+
     // copy everything else, thats not the mcmod.info
     from(sourceSets.main.resources.srcDirs) {
         exclude 'mcmod.info'
     }
+}
+
+sourceSets {
+    main { output.resourcesDir = output.classesDir }
 }

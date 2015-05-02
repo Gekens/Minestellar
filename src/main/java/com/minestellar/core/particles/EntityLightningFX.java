@@ -16,20 +16,12 @@
 
 package com.minestellar.core.particles;
 
-import static org.lwjgl.opengl.GL11.*;
-
-import java.util.Random;
-
-import org.lwjgl.opengl.GL11;
-
-import com.minestellar.core.util.MinestellarLog;
-
 import net.minecraft.client.particle.EntityFX;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
+import org.lwjgl.opengl.GL11;
+
+import static org.lwjgl.opengl.GL11.*;
 
 public class EntityLightningFX extends EntityFX{
 
@@ -53,7 +45,7 @@ public class EntityLightningFX extends EntityFX{
 
 		for(int i = 0; i < sections; i++){
 			xCoords[i] = (float) (rand.nextFloat()+x);
-			yCoords[i] = (float) (rand.nextFloat());
+			yCoords[i] = (rand.nextFloat());
 			zCoords[i] = (float) (rand.nextFloat()+z);
 		}
 
@@ -92,8 +84,8 @@ public class EntityLightningFX extends EntityFX{
 	}
 
 	@Override
-	public void moveEntity(double p_70091_1_, double p_70091_3_, double p_70091_5_) {
-		super.moveEntity(p_70091_1_, p_70091_3_, p_70091_5_);
+	public void moveEntity(double motionX, double motionY, double motionZ){
+		super.moveEntity(motionX, motionY, motionZ);
 	}
 
 	@Override

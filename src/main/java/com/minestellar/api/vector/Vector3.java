@@ -1,7 +1,6 @@
 package com.minestellar.api.vector;
 
-import java.util.List;
-
+import cofh.repack.codechicken.lib.vec.Quat;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NBTTagCompound;
@@ -13,10 +12,11 @@ import net.minecraft.util.Vec3;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
-
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.lwjgl.util.vector.Vector3f;
+
+import java.util.List;
 
 /**
  * Vector3 Class is used for defining objects in a 3D space.
@@ -657,9 +657,14 @@ public class Vector3 implements Cloneable
         return Math.acos(vec1.clone().dotProduct(vec2));
     }
 
+    public double angle(Vector3 vec) {
+        return Math.acos(clone().normalize().dotProduct(vec.clone().normalize()));
+    }
+
     /**
      * Loads a Vector3 from an NBT compound.
      */
+
     @Deprecated
     public static Vector3 readFromNBT(NBTTagCompound nbt)
     {

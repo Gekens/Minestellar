@@ -16,17 +16,15 @@
 
 package com.minestellar.core.particles;
 
-import static org.lwjgl.opengl.GL11.*;
-
-import org.lwjgl.opengl.GL11;
-
+import com.minestellar.core.MinestellarCore;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.EntityFX;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
+import org.lwjgl.opengl.GL11;
 
-import com.minestellar.core.MinestellarCore;
+import static org.lwjgl.opengl.GL11.*;
 
 public class EntitySparkleFX extends EntityFX{
 
@@ -76,8 +74,8 @@ public class EntitySparkleFX extends EntityFX{
 	}
 
 	@Override
-	public void moveEntity(double p_70091_1_, double p_70091_3_, double p_70091_5_) {
-		super.moveEntity(p_70091_1_, p_70091_3_, p_70091_5_);
+	public void moveEntity(double motionX, double motionY, double motionZ){
+		super.moveEntity(motionX, motionY, motionZ);
 	}
 	
 	@Override
