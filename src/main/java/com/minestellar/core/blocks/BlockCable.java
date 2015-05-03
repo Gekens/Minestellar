@@ -16,8 +16,8 @@
 
 package com.minestellar.core.blocks;
 
-import java.util.List;
-
+import com.minestellar.core.MinestellarCore;
+import com.minestellar.core.blocks.tile.TileEntityCable;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -29,8 +29,7 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
-import com.minestellar.core.MinestellarCore;
-import com.minestellar.core.blocks.tile.TileEntityCable;
+import java.util.List;
 
 public class BlockCable extends BlockContainer {
 

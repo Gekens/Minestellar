@@ -17,7 +17,6 @@
 package com.minestellar.core.blocks;
 
 import com.minestellar.core.MinestellarCore;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;

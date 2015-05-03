@@ -16,9 +16,9 @@
 
 package com.minestellar.core.gui.widget;
 
-import java.util.HashMap;
-
 import net.minecraft.client.resources.I18n;
+
+import java.util.HashMap;
 
 /**
  * SideBar element used for planet's information <p>Don't forget to use <i>setColors(int, int)</i></p>

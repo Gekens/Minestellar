@@ -16,20 +16,18 @@
 
 package com.minestellar.core.proxy;
 
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.entity.living.LivingEvent.LivingJumpEvent;
-import net.minecraftforge.event.entity.player.PlayerPickupXpEvent;
-
 import com.minestellar.core.Constants;
 import com.minestellar.core.handler.FileHandler;
-
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.entity.living.LivingEvent.LivingJumpEvent;
+import net.minecraftforge.event.entity.player.PlayerPickupXpEvent;
 
 public abstract class CommonProxyCore {
 	public void preInit(FMLPreInitializationEvent event) {
@@ -67,13 +65,13 @@ public abstract class CommonProxyCore {
 				if(FileHandler.readFromFile(Constants.fileName).equals("false")){
 					Constants.runTimer = true;
 				}
-				FileHandler.writeToFile(Constants.fileName, Constants.runTimer ?  "true" : "false");;
+				FileHandler.writeToFile(Constants.fileName, Constants.runTimer ?  "true" : "false");
 			}
 		}
 		
 		@SubscribeEvent
 		public void onLogout(PlayerPickupXpEvent event){ //Log-out isn't working. I think it logs out too soon. PlayerEvent.PlayerLoggedOutEvent
-			Constants.runTimer = FileHandler.readFromFile(Constants.fileName).equals("true") ? true : false;
+			Constants.runTimer = FileHandler.readFromFile(Constants.fileName).equals("true");
 		}
 	}
 

@@ -1,9 +1,9 @@
 package com.minestellar.core.gui.widget;
 
+import com.google.common.base.Objects;
+
 import java.util.Map;
 import java.util.TreeMap;
-
-import com.google.common.base.Objects;
 
 public class ClickCounter<T>{
     public class ClickCount{
@@ -22,7 +22,7 @@ public class ClickCounter<T>{
         }
     }
 
-    public Map<Integer, ClickCount> buttons = new TreeMap<Integer, ClickCount>();
+    public Map<Integer, ClickCount> buttons = new TreeMap<>();
 
     public ClickCount getCount(int button){
         ClickCount c = buttons.get(button);

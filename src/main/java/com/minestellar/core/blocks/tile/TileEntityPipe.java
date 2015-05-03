@@ -16,17 +16,15 @@
 
 package com.minestellar.core.blocks.tile;
 
+import com.minestellar.api.core.TileEntityWire;
+import cpw.mods.fml.common.Optional;
+import cpw.mods.fml.common.Optional.Method;
 import mekanism.api.gas.Gas;
 import mekanism.api.gas.GasStack;
 import mekanism.api.gas.GasTank;
 import mekanism.api.gas.IGasHandler;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
-
-import com.minestellar.api.core.TileEntityWire;
-
-import cpw.mods.fml.common.Optional;
-import cpw.mods.fml.common.Optional.Method;
 
 @Optional.Interface(iface = "mekanism.api.gas.IGasHandler", modid = "Mekanism")
 public class TileEntityPipe extends TileEntityWire implements IGasHandler {

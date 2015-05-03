@@ -16,10 +16,10 @@
 
 package com.minestellar.core.util;
 
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.Item;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
 
 public class MinestellarCreativeTab extends CreativeTabs {
 	private final Item itemForTab;

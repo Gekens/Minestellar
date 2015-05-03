@@ -16,19 +16,14 @@
 
 package com.minestellar.core.items;
 
+import com.minestellar.core.MinestellarCore;
+import com.minestellar.core.items.tools.*;
 import net.minecraft.item.Item;
 import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemArmor.ArmorMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.oredict.OreDictionary;
-
-import com.minestellar.core.MinestellarCore;
-import com.minestellar.core.items.tools.ItemAxeCore;
-import com.minestellar.core.items.tools.ItemHoeCore;
-import com.minestellar.core.items.tools.ItemPickaxeCore;
-import com.minestellar.core.items.tools.ItemSpadeCore;
-import com.minestellar.core.items.tools.ItemSwordCore;
 
 public class CoreItems {
 	public static void init() {

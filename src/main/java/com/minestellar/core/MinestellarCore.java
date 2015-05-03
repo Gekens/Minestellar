@@ -16,23 +16,8 @@
 
 package com.minestellar.core;
 
-import java.io.File;
-import java.util.HashMap;
-
-import net.minecraft.block.Block;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
-import net.minecraft.item.ItemStack;
-
 import com.minestellar.core.blocks.CoreBlocks;
-import com.minestellar.core.blocks.tile.TileEntityCable;
-import com.minestellar.core.blocks.tile.TileEntityComputer;
-import com.minestellar.core.blocks.tile.TileEntityGasSink;
-import com.minestellar.core.blocks.tile.TileEntityOxygenCollector;
-import com.minestellar.core.blocks.tile.TileEntityPipe;
-import com.minestellar.core.blocks.tile.TileEntityRadioHead;
-import com.minestellar.core.blocks.tile.TileEntitySolarGenerator;
+import com.minestellar.core.blocks.tile.*;
 import com.minestellar.core.handler.GuiHandler;
 import com.minestellar.core.items.CoreItems;
 import com.minestellar.core.network.NetworkHandler;
@@ -41,7 +26,6 @@ import com.minestellar.core.recipe.RecipeManagerCore;
 import com.minestellar.core.util.ConfigManagerCore;
 import com.minestellar.core.util.MinestellarCreativeTab;
 import com.minestellar.core.world.gen.OverworldGenerator;
-
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
@@ -51,6 +35,14 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraft.block.Block;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemStack;
+
+import java.io.File;
+import java.util.HashMap;
 
 @Mod(modid = MinestellarCore.MOD_ID, name = MinestellarCore.MOD_NAME, version = Constants.VERSION)
 public class MinestellarCore {

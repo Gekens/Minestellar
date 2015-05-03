@@ -16,17 +16,15 @@
 
 package com.minestellar.core.blocks.tile;
 
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.common.util.ForgeDirection;
 import cofh.api.energy.EnergyStorage;
 import cofh.api.energy.IEnergyHandler;
 import cofh.api.energy.IEnergyProvider;
-
 import com.minestellar.api.core.TileEntityWire;
-
 import cpw.mods.fml.common.Optional;
 import cpw.mods.fml.common.Optional.Method;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.common.util.ForgeDirection;
 
 @Optional.Interface(iface = "cofh.api.energy.IEnergyHandler", modid = "CoFHCore")
 public class TileEntityCable extends TileEntityWire implements IEnergyHandler {

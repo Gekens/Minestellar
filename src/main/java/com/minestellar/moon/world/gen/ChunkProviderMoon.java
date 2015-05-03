@@ -16,9 +16,12 @@
 
 package com.minestellar.moon.world.gen;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import com.google.common.collect.Lists;
+import com.minestellar.api.core.BlockMetaPair;
+import com.minestellar.api.world.gen.BiomeDecoratorMinestellar;
+import com.minestellar.api.world.gen.ChunkProviderMinestellar;
+import com.minestellar.api.world.gen.MapGenBaseMeta;
+import com.minestellar.moon.blocks.MoonBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.monster.EntitySkeleton;
@@ -28,12 +31,8 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.IChunkProvider;
 
-import com.google.common.collect.Lists;
-import com.minestellar.api.core.BlockMetaPair;
-import com.minestellar.api.world.gen.BiomeDecoratorMinestellar;
-import com.minestellar.api.world.gen.ChunkProviderMinestellar;
-import com.minestellar.api.world.gen.MapGenBaseMeta;
-import com.minestellar.moon.blocks.MoonBlocks;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ChunkProviderMoon extends ChunkProviderMinestellar {
 	private final BiomeDecoratorMoon moonBiomeDecorator = new BiomeDecoratorMoon();
@@ -69,7 +68,7 @@ public class ChunkProviderMoon extends ChunkProviderMinestellar {
 
 	@Override
 	protected BiomeGenBase.SpawnListEntry[] getMonsters() {
-		List<BiomeGenBase.SpawnListEntry> monsters = new ArrayList<BiomeGenBase.SpawnListEntry>();
+		List<BiomeGenBase.SpawnListEntry> monsters = new ArrayList<>();
 		monsters.add(new BiomeGenBase.SpawnListEntry(EntityZombie.class, 8, 2, 3));
 		monsters.add(new BiomeGenBase.SpawnListEntry(EntitySpider.class, 8, 2, 3));
 		monsters.add(new BiomeGenBase.SpawnListEntry(EntitySkeleton.class, 8, 2, 3));

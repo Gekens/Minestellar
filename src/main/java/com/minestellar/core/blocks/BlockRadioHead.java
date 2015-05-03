@@ -18,7 +18,6 @@ package com.minestellar.core.blocks;
 
 import com.minestellar.core.MinestellarCore;
 import com.minestellar.core.blocks.tile.TileEntityRadioHead;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;

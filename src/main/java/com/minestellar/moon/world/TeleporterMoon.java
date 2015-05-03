@@ -16,12 +16,8 @@
 
 package com.minestellar.moon.world;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Random;
-
-import net.minecraft.block.Block;
+import com.minestellar.core.blocks.CoreBlocks;
+import com.minestellar.moon.blocks.MoonBlocks;
 import net.minecraft.entity.Entity;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.ChunkCoordinates;
@@ -32,8 +28,10 @@ import net.minecraft.world.ChunkCoordIntPair;
 import net.minecraft.world.Teleporter;
 import net.minecraft.world.WorldServer;
 
-import com.minestellar.core.blocks.CoreBlocks;
-import com.minestellar.moon.blocks.MoonBlocks;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Random;
 
 public class TeleporterMoon extends Teleporter {
 	private final WorldServer worldServerInstance;
@@ -132,7 +130,7 @@ public class TeleporterMoon extends Teleporter {
 		if (d3 >= 0.0D) {
 			if (flag) {
 				this.destinationCoordinateCache.add(j1, new Teleporter.PortalPosition(i, j, k, this.worldServerInstance.getTotalWorldTime()));
-				this.destinationCoordinateKeys.add(Long.valueOf(j1));
+				this.destinationCoordinateKeys.add(j1);
 			}
 
 			double d11 = (double) i + 0.5D;
@@ -402,7 +400,7 @@ public class TeleporterMoon extends Teleporter {
 					i4 = j2 + k3;
 					j4 = k2 + (j3 - 1) * l2;
 					flag = j3 == 0 || j3 == 3 || k3 == -1 || k3 == 3;
-					this.worldServerInstance.setBlock(l3, i4, j4, (Block) (flag ? CoreBlocks.teleportBlock : MoonBlocks.moonPortal), 0, 2);
+					this.worldServerInstance.setBlock(l3, i4, j4, flag ? CoreBlocks.teleportBlock : MoonBlocks.moonPortal, 0, 2);
 				}
 			}
 
@@ -427,11 +425,11 @@ public class TeleporterMoon extends Teleporter {
 
 			while (iterator.hasNext()) {
 				Long olong = (Long) iterator.next();
-				Teleporter.PortalPosition portalposition = (Teleporter.PortalPosition) this.destinationCoordinateCache.getValueByKey(olong.longValue());
+				Teleporter.PortalPosition portalposition = (Teleporter.PortalPosition) this.destinationCoordinateCache.getValueByKey(olong);
 
 				if (portalposition == null || portalposition.lastUpdateTime < j) {
 					iterator.remove();
-					this.destinationCoordinateCache.remove(olong.longValue());
+					this.destinationCoordinateCache.remove(olong);
 				}
 			}
 		}

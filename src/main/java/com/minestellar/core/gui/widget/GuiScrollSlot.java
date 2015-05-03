@@ -1,14 +1,14 @@
 package com.minestellar.core.gui.widget;
 
-import java.awt.Rectangle;
-
 import org.lwjgl.input.Keyboard;
+
+import java.awt.*;
 
 public abstract class GuiScrollSlot extends GuiScrollPane
 {
     protected String actionCommand;
     public boolean focused;
-    protected ClickCounter<Integer> click = new ClickCounter<Integer>();
+    protected ClickCounter<Integer> click = new ClickCounter<>();
     public boolean smoothScroll = true;
 
     public GuiScrollSlot(int x, int y, int width, int height){

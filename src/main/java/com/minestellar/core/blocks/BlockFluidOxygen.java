@@ -16,8 +16,9 @@
 
 package com.minestellar.core.blocks;
 
-import java.util.Random;
-
+import com.minestellar.core.MinestellarCore;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.util.IIcon;
@@ -28,10 +29,7 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidStack;
 
-import com.minestellar.core.MinestellarCore;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import java.util.Random;
 
 public class BlockFluidOxygen extends BlockFluidClassic {
 	public static IIcon oxygenStillIcon;

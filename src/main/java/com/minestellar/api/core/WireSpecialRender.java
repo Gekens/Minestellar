@@ -16,15 +16,13 @@
 
 package com.minestellar.api.core;
 
+import com.minestellar.core.MinestellarCore;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.util.ForgeDirection;
-
 import org.lwjgl.opengl.GL11;
-
-import com.minestellar.core.MinestellarCore;
 
 /**
  * Class for wire renders that handles different wire dimension

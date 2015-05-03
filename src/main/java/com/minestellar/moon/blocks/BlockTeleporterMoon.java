@@ -16,8 +16,13 @@
 
 package com.minestellar.moon.blocks;
 
-import java.util.Random;
-
+import com.minestellar.core.MinestellarCore;
+import com.minestellar.core.blocks.CoreBlocks;
+import com.minestellar.moon.MinestellarMoon;
+import com.minestellar.moon.util.ConfigManagerMoon;
+import com.minestellar.moon.world.TeleporterMoon;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBreakable;
 import net.minecraft.block.material.Material;
@@ -32,14 +37,7 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import com.minestellar.core.MinestellarCore;
-import com.minestellar.core.blocks.CoreBlocks;
-import com.minestellar.moon.MinestellarMoon;
-import com.minestellar.moon.util.ConfigManagerMoon;
-import com.minestellar.moon.world.TeleporterMoon;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import java.util.Random;
 
 public class BlockTeleporterMoon extends BlockBreakable {
 	public static final int[][] field_150001_a = new int[][] {

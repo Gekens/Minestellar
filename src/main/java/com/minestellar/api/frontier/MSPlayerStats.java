@@ -1,12 +1,12 @@
 package com.minestellar.api.frontier;
 
-import java.lang.ref.WeakReference;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IExtendedEntityProperties;
+
+import java.lang.ref.WeakReference;
 
 public class MSPlayerStats implements IExtendedEntityProperties
 {

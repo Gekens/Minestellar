@@ -16,10 +16,10 @@
 
 package com.minestellar.api.event.wgen;
 
-import java.util.Random;
-
-import net.minecraft.world.World;
 import cpw.mods.fml.common.eventhandler.Event;
+import net.minecraft.world.World;
+
+import java.util.Random;
 
 public class MinestellarEventPopulate extends Event {
 	public final World worldObj;

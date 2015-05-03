@@ -16,20 +16,18 @@
 
 package com.minestellar.moon.world;
 
+import com.minestellar.api.world.IMinestellarWorldProvider;
+import com.minestellar.moon.util.ConfigManagerMoon;
+import com.minestellar.moon.world.gen.ChunkProviderMoon;
+import com.minestellar.moon.world.gen.WorldChunkManagerMoon;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.WorldProvider;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraftforge.client.IRenderHandler;
-
-import com.minestellar.api.world.IMinestellarWorldProvider;
-import com.minestellar.moon.util.ConfigManagerMoon;
-import com.minestellar.moon.world.gen.ChunkProviderMoon;
-import com.minestellar.moon.world.gen.WorldChunkManagerMoon;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class WorldProviderMoon extends WorldProvider implements IMinestellarWorldProvider {
 	@Override

@@ -16,13 +16,6 @@
 
 package com.minestellar.core.blocks;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidRegistry;
-import net.minecraftforge.oredict.OreDictionary;
-
 import com.minestellar.core.MinestellarCore;
 import com.minestellar.core.blocks.fluid.FluidBlockHydrogen;
 import com.minestellar.core.blocks.fluid.FluidBlockNitrogen;
@@ -37,8 +30,13 @@ import com.minestellar.core.blocks.machines.GasSinkMachine;
 import com.minestellar.core.blocks.machines.OxygenCollectorMachine;
 import com.minestellar.core.blocks.machines.SolarGenerator;
 import com.minestellar.core.util.ItemBlockUtil;
-
 import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.oredict.OreDictionary;
 
 public class CoreBlocks {
 	public static void init() {

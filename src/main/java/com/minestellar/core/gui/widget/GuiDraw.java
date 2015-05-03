@@ -1,12 +1,6 @@
 package com.minestellar.core.gui.widget;
 
-import java.awt.Dimension;
-import java.awt.Point;
-import java.awt.geom.Point2D;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
+import com.minestellar.core.util.MathHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.Gui;
@@ -15,12 +9,15 @@ import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.util.EnumChatFormatting;
-
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
-import com.minestellar.core.util.MathHelper;
+import java.awt.*;
+import java.awt.geom.Point2D;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class GuiDraw{
 	public static class GuiHook extends Gui{
@@ -126,7 +123,7 @@ public class GuiDraw{
     }
 
     public static void drawTip(int x, int y, String text) {
-        drawMultilineTip(x, y, Arrays.asList(text));
+        drawMultilineTip(x, y, Collections.singletonList(text));
     }
 
     /**
@@ -137,13 +134,13 @@ public class GuiDraw{
      * Have a string in the tooltip list with TOOLTIP_HANDLER + getTipLineId(handler) for a custom handler
      */
     public static final String TOOLTIP_HANDLER = "\u00A7x";
-    private static List<ITooltipLineHandler> tipLineHandlers = new ArrayList<ITooltipLineHandler>();
+    private static List<ITooltipLineHandler> tipLineHandlers = new ArrayList<>();
 
-    public static interface ITooltipLineHandler
+    public interface ITooltipLineHandler
     {
-        public Dimension getSize();
+        Dimension getSize();
 
-        public void draw(int x, int y);
+        void draw(int x, int y);
     }
 
     public static int getTipLineId(ITooltipLineHandler handler) {

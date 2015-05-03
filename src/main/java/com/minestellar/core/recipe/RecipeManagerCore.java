@@ -16,15 +16,14 @@
 
 package com.minestellar.core.recipe;
 
+import com.minestellar.core.blocks.CoreBlocks;
+import com.minestellar.core.items.CoreItems;
+import com.minestellar.core.util.RecipeUtil;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraftforge.oredict.OreDictionary;
-
-import com.minestellar.core.blocks.CoreBlocks;
-import com.minestellar.core.items.CoreItems;
-import com.minestellar.core.util.RecipeUtil;
 
 public class RecipeManagerCore {
 	private static void addUniversalRecipes() {

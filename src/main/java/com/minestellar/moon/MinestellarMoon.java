@@ -16,14 +16,6 @@
 
 package com.minestellar.moon;
 
-import java.io.File;
-import java.util.HashMap;
-
-import net.minecraft.block.Block;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
-import net.minecraft.item.ItemStack;
-
 import com.minestellar.core.Constants;
 import com.minestellar.moon.blocks.MoonBlocks;
 import com.minestellar.moon.items.MoonItems;
@@ -31,7 +23,6 @@ import com.minestellar.moon.proxy.CommonProxyMoon;
 import com.minestellar.moon.recipe.RecipeManagerMoon;
 import com.minestellar.moon.util.ConfigManagerMoon;
 import com.minestellar.moon.world.DimensionMoon;
-
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
@@ -40,6 +31,13 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraft.block.Block;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemStack;
+
+import java.io.File;
+import java.util.HashMap;
 
 @Mod(modid = MinestellarMoon.MODID, name = MinestellarMoon.MODNAME, version = Constants.VERSION)
 public class MinestellarMoon {
@@ -49,8 +47,8 @@ public class MinestellarMoon {
 	public static final String ASSET_PREFIX = "minestellar_moon";
 	public static final String TEXTURE_PREFIX = MinestellarMoon.ASSET_PREFIX + ":";
 
-	public static HashMap<String, ItemStack> blocksList = new HashMap<String, ItemStack>();
-	public static HashMap<String, ItemStack> itemList = new HashMap<String, ItemStack>();
+	public static HashMap<String, ItemStack> blocksList = new HashMap<>();
+	public static HashMap<String, ItemStack> itemList = new HashMap<>();
 
 	@Instance(MinestellarMoon.MODID)
 	public static MinestellarMoon instance = new MinestellarMoon();

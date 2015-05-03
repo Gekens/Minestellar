@@ -21,22 +21,60 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.world.World;
 import org.lwjgl.opengl.GL11;
 
+import static org.lwjgl.opengl.GL11.*;
+
 public class EntityLightningBoltFX extends EntityFX{
 
     private float endX, endY, endZ;
+    private int sections;
 
-    public EntityLightningBoltFX(World world, double x, double y, double z){
+    public EntityLightningBoltFX(World world, double x, double y, double z, int sections){
         super(world, x, y, z);
+
+        this.sections = sections;
+
+        noClip = true;
     }
 
     @Override
     public void renderParticle(Tessellator tessellator, float partialTicks, float par3, float par4, float par5, float par6, float par7){
-        GL11.glDepthMask(false);
-        GL11.glEnable(GL11.GL_BLEND);
-        GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+        glDisable(GL11.GL_TEXTURE_2D);
+        glDisable(GL11.GL_LIGHTING);
+        glEnable(GL11.GL_BLEND);
+        glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE);
+        glDepthMask(false);
+        glAlphaFunc(GL_GREATER, 0.003921569F);
 
-        GL11.glDisable(GL11.GL_BLEND);
-        GL11.glDepthMask(true);
+        glColor4f(particleRed, particleGreen, particleBlue, 1);
+
+        tessellator.startDrawing(3);
+        float x = (float)(prevPosX+(posX-prevPosX)*partialTicks-interpPosX);
+        float y = (float)(prevPosY+(posY-prevPosY)*partialTicks-interpPosY);
+        float z = (float)(prevPosZ+(posZ-prevPosZ)*partialTicks-interpPosZ);
+        {
+            //            tessellator.addVertex(x, y, z);
+
+            for(int i = 0; i < sections; i++){
+                if(i == sections-1) i = 0;
+                float randX, randY, randZ;
+                do{
+                    randX = rand.nextFloat();
+                    randY = rand.nextFloat();
+                    randZ = rand.nextFloat();
+                }while(randX+x <= (posX+x)-(endX+x) && randY+y <= (posY+y)-(endY+y) && randZ+z <= (posZ+z)-(endZ+z));
+                tessellator.addVertex(randX+x+i, randY+y+i, randZ+z+i);
+            }
+
+            //            tessellator.addVertex(endX+x, endY+y, endZ+z);
+        }
+
+        tessellator.draw();
+
+        glEnable(GL11.GL_TEXTURE_2D);
+        glEnable(GL11.GL_LIGHTING);
+        glDisable(GL_BLEND);
+        glDepthMask(true);
+        glAlphaFunc(GL_GREATER, 0.1F);
     }
 
     @Override
@@ -46,7 +84,13 @@ public class EntityLightningBoltFX extends EntityFX{
 
     @Override
     public void onUpdate(){
-        super.onUpdate();
+        this.prevPosX = this.posX;
+        this.prevPosY = this.posY;
+        this.prevPosZ = this.posZ;
+
+        if(this.particleAge++ >= this.particleMaxAge){
+            this.setDead();
+        }
     }
 
     /**

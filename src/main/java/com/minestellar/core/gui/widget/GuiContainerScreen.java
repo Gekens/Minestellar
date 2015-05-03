@@ -1,14 +1,7 @@
 package com.minestellar.core.gui.widget;
 
-import java.awt.Point;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Set;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.texture.TextureMap;
@@ -20,15 +13,20 @@ import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
-
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
+
 public class GuiContainerScreen extends GuiScreenWidget implements IGuiActionListener{
 
-	public ArrayList<GuiWidget> widgets = new ArrayList<GuiWidget>();
+	public ArrayList<GuiWidget> widgets = new ArrayList<>();
 
 	public int xSize, ySize, midX, midY, guiTop, guiLeft;
 
@@ -162,7 +160,7 @@ public class GuiContainerScreen extends GuiScreenWidget implements IGuiActionLis
 			int j2 = this.returningStackDestSlot.yDisplayPosition - this.field_147010_z;
 			int l1 = this.field_147011_y + (int)((float)k1 * f1);
 			int i2 = this.field_147010_z + (int)((float)j2 * f1);
-			this.drawItemStack(this.returningStack, l1, i2, (String)null);
+			this.drawItemStack(this.returningStack, l1, i2, null);
 		}
 
 		GL11.glPopMatrix();
@@ -337,7 +335,7 @@ public class GuiContainerScreen extends GuiScreenWidget implements IGuiActionLis
 			}
 
 			if (this.mc.gameSettings.touchscreen && flag1 && this.mc.thePlayer.inventory.getItemStack() == null){
-				this.mc.displayGuiScreen((GuiScreen)null);
+				this.mc.displayGuiScreen(null);
 				return;
 			}
 
@@ -457,9 +455,9 @@ public class GuiContainerScreen extends GuiScreenWidget implements IGuiActionLis
 		Slot slot1;
 		Iterator iterator;
 
-		if (this.field_146993_M && slot != null && button == 0 && this.inventorySlots.func_94530_a((ItemStack)null, slot)){
+		if (this.field_146993_M && slot != null && button == 0 && this.inventorySlots.func_94530_a(null, slot)){
 			if (isShiftKeyDown()){
-				if (slot != null && slot.inventory != null && this.field_146994_N != null){
+				if (slot.inventory != null && this.field_146994_N != null){
 					iterator = this.inventorySlots.inventorySlots.iterator();
 
 					while (iterator.hasNext()){
@@ -527,7 +525,7 @@ public class GuiContainerScreen extends GuiScreenWidget implements IGuiActionLis
 				}
 			}
 			else if (this.field_147007_t && !this.field_147008_s.isEmpty()){
-				this.handleMouseClick((Slot)null, -999, Container.func_94534_d(0, this.field_146987_F), 5);
+				this.handleMouseClick(null, -999, Container.func_94534_d(0, this.field_146987_F), 5);
 				iterator = this.field_147008_s.iterator();
 
 				while (iterator.hasNext()){
@@ -535,7 +533,7 @@ public class GuiContainerScreen extends GuiScreenWidget implements IGuiActionLis
 					this.handleMouseClick(slot1, slot1.slotNumber, Container.func_94534_d(1, this.field_146987_F), 5);
 				}
 
-				this.handleMouseClick((Slot)null, -999, Container.func_94534_d(2, this.field_146987_F), 5);
+				this.handleMouseClick(null, -999, Container.func_94534_d(2, this.field_146987_F), 5);
 			}else if (this.mc.thePlayer.inventory.getItemStack() != null){
 				if (button == this.mc.gameSettings.keyBindPickBlock.getKeyCode() + 100){
 					this.handleMouseClick(slot, j1, button, 3);

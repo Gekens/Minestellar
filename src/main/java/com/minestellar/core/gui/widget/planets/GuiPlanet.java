@@ -16,18 +16,14 @@
 
 package com.minestellar.core.gui.widget.planets;
 
-import java.util.Iterator;
-
-import net.minecraft.util.ResourceLocation;
-
-import org.lwjgl.opengl.GL11;
-
 import com.minestellar.core.MinestellarCore;
 import com.minestellar.core.gui.ComputerGui;
 import com.minestellar.core.gui.widget.GuiDraw;
 import com.minestellar.core.gui.widget.GuiScreenWidget;
 import com.minestellar.core.gui.widget.GuiSideBarWidget;
 import com.minestellar.core.gui.widget.GuiWidget;
+import net.minecraft.util.ResourceLocation;
+import org.lwjgl.opengl.GL11;
 
 /**
  * The <i>planet</i> element for the {@link ComputerGui}
@@ -57,15 +53,15 @@ public class GuiPlanet extends GuiWidget{
 				parent = (GuiScreenWidget)parentScreen;
 				if(parent instanceof ComputerGui){
 					ComputerGui gui = (ComputerGui)parent;
-					for(Iterator iterator = gui.planets.iterator(); iterator.hasNext();){
+					for(GuiPlanet planet1 : gui.planets){
 						try{
-							GuiPlanet planet = (GuiPlanet)iterator.next();
-							if(planet != this){
-								((GuiPlanet) planet).setSelected(false);
+							if(planet1 != this){
+								planet1.setSelected(false);
 								gui.setSelectedPlanet(null);
 								gui.setDraw(false);
 							}
-						}catch(Exception e){}
+						}catch(Exception ignored){
+						}
 					}
 					setSelected(!isSelected());
 					if(isSelected()){

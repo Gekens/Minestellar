@@ -16,8 +16,10 @@
 
 package com.minestellar.core.items;
 
-import java.util.List;
-
+import com.minestellar.core.MinestellarCore;
+import com.minestellar.core.proxy.ClientProxyCore;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.EnumRarity;
@@ -25,17 +27,9 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
-import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidContainerRegistry;
-import net.minecraftforge.fluids.FluidRegistry;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.ItemFluidContainer;
+import net.minecraftforge.fluids.*;
 
-import com.minestellar.core.MinestellarCore;
-import com.minestellar.core.proxy.ClientProxyCore;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import java.util.List;
 
 public abstract class ItemCanisterGeneric extends ItemFluidContainer {
 	private String allowedFluid = null;
@@ -93,7 +87,7 @@ public abstract class ItemCanisterGeneric extends ItemFluidContainer {
 	}
 
 	public void setAllowedFluid(String name) {
-		this.allowedFluid = new String(name);
+		this.allowedFluid = name;
 	}
 
 	public String getAllowedFluid() {

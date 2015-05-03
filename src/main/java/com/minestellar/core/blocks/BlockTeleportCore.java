@@ -16,11 +16,10 @@
 
 package com.minestellar.core.blocks;
 
+import com.minestellar.core.MinestellarCore;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
-
-import com.minestellar.core.MinestellarCore;
 
 public class BlockTeleportCore extends Block {
 	protected BlockTeleportCore(String unlocalizedName) {

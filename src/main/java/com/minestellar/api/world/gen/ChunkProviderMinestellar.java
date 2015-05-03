@@ -16,10 +16,9 @@
 
 package com.minestellar.api.world.gen;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
+import com.minestellar.api.core.BlockMetaPair;
+import com.minestellar.core.perlin.generator.Gradient;
+import com.minestellar.core.world.gen.EnumCraterSize;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFalling;
 import net.minecraft.entity.EnumCreatureType;
@@ -32,9 +31,10 @@ import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.ChunkProviderGenerate;
 
-import com.minestellar.api.core.BlockMetaPair;
-import com.minestellar.core.perlin.generator.Gradient;
-import com.minestellar.core.world.gen.EnumCraterSize;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
 
 public abstract class ChunkProviderMinestellar extends ChunkProviderGenerate {
 	protected final Random rand;
@@ -163,7 +163,7 @@ public abstract class ChunkProviderMinestellar extends ChunkProviderGenerate {
 				for (int var16 = ChunkProviderMinestellar.CHUNK_SIZE_Y - 1; var16 >= 0; --var16) {
 					final int index = this.getIndex(var8, var16, var9);
 
-					if (var16 <= 0 + this.rand.nextInt(5)) {
+					if (var16 <= this.rand.nextInt(5)) {
 						arrayOfIDs[index] = Blocks.bedrock;
 					} else {
 						final Block var18 = arrayOfIDs[index];
@@ -346,17 +346,13 @@ public abstract class ChunkProviderMinestellar extends ChunkProviderGenerate {
 		if (par1EnumCreatureType == EnumCreatureType.monster) {
 			final List monsters = new ArrayList();
 
-			for (SpawnListEntry monster : this.getMonsters()) {
-				monsters.add(monster);
-			}
+			Collections.addAll(monsters, this.getMonsters());
 
 			return monsters;
 		} else if (par1EnumCreatureType == EnumCreatureType.creature) {
 			final List creatures = new ArrayList();
 
-			for (SpawnListEntry creature : this.getCreatures()) {
-				creatures.add(creature);
-			}
+			Collections.addAll(creatures, this.getCreatures());
 
 			return creatures;
 		} else {

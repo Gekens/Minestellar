@@ -1,17 +1,16 @@
 package com.minestellar.core.gui.widget;
 
-import java.awt.Point;
-import java.util.ArrayList;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
-
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 
+import java.awt.*;
+import java.util.ArrayList;
+
 public class GuiScreenWidget extends GuiScreen implements IGuiActionListener{    
 
-	public ArrayList<GuiWidget> widgets = new ArrayList<GuiWidget>();
+	public ArrayList<GuiWidget> widgets = new ArrayList<>();
 
 	public int xSize, ySize, midX, midY, guiTop, guiLeft;
 

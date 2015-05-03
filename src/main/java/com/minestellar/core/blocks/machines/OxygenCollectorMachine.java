@@ -16,15 +16,14 @@
 
 package com.minestellar.core.blocks.machines;
 
+import com.minestellar.core.MinestellarCore;
+import com.minestellar.core.blocks.tile.TileEntityOxygenCollector;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-
-import com.minestellar.core.MinestellarCore;
-import com.minestellar.core.blocks.tile.TileEntityOxygenCollector;
 
 public class OxygenCollectorMachine extends Block implements ITileEntityProvider {
 	public OxygenCollectorMachine(String name) {

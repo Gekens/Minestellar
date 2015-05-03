@@ -16,9 +16,8 @@
 
 package com.minestellar.moon.items;
 
-import net.minecraft.item.Item;
-
 import com.minestellar.moon.MinestellarMoon;
+import net.minecraft.item.Item;
 
 public class MoonItems {
 	public static void init() {

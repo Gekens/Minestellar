@@ -1,6 +1,5 @@
 package com.minestellar.api.vector;
 
-import cofh.repack.codechicken.lib.vec.Quat;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NBTTagCompound;
@@ -456,7 +455,6 @@ public class Vector3 implements Cloneable
     /**
      * Gets a position relative to a position's side
      *
-     * @param position - The position
      * @param side     - The side. 0-5
      * @return The position relative to the original position's side
      */
@@ -674,7 +672,6 @@ public class Vector3 implements Cloneable
     /**
      * Saves this Vector3 to disk
      *
-     * @param prefix - The prefix of this save. Use some unique string.
      * @param nbt    - The NBT compound object to save the data in
      */
     public NBTTagCompound writeToNBT(NBTTagCompound nbt)

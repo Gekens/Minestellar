@@ -16,15 +16,12 @@
 
 package com.minestellar.core.util;
 
-import java.io.File;
-
+import com.minestellar.core.Constants;
+import cpw.mods.fml.common.FMLLog;
 import net.minecraftforge.common.config.Configuration;
-
 import org.apache.logging.log4j.Level;
 
-import com.minestellar.core.Constants;
-
-import cpw.mods.fml.common.FMLLog;
+import java.io.File;
 
 public class ConfigManagerCore {
 	public static boolean loaded;

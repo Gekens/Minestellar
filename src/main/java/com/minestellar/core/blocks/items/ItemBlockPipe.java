@@ -16,12 +16,11 @@
 
 package com.minestellar.core.blocks.items;
 
+import com.minestellar.core.proxy.ClientProxyCore;
 import net.minecraft.block.Block;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-
-import com.minestellar.core.proxy.ClientProxyCore;
 
 public class ItemBlockPipe extends ItemBlock {
 

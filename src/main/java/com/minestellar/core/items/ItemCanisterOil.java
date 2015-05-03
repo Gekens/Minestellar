@@ -16,8 +16,10 @@
 
 package com.minestellar.core.items;
 
-import java.util.List;
-
+import com.minestellar.core.MinestellarCore;
+import com.minestellar.core.util.MinestellarUtil;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
@@ -27,11 +29,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
-import com.minestellar.core.MinestellarCore;
-import com.minestellar.core.util.MinestellarUtil;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import java.util.List;
 
 public class ItemCanisterOil extends ItemCanisterGeneric {
 	protected IIcon[] icons = new IIcon[7];

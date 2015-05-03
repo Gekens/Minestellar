@@ -16,21 +16,19 @@
 
 package com.minestellar.core.util;
 
-import java.util.Arrays;
-import java.util.List;
-
+import com.minestellar.core.MinestellarCore;
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.registry.EntityRegistry;
+import cpw.mods.fml.common.registry.LanguageRegistry;
+import cpw.mods.fml.relauncher.Side;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.StatCollector;
 
-import com.minestellar.core.MinestellarCore;
-
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.registry.EntityRegistry;
-import cpw.mods.fml.common.registry.LanguageRegistry;
-import cpw.mods.fml.relauncher.Side;
+import java.util.Arrays;
+import java.util.List;
 
 public class MinestellarUtil {
 	public static int nextID = 0;

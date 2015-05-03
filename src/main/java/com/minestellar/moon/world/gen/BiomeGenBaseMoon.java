@@ -16,12 +16,11 @@
 
 package com.minestellar.moon.world.gen;
 
+import com.minestellar.moon.util.ConfigManagerMoon;
 import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.monster.EntitySpider;
 import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.world.biome.BiomeGenBase;
-
-import com.minestellar.moon.util.ConfigManagerMoon;
 
 public class BiomeGenBaseMoon extends BiomeGenBase {
 	public static final BiomeGenBase moon = new BiomeGenBaseMoon(ConfigManagerMoon.idBiomeMoon).setBiomeName("Moon");

@@ -16,13 +16,12 @@
 
 package com.minestellar.moon.recipe;
 
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.FurnaceRecipes;
-import net.minecraftforge.oredict.OreDictionary;
-
 import com.minestellar.core.util.RecipeUtil;
 import com.minestellar.moon.blocks.MoonBlocks;
 import com.minestellar.moon.items.MoonItems;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.FurnaceRecipes;
+import net.minecraftforge.oredict.OreDictionary;
 
 public class RecipeManagerMoon {
 	private static void addUniversalRecipes() {

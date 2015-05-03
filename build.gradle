@@ -16,9 +16,7 @@ buildscript {
     }
 }
 
-apply plugin: 'java'
 apply plugin: 'forge'
-apply plugin: 'curseforge'
 
 version = "p0.0.3"
 group= "com" // http://maven.apache.org/guides/mini/guide-naming-conventions.html

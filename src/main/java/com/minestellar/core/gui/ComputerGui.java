@@ -16,15 +16,6 @@
 
 package com.minestellar.core.gui;
 
-import java.awt.geom.Point2D;
-import java.util.ArrayList;
-import java.util.Timer;
-
-import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.resources.I18n;
-
-import org.lwjgl.opengl.GL11;
-
 import com.minestellar.core.Constants;
 import com.minestellar.core.blocks.machines.Computer;
 import com.minestellar.core.blocks.tile.TileEntityComputer;
@@ -33,8 +24,14 @@ import com.minestellar.core.gui.widget.GuiScreenWidget;
 import com.minestellar.core.gui.widget.GuiSideBarWidget;
 import com.minestellar.core.gui.widget.planets.GuiPlanet;
 import com.minestellar.core.handler.FileHandler;
-
 import cpw.mods.fml.client.FMLClientHandler;
+import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.resources.I18n;
+import org.lwjgl.opengl.GL11;
+
+import java.awt.geom.Point2D;
+import java.util.ArrayList;
+import java.util.Timer;
 
 /**
  * GuiScreen for the {@link Computer} and {@link TileEntityComputer}
@@ -42,11 +39,11 @@ import cpw.mods.fml.client.FMLClientHandler;
 public class ComputerGui extends GuiScreenWidget{
 
 	public int screenWidth, screenHeight, spaceX, spaceY, spaceWidth, spaceHeight, earthA, earthB;
-	public ArrayList<GuiPlanet> planets = new ArrayList<GuiPlanet>();
-	public ArrayList<Point2D.Double> earthCoordsArray = new ArrayList<Point2D.Double>();
-	public ArrayList<Point2D.Double> moonCoordsArray = new ArrayList<Point2D.Double>();
-	public ArrayList<Point2D.Double> mercuryCoordsArray = new ArrayList<Point2D.Double>();
-	public ArrayList<Point2D.Double> venusCoordsArray = new ArrayList<Point2D.Double>();
+	public ArrayList<GuiPlanet> planets = new ArrayList<>();
+	public ArrayList<Point2D.Double> earthCoordsArray = new ArrayList<>();
+	public ArrayList<Point2D.Double> moonCoordsArray = new ArrayList<>();
+	public ArrayList<Point2D.Double> mercuryCoordsArray = new ArrayList<>();
+	public ArrayList<Point2D.Double> venusCoordsArray = new ArrayList<>();
 
 	private Timer timer;
 	private boolean doesDraw = false;
@@ -81,7 +78,7 @@ public class ComputerGui extends GuiScreenWidget{
 	public void updateScreen(){
 		super.updateScreen();
 
-		if(this.selectedPlanet != null){
+		if(selectedPlanet != null){
 			if(doesDraw){
 				setDraw(false);
 				add(planetInfoLeft = new GuiSideBarWidget(screenWidth, screenHeight, 200, screenHeight, 1).setColors(0xAA555555, 0xAA000000).setTitle(selectedPlanet.getName())
@@ -89,7 +86,7 @@ public class ComputerGui extends GuiScreenWidget{
 			}
 		}
 
-		if(this.selectedPlanet == null && !this.doesDraw){
+		if(selectedPlanet == null && !this.doesDraw){
 			removeSidebars();
 		}
 
@@ -210,7 +207,7 @@ public class ComputerGui extends GuiScreenWidget{
 	 */
 
 	public void setSelectedPlanet(GuiPlanet planet){
-		this.selectedPlanet = planet;
+		selectedPlanet = planet;
 	}
 
 	/**

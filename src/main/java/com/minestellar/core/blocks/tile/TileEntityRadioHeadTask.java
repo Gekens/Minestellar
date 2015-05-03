@@ -16,14 +16,13 @@
 
 package com.minestellar.core.blocks.tile;
 
-import java.util.TimerTask;
-
-import net.minecraft.world.World;
-
 import com.minestellar.core.blocks.BlockRadioWall;
 import com.minestellar.core.network.NetworkHandler;
 import com.minestellar.core.network.message.MessageRadioFormed;
 import com.minestellar.core.network.message.MessageRadioUnformed;
+import net.minecraft.world.World;
+
+import java.util.TimerTask;
 
 public class TileEntityRadioHeadTask extends TimerTask{
 

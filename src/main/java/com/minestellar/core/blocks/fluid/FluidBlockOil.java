@@ -16,9 +16,8 @@
 
 package com.minestellar.core.blocks.fluid;
 
-import net.minecraftforge.fluids.Fluid;
-
 import com.minestellar.core.blocks.BlockFluidOil;
+import net.minecraftforge.fluids.Fluid;
 
 public class FluidBlockOil extends Fluid {
 	public FluidBlockOil(String fluidName) {

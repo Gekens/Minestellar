@@ -16,10 +16,10 @@
 
 package com.minestellar.core.gui;
 
-import java.util.TimerTask;
-
 import com.minestellar.core.gui.widget.GuiDraw;
 import com.minestellar.core.gui.widget.planets.GuiPlanet;
+
+import java.util.TimerTask;
 
 /**
  * Timer task for the planets.
@@ -77,10 +77,7 @@ public class PlanetTimer extends TimerTask{
 			y = Math.sqrt(Math.abs((planet.getB()*planet.getB())*(1-((x*x)/(planet.getA()*planet.getA())))));
 
 		if((x == planet.getA() && !doTop) || (x == -planet.getA() && doTop)){
-			if(!doTop)
-				doTop = true;
-			else
-				doTop = false;
+			doTop = ! doTop;
 		}
 
 		if(doTop){

@@ -2,7 +2,6 @@ package com.minestellar.core.gui.widget;
 
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.util.ChatAllowedCharacters;
-
 import org.lwjgl.input.Keyboard;
 
 public class GuiMSTextField extends GuiWidget{

@@ -16,8 +16,8 @@
 
 package com.minestellar.core.blocks.tile;
 
-import java.util.ArrayList;
-
+import cpw.mods.fml.common.Optional;
+import cpw.mods.fml.common.Optional.Method;
 import mekanism.api.gas.Gas;
 import mekanism.api.gas.GasStack;
 import mekanism.api.gas.GasTank;
@@ -28,8 +28,8 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Vec3;
 import net.minecraftforge.common.util.ForgeDirection;
-import cpw.mods.fml.common.Optional;
-import cpw.mods.fml.common.Optional.Method;
+
+import java.util.ArrayList;
 
 @Optional.Interface(iface = "mekanism.api.gas.IGasHandler", modid = "Mekanism")
 public class TileEntityOxygenCollector extends TileEntity implements IGasHandler {

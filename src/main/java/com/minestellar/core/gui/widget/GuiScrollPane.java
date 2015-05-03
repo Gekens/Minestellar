@@ -1,9 +1,8 @@
 package com.minestellar.core.gui.widget;
 
-import java.awt.Dimension;
-import java.awt.Rectangle;
-
 import com.minestellar.core.util.MathHelper;
+
+import java.awt.*;
 
 public abstract class GuiScrollPane extends GuiWidget{
     protected int scrollclicky = -1;

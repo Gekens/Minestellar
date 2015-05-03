@@ -25,7 +25,7 @@ import static org.lwjgl.opengl.GL11.*;
 
 public class EntityLightningFX extends EntityFX{
 
-	private int sections, seconds;
+	private int seconds;
 	private float[] xCoords, yCoords, zCoords;
 	private float endX, endY, endZ;
 
@@ -36,7 +36,6 @@ public class EntityLightningFX extends EntityFX{
 	public EntityLightningFX(World world, double x, double y, double z, int sections, int seconds){
 		super(world, x, y, z);
 
-		this.sections = sections;
 		this.seconds = seconds;
 		
 		xCoords = new float[sections];
@@ -62,7 +61,7 @@ public class EntityLightningFX extends EntityFX{
 		glDepthMask(false);
 		glAlphaFunc(GL_GREATER, 0.003921569F);
 
-		glColor4f(particleRed, particleGreen, particleBlue, 1);
+		glColor4f(particleRed, particleGreen, particleBlue, 0.8F);
 
 		tessellator.startDrawing(3);
 		float x = (float)(prevPosX+(posX-prevPosX)*partialTicks-interpPosX);

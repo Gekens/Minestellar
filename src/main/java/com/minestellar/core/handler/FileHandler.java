@@ -16,14 +16,9 @@
 
 package com.minestellar.core.handler;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-
 import net.minecraft.client.Minecraft;
+
+import java.io.*;
 
 /**
  * Custom file handler for writing and reading files
@@ -37,7 +32,6 @@ public class FileHandler{
 	 * 
 	 * @param fileName The name of the file that should be written
 	 * @param text The text that should be written
-	 * @throws IOException If the folder does not exist 
 	 */
 	
 	public static void writeToFile(String fileName, String text){
@@ -71,7 +65,6 @@ public class FileHandler{
 	 * 
 	 * @param fileName The name of the file
 	 * @see FileHandler#writeToFile(String, String)
-	 * @throws IOException In case, for any reason, the file can't be read
 	 */
 	
 	public static String readFromFile(String fileName){
