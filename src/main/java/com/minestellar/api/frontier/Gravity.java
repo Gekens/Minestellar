@@ -44,7 +44,7 @@ public class Gravity {
 		}
 		
 		event.player.motionY = -0.375; // This makes the fall slower to simulate low gravity.
-				
+		player.fallDistance = 0.0F;		
 	}
 
 
