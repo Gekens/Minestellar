@@ -25,6 +25,7 @@ import com.minestellar.core.proxy.CommonProxyCore;
 import com.minestellar.core.recipe.RecipeManagerCore;
 import com.minestellar.core.util.ConfigManagerCore;
 import com.minestellar.core.util.MinestellarCreativeTab;
+import com.minestellar.core.util.MinestellarLog;
 import com.minestellar.core.world.gen.OverworldGenerator;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -55,8 +56,8 @@ public class MinestellarCore {
 	public static CreativeTabs stellarBlocksTab;
 	public static CreativeTabs stellarItemsTab;
 
-	public static HashMap<String, ItemStack> blocksList = new HashMap<String, ItemStack>();
-	public static HashMap<String, ItemStack> itemList = new HashMap<String, ItemStack>();
+	public static HashMap<String, ItemStack> blocksList = new HashMap<>();
+	public static HashMap<String, ItemStack> itemList = new HashMap<>();
 
 	@Instance(MinestellarCore.MOD_ID)
 	public static MinestellarCore instance = new MinestellarCore();
@@ -74,16 +75,20 @@ public class MinestellarCore {
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
+        long currTime = System.currentTimeMillis();
 		new ConfigManagerCore(new File(event.getModConfigurationDirectory(), "Minestellar/core.cfg"));
 
 		CoreBlocks.init();
 		CoreItems.init();
 
 		MinestellarCore.proxy.preInit(event);
+
+		MinestellarLog.info("PreInitialization completed in " + (System.currentTimeMillis()-currTime) + " millis.");
 	}
 
 	@EventHandler
 	public void init(FMLInitializationEvent event) {
+        long currTime = System.currentTimeMillis();
 		NetworkHandler.init();
 		
 		MinestellarCore.stellarBlocksTab = new MinestellarCreativeTab(CreativeTabs.getNextID(), "MinestellarBlocks", Item.getItemFromBlock(CoreBlocks.coreOreBlocks), 0);
@@ -108,11 +113,14 @@ public class MinestellarCore {
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
 		
 		MinestellarCore.proxy.init(event);
+        MinestellarLog.info("Initialization completed in " + (System.currentTimeMillis() - currTime) + " millis.");
 	}
 
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event) {
-		MinestellarCore.proxy.postInit(event);
+        long currTime = System.currentTimeMillis();
+        MinestellarCore.proxy.postInit(event);
+        MinestellarLog.info("PostInitialization completed in " + (System.currentTimeMillis() - currTime) + " millis.");
 	}
 
 	private void registerTileEntities() {

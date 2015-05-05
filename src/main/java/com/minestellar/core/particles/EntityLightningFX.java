@@ -44,7 +44,7 @@ public class EntityLightningFX extends EntityFX{
 
 		for(int i = 0; i < sections; i++){
 			xCoords[i] = (float) (rand.nextFloat()+x);
-			yCoords[i] = (rand.nextFloat());
+			yCoords[i] = rand.nextFloat();
 			zCoords[i] = (float) (rand.nextFloat()+z);
 		}
 

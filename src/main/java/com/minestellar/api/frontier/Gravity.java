@@ -1,13 +1,10 @@
 package com.minestellar.api.frontier;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.world.World;
-import net.minecraftforge.event.entity.living.LivingEvent.LivingJumpEvent;
-import net.minecraftforge.event.entity.living.LivingFallEvent;
-import cpw.mods.fml.common.eventhandler.EventPriority;
+import com.minestellar.moon.util.ConfigManagerMoon;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent.PlayerTickEvent;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraftforge.event.entity.living.LivingEvent.LivingJumpEvent;
 
 public class Gravity {
 	
@@ -24,7 +21,7 @@ public class Gravity {
 			return;
 		}
 		// The dimension id for the moon
-		if (event.entity.dimension == -25)
+		if (event.entity.dimension == ConfigManagerMoon.idDimensionMoon)
 		{
 			event.entity.motionY *= 2; // The normal jump height is 2.125 block high, which this times that by 2.
 		}

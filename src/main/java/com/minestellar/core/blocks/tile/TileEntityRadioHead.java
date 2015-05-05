@@ -16,7 +16,8 @@
 
 package com.minestellar.core.blocks.tile;
 
-import com.minestellar.core.particles.EntityLightningBoltFX;
+import com.minestellar.api.vector.Vector3;
+import com.minestellar.core.particles.EntityLightningBeamFX;
 import net.minecraft.client.Minecraft;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -43,7 +44,7 @@ public class TileEntityRadioHead extends TileEntity{
 //                Minecraft.getMinecraft().effectRenderer.addEffect(new EntityLightningFX(worldObj, xCoord, yCoord, zCoord, 5, 2).setColor((float)Math.random(), (float)Math.random(), (float)Math.random()).setArrivalCoords(xCoord-2, yCoord-2, zCoord+2));
 //                Minecraft.getMinecraft().effectRenderer.addEffect(new EntityLightningFX(worldObj, xCoord, yCoord, zCoord, 5, 2).setColor((float)Math.random(), (float)Math.random(), (float)Math.random()).setArrivalCoords(xCoord+2, yCoord-2, zCoord+2));
 //            }
-	        Minecraft.getMinecraft().effectRenderer.addEffect(new EntityLightningBoltFX(worldObj, xCoord, yCoord+1.5F, zCoord, 15).setColor(0.1F, 0.2F, 0.3F).setArrivalCoords(xCoord+10, yCoord, zCoord+10));
+	        Minecraft.getMinecraft().effectRenderer.addEffect(new EntityLightningBeamFX(worldObj, xCoord, yCoord, zCoord).setColor(1F, 0.F, 0.F).setArrivalCoords(new Vector3(xCoord+2, yCoord, zCoord-1), new Vector3(xCoord-2, yCoord, zCoord+1)));
 		}
 	}
 	

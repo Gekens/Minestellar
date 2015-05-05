@@ -16,6 +16,7 @@
 
 package com.minestellar.core.particles;
 
+import com.minestellar.api.vector.Vector3;
 import net.minecraft.client.particle.EntityFX;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.world.World;
@@ -23,15 +24,14 @@ import org.lwjgl.opengl.GL11;
 
 import static org.lwjgl.opengl.GL11.*;
 
-public class EntityLightningBoltFX extends EntityFX{
+public class EntityLightningBeamFX extends EntityFX{
 
-    private float endX, endY, endZ;
-    private int sections;
+    private Vector3[] stopCoordinates;
 
-    public EntityLightningBoltFX(World world, double x, double y, double z, int sections){
+    public EntityLightningBeamFX(World world, double x, double y, double z){
         super(world, x, y, z);
 
-        this.sections = sections;
+        setGravity(0);
 
         noClip = true;
     }
@@ -48,24 +48,18 @@ public class EntityLightningBoltFX extends EntityFX{
         glColor4f(particleRed, particleGreen, particleBlue, 1);
 
         tessellator.startDrawing(3);
+
         float x = (float)(prevPosX+(posX-prevPosX)*partialTicks-interpPosX);
         float y = (float)(prevPosY+(posY-prevPosY)*partialTicks-interpPosY);
         float z = (float)(prevPosZ+(posZ-prevPosZ)*partialTicks-interpPosZ);
+
         {
-            //            tessellator.addVertex(x, y, z);
+            tessellator.addVertex(x, y, z);
 
-            for(int i = 0; i < sections; i++){
-                if(i == sections-1) i = 0;
-                float randX, randY, randZ;
-                do{
-                    randX = rand.nextFloat();
-                    randY = rand.nextFloat();
-                    randZ = rand.nextFloat();
-                }while(randX+x <= (posX+x)-(endX+x) && randY+y <= (posY+y)-(endY+y) && randZ+z <= (posZ+z)-(endZ+z));
-                tessellator.addVertex(randX+x+i, randY+y+i, randZ+z+i);
+
+            for(Vector3 stopCoordinate : stopCoordinates){
+                tessellator.addVertex(stopCoordinate.x + x, stopCoordinate.y + y, stopCoordinate.z + z);
             }
-
-            //            tessellator.addVertex(endX+x, endY+y, endZ+z);
         }
 
         tessellator.draw();
@@ -97,42 +91,9 @@ public class EntityLightningBoltFX extends EntityFX{
      * Sets the coordinates of the point at which the particle should arrive.
      */
 
-    public EntityLightningBoltFX setArrivalCoords(float x, float y, float z){
-        this.endX = x;
-        this.endY = y;
-        this.endZ = z;
+    public EntityLightningBeamFX setArrivalCoords(Vector3... stopCoordinates){
+        this.stopCoordinates = stopCoordinates;
         return this;
-    }
-
-    /**
-     * Calculates the <code>x</code> component of the velocity needed to get to the end position.
-     *
-     * @param time Time in in-game ticks.
-     */
-
-    public float calculateVelocityX(int time){
-        return (float) ((this.endX-this.posX)/(time));
-    }
-
-    /**
-     * Calculates the <code>y</code> component of the velocity needed to get to the end position.
-     *
-     * @param time Time in in-game ticks.
-     */
-
-    public float calculateVelocityY(int time){
-        float angle = (float) (Math.atan((this.endY-this.posY)/(this.endX-this.posX)));
-        return (float) (calculateVelocityX(time)*Math.tan(angle));
-    }
-
-    /**
-     * Calculates the <code>z</code> component of the velocity needed to get to the end position.
-     *
-     * @param time Time in in-game ticks.
-     */
-
-    public float calculateVelocityZ(int time){
-        return (float) ((this.endZ-this.posZ)/(time));
     }
 
     @Override
@@ -150,22 +111,22 @@ public class EntityLightningBoltFX extends EntityFX{
         return 3;
     }
 
-    public EntityLightningBoltFX setMaxAge(int maxAge){
+    public EntityLightningBeamFX setMaxAge(int maxAge){
         particleMaxAge = maxAge;
         return this;
     }
 
-    public EntityLightningBoltFX setGravity(float gravity){
+    public EntityLightningBeamFX setGravity(float gravity){
         particleGravity = gravity;
         return this;
     }
 
-    public EntityLightningBoltFX setScale(float scale){
+    public EntityLightningBeamFX setScale(float scale){
         particleScale = scale;
         return this;
     }
 
-    public EntityLightningBoltFX setColor(float r, float g, float b){
+    public EntityLightningBeamFX setColor(float r, float g, float b){
         setRBGColorF(r, g, b);
         return this;
     }

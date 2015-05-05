@@ -17,6 +17,7 @@
 package com.minestellar.moon;
 
 import com.minestellar.core.Constants;
+import com.minestellar.core.util.MinestellarLog;
 import com.minestellar.moon.blocks.MoonBlocks;
 import com.minestellar.moon.items.MoonItems;
 import com.minestellar.moon.proxy.CommonProxyMoon;
@@ -66,6 +67,7 @@ public class MinestellarMoon {
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
+		long currTime = System.currentTimeMillis();
 		new ConfigManagerMoon(new File(event.getModConfigurationDirectory(), "Minestellar/moon.cfg"));
 
 		MoonBlocks.init();
@@ -74,10 +76,12 @@ public class MinestellarMoon {
 		DimensionMoon.init();
 
 		MinestellarMoon.proxy.preInit(event);
+        MinestellarLog.info("PreInitialitazion completed in " + (System.currentTimeMillis()-currTime) + " millis.");
 	}
 
 	@EventHandler
 	public void init(FMLInitializationEvent event) {
+        long currTime = System.currentTimeMillis();
 		RecipeManagerMoon.loadRecipes();
 
 		this.registerTileEntities();
@@ -85,11 +89,14 @@ public class MinestellarMoon {
 		this.registerOtherEntities();
 
 		MinestellarMoon.proxy.init(event);
+        MinestellarLog.info("Initialitazion completed in " + (System.currentTimeMillis() - currTime) + " millis.");
 	}
 
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event) {
+        long currTime = System.currentTimeMillis();
 		MinestellarMoon.proxy.postInit(event);
+        MinestellarLog.info("PostInitialitazion completed in " + (System.currentTimeMillis() - currTime) + " millis.");
 	}
 
 	private void registerTileEntities() {
