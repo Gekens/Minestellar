@@ -26,12 +26,15 @@ import static org.lwjgl.opengl.GL11.*;
 
 public class EntityLightningBeamFX extends EntityFX{
 
+//    Minecraft.getMinecraft().effectRenderer.addEffect(new EntityLightningBeamFX(worldObj, xCoord, yCoord, zCoord).setColor(1F, 0.2F, 0.7F).setArrivalCoords(new Vector3(xCoord+12, 5, zCoord-1), new Vector3(xCoord-9, 4, zCoord+1), new Vector3(xCoord-15, 10, zCoord+6)));
+
     private Vector3[] stopCoordinates;
 
     public EntityLightningBeamFX(World world, double x, double y, double z){
         super(world, x, y, z);
 
         setGravity(0);
+        setMaxAge(1);
 
         noClip = true;
     }
@@ -45,17 +48,17 @@ public class EntityLightningBeamFX extends EntityFX{
         glDepthMask(false);
         glAlphaFunc(GL_GREATER, 0.003921569F);
 
-        glColor4f(particleRed, particleGreen, particleBlue, 1);
+        glColor4f(particleRed, particleGreen, particleBlue, 0.8F);
 
+        tessellator.setBrightness(0);
         tessellator.startDrawing(3);
 
-        float x = (float)(prevPosX+(posX-prevPosX)*partialTicks-interpPosX);
-        float y = (float)(prevPosY+(posY-prevPosY)*partialTicks-interpPosY);
-        float z = (float)(prevPosZ+(posZ-prevPosZ)*partialTicks-interpPosZ);
+        float x = (float) (prevPosX + (posX - prevPosX) * partialTicks - interpPosX);
+        float y = (float) (prevPosY + (posY - prevPosY) * partialTicks - interpPosY);
+        float z = (float) (prevPosZ + (posZ - prevPosZ) * partialTicks - interpPosZ);
 
         {
             tessellator.addVertex(x, y, z);
-
 
             for(Vector3 stopCoordinate : stopCoordinates){
                 tessellator.addVertex(stopCoordinate.x + x, stopCoordinate.y + y, stopCoordinate.z + z);
@@ -89,6 +92,7 @@ public class EntityLightningBeamFX extends EntityFX{
 
     /**
      * Sets the coordinates of the point at which the particle should arrive.
+     * <b>NOTE: for the {@code y} axis, don't use {@code xCoord +- y}, use just {@code y}</b>
      */
 
     public EntityLightningBeamFX setArrivalCoords(Vector3... stopCoordinates){
@@ -97,12 +101,12 @@ public class EntityLightningBeamFX extends EntityFX{
     }
 
     @Override
-    public boolean canBeCollidedWith() {
+    public boolean canBeCollidedWith(){
         return false;
     }
 
     @Override
-    public boolean canBePushed() {
+    public boolean canBePushed(){
         return false;
     }
 
