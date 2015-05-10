@@ -64,8 +64,8 @@ public class MinestellarCore {
 	public static CreativeTabs stellarBlocksTab;
 	public static CreativeTabs stellarItemsTab;
 
-	public static HashMap<String, ItemStack> blocksList = new HashMap<>();
-	public static HashMap<String, ItemStack> itemList = new HashMap<>();
+	public static HashMap<String, ItemStack> blocksList = new HashMap<String, ItemStack>();
+	public static HashMap<String, ItemStack> itemList = new HashMap<String, ItemStack>();
 
 	@Instance(MinestellarCore.MOD_ID)
 	public static MinestellarCore instance = new MinestellarCore();

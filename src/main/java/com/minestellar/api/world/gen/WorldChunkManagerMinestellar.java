@@ -33,7 +33,7 @@ public abstract class WorldChunkManagerMinestellar extends WorldChunkManager {
 
 	public WorldChunkManagerMinestellar() {
 		this.biomeCache = new BiomeCache(this);
-		this.biomesToSpawnIn = new ArrayList<>();
+		this.biomesToSpawnIn = new ArrayList<BiomeGenBase>();
 		this.biomesToSpawnIn.add(this.getBiome());
 	}
 

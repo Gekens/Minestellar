@@ -1,10 +1,12 @@
 package com.minestellar.venus;
 
 import java.io.File;
+import java.util.HashMap;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemStack;
 
 import com.minestellar.core.Constants;
 import com.minestellar.core.util.MinestellarLog;
@@ -34,6 +36,9 @@ public class MinestellarVenus {
 
 	public static final String ASSET_PREFIX = "minestellar_venus";
 	public static final String TEXTURE_PREFIX = MinestellarVenus.ASSET_PREFIX + ":";
+
+	public static HashMap<String, ItemStack> blocksList = new HashMap<String, ItemStack>();
+	public static HashMap<String, ItemStack> itemList = new HashMap<String, ItemStack>();
 
 	@SidedProxy(clientSide = "com.minestellar.venus.proxy.ClientProxyVenus", serverSide = "com.minestellar.venus.proxy.CommonProxyVenus")
 	public static CommonProxyVenus proxy;

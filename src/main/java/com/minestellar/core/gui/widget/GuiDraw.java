@@ -136,7 +136,7 @@ public class GuiDraw {
 	 * Have a string in the tooltip list with TOOLTIP_HANDLER + getTipLineId(handler) for a custom handler
 	 */
 	public static final String TOOLTIP_HANDLER = "\u00A7x";
-	private static List<ITooltipLineHandler> tipLineHandlers = new ArrayList<>();
+	private static List<ITooltipLineHandler> tipLineHandlers = new ArrayList<ITooltipLineHandler>();
 
 	public interface ITooltipLineHandler {
 		Dimension getSize();

@@ -22,7 +22,7 @@ public class ClickCounter<T> {
 		}
 	}
 
-	public Map<Integer, ClickCount> buttons = new TreeMap<>();
+	public Map<Integer, ClickCount> buttons = new TreeMap<Integer, ClickCount>();
 
 	public ClickCount getCount(int button) {
 		ClickCount c = buttons.get(button);

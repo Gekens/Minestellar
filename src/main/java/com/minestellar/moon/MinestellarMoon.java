@@ -50,8 +50,8 @@ public class MinestellarMoon {
 	public static final String ASSET_PREFIX = "minestellar_moon";
 	public static final String TEXTURE_PREFIX = MinestellarMoon.ASSET_PREFIX + ":";
 
-	public static HashMap<String, ItemStack> blocksList = new HashMap<>();
-	public static HashMap<String, ItemStack> itemList = new HashMap<>();
+	public static HashMap<String, ItemStack> blocksList = new HashMap<String, ItemStack>();
+	public static HashMap<String, ItemStack> itemList = new HashMap<String, ItemStack>();
 
 	@Instance(MinestellarMoon.MODID)
 	public static MinestellarMoon instance = new MinestellarMoon();

@@ -7,7 +7,7 @@ import org.lwjgl.input.Keyboard;
 public abstract class GuiScrollSlot extends GuiScrollPane {
 	protected String actionCommand;
 	public boolean focused;
-	protected ClickCounter<Integer> click = new ClickCounter<>();
+	protected ClickCounter<Integer> click = new ClickCounter<Integer>();
 	public boolean smoothScroll = true;
 
 	public GuiScrollSlot(int x, int y, int width, int height) {

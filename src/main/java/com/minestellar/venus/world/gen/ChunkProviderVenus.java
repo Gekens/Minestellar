@@ -70,7 +70,7 @@ public class ChunkProviderVenus extends ChunkProviderMinestellar {
 
 	@Override
 	protected BiomeGenBase.SpawnListEntry[] getMonsters() {
-		List<BiomeGenBase.SpawnListEntry> monsters = new ArrayList<>();
+		List<BiomeGenBase.SpawnListEntry> monsters = new ArrayList<BiomeGenBase.SpawnListEntry>();
 		monsters.add(new BiomeGenBase.SpawnListEntry(EntityZombie.class, 8, 2, 3));
 		monsters.add(new BiomeGenBase.SpawnListEntry(EntitySpider.class, 8, 2, 3));
 		monsters.add(new BiomeGenBase.SpawnListEntry(EntitySkeleton.class, 8, 2, 3));
