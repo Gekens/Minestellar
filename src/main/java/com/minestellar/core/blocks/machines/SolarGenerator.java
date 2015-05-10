@@ -16,14 +16,15 @@
 
 package com.minestellar.core.blocks.machines;
 
-import com.minestellar.core.MinestellarCore;
-import com.minestellar.core.blocks.tile.TileEntitySolarGenerator;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
+
+import com.minestellar.core.MinestellarCore;
+import com.minestellar.core.blocks.tile.TileEntitySolarGenerator;
 
 public class SolarGenerator extends Block implements ITileEntityProvider {
 	public SolarGenerator(String name) {

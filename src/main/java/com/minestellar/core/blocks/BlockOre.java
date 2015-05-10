@@ -16,7 +16,8 @@
 
 package com.minestellar.core.blocks;
 
-import com.minestellar.core.MinestellarCore;
+import java.util.List;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -26,12 +27,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
-import java.util.List;
+import com.minestellar.core.MinestellarCore;
 
-public class BlockOreCore extends Block {
+public class BlockOre extends Block {
 	private IIcon[] blockIcon;
 
-	public BlockOreCore(String name) {
+	public BlockOre(String name) {
 		super(Material.rock);
 		this.setBlockName(name);
 	}

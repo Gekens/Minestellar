@@ -16,6 +16,14 @@
 
 package com.minestellar.moon;
 
+import java.io.File;
+import java.util.HashMap;
+
+import net.minecraft.block.Block;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemStack;
+
 import com.minestellar.core.Constants;
 import com.minestellar.core.util.MinestellarLog;
 import com.minestellar.moon.blocks.MoonBlocks;
@@ -24,6 +32,7 @@ import com.minestellar.moon.proxy.CommonProxyMoon;
 import com.minestellar.moon.recipe.RecipeManagerMoon;
 import com.minestellar.moon.util.ConfigManagerMoon;
 import com.minestellar.moon.world.DimensionMoon;
+
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
@@ -32,13 +41,6 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
-import net.minecraft.block.Block;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
-import net.minecraft.item.ItemStack;
-
-import java.io.File;
-import java.util.HashMap;
 
 @Mod(modid = MinestellarMoon.MODID, name = MinestellarMoon.MODNAME, version = Constants.VERSION)
 public class MinestellarMoon {
@@ -76,12 +78,12 @@ public class MinestellarMoon {
 		DimensionMoon.init();
 
 		MinestellarMoon.proxy.preInit(event);
-        MinestellarLog.info("PreInitialitazion completed in " + (System.currentTimeMillis()-currTime) + " millis.");
+		MinestellarLog.info("PreInitialitazion completed in " + (System.currentTimeMillis() - currTime) + " millis.");
 	}
 
 	@EventHandler
 	public void init(FMLInitializationEvent event) {
-        long currTime = System.currentTimeMillis();
+		long currTime = System.currentTimeMillis();
 		RecipeManagerMoon.loadRecipes();
 
 		this.registerTileEntities();
@@ -89,14 +91,14 @@ public class MinestellarMoon {
 		this.registerOtherEntities();
 
 		MinestellarMoon.proxy.init(event);
-        MinestellarLog.info("Initialitazion completed in " + (System.currentTimeMillis() - currTime) + " millis.");
+		MinestellarLog.info("Initialitazion completed in " + (System.currentTimeMillis() - currTime) + " millis.");
 	}
 
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event) {
-        long currTime = System.currentTimeMillis();
+		long currTime = System.currentTimeMillis();
 		MinestellarMoon.proxy.postInit(event);
-        MinestellarLog.info("PostInitialitazion completed in " + (System.currentTimeMillis() - currTime) + " millis.");
+		MinestellarLog.info("PostInitialitazion completed in " + (System.currentTimeMillis() - currTime) + " millis.");
 	}
 
 	private void registerTileEntities() {

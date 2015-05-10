@@ -16,9 +16,11 @@
 
 package com.minestellar.api.world.gen;
 
-import com.minestellar.api.core.BlockMetaPair;
-import com.minestellar.core.perlin.generator.Gradient;
-import com.minestellar.core.world.gen.EnumCraterSize;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFalling;
 import net.minecraft.entity.EnumCreatureType;
@@ -31,14 +33,12 @@ import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.ChunkProviderGenerate;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Random;
+import com.minestellar.api.core.BlockMetaPair;
+import com.minestellar.core.perlin.generator.Gradient;
+import com.minestellar.core.world.gen.EnumCraterSize;
 
 public abstract class ChunkProviderMinestellar extends ChunkProviderGenerate {
 	protected final Random rand;
-
 	private final Gradient noiseGen1;
 	private final Gradient noiseGen2;
 	private final Gradient noiseGen3;
@@ -46,11 +46,9 @@ public abstract class ChunkProviderMinestellar extends ChunkProviderGenerate {
 	private final Gradient noiseGen5;
 	private final Gradient noiseGen6;
 	private final Gradient noiseGen7;
-
 	protected final World worldObj;
-
+	
 	private BiomeGenBase[] biomesForGeneration = this.getBiomesForGeneration();
-
 	private final double TERRAIN_HEIGHT_MOD = this.getHeightModifier();
 	private final double SMALL_FEATURE_HEIGHT_MOD = this.getSmallFeatureHeightModifier();
 	private final double MOUNTAIN_HEIGHT_MOD = this.getMountainHeightModifier();
@@ -72,7 +70,6 @@ public abstract class ChunkProviderMinestellar extends ChunkProviderGenerate {
 		super(par1World, seed, mapFeaturesEnabled);
 		this.worldObj = par1World;
 		this.rand = new Random(seed);
-
 		this.noiseGen1 = new Gradient(this.rand.nextLong(), 4, 0.25F);
 		this.noiseGen2 = new Gradient(this.rand.nextLong(), 4, 0.25F);
 		this.noiseGen3 = new Gradient(this.rand.nextLong(), 4, 0.25F);
@@ -102,7 +99,6 @@ public abstract class ChunkProviderMinestellar extends ChunkProviderGenerate {
 				final double smallFilter = this.noiseGen7.getNoise(chunkX * 16 + x, chunkZ * 16 + z) * ChunkProviderMinestellar.SMALL_FEATURE_FILTER_MOD - 0.5;
 				mountainHeight = this.lerp(smallHillHeight, mountainHeight * this.MOUNTAIN_HEIGHT_MOD, this.fade(this.clamp(mountainHeight * 2, 0, 1)));
 				valleyHeight = this.lerp(smallHillHeight, valleyHeight * this.VALLEY_HEIGHT_MOD - this.VALLEY_HEIGHT_MOD + 9, this.fade(this.clamp((valleyHeight + 2) * 4, 0, 1)));
-
 				double yDev = this.lerp(valleyHeight, mountainHeight, this.fade(largeFilter));
 				yDev = this.lerp(smallHillHeight, yDev, smallFilter);
 				yDev = this.lerp(baseHeight, yDev, featureFilter);
@@ -120,13 +116,9 @@ public abstract class ChunkProviderMinestellar extends ChunkProviderGenerate {
 	private double lerp(double d1, double d2, double t) {
 		if (t < 0.0) {
 			return d1;
-		}
-
-		else if (t > 1.0) {
+		} else if (t > 1.0) {
 			return d2;
-		}
-
-		else {
+		} else {
 			return d1 + (d2 - d1) * t;
 		}
 	}
@@ -138,11 +130,10 @@ public abstract class ChunkProviderMinestellar extends ChunkProviderGenerate {
 	private double clamp(double x, double min, double max) {
 		if (x < min) {
 			return min;
-		}
-
-		if (x > max) {
+		} else if (x > max) {
 			return max;
 		}
+		
 		return x;
 	}
 
@@ -151,6 +142,7 @@ public abstract class ChunkProviderMinestellar extends ChunkProviderGenerate {
 		final int var5 = 20;
 		final float var6 = 0.03125F;
 		this.noiseGen4.setFrequency(var6 * 2);
+		
 		for (int var8 = 0; var8 < 16; ++var8) {
 			for (int var9 = 0; var9 < 16; ++var9) {
 				final int var12 = (int) (this.noiseGen4.getNoise(par1 * 16 + var8, par2 * 16 + var9) / 3.0D + 3.0D + this.rand.nextDouble() * 0.25D);
@@ -226,7 +218,6 @@ public abstract class ChunkProviderMinestellar extends ChunkProviderGenerate {
 		}
 
 		this.onChunkProvide(par1, par2, ids, meta);
-
 		final Chunk var4 = new Chunk(this.worldObj, ids, meta, par1, par2);
 		final byte[] var5 = var4.getBiomeArray();
 
@@ -235,6 +226,7 @@ public abstract class ChunkProviderMinestellar extends ChunkProviderGenerate {
 		}
 
 		var4.generateSkylightMap();
+		
 		return var4;
 	}
 
@@ -310,6 +302,7 @@ public abstract class ChunkProviderMinestellar extends ChunkProviderGenerate {
 	@Override
 	public void populate(IChunkProvider par1IChunkProvider, int par2, int par3) {
 		BlockFalling.fallInstantly = true;
+
 		int var4 = par2 * 16;
 		int var5 = par3 * 16;
 		this.worldObj.getBiomeGenForCoords(var4 + 16, var5 + 16);
@@ -338,20 +331,16 @@ public abstract class ChunkProviderMinestellar extends ChunkProviderGenerate {
 		return "RandomLevelSource";
 	}
 
-	@SuppressWarnings({
-			"unchecked", "rawtypes"
-	})
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public List getPossibleCreatures(EnumCreatureType par1EnumCreatureType, int i, int j, int k) {
 		if (par1EnumCreatureType == EnumCreatureType.monster) {
 			final List monsters = new ArrayList();
-
 			Collections.addAll(monsters, this.getMonsters());
 
 			return monsters;
 		} else if (par1EnumCreatureType == EnumCreatureType.creature) {
 			final List creatures = new ArrayList();
-
 			Collections.addAll(creatures, this.getCreatures());
 
 			return creatures;

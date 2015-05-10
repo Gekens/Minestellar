@@ -16,17 +16,18 @@
 
 package com.minestellar.moon.recipe;
 
-import com.minestellar.core.util.RecipeUtil;
-import com.minestellar.moon.blocks.MoonBlocks;
-import com.minestellar.moon.items.MoonItems;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraftforge.oredict.OreDictionary;
 
+import com.minestellar.core.util.RecipeUtil;
+import com.minestellar.moon.blocks.MoonBlocks;
+import com.minestellar.moon.items.MoonItems;
+
 public class RecipeManagerMoon {
 	private static void addUniversalRecipes() {
 		// OTHER CRAFTING
-		RecipeUtil.addRecipe(new ItemStack(MoonItems.moonPortalTrigger, 1, 0), new Object[] {"X X", "XXX", " X ", 'X', "pipeSteel"});
+		RecipeUtil.addRecipe(new ItemStack(MoonItems.moonPortalTrigger, 1, 0), new Object[] { "X X", "XXX", " X ", 'X', "pipeSteel" });
 
 		// SMELTING
 		FurnaceRecipes.smelting().func_151394_a(new ItemStack(MoonBlocks.moonBasicBlocks, 1, 3), OreDictionary.getOres("moonStone").get(0), 0.2F);

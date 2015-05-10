@@ -16,8 +16,9 @@
 
 package com.minestellar.core.blocks.fluid;
 
-import com.minestellar.core.blocks.BlockFluidOxygen;
 import net.minecraftforge.fluids.Fluid;
+
+import com.minestellar.core.blocks.BlockFluidOxygen;
 
 public class FluidBlockOxygen extends Fluid {
 	public FluidBlockOxygen(String fluidName) {

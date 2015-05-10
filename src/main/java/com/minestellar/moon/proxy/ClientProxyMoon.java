@@ -16,10 +16,14 @@
 
 package com.minestellar.moon.proxy;
 
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.multiplayer.WorldClient;
+
 import com.minestellar.api.world.IMinestellarWorldProvider;
 import com.minestellar.core.world.CloudRenderer;
 import com.minestellar.moon.world.SkyRendererMoon;
 import com.minestellar.moon.world.WorldProviderMoon;
+
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
@@ -29,8 +33,6 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent.ClientTickEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.multiplayer.WorldClient;
 
 public class ClientProxyMoon extends CommonProxyMoon {
 	@Override
@@ -83,5 +85,4 @@ public class ClientProxyMoon extends CommonProxyMoon {
 			}
 		}
 	}
-
 }

@@ -16,9 +16,6 @@
 
 package com.minestellar.core.blocks.machines;
 
-import com.minestellar.core.MinestellarCore;
-import com.minestellar.core.blocks.tile.TileEntityComputer;
-import com.minestellar.core.gui.GUIs;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
@@ -27,8 +24,11 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
-public class Computer extends Block implements ITileEntityProvider{
+import com.minestellar.core.MinestellarCore;
+import com.minestellar.core.blocks.tile.TileEntityComputer;
+import com.minestellar.core.gui.GUIs;
 
+public class Computer extends Block implements ITileEntityProvider {
 	public Computer(String name) {
 		super(Material.iron);
 		this.setBlockName(name);
@@ -40,11 +40,10 @@ public class Computer extends Block implements ITileEntityProvider{
 	}
 
 	@Override
-	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ){
+	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
+		TileEntityComputer te = (TileEntityComputer) world.getTileEntity(x, y, z);
 
-		TileEntityComputer te = (TileEntityComputer)world.getTileEntity(x, y, z);
-
-		if(te != null){
+		if (te != null) {
 			player.openGui(MinestellarCore.instance, GUIs.COMPUTER_GUI, world, x, y, z);
 		}
 
@@ -55,5 +54,4 @@ public class Computer extends Block implements ITileEntityProvider{
 	public CreativeTabs getCreativeTabToDisplayOn() {
 		return MinestellarCore.stellarBlocksTab;
 	}
-
 }

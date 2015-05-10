@@ -21,8 +21,7 @@ import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 
 /**
- * Solar Panel - Gekens
- * Created using Tabula 4.1.1
+ * Solar Panel - Gekens Created using Tabula 4.1.1
  */
 public class ModelSolarPanel extends ModelBase {
 	public ModelRenderer baseblock;

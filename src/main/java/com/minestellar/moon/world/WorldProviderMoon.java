@@ -16,18 +16,21 @@
 
 package com.minestellar.moon.world;
 
-import com.minestellar.api.world.IMinestellarWorldProvider;
-import com.minestellar.moon.util.ConfigManagerMoon;
-import com.minestellar.moon.world.gen.ChunkProviderMoon;
-import com.minestellar.moon.world.gen.WorldChunkManagerMoon;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.WorldProvider;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraftforge.client.IRenderHandler;
+
+import com.minestellar.api.vector.Vector3;
+import com.minestellar.api.world.IMinestellarWorldProvider;
+import com.minestellar.moon.util.ConfigManagerMoon;
+import com.minestellar.moon.world.gen.ChunkProviderMoon;
+import com.minestellar.moon.world.gen.WorldChunkManagerMoon;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class WorldProviderMoon extends WorldProvider implements IMinestellarWorldProvider {
 	@Override
@@ -115,6 +118,18 @@ public class WorldProviderMoon extends WorldProvider implements IMinestellarWorl
 			final float var3 = 1.0F - var2 / 15.0F;
 			this.lightBrightnessTable[var2] = (1.0F - var3) / (var3 * 3.0F + 1.0F) * (1.0F - var1) + var1;
 		}
+	}
+
+	@Override
+	public Vector3 getSkyColor() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Vector3 getFogColor() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override

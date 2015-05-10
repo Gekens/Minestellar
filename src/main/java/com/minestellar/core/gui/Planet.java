@@ -19,21 +19,20 @@ package com.minestellar.core.gui;
 /**
  * Enumeration containing all the required constants of the planet's orbits
  */
-
-public enum Planet{
-
-	EARTH(152./2., 147./2.),
-	MOON(384./152., 383./147),
-	VENUS(108./2., 107./2.);
-	
+public enum Planet {
+	EARTH(152. / 2., 147. / 2.), MOON(384. / 152., 383. / 147), VENUS(108. / 2., 107. / 2.);
 	private double a, b;
-	
-	Planet(double a, double b){
+
+	Planet(double a, double b) {
 		this.a = a;
 		this.b = b;
 	}
-	
-	public double getA(){return this.a;}
-	public double getB(){return this.b;}
-	
+
+	public double getA() {
+		return this.a;
+	}
+
+	public double getB() {
+		return this.b;
+	}
 }

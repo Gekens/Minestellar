@@ -16,26 +16,27 @@
 
 package com.minestellar.moon.blocks.items;
 
-import com.minestellar.core.proxy.ClientProxyCore;
 import net.minecraft.block.Block;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 
+import com.minestellar.core.proxy.ClientProxyCore;
+
 public class ItemBlockBasicMoon extends ItemBlock {
-	private static final String[] types = new String[] {
-			"surfaceStone", 
-			"surfaceStone1", 
-			"surfaceStone2", 
-			"surfaceStone3", 
-			"surfaceStone4", 
-			"surfaceStone5", 
-			"surfaceStone6", 
-			"surfaceStone7", 
-			"surfaceStone8", 
-			"subSurfaceStone", 
-			"stone", 
-			"cobblestone",
+	private static final String[] types = new String[] { 
+		"surfaceStone", 
+		"surfaceStone1", 
+		"surfaceStone2", 
+		"surfaceStone3", 
+		"surfaceStone4", 
+		"surfaceStone5", 
+		"surfaceStone6", 
+		"surfaceStone7", 
+		"surfaceStone8", 
+		"subSurfaceStone", 
+		"stone", 
+		"cobblestone"
 	};
 
 	public ItemBlockBasicMoon(Block par1) {

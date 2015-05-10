@@ -16,8 +16,8 @@
 
 package com.minestellar.core.blocks.tile;
 
-import cpw.mods.fml.common.Optional;
-import cpw.mods.fml.common.Optional.Method;
+import java.util.ArrayList;
+
 import mekanism.api.gas.Gas;
 import mekanism.api.gas.GasStack;
 import mekanism.api.gas.GasTank;
@@ -28,16 +28,13 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Vec3;
 import net.minecraftforge.common.util.ForgeDirection;
-
-import java.util.ArrayList;
+import cpw.mods.fml.common.Optional;
+import cpw.mods.fml.common.Optional.Method;
 
 @Optional.Interface(iface = "mekanism.api.gas.IGasHandler", modid = "Mekanism")
 public class TileEntityOxygenCollector extends TileEntity implements IGasHandler {
-
 	private GasTank gasTank;
-
 	private int currentGasAmount;
-
 	private ArrayList<Block> blocks;
 	private ArrayList<Vec3> coords;
 
@@ -54,9 +51,7 @@ public class TileEntityOxygenCollector extends TileEntity implements IGasHandler
 		if (!worldObj.isRemote && gasTank.getGas() != null) {
 			if (gasTank.getGas().getGas() != null) {
 				if (gasTank.stored.amount < gasTank.getMaxGas()) {
-
 					for (int i = 0; i < blocks.size(); i++) {
-
 						if (blocks.get(i) == Blocks.leaves || blocks.get(i) == Blocks.leaves2) {
 							gasTank.stored.amount += 5; // Augments the stored gas amount based on the nature of the nature blocks
 						} else if (blocks.get(i) == Blocks.cactus) {
@@ -68,7 +63,6 @@ public class TileEntityOxygenCollector extends TileEntity implements IGasHandler
 						} else {
 							continue;
 						}
-
 					}
 				}
 			}
@@ -92,11 +86,9 @@ public class TileEntityOxygenCollector extends TileEntity implements IGasHandler
 	 * @return The list of blocks in the area
 	 */
 	private ArrayList<Block> getNatureBlocks(int maxDistanceAway) {
-
 		int xMov = 0 - maxDistanceAway;
 		int yMov = maxDistanceAway;
 		int zMov = 0 - maxDistanceAway;
-
 		ArrayList<Block> list = new ArrayList<Block>();
 
 		while (true) {
@@ -134,7 +126,6 @@ public class TileEntityOxygenCollector extends TileEntity implements IGasHandler
 		int xMov = 0 - maxDistanceAway;
 		int yMov = maxDistanceAway;
 		int zMov = 0 - maxDistanceAway;
-
 		ArrayList<Vec3> list = new ArrayList<Vec3>();
 
 		while (true) {
@@ -162,7 +153,6 @@ public class TileEntityOxygenCollector extends TileEntity implements IGasHandler
 			}
 
 			xMov++;
-
 		}
 	}
 
@@ -179,7 +169,7 @@ public class TileEntityOxygenCollector extends TileEntity implements IGasHandler
 	}
 
 	/**
-	 *  MEKANISM IMPLEMENTATION
+	 * MEKANISM IMPLEMENTATION
 	 */
 	@Method(modid = "Mekanism")
 	@Override

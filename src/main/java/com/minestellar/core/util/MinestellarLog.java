@@ -16,8 +16,9 @@
 
 package com.minestellar.core.util;
 
-import cpw.mods.fml.relauncher.FMLRelaunchLog;
 import org.apache.logging.log4j.Level;
+
+import cpw.mods.fml.relauncher.FMLRelaunchLog;
 
 public class MinestellarLog {
 	public static void info(String message) {

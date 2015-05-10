@@ -16,8 +16,11 @@
 
 package com.minestellar.moon.world;
 
-import com.minestellar.core.blocks.CoreBlocks;
-import com.minestellar.moon.blocks.MoonBlocks;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Random;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.ChunkCoordinates;
@@ -28,10 +31,8 @@ import net.minecraft.world.ChunkCoordIntPair;
 import net.minecraft.world.Teleporter;
 import net.minecraft.world.WorldServer;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Random;
+import com.minestellar.core.blocks.CoreBlocks;
+import com.minestellar.moon.blocks.MoonBlocks;
 
 public class TeleporterMoon extends Teleporter {
 	private final WorldServer worldServerInstance;
@@ -222,7 +223,7 @@ public class TeleporterMoon extends Teleporter {
 			}
 
 			par1Entity.setLocationAndAngles(d11, d6, d7, par1Entity.rotationYaw, par1Entity.rotationPitch);
-			
+
 			return true;
 		} else {
 			return false;

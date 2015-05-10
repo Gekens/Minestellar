@@ -16,15 +16,17 @@
 
 package com.minestellar.core.world.gen;
 
-import com.minestellar.api.world.IMinestellarWorldProvider;
-import cpw.mods.fml.common.IWorldGenerator;
+import java.util.Random;
+
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
 
-import java.util.Random;
+import com.minestellar.api.world.IMinestellarWorldProvider;
+
+import cpw.mods.fml.common.IWorldGenerator;
 
 public class OverworldGenerator implements IWorldGenerator {
 	private final int amountPerChunk;
@@ -88,8 +90,8 @@ public class OverworldGenerator implements IWorldGenerator {
 						if (var39 * var39 + var42 * var42 < 1.0D) {
 							for (int var44 = var34; var44 <= var37; ++var44) {
 								double var45 = (var44 + 0.5D - var24) / (var28 / 2.0D);
-
 								Block block = par1World.getBlock(var38, var41, var44);
+								
 								if (var39 * var39 + var42 * var42 + var45 * var45 < 1.0D && block.isReplaceableOreGen(par1World, var38, var41, var44, Blocks.stone)) {
 									par1World.setBlock(var38, var41, var44, this.oreBlock, this.metadata, 2);
 								}

@@ -16,22 +16,20 @@
 
 package com.minestellar.core.blocks;
 
-import com.minestellar.core.MinestellarCore;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 
-public class BlockRadioWall extends Block{
+import com.minestellar.core.MinestellarCore;
 
-	public BlockRadioWall(String name){
+public class BlockRadioWall extends Block {
+	public BlockRadioWall(String name) {
 		super(Material.iron);
 		this.setBlockName(name);
 	}
-	
+
 	@Override
 	public CreativeTabs getCreativeTabToDisplayOn() {
 		return MinestellarCore.stellarBlocksTab;
 	}
-
-	
 }

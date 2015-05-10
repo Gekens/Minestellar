@@ -16,16 +16,16 @@
 
 package com.minestellar.api.world.gen;
 
-import com.minestellar.api.event.wgen.MinestellarEventPopulate;
+import java.util.Random;
+
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraftforge.common.MinecraftForge;
 
-import java.util.Random;
+import com.minestellar.api.event.wgen.MinestellarEventPopulate;
 
 public abstract class BiomeDecoratorMinestellar {
 	protected Random rand;
-
 	protected int chunkX;
 	protected int chunkZ;
 

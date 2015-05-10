@@ -16,16 +16,17 @@
 
 package com.minestellar.core.render.tile;
 
-import com.minestellar.core.MinestellarCore;
-import com.minestellar.core.model.ModelGasSink;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
+
 import org.lwjgl.opengl.GL11;
+
+import com.minestellar.core.MinestellarCore;
+import com.minestellar.core.model.ModelGasSink;
 
 public class TileEntityRenderGasSink extends TileEntitySpecialRenderer {
 	private ResourceLocation texture;
-
 	public static ModelGasSink model;
 
 	public TileEntityRenderGasSink() {
@@ -35,9 +36,7 @@ public class TileEntityRenderGasSink extends TileEntitySpecialRenderer {
 	@Override
 	public void renderTileEntityAt(TileEntity tile, double translationX, double translationY, double translationZ, float f) {
 		texture = new ResourceLocation(MinestellarCore.TEXTURE_PREFIX + "textures/model/tile/gasSink.png");
-
 		this.bindTexture(texture);
-
 		GL11.glPushMatrix();
 		GL11.glTranslatef((float) translationX + 0.5F, (float) translationY + 1.5F, (float) translationZ + 0.5F);
 		GL11.glScalef(1.0F, -1F, -1F);

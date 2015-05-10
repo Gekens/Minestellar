@@ -16,9 +16,6 @@
 
 package com.minestellar.core.blocks.tile;
 
-import com.minestellar.api.core.TileEntityWire;
-import cpw.mods.fml.common.Optional;
-import cpw.mods.fml.common.Optional.Method;
 import mekanism.api.gas.Gas;
 import mekanism.api.gas.GasStack;
 import mekanism.api.gas.GasTank;
@@ -26,13 +23,15 @@ import mekanism.api.gas.IGasHandler;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
 
+import com.minestellar.api.core.TileEntityWire;
+
+import cpw.mods.fml.common.Optional;
+import cpw.mods.fml.common.Optional.Method;
+
 @Optional.Interface(iface = "mekanism.api.gas.IGasHandler", modid = "Mekanism")
 public class TileEntityPipe extends TileEntityWire implements IGasHandler {
 	GasTank gasTank;
-
-	/** How fast this tank can output gas. */
 	public int output;
-
 	public int currentGasAmount;
 
 	public TileEntityPipe(int meta) {
@@ -55,7 +54,6 @@ public class TileEntityPipe extends TileEntityWire implements IGasHandler {
 		default:
 			break;
 		}
-
 	}
 
 	/**
@@ -76,7 +74,6 @@ public class TileEntityPipe extends TileEntityWire implements IGasHandler {
 						int targetX = xCoord + ForgeDirection.getOrientation(i).offsetX;
 						int targetY = yCoord + ForgeDirection.getOrientation(i).offsetY;
 						int targetZ = zCoord + ForgeDirection.getOrientation(i).offsetZ;
-
 						TileEntity tile = worldObj.getTileEntity(targetX, targetY, targetZ);
 
 						if (tile instanceof IGasHandler) {
@@ -85,9 +82,8 @@ public class TileEntityPipe extends TileEntityWire implements IGasHandler {
 							}
 						}
 					} catch (Exception e) {
-						
-					}
 
+					}
 				}
 			}
 
@@ -107,7 +103,6 @@ public class TileEntityPipe extends TileEntityWire implements IGasHandler {
 	 * Connects the cable to the <code>IGasHandler<code> blocks
 	 */
 	public void updateBlockConnections() {
-
 		if (this.worldObj.getTileEntity(xCoord, yCoord + 1, zCoord) instanceof IGasHandler) {
 			if (this.worldObj.getTileEntity(xCoord, yCoord + 1, zCoord) instanceof TileEntityPipe) {
 				if (this.worldObj.getTileEntity(xCoord, yCoord + 1, zCoord).getBlockMetadata() == this.getBlockMetadata()) {
@@ -194,7 +189,7 @@ public class TileEntityPipe extends TileEntityWire implements IGasHandler {
 	}
 
 	/**
-	 *  MEKANISM GAS IMPLEMENTATION
+	 * MEKANISM GAS IMPLEMENTATION
 	 */
 	@Method(modid = "Mekanism")
 	@Override

@@ -16,14 +16,19 @@
 
 package com.minestellar.core.items;
 
-import com.minestellar.core.MinestellarCore;
-import com.minestellar.core.items.tools.*;
 import net.minecraft.item.Item;
 import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemArmor.ArmorMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.oredict.OreDictionary;
+
+import com.minestellar.core.MinestellarCore;
+import com.minestellar.core.items.tools.ItemAxeCore;
+import com.minestellar.core.items.tools.ItemHoeCore;
+import com.minestellar.core.items.tools.ItemPickaxeCore;
+import com.minestellar.core.items.tools.ItemSpadeCore;
+import com.minestellar.core.items.tools.ItemSwordCore;
 
 public class CoreItems {
 	public static void init() {
@@ -55,7 +60,7 @@ public class CoreItems {
 	public static Item hydrogenBucket;
 	public static Item nitrogenBucket;
 
-	public static ArmorMaterial ARMOR_CARBON = EnumHelper.addArmorMaterial("carbon", 30, new int[] {3, 8, 6, 3}, 12);
+	public static ArmorMaterial ARMOR_CARBON = EnumHelper.addArmorMaterial("carbon", 30, new int[] { 3, 8, 6, 3 }, 12);
 	public static ToolMaterial TOOL_CARBON = EnumHelper.addToolMaterial("carbon", 3, 768, 5.0F, 2, 8);
 
 	private static void initItems() {

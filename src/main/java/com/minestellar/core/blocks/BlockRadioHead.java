@@ -16,8 +16,6 @@
 
 package com.minestellar.core.blocks;
 
-import com.minestellar.core.MinestellarCore;
-import com.minestellar.core.blocks.tile.TileEntityRadioHead;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
@@ -25,9 +23,11 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
-public class BlockRadioHead extends Block implements ITileEntityProvider{
+import com.minestellar.core.MinestellarCore;
+import com.minestellar.core.blocks.tile.TileEntityRadioHead;
 
-	protected BlockRadioHead(String name){
+public class BlockRadioHead extends Block implements ITileEntityProvider {
+	protected BlockRadioHead(String name) {
 		super(Material.iron);
 		this.setBlockName(name);
 	}
@@ -37,10 +37,8 @@ public class BlockRadioHead extends Block implements ITileEntityProvider{
 		return MinestellarCore.stellarBlocksTab;
 	}
 
-	
 	@Override
-	public TileEntity createNewTileEntity(World world, int meta){
+	public TileEntity createNewTileEntity(World world, int meta) {
 		return new TileEntityRadioHead();
 	}
-
 }

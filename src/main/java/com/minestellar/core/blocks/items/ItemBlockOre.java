@@ -16,24 +16,25 @@
 
 package com.minestellar.core.blocks.items;
 
-import com.minestellar.core.proxy.ClientProxyCore;
 import net.minecraft.block.Block;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 
-public class ItemBlockOreCore extends ItemBlock {
-	private static final String[] types = new String[] {
-			"oreCopper", 
-			"oreTin", 
-			"oreLithium", 
-			"oreSilicon", 
-			"oreAluminum", 
-			"oreTitanium", 
-			"oreCarbon",
+import com.minestellar.core.proxy.ClientProxyCore;
+
+public class ItemBlockOre extends ItemBlock {
+	private static final String[] types = new String[] { 
+		"oreCopper", 
+		"oreTin", 
+		"oreLithium", 
+		"oreSilicon",
+		"oreAluminum", 
+		"oreTitanium", 
+		"oreCarbon", 
 	};
 
-	public ItemBlockOreCore(Block par1) {
+	public ItemBlockOre(Block par1) {
 		super(par1);
 		this.setHasSubtypes(true);
 	}
@@ -52,10 +53,10 @@ public class ItemBlockOreCore extends ItemBlock {
 	public String getUnlocalizedName(ItemStack itemstack) {
 		int meta = itemstack.getItemDamage();
 
-		if (meta < 0 || meta >= ItemBlockOreCore.types.length) {
+		if (meta < 0 || meta >= ItemBlockOre.types.length) {
 			meta = 0;
 		}
 
-		return super.getUnlocalizedName() + "." + ItemBlockOreCore.types[meta];
+		return super.getUnlocalizedName() + "." + ItemBlockOre.types[meta];
 	}
 }

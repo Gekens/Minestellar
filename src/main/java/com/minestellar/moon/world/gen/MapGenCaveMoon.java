@@ -16,14 +16,15 @@
 
 package com.minestellar.moon.world.gen;
 
-import com.minestellar.api.world.gen.MapGenBaseMeta;
-import com.minestellar.moon.blocks.MoonBlocks;
+import java.util.Random;
+
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
-import java.util.Random;
+import com.minestellar.api.world.gen.MapGenBaseMeta;
+import com.minestellar.moon.blocks.MoonBlocks;
 
 public class MapGenCaveMoon extends MapGenBaseMeta {
 	public static final int BREAK_THROUGH_CHANCE = 100; // 1 in 100 chance
@@ -163,7 +164,6 @@ public class MapGenCaveMoon extends MapGenBaseMeta {
 								}
 							}
 						}
-
 
 						if (flag) {
 							break;

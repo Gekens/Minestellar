@@ -16,24 +16,19 @@
 
 package com.minestellar.core.world.gen;
 
+import java.util.Random;
+
 import net.minecraft.block.Block;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenMinable;
 
-import java.util.Random;
-
 public class WorldGenMinableMeta extends WorldGenMinable {
 	private final Block minableBlockId;
-
 	private final int numberOfBlocks;
-
 	private final int metadata;
-
 	private boolean usingMetadata = false;
-
 	private final Block fillerID;
-
 	private final int fillerMetadata;
 
 	public WorldGenMinableMeta(Block par1, int par2, int par3, boolean par4, Block id, int meta) {
@@ -88,9 +83,7 @@ public class WorldGenMinableMeta extends WorldGenMinable {
 								if (dx + dy + dz < 1.0F && par1World.getBlock(ix, iy, iz) == this.fillerID && par1World.getBlockMetadata(ix, iy, iz) == this.fillerMetadata) {
 									if (!this.usingMetadata) {
 										par1World.setBlock(ix, iy, iz, this.minableBlockId, 0, 3);
-									}
-
-									else {
+									} else {
 										par1World.setBlock(ix, iy, iz, this.minableBlockId, this.metadata, 3);
 									}
 								}

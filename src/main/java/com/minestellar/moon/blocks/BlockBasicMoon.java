@@ -16,8 +16,8 @@
 
 package com.minestellar.moon.blocks;
 
-import com.minestellar.core.MinestellarCore;
-import com.minestellar.moon.MinestellarMoon;
+import java.util.List;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -27,7 +27,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
-import java.util.List;
+import com.minestellar.core.MinestellarCore;
+import com.minestellar.moon.MinestellarMoon;
 
 public class BlockBasicMoon extends Block {
 	private IIcon[] blockIcon;
@@ -91,9 +92,7 @@ public class BlockBasicMoon extends Block {
 			else {
 				return this.blockIcon[0];
 			}
-		}
-
-		else {
+		} else {
 			switch (meta) {
 			case 0:
 				return this.blockIcon[0];

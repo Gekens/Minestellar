@@ -16,16 +16,18 @@
 
 package com.minestellar.moon.util;
 
-import com.minestellar.core.Constants;
-import cpw.mods.fml.common.FMLLog;
+import java.io.File;
+
 import net.minecraftforge.common.config.Configuration;
+
 import org.apache.logging.log4j.Level;
 
-import java.io.File;
+import com.minestellar.core.Constants;
+
+import cpw.mods.fml.common.FMLLog;
 
 public class ConfigManagerMoon {
 	public static boolean loaded;
-
 	static Configuration configuration;
 
 	public ConfigManagerMoon(File file) {

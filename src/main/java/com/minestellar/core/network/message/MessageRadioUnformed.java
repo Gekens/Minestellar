@@ -19,16 +19,18 @@ package com.minestellar.core.network.message;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
 
-public class MessageRadioUnformed extends MessageBase<MessageRadioUnformed>{
+public class MessageRadioUnformed extends MessageBase<MessageRadioUnformed> {
+	private int x, y, z;
 
-private int x, y, z;
-	
-	public MessageRadioUnformed(){}
-	
-	public MessageRadioUnformed(int x, int y, int z){
-		this.x = x; this.y = y; this.z = z;
+	public MessageRadioUnformed() {
 	}
-	
+
+	public MessageRadioUnformed(int x, int y, int z) {
+		this.x = x;
+		this.y = y;
+		this.z = z;
+	}
+
 	@Override
 	public void fromBytes(ByteBuf buf) {
 		this.x = buf.readInt();
@@ -45,12 +47,11 @@ private int x, y, z;
 
 	@Override
 	public void handleClientSide(MessageRadioUnformed message, EntityPlayer player) {
-		//NO-OP
+		// NO-OP
 	}
 
 	@Override
 	public void handleServerSide(MessageRadioUnformed message, EntityPlayer player) {
-		player.worldObj.setBlockMetadataWithNotify(message.x, message.y, message.z, 0, 1|2);
+		player.worldObj.setBlockMetadataWithNotify(message.x, message.y, message.z, 0, 1 | 2);
 	}
-
 }

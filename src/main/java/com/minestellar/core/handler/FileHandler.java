@@ -16,46 +16,48 @@
 
 package com.minestellar.core.handler;
 
-import net.minecraft.client.Minecraft;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
 
-import java.io.*;
+import com.minestellar.core.util.MinestellarLog;
+
+import net.minecraft.client.Minecraft;
 
 /**
  * Custom file handler for writing and reading files
  */
-
-public class FileHandler{
-
+public class FileHandler {
 	/**
-	 * Writes the given text in the given file. 
-	 * <p><b>Note:</b> a new folder will be created in the <i>mods</i> folder. The file will be put there.</p>
+	 * Writes the given text in the given file.
+	 * <p>
+	 * <b>Note:</b> a new folder will be created in the <i>mods</i> folder. The file will be put there.
+	 * </p>
 	 * 
 	 * @param fileName The name of the file that should be written
 	 * @param text The text that should be written
 	 */
-	
-	public static void writeToFile(String fileName, String text){
-
+	public static void writeToFile(String fileName, String text) {
 		FileWriter fileWriter;
 
-		try{
-
+		try {
 			File modsFolder = new File(new File(Minecraft.getMinecraft().mcDataDir.getAbsolutePath().replace(File.separatorChar, '/').replace("/.", "/")), "mods");
-			File myFolder = new File(modsFolder, "minestellarCore");
+			File myFolder = new File(modsFolder, "MinestellarCore");
 			myFolder.mkdir();
 			File myFile = new File(myFolder, fileName);
-			
+
 			fileWriter = new FileWriter(myFile.getAbsolutePath());
-			
+
 			BufferedWriter writer = new BufferedWriter(fileWriter);
 
-			System.out.println("String: " + text);
-			
+			//MinestellarLog.info("String: " + text);
+
 			writer.write(text);
 			writer.newLine();
 			writer.close();
-
-		}catch(Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
@@ -66,36 +68,32 @@ public class FileHandler{
 	 * @param fileName The name of the file
 	 * @see FileHandler#writeToFile(String, String)
 	 */
-	
-	public static String readFromFile(String fileName){
+	public static String readFromFile(String fileName) {
 		String line, text = "";
-		
 		FileReader fileReader;
-		
-		try{
-			
+
+		try {
 			File modsFolder = new File(new File(Minecraft.getMinecraft().mcDataDir.getAbsolutePath().replace(File.separatorChar, '/').replace("/.", "/")), "mods");
-			File myFolder = new File(modsFolder, "minestellarCore");
+			File myFolder = new File(modsFolder, "MinestellarCore");
 			myFolder.mkdir();
 			File myFile = new File(myFolder, fileName);
-			
+
 			fileReader = new FileReader(myFile.getAbsolutePath());
 
 			BufferedReader bufferedReader = new BufferedReader(fileReader);
 
-			while((line = bufferedReader.readLine()) != null){
+			while ((line = bufferedReader.readLine()) != null) {
 				text += line;
 			}
-			
-			System.out.println("Text: " + text);
-			
+
+			//MinestellarLog.info("Text: " + text);
+
 			bufferedReader.close();
-			
+
 			return text;
-		}catch(Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return null;
 	}
-
 }

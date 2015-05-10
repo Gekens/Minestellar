@@ -16,12 +16,9 @@
 
 package com.minestellar.moon.world.gen;
 
-import com.google.common.collect.Lists;
-import com.minestellar.api.core.BlockMetaPair;
-import com.minestellar.api.world.gen.BiomeDecoratorMinestellar;
-import com.minestellar.api.world.gen.ChunkProviderMinestellar;
-import com.minestellar.api.world.gen.MapGenBaseMeta;
-import com.minestellar.moon.blocks.MoonBlocks;
+import java.util.ArrayList;
+import java.util.List;
+
 import net.minecraft.block.Block;
 import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.monster.EntitySkeleton;
@@ -31,8 +28,12 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.IChunkProvider;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.google.common.collect.Lists;
+import com.minestellar.api.core.BlockMetaPair;
+import com.minestellar.api.world.gen.BiomeDecoratorMinestellar;
+import com.minestellar.api.world.gen.ChunkProviderMinestellar;
+import com.minestellar.api.world.gen.MapGenBaseMeta;
+import com.minestellar.moon.blocks.MoonBlocks;
 
 public class ChunkProviderMoon extends ChunkProviderMinestellar {
 	private final BiomeDecoratorMoon moonBiomeDecorator = new BiomeDecoratorMoon();
@@ -49,9 +50,7 @@ public class ChunkProviderMoon extends ChunkProviderMinestellar {
 
 	@Override
 	protected BiomeGenBase[] getBiomesForGeneration() {
-		return new BiomeGenBase[] {
-			BiomeGenBaseMoon.moon
-		};
+		return new BiomeGenBase[] { BiomeGenBaseMoon.moon };
 	}
 
 	@Override

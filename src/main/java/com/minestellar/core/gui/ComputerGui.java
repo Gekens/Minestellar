@@ -16,6 +16,15 @@
 
 package com.minestellar.core.gui;
 
+import java.awt.geom.Point2D;
+import java.util.ArrayList;
+import java.util.Timer;
+
+import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.resources.I18n;
+
+import org.lwjgl.opengl.GL11;
+
 import com.minestellar.core.Constants;
 import com.minestellar.core.blocks.machines.Computer;
 import com.minestellar.core.blocks.tile.TileEntityComputer;
@@ -24,20 +33,14 @@ import com.minestellar.core.gui.widget.GuiScreenWidget;
 import com.minestellar.core.gui.widget.GuiSideBarWidget;
 import com.minestellar.core.gui.widget.planets.GuiPlanet;
 import com.minestellar.core.handler.FileHandler;
-import cpw.mods.fml.client.FMLClientHandler;
-import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.resources.I18n;
-import org.lwjgl.opengl.GL11;
+import com.minestellar.core.util.MinestellarLog;
 
-import java.awt.geom.Point2D;
-import java.util.ArrayList;
-import java.util.Timer;
+import cpw.mods.fml.client.FMLClientHandler;
 
 /**
  * GuiScreen for the {@link Computer} and {@link TileEntityComputer}
  */
-public class ComputerGui extends GuiScreenWidget{
-
+public class ComputerGui extends GuiScreenWidget {
 	public int screenWidth, screenHeight, spaceX, spaceY, spaceWidth, spaceHeight, earthA, earthB;
 	public ArrayList<GuiPlanet> planets = new ArrayList<GuiPlanet>();
 	public ArrayList<Point2D.Double> earthCoordsArray = new ArrayList<Point2D.Double>();
@@ -56,14 +59,16 @@ public class ComputerGui extends GuiScreenWidget{
 		this.screenWidth = GuiDraw.displaySize().width;
 		this.screenHeight = GuiDraw.displaySize().height;
 		this.spaceX = this.spaceY = 10;
-		this.spaceWidth = this.screenWidth-this.spaceX*2;
-		this.spaceHeight = this.screenHeight-this.spaceY*2;
-		this.earthA = 152/2; this.earthB = 147/2;
+		this.spaceWidth = this.screenWidth - this.spaceX * 2;
+		this.spaceHeight = this.screenHeight - this.spaceY * 2;
+		this.earthA = 152 / 2;
+		this.earthB = 147 / 2;
 		GuiDraw.fillEllipseCoordsArray(earthA, earthB, earthCoordsArray);
-		GuiDraw.fillEllipseCoordsArray(384/152, 383/147, moonCoordsArray);
-		GuiDraw.fillEllipseCoordsArray(108/2, 107/2, venusCoordsArray);
-		GuiDraw.fillEllipseCoordsArray(57/2, 56/2, mercuryCoordsArray);
-		if(Constants.runTimer){
+		GuiDraw.fillEllipseCoordsArray(384 / 152, 383 / 147, moonCoordsArray);
+		GuiDraw.fillEllipseCoordsArray(108 / 2, 107 / 2, venusCoordsArray);
+		GuiDraw.fillEllipseCoordsArray(57 / 2, 56 / 2, mercuryCoordsArray);
+		
+		if (Constants.runTimer) {
 			FileHandler.writeToFile(Constants.fileName, "false");
 			Constants.runTimer = false;
 			this.timer = new Timer(false);
@@ -71,22 +76,20 @@ public class ComputerGui extends GuiScreenWidget{
 			this.timer.scheduleAtFixedRate(new PlanetTimer("moon"), 10, 100);
 			this.timer.scheduleAtFixedRate(new PlanetTimer("venus"), 10, 100);
 		}
-
 	}
 
 	@Override
-	public void updateScreen(){
+	public void updateScreen() {
 		super.updateScreen();
 
-		if(selectedPlanet != null){
-			if(doesDraw){
+		if (selectedPlanet != null) {
+			if (doesDraw) {
 				setDraw(false);
-				add(planetInfoLeft = new GuiSideBarWidget(screenWidth, screenHeight, 200, screenHeight, 1).setColors(0xAA555555, 0xAA000000).setTitle(selectedPlanet.getName())
-						.setContent("dimension", I18n.format("data." + selectedPlanet.getName() + ".dimension")).setContent("gravity", I18n.format("data." + selectedPlanet.getName() + ".gravity")));
+				add(planetInfoLeft = new GuiSideBarWidget(screenWidth, screenHeight, 200, screenHeight, 1).setColors(0xAA555555, 0xAA000000).setTitle(selectedPlanet.getName()).setContent("dimension", I18n.format("data." + selectedPlanet.getName() + ".dimension")).setContent("gravity", I18n.format("data." + selectedPlanet.getName() + ".gravity")));
 			}
 		}
 
-		if(selectedPlanet == null && !this.doesDraw){
+		if (selectedPlanet == null && !this.doesDraw) {
 			removeSidebars();
 		}
 
@@ -94,8 +97,8 @@ public class ComputerGui extends GuiScreenWidget{
 	}
 
 	@Override
-	public void addWidgets(){
-		add(sun = new GuiPlanet(getMid(screenWidth)-(int)Math.sqrt(earthA^2-earthB^2), getMid(screenHeight)-4, "sun"));
+	public void addWidgets() {
+		add(sun = new GuiPlanet(getMid(screenWidth) - (int) Math.sqrt(earthA ^ 2 - earthB ^ 2), getMid(screenHeight) - 4, "sun"));
 		add(earth = new GuiPlanet(0, 0, "earth"));
 		add(moon = new GuiPlanet(0, 0, "moon"));
 		add(venus = new GuiPlanet(0, 0, "venus"));
@@ -107,18 +110,17 @@ public class ComputerGui extends GuiScreenWidget{
 	}
 
 	@Override
-	public void drawBackground(){
+	public void drawBackground() {
 		drawDefaultBackground();
 		GuiDraw.drawRect(spaceX, spaceY, spaceWidth, spaceHeight, 0xFF000000);
 	}
 
 	@Override
-	public void drawForeground(){
+	public void drawForeground() {
 		GL11.glDisable(GL11.GL_LIGHTING);
 		GL11.glDisable(GL11.GL_DEPTH_TEST);
 		GL11.glDisable(GL11.GL_TEXTURE_2D);
 		{
-
 			GL11.glPushMatrix();
 			{
 				GL11.glDisable(GL11.GL_LIGHTING);
@@ -128,73 +130,85 @@ public class ComputerGui extends GuiScreenWidget{
 				GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 				GL11.glDisable(GL11.GL_TEXTURE_2D);
 
-				//Earth
+				// Earth
 				GL11.glColor4d(0, 0, 1, 1);
 				Tessellator tess = Tessellator.instance;
 				tess.startDrawing(GL11.GL_LINES);
-				for(int i = 0; i < earthCoordsArray.size(); i++){
-					tess.addVertex(getMid(screenWidth)+4+earthCoordsArray.get(i).x, getMid(screenHeight)+4+earthCoordsArray.get(i).y, 0.0D);
+				
+				for (int i = 0; i < earthCoordsArray.size(); i++) {
+					tess.addVertex(getMid(screenWidth) + 4 + earthCoordsArray.get(i).x, getMid(screenHeight) + 4 + earthCoordsArray.get(i).y, 0.0D);
 				}
+				
 				tess.draw();
 
-				//Moon
+				// Moon
 				GL11.glColor4d(0.89, 0.89, 0.89, 1);
 				tess.startDrawing(GL11.GL_LINES);
-				for(int i = 0; i < moonCoordsArray.size(); i++){
-					tess.addVertex(earth.x+4+moonCoordsArray.get(i).x, earth.y+4+moonCoordsArray.get(i).y, 0.0D);
-				}
-				tess.draw();
 				
-				//Venus
-				GL11.glColor4d(0.84, 0.63, 0.29, 1);
-				tess.startDrawing(GL11.GL_LINES);
-				for(int i = 0; i < venusCoordsArray.size(); i++){
-					tess.addVertex(getMid(screenWidth)+4+venusCoordsArray.get(i).x, getMid(screenHeight)+4+venusCoordsArray.get(i).y, 0.0D);
+				for (int i = 0; i < moonCoordsArray.size(); i++) {
+					tess.addVertex(earth.x + 4 + moonCoordsArray.get(i).x, earth.y + 4 + moonCoordsArray.get(i).y, 0.0D);
 				}
+				
 				tess.draw();
 
-				//Mercury
+				// Venus
+				GL11.glColor4d(0.84, 0.63, 0.29, 1);
+				tess.startDrawing(GL11.GL_LINES);
+				
+				for (int i = 0; i < venusCoordsArray.size(); i++) {
+					tess.addVertex(getMid(screenWidth) + 4 + venusCoordsArray.get(i).x, getMid(screenHeight) + 4 + venusCoordsArray.get(i).y, 0.0D);
+				}
+				
+				tess.draw();
+
+				// Mercury
 				GL11.glColor4d(0.49, 0.29, 0.06, 1);
 				tess.startDrawing(GL11.GL_LINES);
-				for(int i = 0; i < mercuryCoordsArray.size(); i++){
-					tess.addVertex(getMid(screenWidth)+4+mercuryCoordsArray.get(i).x, getMid(screenHeight)+4+mercuryCoordsArray.get(i).y, 0.0D);
-				}
-				tess.draw();
 				
+				for (int i = 0; i < mercuryCoordsArray.size(); i++) {
+					tess.addVertex(getMid(screenWidth) + 4 + mercuryCoordsArray.get(i).x, getMid(screenHeight) + 4 + mercuryCoordsArray.get(i).y, 0.0D);
+				}
+				
+				tess.draw();
+
 				GL11.glEnable(GL11.GL_LIGHTING);
 				GL11.glEnable(GL11.GL_DEPTH_TEST);
 				GL11.glDepthMask(true);
 				GL11.glDisable(GL11.GL_BLEND);
 				GL11.glEnable(GL11.GL_TEXTURE_2D);
 			}
+			
 			GL11.glPopMatrix();
 		}
+		
 		GL11.glEnable(GL11.GL_TEXTURE_2D);
 		GL11.glEnable(GL11.GL_LIGHTING);
 		GL11.glEnable(GL11.GL_DEPTH_TEST);
 	}
 
 	@Override
-	public void actionPerformed(String ident, Object... params){
-        if(ident.equals("test")){
-            System.out.println("test");
-        }
+	public void actionPerformed(String ident, Object... params) {
+		if(ident.equals("test")){
+			MinestellarLog.info("test");
+		}
 	}
 
 	@Override
-	public boolean doesGuiPauseGame(){
+	public boolean doesGuiPauseGame() {
 		return false;
 	}
 
 	/**
-	 * Sets the <code>doesDraw</code> variable to the parameter 
-	 * <p><code>doesDraw</code> is used to draw only one time the {@link GuiSideBarWidget}</p>
+	 * Sets the <code>doesDraw</code> variable to the parameter
+	 * 
+	 * <p>
+	 * <code>doesDraw</code> is used to draw only one time the {@link GuiSideBarWidget}
+	 * </p>
 	 * 
 	 * @param b The boolean
 	 * @see GuiSideBarWidget
 	 */
-
-	public void setDraw(boolean b){
+	public void setDraw(boolean b) {
 		this.doesDraw = b;
 	}
 
@@ -203,8 +217,7 @@ public class ComputerGui extends GuiScreenWidget{
 	 * 
 	 * @see GuiSideBarWidget
 	 */
-
-	public void setSelectedPlanet(GuiPlanet planet){
+	public void setSelectedPlanet(GuiPlanet planet) {
 		selectedPlanet = planet;
 	}
 
@@ -218,7 +231,7 @@ public class ComputerGui extends GuiScreenWidget{
 		return selectedPlanet;
 	}
 
-	public void removeSidebars(){
+	public void removeSidebars() {
 		widgets.remove(planetInfoBottom);
 		widgets.remove(planetInfoLeft);
 		widgets.remove(planetInfoRight);
@@ -228,5 +241,4 @@ public class ComputerGui extends GuiScreenWidget{
 		planetInfoRight = null;
 		planetInfoTop = null;
 	}
-
 }

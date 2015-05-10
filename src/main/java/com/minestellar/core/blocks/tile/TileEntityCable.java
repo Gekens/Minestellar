@@ -16,19 +16,20 @@
 
 package com.minestellar.core.blocks.tile;
 
-import cofh.api.energy.EnergyStorage;
-import cofh.api.energy.IEnergyHandler;
-import cofh.api.energy.IEnergyProvider;
-import com.minestellar.api.core.TileEntityWire;
-import cpw.mods.fml.common.Optional;
-import cpw.mods.fml.common.Optional.Method;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
+import cofh.api.energy.EnergyStorage;
+import cofh.api.energy.IEnergyHandler;
+import cofh.api.energy.IEnergyProvider;
+
+import com.minestellar.api.core.TileEntityWire;
+
+import cpw.mods.fml.common.Optional;
+import cpw.mods.fml.common.Optional.Method;
 
 @Optional.Interface(iface = "cofh.api.energy.IEnergyHandler", modid = "CoFHCore")
 public class TileEntityCable extends TileEntityWire implements IEnergyHandler {
-
 	private EnergyStorage storage;
 
 	public TileEntityCable(int meta) {
@@ -66,8 +67,9 @@ public class TileEntityCable extends TileEntityWire implements IEnergyHandler {
 					// System.out.println("instanceof IEnergyHandler");
 					System.out.println("Stored: " + storage.getEnergyStored() + " Max: " + storage.getMaxEnergyStored());
 					int maxExtract = storage.getMaxExtract(); // Gets the maximum amount of energy that can be extracted from this tile in one tick.
-					int maxAvailable = storage.extractEnergy(maxExtract, true); // Simulates removing "maxExtract" to find out how much energy is actually available.
-					int energyTransferred = ((IEnergyHandler) tile).receiveEnergy(ForgeDirection.getOrientation(i), maxAvailable, false); // Sends "maxAvailable" to the target tile and records how much energy was accepted.
+					int maxAvailable = storage.extractEnergy(maxExtract, true); // Simulates removing "maxExtract" to find out how much energy is
+																				// actually available.
+					int energyTransferred = ((IEnergyHandler) tile).receiveEnergy(ForgeDirection.getOrientation(i), maxAvailable, false); // Sends "maxAvailable" to the target tile and records how  much energy was accepted.
 
 					storage.extractEnergy(energyTransferred, false);// Extract the energy transferred from the internal storage.
 				}
@@ -179,7 +181,7 @@ public class TileEntityCable extends TileEntityWire implements IEnergyHandler {
 	}
 
 	/**
-	 *  RF IMPLEMENTATION
+	 * RF IMPLEMENTATION
 	 */
 	@Method(modid = "CoFHCore")
 	@Override
