@@ -26,7 +26,7 @@ import java.util.Set;
 
 public class GuiContainerScreen extends GuiScreenWidget implements IGuiActionListener{
 
-	public ArrayList<GuiWidget> widgets = new ArrayList<>();
+	public ArrayList<GuiWidget> widgets = new ArrayList<GuiWidget>();
 
 	public int xSize, ySize, midX, midY, guiTop, guiLeft;
 

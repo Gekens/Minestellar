@@ -18,7 +18,7 @@ buildscript {
 
 apply plugin: 'forge'
 
-version = "p0.0.3"
+version = "p0.0.4"
 group= "com" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "Minestellar"
 

@@ -39,11 +39,11 @@ import java.util.Timer;
 public class ComputerGui extends GuiScreenWidget{
 
 	public int screenWidth, screenHeight, spaceX, spaceY, spaceWidth, spaceHeight, earthA, earthB;
-	public ArrayList<GuiPlanet> planets = new ArrayList<>();
-	public ArrayList<Point2D.Double> earthCoordsArray = new ArrayList<>();
-	public ArrayList<Point2D.Double> moonCoordsArray = new ArrayList<>();
-	public ArrayList<Point2D.Double> mercuryCoordsArray = new ArrayList<>();
-	public ArrayList<Point2D.Double> venusCoordsArray = new ArrayList<>();
+	public ArrayList<GuiPlanet> planets = new ArrayList<GuiPlanet>();
+	public ArrayList<Point2D.Double> earthCoordsArray = new ArrayList<Point2D.Double>();
+	public ArrayList<Point2D.Double> moonCoordsArray = new ArrayList<Point2D.Double>();
+	public ArrayList<Point2D.Double> mercuryCoordsArray = new ArrayList<Point2D.Double>();
+	public ArrayList<Point2D.Double> venusCoordsArray = new ArrayList<Point2D.Double>();
 
 	private Timer timer;
 	private boolean doesDraw = false;
@@ -176,11 +176,9 @@ public class ComputerGui extends GuiScreenWidget{
 
 	@Override
 	public void actionPerformed(String ident, Object... params){
-		switch(ident){
-		case "test":
-			System.out.println("test");
-			break;
-		}
+        if(ident.equals("test")){
+            System.out.println("test");
+        }
 	}
 
 	@Override

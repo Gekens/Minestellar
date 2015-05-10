@@ -28,7 +28,8 @@ import java.util.TimerTask;
 public class PlanetTimer extends TimerTask{
 
 	private String planetName;
-	private double x = 0., y = 0., incr = 2;
+    private final double incr = 2;
+	private double x = 0., y = 0.;
 	private boolean doTop = false, firstTime = true;
 
 	private Planet planet;
@@ -41,22 +42,19 @@ public class PlanetTimer extends TimerTask{
 	@Override
 	public void run(){
 
-		switch(this.planetName){
-		case "earth":
-			planet = Planet.EARTH;
-			currentPlanet = ComputerGui.earth;
-			break;
-		case "moon":
-			planet = Planet.MOON;
-			currentPlanet = ComputerGui.moon;
-			break;
-		case "venus":
-			planet = Planet.VENUS;
-			currentPlanet = ComputerGui.venus;
-			break;
-		default:
-			break;
-		}
+        if(this.planetName.equals("earth")){
+            planet = Planet.EARTH;
+            currentPlanet = ComputerGui.earth;
+
+        }else if(this.planetName.equals("moon")){
+            planet = Planet.MOON;
+            currentPlanet = ComputerGui.moon;
+
+        }else if(this.planetName.equals("venus")){
+            planet = Planet.VENUS;
+            currentPlanet = ComputerGui.venus;
+
+        }
 
 		if(firstTime){
 			firstTime = false;

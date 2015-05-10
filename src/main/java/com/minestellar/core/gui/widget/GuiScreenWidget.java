@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class GuiScreenWidget extends GuiScreen implements IGuiActionListener{    
 
-	public ArrayList<GuiWidget> widgets = new ArrayList<>();
+	public ArrayList<GuiWidget> widgets = new ArrayList<GuiWidget>();
 
 	public int xSize, ySize, midX, midY, guiTop, guiLeft;
 
