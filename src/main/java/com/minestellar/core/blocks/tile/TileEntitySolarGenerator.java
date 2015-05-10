@@ -16,19 +16,18 @@
 
 package com.minestellar.core.blocks.tile;
 
-import cofh.api.energy.EnergyStorage;
-import cofh.api.energy.IEnergyHandler;
-import cpw.mods.fml.common.Optional;
-import cpw.mods.fml.common.Optional.Method;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
+import cofh.api.energy.EnergyStorage;
+import cofh.api.energy.IEnergyHandler;
+import cpw.mods.fml.common.Optional;
+import cpw.mods.fml.common.Optional.Method;
 
 @Optional.Interface(iface = "cofh.api.energy.IEnergyHandler", modid = "CoFHCore")
 public class TileEntitySolarGenerator extends TileEntity implements IEnergyHandler {
-
 	private EnergyStorage storage;
 	public boolean Light = false;
 
@@ -43,23 +42,12 @@ public class TileEntitySolarGenerator extends TileEntity implements IEnergyHandl
 		 * 
 		 * super.updateEntity();
 		 * 
-		 * if(!worldObj.isRemote)
-		 * {
-		 * if(worldObj.isDaytime() && ((!worldObj.isRaining() && !worldObj.isThundering())) && !worldObj.provider.hasNoSky && worldObj.canBlockSeeTheSky(xCoord, yCoord+1, zCoord))
-		 * {
-		 * Light = true;
-		 * }
-		 * else
-		 * {
-		 * Light - false;
-		 * }
+		 * if(!worldObj.isRemote) { if(worldObj.isDaytime() && ((!worldObj.isRaining() && !worldObj.isThundering())) && !worldObj.provider.hasNoSky &&
+		 * worldObj.canBlockSeeTheSky(xCoord, yCoord+1, zCoord)) { Light = true; } else { Light - false; }
 		 * 
-		 * if(canWork())
-		 * {
-		 * storage.setEnergyStored(stored += this.getSolarLight(this.worldObj, this.xCoord, this.yCoord, this.zCoord));
-		 * }
-		 * }
+		 * if(canWork()) { storage.setEnergyStored(stored += this.getSolarLight(this.worldObj, this.xCoord, this.yCoord, this.zCoord)); } }
 		 */
+		
 		if (!this.worldObj.provider.hasNoSky) {
 			int stored = storage.getEnergyStored();
 			// MinestellarLog.info("Solar Light: " + this.getSolarLight(this.worldObj, this.xCoord, this.yCoord, this.zCoord));
@@ -71,7 +59,6 @@ public class TileEntitySolarGenerator extends TileEntity implements IEnergyHandl
 	 * This checks if the energy that is store is not greater than the max amount and if their is light in the sky
 	 */
 	public boolean canWork() {
-
 		return storage.getEnergyStored() < storage.getMaxEnergyStored() && Light;
 	}
 
@@ -82,23 +69,28 @@ public class TileEntitySolarGenerator extends TileEntity implements IEnergyHandl
 		int i = world.getBlockMetadata(x, y, z);
 		int j = world.getSavedLightValue(EnumSkyBlock.Sky, x, y, z) - world.skylightSubtracted;
 		float f = world.getCelestialAngleRadians(1.0F);
+		
 		if (f < 3.141593F) {
 			f += (0.0F - f) * 0.2F;
 		} else {
 			f += (6.283186F - f) * 0.2F;
 		}
+		
 		j = Math.round(j * MathHelper.cos(f));
+		
 		if (j < 0) {
 			j = 0;
 		}
+		
 		if (j > 15) {
 			j = 15;
 		}
+		
 		return j;
 	}
 
 	/**
-	 *  RF IMPLEMENTATION
+	 * RF IMPLEMENTATION
 	 */
 	@Method(modid = "CoFHCore")
 	@Override

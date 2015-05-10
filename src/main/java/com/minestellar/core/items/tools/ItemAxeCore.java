@@ -16,15 +16,17 @@
 
 package com.minestellar.core.items.tools;
 
-import com.minestellar.core.MinestellarCore;
-import com.minestellar.core.proxy.ClientProxyCore;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemAxe;
 import net.minecraft.item.ItemStack;
+
+import com.minestellar.core.MinestellarCore;
+import com.minestellar.core.proxy.ClientProxyCore;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemAxeCore extends ItemAxe {
 	public ItemAxeCore(String name, ToolMaterial par2EnumToolMaterial) {

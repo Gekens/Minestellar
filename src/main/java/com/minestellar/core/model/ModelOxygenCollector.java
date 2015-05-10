@@ -21,8 +21,7 @@ import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 
 /**
- * Oxygen Sink - Gekens
- * Created using Tabula 4.1.1
+ * Oxygen Sink - Gekens Created using Tabula 4.1.1
  */
 public class ModelOxygenCollector extends ModelBase {
 	public ModelRenderer base;

@@ -16,123 +16,132 @@
 
 package com.minestellar.core.particles;
 
-import com.minestellar.api.vector.Vector3;
+import static org.lwjgl.opengl.GL11.GL_BLEND;
+import static org.lwjgl.opengl.GL11.GL_GREATER;
+import static org.lwjgl.opengl.GL11.glAlphaFunc;
+import static org.lwjgl.opengl.GL11.glBlendFunc;
+import static org.lwjgl.opengl.GL11.glColor4f;
+import static org.lwjgl.opengl.GL11.glDepthMask;
+import static org.lwjgl.opengl.GL11.glDisable;
+import static org.lwjgl.opengl.GL11.glEnable;
 import net.minecraft.client.particle.EntityFX;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.world.World;
+
 import org.lwjgl.opengl.GL11;
 
-import static org.lwjgl.opengl.GL11.*;
+import com.minestellar.api.vector.Vector3;
 
-public class EntityLightningBeamFX extends EntityFX{
+public class EntityLightningBeamFX extends EntityFX {
+	// Minecraft.getMinecraft().effectRenderer.addEffect(new EntityLightningBeamFX(worldObj, xCoord, yCoord, zCoord).setColor(1F, 0.2F, 0.7F).setArrivalCoords(new Vector3(xCoord+12, 5, zCoord-1), new Vector3(xCoord-9, 4, zCoord+1), new Vector3(xCoord-15, 10, zCoord+6)));
+	private Vector3[] stopCoordinates;
 
-//    Minecraft.getMinecraft().effectRenderer.addEffect(new EntityLightningBeamFX(worldObj, xCoord, yCoord, zCoord).setColor(1F, 0.2F, 0.7F).setArrivalCoords(new Vector3(xCoord+12, 5, zCoord-1), new Vector3(xCoord-9, 4, zCoord+1), new Vector3(xCoord-15, 10, zCoord+6)));
+	public EntityLightningBeamFX(World world, double x, double y, double z) {
+		super(world, x, y, z);
 
-    private Vector3[] stopCoordinates;
+		setGravity(0);
+		setMaxAge(1);
 
-    public EntityLightningBeamFX(World world, double x, double y, double z){
-        super(world, x, y, z);
+		noClip = true;
+	}
 
-        setGravity(0);
-        setMaxAge(1);
+	@Override
+	public void renderParticle(Tessellator tessellator, float partialTicks, float par3, float par4, float par5, float par6, float par7) {
+		glDisable(GL11.GL_TEXTURE_2D);
+		glDisable(GL11.GL_LIGHTING);
+		glEnable(GL11.GL_BLEND);
+		glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE);
+		glDepthMask(false);
+		glAlphaFunc(GL_GREATER, 0.003921569F);
 
-        noClip = true;
-    }
+		glColor4f(particleRed, particleGreen, particleBlue, 0.8F);
 
-    @Override
-    public void renderParticle(Tessellator tessellator, float partialTicks, float par3, float par4, float par5, float par6, float par7){
-        glDisable(GL11.GL_TEXTURE_2D);
-        glDisable(GL11.GL_LIGHTING);
-        glEnable(GL11.GL_BLEND);
-        glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE);
-        glDepthMask(false);
-        glAlphaFunc(GL_GREATER, 0.003921569F);
+		tessellator.setBrightness(0);
+		tessellator.startDrawing(3);
 
-        glColor4f(particleRed, particleGreen, particleBlue, 0.8F);
+		float x = (float) (prevPosX + (posX - prevPosX) * partialTicks - interpPosX);
+		float y = (float) (prevPosY + (posY - prevPosY) * partialTicks - interpPosY);
+		float z = (float) (prevPosZ + (posZ - prevPosZ) * partialTicks - interpPosZ);
 
-        tessellator.setBrightness(0);
-        tessellator.startDrawing(3);
+		{
+			tessellator.addVertex(x, y, z);
 
-        float x = (float) (prevPosX + (posX - prevPosX) * partialTicks - interpPosX);
-        float y = (float) (prevPosY + (posY - prevPosY) * partialTicks - interpPosY);
-        float z = (float) (prevPosZ + (posZ - prevPosZ) * partialTicks - interpPosZ);
+			for (Vector3 stopCoordinate : stopCoordinates) {
+				tessellator.addVertex(stopCoordinate.x + x, stopCoordinate.y + y, stopCoordinate.z + z);
+			}
+		}
 
-        {
-            tessellator.addVertex(x, y, z);
+		tessellator.draw();
 
-            for(Vector3 stopCoordinate : stopCoordinates){
-                tessellator.addVertex(stopCoordinate.x + x, stopCoordinate.y + y, stopCoordinate.z + z);
-            }
-        }
+		glEnable(GL11.GL_TEXTURE_2D);
+		glEnable(GL11.GL_LIGHTING);
+		glDisable(GL_BLEND);
+		glDepthMask(true);
+		glAlphaFunc(GL_GREATER, 0.1F);
+	}
 
-        tessellator.draw();
+	@Override
+	public void moveEntity(double motionX, double motionY, double motionZ) {
+		super.moveEntity(motionX, motionY, motionZ);
+	}
 
-        glEnable(GL11.GL_TEXTURE_2D);
-        glEnable(GL11.GL_LIGHTING);
-        glDisable(GL_BLEND);
-        glDepthMask(true);
-        glAlphaFunc(GL_GREATER, 0.1F);
-    }
+	@Override
+	public void onUpdate() {
+		this.prevPosX = this.posX;
+		this.prevPosY = this.posY;
+		this.prevPosZ = this.posZ;
 
-    @Override
-    public void moveEntity(double motionX, double motionY, double motionZ){
-        super.moveEntity(motionX, motionY, motionZ);
-    }
+		if (this.particleAge++ >= this.particleMaxAge) {
+			this.setDead();
+		}
+	}
 
-    @Override
-    public void onUpdate(){
-        this.prevPosX = this.posX;
-        this.prevPosY = this.posY;
-        this.prevPosZ = this.posZ;
+	/**
+	 * Sets the coordinates of the point at which the particle should arrive. <b>NOTE: for the {@code y} axis, don't use {@code xCoord +- y}, use just
+	 * {@code y}</b>
+	 */
+	public EntityLightningBeamFX setArrivalCoords(Vector3... stopCoordinates) {
+		this.stopCoordinates = stopCoordinates;
+		
+		return this;
+	}
 
-        if(this.particleAge++ >= this.particleMaxAge){
-            this.setDead();
-        }
-    }
+	@Override
+	public boolean canBeCollidedWith() {
+		return false;
+	}
 
-    /**
-     * Sets the coordinates of the point at which the particle should arrive.
-     * <b>NOTE: for the {@code y} axis, don't use {@code xCoord +- y}, use just {@code y}</b>
-     */
+	@Override
+	public boolean canBePushed() {
+		return false;
+	}
 
-    public EntityLightningBeamFX setArrivalCoords(Vector3... stopCoordinates){
-        this.stopCoordinates = stopCoordinates;
-        return this;
-    }
+	@Override
+	public int getFXLayer() {
+		return 3;
+	}
 
-    @Override
-    public boolean canBeCollidedWith(){
-        return false;
-    }
+	public EntityLightningBeamFX setMaxAge(int maxAge) {
+		particleMaxAge = maxAge;
+		
+		return this;
+	}
 
-    @Override
-    public boolean canBePushed(){
-        return false;
-    }
+	public EntityLightningBeamFX setGravity(float gravity) {
+		particleGravity = gravity;
+		
+		return this;
+	}
 
-    @Override
-    public int getFXLayer(){
-        return 3;
-    }
+	public EntityLightningBeamFX setScale(float scale) {
+		particleScale = scale;
+		
+		return this;
+	}
 
-    public EntityLightningBeamFX setMaxAge(int maxAge){
-        particleMaxAge = maxAge;
-        return this;
-    }
-
-    public EntityLightningBeamFX setGravity(float gravity){
-        particleGravity = gravity;
-        return this;
-    }
-
-    public EntityLightningBeamFX setScale(float scale){
-        particleScale = scale;
-        return this;
-    }
-
-    public EntityLightningBeamFX setColor(float r, float g, float b){
-        setRBGColorF(r, g, b);
-        return this;
-    }
-
+	public EntityLightningBeamFX setColor(float r, float g, float b) {
+		setRBGColorF(r, g, b);
+		
+		return this;
+	}
 }

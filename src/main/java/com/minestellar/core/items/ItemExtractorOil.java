@@ -16,11 +16,6 @@
 
 package com.minestellar.core.items;
 
-import com.minestellar.api.vector.Vector3;
-import com.minestellar.core.MinestellarCore;
-import com.minestellar.core.proxy.ClientProxyCore;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
@@ -37,6 +32,13 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidBlock;
+
+import com.minestellar.api.vector.Vector3;
+import com.minestellar.core.MinestellarCore;
+import com.minestellar.core.proxy.ClientProxyCore;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemExtractorOil extends Item {
 	protected IIcon[] icons = new IIcon[5];

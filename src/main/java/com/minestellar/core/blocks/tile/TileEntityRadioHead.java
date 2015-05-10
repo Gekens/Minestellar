@@ -16,44 +16,43 @@
 
 package com.minestellar.core.blocks.tile;
 
-import com.minestellar.core.particles.EntityLightningFX;
+import java.util.Timer;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 
-import java.util.Timer;
+import com.minestellar.core.particles.EntityLightningFX;
 
-public class TileEntityRadioHead extends TileEntity{
+public class TileEntityRadioHead extends TileEntity {
+	public TileEntityRadioHead() {
+		Timer checkerTimer = new Timer();
+		checkerTimer.scheduleAtFixedRate(new TileEntityRadioHeadTask(this), 100, 10 * 1000);
+	}
 
-    public TileEntityRadioHead(){
-        Timer checkerTimer = new Timer();
-        checkerTimer.scheduleAtFixedRate(new TileEntityRadioHeadTask(this), 100, 10 * 1000);
-    }
+	@Override
+	public void updateEntity() {
+		if (this.getBlockMetadata() == 1) { // If the head is surrounded
+			if (Math.random() <= 0.1) {
+				Minecraft.getMinecraft().effectRenderer.addEffect(new EntityLightningFX(worldObj, xCoord, yCoord, zCoord, 5, 2).setColor((float) Math.random(), (float) Math.random(), (float) Math.random()).setArrivalCoords(xCoord - 2, yCoord + 2, zCoord - 2));
+				Minecraft.getMinecraft().effectRenderer.addEffect(new EntityLightningFX(worldObj, xCoord, yCoord, zCoord, 5, 2).setColor((float) Math.random(), (float) Math.random(), (float) Math.random()).setArrivalCoords(xCoord + 2, yCoord + 2, zCoord - 2));
+				Minecraft.getMinecraft().effectRenderer.addEffect(new EntityLightningFX(worldObj, xCoord, yCoord, zCoord, 5, 2).setColor((float) Math.random(), (float) Math.random(), (float) Math.random()).setArrivalCoords(xCoord - 2, yCoord + 2, zCoord + 2));
+				Minecraft.getMinecraft().effectRenderer.addEffect(new EntityLightningFX(worldObj, xCoord, yCoord, zCoord, 5, 2).setColor((float) Math.random(), (float) Math.random(), (float) Math.random()).setArrivalCoords(xCoord + 2, yCoord + 2, zCoord + 2));
+				Minecraft.getMinecraft().effectRenderer.addEffect(new EntityLightningFX(worldObj, xCoord, yCoord, zCoord, 5, 2).setColor((float) Math.random(), (float) Math.random(), (float) Math.random()).setArrivalCoords(xCoord - 2, yCoord - 2, zCoord - 2));
+				Minecraft.getMinecraft().effectRenderer.addEffect(new EntityLightningFX(worldObj, xCoord, yCoord, zCoord, 5, 2).setColor((float) Math.random(), (float) Math.random(), (float) Math.random()).setArrivalCoords(xCoord + 2, yCoord - 2, zCoord - 2));
+				Minecraft.getMinecraft().effectRenderer.addEffect(new EntityLightningFX(worldObj, xCoord, yCoord, zCoord, 5, 2).setColor((float) Math.random(), (float) Math.random(), (float) Math.random()).setArrivalCoords(xCoord - 2, yCoord - 2, zCoord + 2));
+				Minecraft.getMinecraft().effectRenderer.addEffect(new EntityLightningFX(worldObj, xCoord, yCoord, zCoord, 5, 2).setColor((float) Math.random(), (float) Math.random(), (float) Math.random()).setArrivalCoords(xCoord + 2, yCoord - 2, zCoord + 2));
+			}
+		}
+	}
 
-    @Override
-    public void updateEntity(){
-        if(this.getBlockMetadata() == 1){ // If the head is surrounded
-            if(Math.random() <= 0.1){
-                Minecraft.getMinecraft().effectRenderer.addEffect(new EntityLightningFX(worldObj, xCoord, yCoord, zCoord, 5, 2).setColor((float)Math.random(), (float)Math.random(), (float)Math.random()).setArrivalCoords(xCoord-2, yCoord+2, zCoord-2));
-                Minecraft.getMinecraft().effectRenderer.addEffect(new EntityLightningFX(worldObj, xCoord, yCoord, zCoord, 5, 2).setColor((float)Math.random(), (float)Math.random(), (float)Math.random()).setArrivalCoords(xCoord+2, yCoord+2, zCoord-2));
-                Minecraft.getMinecraft().effectRenderer.addEffect(new EntityLightningFX(worldObj, xCoord, yCoord, zCoord, 5, 2).setColor((float)Math.random(), (float)Math.random(), (float)Math.random()).setArrivalCoords(xCoord-2, yCoord+2, zCoord+2));
-                Minecraft.getMinecraft().effectRenderer.addEffect(new EntityLightningFX(worldObj, xCoord, yCoord, zCoord, 5, 2).setColor((float)Math.random(), (float)Math.random(), (float)Math.random()).setArrivalCoords(xCoord+2, yCoord+2, zCoord+2));
-                Minecraft.getMinecraft().effectRenderer.addEffect(new EntityLightningFX(worldObj, xCoord, yCoord, zCoord, 5, 2).setColor((float)Math.random(), (float)Math.random(), (float)Math.random()).setArrivalCoords(xCoord-2, yCoord-2, zCoord-2));
-                Minecraft.getMinecraft().effectRenderer.addEffect(new EntityLightningFX(worldObj, xCoord, yCoord, zCoord, 5, 2).setColor((float)Math.random(), (float)Math.random(), (float)Math.random()).setArrivalCoords(xCoord+2, yCoord-2, zCoord-2));
-                Minecraft.getMinecraft().effectRenderer.addEffect(new EntityLightningFX(worldObj, xCoord, yCoord, zCoord, 5, 2).setColor((float)Math.random(), (float)Math.random(), (float)Math.random()).setArrivalCoords(xCoord-2, yCoord-2, zCoord+2));
-                Minecraft.getMinecraft().effectRenderer.addEffect(new EntityLightningFX(worldObj, xCoord, yCoord, zCoord, 5, 2).setColor((float)Math.random(), (float)Math.random(), (float)Math.random()).setArrivalCoords(xCoord+2, yCoord-2, zCoord+2));
-            }
-        }
-    }
+	@Override
+	public void readFromNBT(NBTTagCompound nbt) {
+		super.readFromNBT(nbt);
+	}
 
-    @Override
-    public void readFromNBT(NBTTagCompound nbt){
-        super.readFromNBT(nbt);
-    }
-
-    @Override
-    public void writeToNBT(NBTTagCompound nbt){
-        super.writeToNBT(nbt);
-    }
-
+	@Override
+	public void writeToNBT(NBTTagCompound nbt) {
+		super.writeToNBT(nbt);
+	}
 }

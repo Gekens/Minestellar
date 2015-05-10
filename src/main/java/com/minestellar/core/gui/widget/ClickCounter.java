@@ -1,52 +1,52 @@
 package com.minestellar.core.gui.widget;
 
-import com.google.common.base.Objects;
-
 import java.util.Map;
 import java.util.TreeMap;
 
-public class ClickCounter<T>{
-    public class ClickCount{
-        public T clicked;
-        public long time;
-        public int count;
+import com.google.common.base.Objects;
 
-        public boolean update(T clicked){
-            if(!Objects.equal(this.clicked, clicked)){
-                this.clicked = clicked;
-                count = 0;
-                time = Long.MIN_VALUE;
-                return false;
-            }
-            return true;
-        }
-    }
+public class ClickCounter<T> {
+	public class ClickCount {
+		public T clicked;
+		public long time;
+		public int count;
 
-    public Map<Integer, ClickCount> buttons = new TreeMap<>();
+		public boolean update(T clicked) {
+			if (!Objects.equal(this.clicked, clicked)) {
+				this.clicked = clicked;
+				count = 0;
+				time = Long.MIN_VALUE;
+				return false;
+			}
+			return true;
+		}
+	}
 
-    public ClickCount getCount(int button){
-        ClickCount c = buttons.get(button);
-        if(c == null)
-            buttons.put(button, c = new ClickCount());
-        return c;
-    }
+	public Map<Integer, ClickCount> buttons = new TreeMap<>();
 
-    public void mouseDown(T clicked, int button) {
-        ClickCount c = getCount(button);
-        c.update(clicked);
-    }
+	public ClickCount getCount(int button) {
+		ClickCount c = buttons.get(button);
+		if (c == null)
+			buttons.put(button, c = new ClickCount());
+		return c;
+	}
 
-    public int mouseUp(T clicked, int button){
-        ClickCount c = getCount(button);
-        if(!c.update(clicked))
-            return 0;
+	public void mouseDown(T clicked, int button) {
+		ClickCount c = getCount(button);
+		c.update(clicked);
+	}
 
-        long time = System.currentTimeMillis();
-        if(time-c.time < 500)
-            c.count++;
-        else
-            c.count = 1;
-        c.time = time;
-        return c.count;
-    }
+	public int mouseUp(T clicked, int button) {
+		ClickCount c = getCount(button);
+		if (!c.update(clicked))
+			return 0;
+
+		long time = System.currentTimeMillis();
+		if (time - c.time < 500)
+			c.count++;
+		else
+			c.count = 1;
+		c.time = time;
+		return c.count;
+	}
 }

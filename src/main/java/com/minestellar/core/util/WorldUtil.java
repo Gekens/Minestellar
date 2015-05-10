@@ -16,12 +16,6 @@
 
 package com.minestellar.core.util;
 
-import com.minestellar.api.vector.Vector3;
-import com.minestellar.api.world.IMinestellarWorldProvider;
-import cpw.mods.fml.client.FMLClientHandler;
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.entity.Entity;
@@ -32,7 +26,21 @@ import net.minecraft.network.play.server.S07PacketRespawn;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
-import net.minecraft.world.*;
+import net.minecraft.world.EnumDifficulty;
+import net.minecraft.world.World;
+import net.minecraft.world.WorldProvider;
+import net.minecraft.world.WorldProviderSurface;
+import net.minecraft.world.WorldServer;
+import net.minecraft.world.WorldSettings;
+import net.minecraft.world.WorldType;
+
+import com.minestellar.api.vector.Vector3;
+import com.minestellar.api.world.IMinestellarWorldProvider;
+
+import cpw.mods.fml.client.FMLClientHandler;
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class WorldUtil {
 	public static double getGravityForEntity(Entity entity) {
@@ -80,6 +88,7 @@ public class WorldUtil {
 			}
 
 			f2 = 1.0F - f2;
+			
 			return f2 * 0.8F;
 		}
 
@@ -102,7 +111,6 @@ public class WorldUtil {
 		if (world.provider instanceof WorldProviderSurface && FMLClientHandler.instance().getClient().thePlayer.posY >= 200) {
 			float var20 = (float) (FMLClientHandler.instance().getClient().thePlayer.posY - 200.0F) / 1000.0F;
 			final float var21 = Math.max(1.0F - var20 * 4.0F, 0.0F);
-
 			Vec3 vec = world.getFogColor(1.0F);
 
 			return Vec3.createVectorHelper(vec.xCoord * var21, vec.yCoord * var21, vec.zCoord * var21);
@@ -115,7 +123,6 @@ public class WorldUtil {
 		if (world.provider instanceof WorldProviderSurface && FMLClientHandler.instance().getClient().thePlayer.posY >= 200) {
 			float var20 = (float) (FMLClientHandler.instance().getClient().thePlayer.posY - 200.0F) / 1000.0F;
 			final float var21 = Math.max(1.0F - var20 * 2.0F, 0.0F);
-
 			Vec3 vec = world.getSkyColor(FMLClientHandler.instance().getClient().renderViewEntity, 1.0F);
 
 			return Vec3.createVectorHelper(vec.xCoord * var21, vec.yCoord * var21, vec.zCoord * var21);
@@ -127,18 +134,18 @@ public class WorldUtil {
 	public static WorldProvider getProviderForDimension(int id) {
 		WorldProvider provider = null;
 		MinecraftServer theServer = FMLCommonHandler.instance().getMinecraftServerInstance();
-		
+
 		if (theServer != null) {
 			WorldServer ws = theServer.worldServerForDimension(id);
 			if (ws != null) {
 				provider = ws.provider;
 			}
 		}
-		
+
 		if (provider == null) {
 			provider = WorldProvider.getProviderForDimension(id);
 		}
-		
+
 		return provider;
 	}
 
@@ -146,7 +153,7 @@ public class WorldUtil {
 	public static EntityPlayer forceRespawnClient(int dimID, int par2, String par3, int par4) {
 		S07PacketRespawn fakePacket = new S07PacketRespawn(dimID, EnumDifficulty.getDifficultyEnum(par2), WorldType.parseWorldType(par3), WorldSettings.GameType.getByID(par4));
 		Minecraft.getMinecraft().getNetHandler().handleRespawn(fakePacket);
-		
+
 		return FMLClientHandler.instance().getClientPlayerEntity();
 	}
 }

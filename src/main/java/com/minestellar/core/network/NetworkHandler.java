@@ -16,45 +16,44 @@
 
 package com.minestellar.core.network;
 
+import net.minecraft.entity.player.EntityPlayerMP;
+
 import com.minestellar.core.MinestellarCore;
 import com.minestellar.core.network.message.MessageRadioFormed;
 import com.minestellar.core.network.message.MessageRadioUnformed;
+
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.network.NetworkRegistry.TargetPoint;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import cpw.mods.fml.relauncher.Side;
-import net.minecraft.entity.player.EntityPlayerMP;
 
-public class NetworkHandler{
+public class NetworkHandler {
+	private static SimpleNetworkWrapper INSTANCE;
 
-	private static SimpleNetworkWrapper INSTANCE;	
-
-	public static void init(){
-        INSTANCE = NetworkRegistry.INSTANCE.newSimpleChannel(MinestellarCore.MOD_ID);
-        
-        INSTANCE.registerMessage(MessageRadioFormed.class, MessageRadioFormed.class, 0, Side.SERVER);
-        INSTANCE.registerMessage(MessageRadioUnformed.class, MessageRadioUnformed.class, 1, Side.SERVER);
+	public static void init() {
+		INSTANCE = NetworkRegistry.INSTANCE.newSimpleChannel(MinestellarCore.MOD_ID);
+		INSTANCE.registerMessage(MessageRadioFormed.class, MessageRadioFormed.class, 0, Side.SERVER);
+		INSTANCE.registerMessage(MessageRadioUnformed.class, MessageRadioUnformed.class, 1, Side.SERVER);
 	}
-	
-	public static void sendToServer(IMessage message){
-        INSTANCE.sendToServer(message);
-    }
 
-    public static void sendTo(IMessage message, EntityPlayerMP player){
-        INSTANCE.sendTo(message, player);
-    }
+	public static void sendToServer(IMessage message) {
+		INSTANCE.sendToServer(message);
+	}
 
-    public static void sendToAllAround(IMessage message, TargetPoint point){
-        INSTANCE.sendToAllAround(message, point);
-    }
+	public static void sendTo(IMessage message, EntityPlayerMP player) {
+		INSTANCE.sendTo(message, player);
+	}
 
-    public static void sendToAll(IMessage message){
-        INSTANCE.sendToAll(message);
-    }
+	public static void sendToAllAround(IMessage message, TargetPoint point) {
+		INSTANCE.sendToAllAround(message, point);
+	}
 
-    public static void sendToDimension(IMessage message, int dimensionId){
-        INSTANCE.sendToDimension(message, dimensionId);
-    }
-	
+	public static void sendToAll(IMessage message) {
+		INSTANCE.sendToAll(message);
+	}
+
+	public static void sendToDimension(IMessage message, int dimensionId) {
+		INSTANCE.sendToDimension(message, dimensionId);
+	}
 }

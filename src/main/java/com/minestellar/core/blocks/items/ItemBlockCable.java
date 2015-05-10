@@ -16,18 +16,18 @@
 
 package com.minestellar.core.blocks.items;
 
-import com.minestellar.core.proxy.ClientProxyCore;
 import net.minecraft.block.Block;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 
-public class ItemBlockCable extends ItemBlock {
+import com.minestellar.core.proxy.ClientProxyCore;
 
-	public static String[] types = new String[] {
-			"light_wire", 
-			"medium_wire", 
-			"heavy_wire"
+public class ItemBlockCable extends ItemBlock {
+	public static String[] types = new String[] { 
+		"light_wire", 
+		"medium_wire", 
+		"heavy_wire" 
 	};
 
 	public ItemBlockCable(Block par1) {
@@ -48,11 +48,11 @@ public class ItemBlockCable extends ItemBlock {
 	@Override
 	public String getUnlocalizedName(ItemStack itemstack) {
 		int meta = itemstack.getItemDamage();
-		
+
 		if (meta < 0 || meta >= ItemBlockCable.types.length) {
 			meta = 0;
 		}
-		
+
 		return super.getUnlocalizedName() + "." + ItemBlockCable.types[meta];
 	}
 }

@@ -16,21 +16,20 @@
 
 package com.minestellar.core.blocks.container;
 
-import com.minestellar.core.blocks.tile.TileEntityComputer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 
-public class ComputerContainer extends Container{
+import com.minestellar.core.blocks.tile.TileEntityComputer;
 
+public class ComputerContainer extends Container {
 	private TileEntityComputer te;
-	
+
 	public ComputerContainer(TileEntityComputer te) {
 		this.te = te;
 	}
-	
+
 	@Override
 	public boolean canInteractWith(EntityPlayer player) {
 		return true;
 	}
-
 }

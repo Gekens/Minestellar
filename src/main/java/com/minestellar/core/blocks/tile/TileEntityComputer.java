@@ -19,19 +19,17 @@ package com.minestellar.core.blocks.tile;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 
-public class TileEntityComputer extends TileEntity{
-
+public class TileEntityComputer extends TileEntity {
 	public TileEntityComputer() {
 	}
 
 	@Override
-	public void readFromNBT(NBTTagCompound nbt){
+	public void readFromNBT(NBTTagCompound nbt) {
 		super.readFromNBT(nbt);
 	}
-	
+
 	@Override
-	public void writeToNBT(NBTTagCompound nbt){
+	public void writeToNBT(NBTTagCompound nbt) {
 		super.writeToNBT(nbt);
 	}
-	
 }

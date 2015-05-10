@@ -16,13 +16,8 @@
 
 package com.minestellar.moon.blocks;
 
-import com.minestellar.core.MinestellarCore;
-import com.minestellar.core.blocks.CoreBlocks;
-import com.minestellar.moon.MinestellarMoon;
-import com.minestellar.moon.util.ConfigManagerMoon;
-import com.minestellar.moon.world.TeleporterMoon;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import java.util.Random;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBreakable;
 import net.minecraft.block.material.Material;
@@ -37,12 +32,17 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import java.util.Random;
+import com.minestellar.core.MinestellarCore;
+import com.minestellar.core.blocks.CoreBlocks;
+import com.minestellar.moon.MinestellarMoon;
+import com.minestellar.moon.util.ConfigManagerMoon;
+import com.minestellar.moon.world.TeleporterMoon;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockTeleporterMoon extends BlockBreakable {
-	public static final int[][] field_150001_a = new int[][] {
-		new int[0], {3, 1}, {2, 0}
-	};
+	public static final int[][] field_150001_a = new int[][] { new int[0], { 3, 1 }, { 2, 0 } };
 
 	private static final String __OBFID = "CL_00000284";
 
@@ -144,6 +144,7 @@ public class BlockTeleporterMoon extends BlockBreakable {
 		boolean flag3 = p_149646_1_.getBlock(p_149646_2_, p_149646_3_, p_149646_4_ + 1) == this && p_149646_1_.getBlock(p_149646_2_, p_149646_3_, p_149646_4_ + 2) != this;
 		boolean flag4 = flag || flag1 || i1 == 1;
 		boolean flag5 = flag2 || flag3 || i1 == 2;
+		
 		return flag4 && p_149646_5_ == 4 ? true : (flag4 && p_149646_5_ == 5 ? true : (flag5 && p_149646_5_ == 2 ? true : flag5 && p_149646_5_ == 3));
 	}
 

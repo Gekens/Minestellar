@@ -16,24 +16,24 @@
 
 package com.minestellar.api.core;
 
-import com.minestellar.core.MinestellarCore;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.util.ForgeDirection;
+
 import org.lwjgl.opengl.GL11;
+
+import com.minestellar.core.MinestellarCore;
 
 /**
  * Class for wire renders that handles different wire dimension
  */
 public class WireSpecialRender extends TileEntitySpecialRenderer {
 	private ResourceLocation blockTexture;
-
 	private int type;
 	private float pixel = 1F / 16F;
 	private float texturePixelX, texturePixelY, location, blockDimension, imageDimensionX, imageDimensionY;
-
 	private boolean drawInside;
 
 	public WireSpecialRender(int type, float imageDimension, float blockDimension, boolean drawInside) {
@@ -70,6 +70,7 @@ public class WireSpecialRender extends TileEntitySpecialRenderer {
 
 		GL11.glTranslated(translationX, translationY, translationZ);
 		GL11.glDisable(GL11.GL_LIGHTING);
+		
 		if (blockTexture != null) {
 			this.bindTexture(blockTexture);
 		} else {
@@ -107,11 +108,13 @@ public class WireSpecialRender extends TileEntitySpecialRenderer {
 		tessellator.startDrawingQuads();
 		{
 			GL11.glTranslatef(0.5F, 0.5F, 0.5F);
+			
 			if (direction.equals(ForgeDirection.SOUTH) || direction.equals(ForgeDirection.NORTH)) {
 				GL11.glRotatef(90, 1, 0, 0);
 			} else if (direction.equals(ForgeDirection.WEST) || direction.equals(ForgeDirection.EAST)) {
 				GL11.glRotatef(90, 0, 0, 1);
 			}
+			
 			GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
 
 			{
@@ -160,13 +163,13 @@ public class WireSpecialRender extends TileEntitySpecialRenderer {
 			tessellator.draw();
 
 			GL11.glTranslatef(0.5F, 0.5F, 0.5F);
-			
+
 			if (direction.equals(ForgeDirection.SOUTH) || direction.equals(ForgeDirection.NORTH)) {
 				GL11.glRotatef(-90, 1, 0, 0);
 			} else if (direction.equals(ForgeDirection.WEST) || direction.equals(ForgeDirection.EAST)) {
 				GL11.glRotatef(-90, 0, 0, 1);
 			}
-			
+
 			GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
 		}
 	}
@@ -180,6 +183,7 @@ public class WireSpecialRender extends TileEntitySpecialRenderer {
 		tessellator.startDrawingQuads();
 		{
 			GL11.glTranslatef(0.5F, 0.5F, 0.5F);
+			
 			if (direction.equals(ForgeDirection.UP)) {
 				// ROTATE
 			} else if (direction.equals(ForgeDirection.DOWN)) {
@@ -193,6 +197,7 @@ public class WireSpecialRender extends TileEntitySpecialRenderer {
 			} else if (direction.equals(ForgeDirection.EAST)) {
 				GL11.glRotatef(270, 0, 0, 1);
 			}
+			
 			GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
 
 			{
@@ -238,9 +243,11 @@ public class WireSpecialRender extends TileEntitySpecialRenderer {
 					tessellator.addVertexWithUV(location * pixel / 2, 1 - location * pixel / 2, 1 - location * pixel / 2, blockDimension * texturePixelX, blockDimension * texturePixelY);
 				}
 			}
+			
 			tessellator.draw();
 
 			GL11.glTranslatef(0.5F, 0.5F, 0.5F);
+			
 			if (direction.equals(ForgeDirection.UP)) {
 				// NOPE
 			} else if (direction.equals(ForgeDirection.DOWN)) {
@@ -254,6 +261,7 @@ public class WireSpecialRender extends TileEntitySpecialRenderer {
 			} else if (direction.equals(ForgeDirection.EAST)) {
 				GL11.glRotatef(-270, 0, 0, 1);
 			}
+			
 			GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
 		}
 	}
@@ -266,7 +274,7 @@ public class WireSpecialRender extends TileEntitySpecialRenderer {
 
 		tessellator.startDrawingQuads();
 		{
-			// Sides
+			/* Sides */
 			tessellator.addVertexWithUV(1 - location * pixel / 2, location * pixel / 2, 1 - location * pixel / 2, blockDimension * texturePixelX, blockDimension * texturePixelY);
 			tessellator.addVertexWithUV(1 - location * pixel / 2, 1 - location * pixel / 2, 1 - location * pixel / 2, blockDimension * texturePixelX, 0);
 			tessellator.addVertexWithUV(location * pixel / 2, 1 - location * pixel / 2, 1 - location * pixel / 2, 0, 0);
@@ -287,13 +295,13 @@ public class WireSpecialRender extends TileEntitySpecialRenderer {
 			tessellator.addVertexWithUV(location * pixel / 2, 1 - location * pixel / 2, location * pixel / 2, 0, 0);
 			tessellator.addVertexWithUV(location * pixel / 2, location * pixel / 2, location * pixel / 2, 0, blockDimension * texturePixelY);
 
-			// Top
+			/* Top */
 			tessellator.addVertexWithUV(1 - location * pixel / 2, 1 - location * pixel / 2, 1 - location * pixel / 2, blockDimension * texturePixelX, blockDimension * texturePixelY);
 			tessellator.addVertexWithUV(1 - location * pixel / 2, 1 - location * pixel / 2, location * pixel / 2, blockDimension * texturePixelX, 0);
 			tessellator.addVertexWithUV(location * pixel / 2, 1 - location * pixel / 2, location * pixel / 2, 0, 0);
 			tessellator.addVertexWithUV(location * pixel / 2, 1 - location * pixel / 2, 1 - location * pixel / 2, 0, blockDimension * texturePixelY);
 
-			// Bottom
+			/* Bottom */
 			tessellator.addVertexWithUV(location * pixel / 2, location * pixel / 2, 1 - location * pixel / 2, blockDimension * texturePixelX, blockDimension * texturePixelY);
 			tessellator.addVertexWithUV(location * pixel / 2, location * pixel / 2, location * pixel / 2, blockDimension * texturePixelX, 0);
 			tessellator.addVertexWithUV(1 - location * pixel / 2, location * pixel / 2, location * pixel / 2, 0, 0);
@@ -331,6 +339,7 @@ public class WireSpecialRender extends TileEntitySpecialRenderer {
 				tessellator.addVertexWithUV(location * pixel / 2, location * pixel / 2, 1 - location * pixel / 2, blockDimension * texturePixelX, blockDimension * texturePixelY);
 			}
 		}
+		
 		tessellator.draw();
 	}
 }

@@ -16,9 +16,6 @@
 
 package com.minestellar.core.items;
 
-import com.minestellar.core.MinestellarCore;
-import com.minestellar.core.blocks.CoreBlocks;
-import com.minestellar.core.proxy.ClientProxyCore;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -28,6 +25,10 @@ import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemBucket;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+
+import com.minestellar.core.MinestellarCore;
+import com.minestellar.core.blocks.CoreBlocks;
+import com.minestellar.core.proxy.ClientProxyCore;
 
 public class ItemBucketOxygen extends ItemBucket {
 	private Block isFull;

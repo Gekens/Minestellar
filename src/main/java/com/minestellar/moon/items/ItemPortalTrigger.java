@@ -16,12 +16,6 @@
 
 package com.minestellar.moon.items;
 
-import com.minestellar.core.MinestellarCore;
-import com.minestellar.core.proxy.ClientProxyCore;
-import com.minestellar.moon.MinestellarMoon;
-import com.minestellar.moon.blocks.MoonBlocks;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -30,6 +24,14 @@ import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+
+import com.minestellar.core.MinestellarCore;
+import com.minestellar.core.proxy.ClientProxyCore;
+import com.minestellar.moon.MinestellarMoon;
+import com.minestellar.moon.blocks.MoonBlocks;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemPortalTrigger extends Item {
 	public ItemPortalTrigger(String name) {

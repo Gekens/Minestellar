@@ -16,11 +16,13 @@
 
 package com.minestellar.core.render.item;
 
-import com.minestellar.core.blocks.tile.TileEntityCable;
 import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.IItemRenderer;
+
 import org.lwjgl.opengl.GL11;
+
+import com.minestellar.core.blocks.tile.TileEntityCable;
 
 public class CableItemRender implements IItemRenderer {
 	private int meta;

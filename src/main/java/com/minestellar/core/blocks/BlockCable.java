@@ -16,8 +16,8 @@
 
 package com.minestellar.core.blocks;
 
-import com.minestellar.core.MinestellarCore;
-import com.minestellar.core.blocks.tile.TileEntityCable;
+import java.util.List;
+
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -29,12 +29,11 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
-import java.util.List;
+import com.minestellar.core.MinestellarCore;
+import com.minestellar.core.blocks.tile.TileEntityCable;
 
 public class BlockCable extends BlockContainer {
-
 	float pixel = 1F / 16F;
-
 	public static IIcon[] cableBlockIcon;
 
 	protected BlockCable(String name) {
@@ -50,14 +49,12 @@ public class BlockCable extends BlockContainer {
 		TileEntityCable cable = (TileEntityCable) world.getTileEntity(x, y, z);
 
 		if (cable != null) {
-
 			float minX = 11 * pixel / 2 - (cable.connections[5] != null ? (11 * pixel / 2) : 0);
 			float minY = 11 * pixel / 2 - (cable.connections[1] != null ? (11 * pixel / 2) : 0);
 			float minZ = 11 * pixel / 2 - (cable.connections[2] != null ? (11 * pixel / 2) : 0);
 			float maxX = 1 - 11 * pixel / 2 + (cable.connections[3] != null ? (11 * pixel / 2) : 0);
 			float maxY = 1 - 11 * pixel / 2 + (cable.connections[0] != null ? (11 * pixel / 2) : 0);
 			float maxZ = 1 - 11 * pixel / 2 + (cable.connections[4] != null ? (11 * pixel / 2) : 0);
-
 			this.setBlockBounds(minX, minY, minZ, maxX, maxY, maxZ);
 		}
 
@@ -69,14 +66,12 @@ public class BlockCable extends BlockContainer {
 		TileEntityCable cable = (TileEntityCable) world.getTileEntity(x, y, z);
 
 		if (cable != null) {
-
 			float minX = 11 * pixel / 2 - (cable.connections[5] != null ? (11 * pixel / 2) : 0);
 			float minY = 11 * pixel / 2 - (cable.connections[1] != null ? (11 * pixel / 2) : 0);
 			float minZ = 11 * pixel / 2 - (cable.connections[2] != null ? (11 * pixel / 2) : 0);
 			float maxX = 1 - 11 * pixel / 2 + (cable.connections[3] != null ? (11 * pixel / 2) : 0);
 			float maxY = 1 - 11 * pixel / 2 + (cable.connections[0] != null ? (11 * pixel / 2) : 0);
 			float maxZ = 1 - 11 * pixel / 2 + (cable.connections[4] != null ? (11 * pixel / 2) : 0);
-
 			this.setBlockBounds(minX, minY, minZ, maxX, maxY, maxZ);
 		}
 

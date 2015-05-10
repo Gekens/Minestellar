@@ -16,9 +16,8 @@
 
 package com.minestellar.core.blocks;
 
-import com.minestellar.core.MinestellarCore;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import java.util.Random;
+
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.util.IIcon;
@@ -29,7 +28,10 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidStack;
 
-import java.util.Random;
+import com.minestellar.core.MinestellarCore;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockFluidOil extends BlockFluidClassic {
 	public static IIcon oilStillIcon;
@@ -51,13 +53,13 @@ public class BlockFluidOil extends BlockFluidClassic {
 	}
 
 	@Override
-	public boolean canDisplace(IBlockAccess world, int x, int y, int z){
-		return ! world.getBlock(x, y, z).getMaterial().isLiquid() && super.canDisplace(world, x, y, z);
+	public boolean canDisplace(IBlockAccess world, int x, int y, int z) {
+		return !world.getBlock(x, y, z).getMaterial().isLiquid() && super.canDisplace(world, x, y, z);
 	}
 
 	@Override
-	public boolean displaceIfPossible(World world, int x, int y, int z){
-		return ! world.getBlock(x, y, z).getMaterial().isLiquid() && super.displaceIfPossible(world, x, y, z);
+	public boolean displaceIfPossible(World world, int x, int y, int z) {
+		return !world.getBlock(x, y, z).getMaterial().isLiquid() && super.displaceIfPossible(world, x, y, z);
 	}
 
 	@Override

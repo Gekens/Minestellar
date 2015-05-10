@@ -16,10 +16,8 @@
 
 package com.minestellar.moon.world;
 
-import com.minestellar.api.world.IMinestellarWorldProvider;
-import com.minestellar.core.util.ConfigManagerCore;
-import com.minestellar.moon.MinestellarMoon;
-import cpw.mods.fml.client.FMLClientHandler;
+import java.util.Random;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.client.renderer.GLAllocation;
@@ -27,9 +25,14 @@ import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.IRenderHandler;
+
 import org.lwjgl.opengl.GL11;
 
-import java.util.Random;
+import com.minestellar.api.world.IMinestellarWorldProvider;
+import com.minestellar.core.util.ConfigManagerCore;
+import com.minestellar.moon.MinestellarMoon;
+
+import cpw.mods.fml.client.FMLClientHandler;
 
 public class SkyRendererMoon extends IRenderHandler {
 	private static final ResourceLocation sunTexture = new ResourceLocation("textures/environment/sun.png");

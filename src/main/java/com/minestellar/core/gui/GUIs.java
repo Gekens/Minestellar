@@ -17,7 +17,5 @@
 package com.minestellar.core.gui;
 
 public class GUIs {
-
 	public static final int COMPUTER_GUI = 0;
-	
 }

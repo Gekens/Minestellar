@@ -16,8 +16,9 @@
 
 package com.minestellar.moon.world;
 
-import com.minestellar.moon.util.ConfigManagerMoon;
 import net.minecraftforge.common.DimensionManager;
+
+import com.minestellar.moon.util.ConfigManagerMoon;
 
 public class DimensionMoon {
 	public static void init() {

@@ -22,7 +22,6 @@ public enum EnumCraterSize {
 	public final int MIN_SIZE;
 	public final int MAX_SIZE;
 	private final int PROBABILITY;
-
 	public static EnumCraterSize[] sizeArray;
 
 	private EnumCraterSize(int min, int max, int prob) {
@@ -40,6 +39,7 @@ public enum EnumCraterSize {
 
 		EnumCraterSize.sizeArray = new EnumCraterSize[amount];
 		int pointer = 0;
+		
 		for (final EnumCraterSize c : EnumCraterSize.values()) {
 			for (int i = 0; i < c.PROBABILITY; i++) {
 				EnumCraterSize.sizeArray[pointer] = c;

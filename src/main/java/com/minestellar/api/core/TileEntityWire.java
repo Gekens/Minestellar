@@ -75,7 +75,6 @@ public class TileEntityWire extends TileEntity implements IWire {
 		} else {
 			connections[5] = null;
 		}
-
 	}
 
 	/**
@@ -84,7 +83,6 @@ public class TileEntityWire extends TileEntity implements IWire {
 	@Override
 	public boolean onlyOneOpposite(ForgeDirection[] directions) {
 		ForgeDirection mainDirection = null;
-
 		boolean isOpposite = false;
 
 		for (int i = 0; i < directions.length; i++) {
@@ -115,11 +113,11 @@ public class TileEntityWire extends TileEntity implements IWire {
 		if ((firstDirection.equals(ForgeDirection.NORTH) && secondDirection.equals(ForgeDirection.SOUTH)) || (firstDirection.equals(ForgeDirection.SOUTH) && secondDirection.equals(ForgeDirection.NORTH))) {
 			return true;
 		}
-		
+
 		if ((firstDirection.equals(ForgeDirection.EAST) && secondDirection.equals(ForgeDirection.WEST)) || (firstDirection.equals(ForgeDirection.WEST) && secondDirection.equals(ForgeDirection.EAST))) {
 			return true;
 		}
-		
+
 		if ((firstDirection.equals(ForgeDirection.UP) && secondDirection.equals(ForgeDirection.DOWN)) || (firstDirection.equals(ForgeDirection.DOWN) && secondDirection.equals(ForgeDirection.UP))) {
 			return true;
 		}

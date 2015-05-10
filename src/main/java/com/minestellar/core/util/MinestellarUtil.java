@@ -16,19 +16,21 @@
 
 package com.minestellar.core.util;
 
-import com.minestellar.core.MinestellarCore;
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.registry.EntityRegistry;
-import cpw.mods.fml.common.registry.LanguageRegistry;
-import cpw.mods.fml.relauncher.Side;
+import java.util.Arrays;
+import java.util.List;
+
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.StatCollector;
 
-import java.util.Arrays;
-import java.util.List;
+import com.minestellar.core.MinestellarCore;
+
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.registry.EntityRegistry;
+import cpw.mods.fml.common.registry.LanguageRegistry;
+import cpw.mods.fml.relauncher.Side;
 
 public class MinestellarUtil {
 	public static int nextID = 0;
@@ -92,6 +94,7 @@ public class MinestellarUtil {
 	public static String translate(String key) {
 		String result = StatCollector.translateToLocal(key);
 		int comment = result.indexOf('#');
+		
 		return (comment > 0) ? result.substring(0, comment).trim() : result;
 	}
 
@@ -99,12 +102,14 @@ public class MinestellarUtil {
 		String translated = translate(key);
 		int comment = translated.indexOf('#');
 		translated = (comment > 0) ? translated.substring(0, comment).trim() : translated;
+		
 		return Arrays.asList(translated.split("\\$"));
 	}
 
 	public static String translateWithFormat(String key, Object... values) {
 		String result = StatCollector.translateToLocalFormatted(key, values);
 		int comment = result.indexOf('#');
+		
 		return (comment > 0) ? result.substring(0, comment).trim() : result;
 	}
 }

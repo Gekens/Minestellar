@@ -16,16 +16,18 @@
 
 package com.minestellar.core.util;
 
-import com.minestellar.core.Constants;
-import cpw.mods.fml.common.FMLLog;
+import java.io.File;
+
 import net.minecraftforge.common.config.Configuration;
+
 import org.apache.logging.log4j.Level;
 
-import java.io.File;
+import com.minestellar.core.Constants;
+
+import cpw.mods.fml.common.FMLLog;
 
 public class ConfigManagerCore {
 	public static boolean loaded;
-
 	static Configuration configuration;
 
 	public ConfigManagerCore(File file) {
@@ -41,7 +43,7 @@ public class ConfigManagerCore {
 	private void setDefaultValues() {
 		try {
 			ConfigManagerCore.configuration.load();
-			
+
 			ConfigManagerCore.idStarMultiplier = ConfigManagerCore.configuration.get(Constants.CONFIGURATION_GENERAL, "Star count multiplyer. Causes more lag when in space. (Default '1.0')", 1.0).getDouble(1.0);
 			ConfigManagerCore.idDayLength = ConfigManagerCore.configuration.get(Constants.CONFIGURATION_GENERAL, "Realistic Day Length. (Default 'true')", true).getBoolean(true);
 		} catch (final Exception e) {

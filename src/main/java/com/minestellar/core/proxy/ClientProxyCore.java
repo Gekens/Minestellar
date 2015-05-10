@@ -16,20 +16,8 @@
 
 package com.minestellar.core.proxy;
 
-import com.minestellar.api.core.WireSpecialRender;
-import com.minestellar.core.blocks.CoreBlocks;
-import com.minestellar.core.blocks.tile.*;
-import com.minestellar.core.particles.EntityCoreOilDripFX;
-import com.minestellar.core.render.item.*;
-import com.minestellar.core.render.tile.TileEntityRenderGasSink;
-import com.minestellar.core.render.tile.TileEntityRenderOxygenCollector;
-import com.minestellar.core.render.tile.TileEntityRenderSolarPanel;
-import cpw.mods.fml.client.FMLClientHandler;
-import cpw.mods.fml.client.registry.ClientRegistry;
-import cpw.mods.fml.client.registry.RenderingRegistry;
-import cpw.mods.fml.common.event.FMLInitializationEvent;
-import cpw.mods.fml.common.event.FMLPostInitializationEvent;
-import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import java.util.Objects;
+
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.EntityFX;
@@ -40,12 +28,33 @@ import net.minecraft.util.EnumChatFormatting;
 import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.common.util.EnumHelper;
 
-import java.util.Objects;
+import com.minestellar.api.core.WireSpecialRender;
+import com.minestellar.core.blocks.CoreBlocks;
+import com.minestellar.core.blocks.tile.TileEntityCable;
+import com.minestellar.core.blocks.tile.TileEntityGasSink;
+import com.minestellar.core.blocks.tile.TileEntityOxygenCollector;
+import com.minestellar.core.blocks.tile.TileEntityPipe;
+import com.minestellar.core.blocks.tile.TileEntitySolarGenerator;
+import com.minestellar.core.particles.EntityCoreOilDripFX;
+import com.minestellar.core.render.item.CableItemRender;
+import com.minestellar.core.render.item.GasSinkItemRender;
+import com.minestellar.core.render.item.OxygenCollectorItemRender;
+import com.minestellar.core.render.item.PipeItemRender;
+import com.minestellar.core.render.item.SolarGeneratorItemRender;
+import com.minestellar.core.render.tile.TileEntityRenderGasSink;
+import com.minestellar.core.render.tile.TileEntityRenderOxygenCollector;
+import com.minestellar.core.render.tile.TileEntityRenderSolarPanel;
+
+import cpw.mods.fml.client.FMLClientHandler;
+import cpw.mods.fml.client.registry.ClientRegistry;
+import cpw.mods.fml.client.registry.RenderingRegistry;
+import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLPostInitializationEvent;
+import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 
 public class ClientProxyCore extends CommonProxyCore {
 	private static Minecraft mc = FMLClientHandler.instance().getClient();
 	public static EnumRarity stellarItem = EnumHelper.addRarity("MinestellarRarity", EnumChatFormatting.RED, "MinestellarCore");
-
 	private static int renderIndexCarbonArmor;
 
 	@Override
@@ -103,10 +112,9 @@ public class ClientProxyCore extends CommonProxyCore {
 
 		mc.effectRenderer.addEffect(entityfx);
 	}
-	
+
 	@Override
-	public EntityPlayer getClientPlayer(){
+	public EntityPlayer getClientPlayer() {
 		return Minecraft.getMinecraft().thePlayer;
 	}
-
 }

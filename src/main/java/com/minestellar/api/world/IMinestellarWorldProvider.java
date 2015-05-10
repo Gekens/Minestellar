@@ -16,6 +16,8 @@
 
 package com.minestellar.api.world;
 
+import com.minestellar.api.vector.Vector3;
+
 public interface IMinestellarWorldProvider {
 	float getGravity();
 
@@ -28,4 +30,8 @@ public interface IMinestellarWorldProvider {
 	float getHeatLevelsNight();
 
 	float getAirPressure();
+
+	Vector3 getSkyColor();
+
+	Vector3 getFogColor();
 }

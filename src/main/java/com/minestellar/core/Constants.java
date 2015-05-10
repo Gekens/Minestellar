@@ -21,11 +21,11 @@ public class Constants {
 	public static final String MINOR_VERSION = "0";
 	public static final String REVISION_VERSION = "1";
 	public static final String VERSION = (MAJOR_VERSION) + "." + (MINOR_VERSION) + "." + (REVISION_VERSION);
-	
+
 	public static final String CONFIGURATION_GENERAL = "general";
 	public static final String CONFIGURATION_BIOMES = "biomes";
 	public static final String CONFIGURATION_DIMENSIONS = "dimensions";
-	
+
 	public static boolean runTimer = true;
 	public static final String fileName = "state.txt";
 }

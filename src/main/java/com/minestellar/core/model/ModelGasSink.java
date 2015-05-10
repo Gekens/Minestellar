@@ -21,8 +21,7 @@ import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 
 /**
- * GasSink - Gekens
- * Created using Tabula 4.1.1
+ * GasSink - Gekens Created using Tabula 4.1.1
  */
 public class ModelGasSink extends ModelBase {
 	public ModelRenderer top;

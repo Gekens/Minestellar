@@ -14,27 +14,23 @@
  * this program; if not, see <http://www.gnu.org/licenses>.
  */
 
-package com.minestellar.core.blocks;
+package com.minestellar.venus.world;
 
-import com.minestellar.core.MinestellarCore;
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
-import net.minecraft.creativetab.CreativeTabs;
+import net.minecraftforge.common.DimensionManager;
 
-public class BlockTeleportCore extends Block {
-	protected BlockTeleportCore(String unlocalizedName) {
-		super(Material.iron);
-		this.setBlockName(unlocalizedName);
-		this.setBlockTextureName(MinestellarCore.TEXTURE_PREFIX + unlocalizedName);
-		this.setHardness(3.0F);
-		this.setResistance(6.0F);
-		this.setLightLevel(0.75F);
-		this.setHarvestLevel("pickaxe", 3);
-		this.setStepSound(soundTypeMetal);
+import com.minestellar.venus.util.ConfigManagerVenus;
+
+public class DimensionVenus {
+	public static void init() {
+		registerWorldProvider();
+		registerDimensions();
 	}
 
-	@Override
-	public CreativeTabs getCreativeTabToDisplayOn() {
-		return MinestellarCore.stellarBlocksTab;
+	public static void registerDimensions() {
+		DimensionManager.registerDimension(ConfigManagerVenus.idDimensionVenus, ConfigManagerVenus.idDimensionVenus);
+	}
+
+	public static void registerWorldProvider() {
+		DimensionManager.registerProviderType(ConfigManagerVenus.idDimensionVenus, WorldProviderVenus.class, true);
 	}
 }

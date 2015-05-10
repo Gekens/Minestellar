@@ -16,10 +16,8 @@
 
 package com.minestellar.core.items;
 
-import com.minestellar.core.MinestellarCore;
-import com.minestellar.core.proxy.ClientProxyCore;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import java.util.List;
+
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.EnumRarity;
@@ -27,37 +25,40 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 
-import java.util.List;
+import com.minestellar.core.MinestellarCore;
+import com.minestellar.core.proxy.ClientProxyCore;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemBasicCore extends Item {
-	private static String[] names = {
-			"ingotCopper", // 0
-			"ingotTin", // 1
-			"ingotSteel", // 2
-			"ingotLithium", // 3
-			"ingotSilicon", // 4
-			"ingotAluminum", // 5
-			"ingotTitanium", // 6
-			"ingotCarbon", // 7
+	private static String[] names = { "ingotCopper", // 0
+	"ingotTin", // 1
+	"ingotSteel", // 2
+	"ingotLithium", // 3
+	"ingotSilicon", // 4
+	"ingotAluminum", // 5
+	"ingotTitanium", // 6
+	"ingotCarbon", // 7
 
-			"dustSteel", // 8
+	"dustSteel", // 8
 
-			"compressedCopper", // 9
-			"compressedTin", // 10
-			"compressedSteel", // 11
-			"compressedLithium", // 12
-			"compressedSilicon", // 13
-			"compressedAluminum", // 14
-			"compressedTitanium", // 15
-			"compressedCarbon", // 16
+	"compressedCopper", // 9
+	"compressedTin", // 10
+	"compressedSteel", // 11
+	"compressedLithium", // 12
+	"compressedSilicon", // 13
+	"compressedAluminum", // 14
+	"compressedTitanium", // 15
+	"compressedCarbon", // 16
 
-			"electricMotor", // 17
-			"electricPump", // 18
-			"filterAir", // 19
-			"filterOil", // 20
-			"nozzleSteel", // 21
-			"pipeSteel", // 22
-			"pipeMagnetic", // 23
+	"electricMotor", // 17
+	"electricPump", // 18
+	"filterAir", // 19
+	"filterOil", // 20
+	"nozzleSteel", // 21
+	"pipeSteel", // 22
+	"pipeMagnetic", // 23
 	};
 
 	protected IIcon[] icons = new IIcon[ItemBasicCore.names.length];
@@ -99,9 +100,7 @@ public class ItemBasicCore extends Item {
 		return super.getIconFromDamage(damage);
 	}
 
-	@SuppressWarnings({
-			"unchecked", "rawtypes"
-	})
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public void getSubItems(Item par1, CreativeTabs par2CreativeTabs, List par3List) {
 		for (int i = 0; i < ItemBasicCore.names.length; i++) {

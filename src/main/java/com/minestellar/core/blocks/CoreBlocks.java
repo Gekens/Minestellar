@@ -16,27 +16,29 @@
 
 package com.minestellar.core.blocks;
 
-import com.minestellar.core.MinestellarCore;
-import com.minestellar.core.blocks.fluid.FluidBlockHydrogen;
-import com.minestellar.core.blocks.fluid.FluidBlockNitrogen;
-import com.minestellar.core.blocks.fluid.FluidBlockOil;
-import com.minestellar.core.blocks.fluid.FluidBlockOxygen;
-import com.minestellar.core.blocks.items.ItemBlockCable;
-import com.minestellar.core.blocks.items.ItemBlockDecorCore;
-import com.minestellar.core.blocks.items.ItemBlockOreCore;
-import com.minestellar.core.blocks.items.ItemBlockPipe;
-import com.minestellar.core.blocks.machines.Computer;
-import com.minestellar.core.blocks.machines.GasSinkMachine;
-import com.minestellar.core.blocks.machines.OxygenCollectorMachine;
-import com.minestellar.core.blocks.machines.SolarGenerator;
-import com.minestellar.core.util.ItemBlockUtil;
-import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.oredict.OreDictionary;
+
+import com.minestellar.core.MinestellarCore;
+import com.minestellar.core.blocks.fluid.FluidBlockHydrogen;
+import com.minestellar.core.blocks.fluid.FluidBlockNitrogen;
+import com.minestellar.core.blocks.fluid.FluidBlockOil;
+import com.minestellar.core.blocks.fluid.FluidBlockOxygen;
+import com.minestellar.core.blocks.items.ItemBlockCable;
+import com.minestellar.core.blocks.items.ItemBlockDecoration;
+import com.minestellar.core.blocks.items.ItemBlockOre;
+import com.minestellar.core.blocks.items.ItemBlockPipe;
+import com.minestellar.core.blocks.machines.Computer;
+import com.minestellar.core.blocks.machines.GasSinkMachine;
+import com.minestellar.core.blocks.machines.OxygenCollectorMachine;
+import com.minestellar.core.blocks.machines.SolarGenerator;
+import com.minestellar.core.util.ItemBlockUtil;
+
+import cpw.mods.fml.common.registry.GameRegistry;
 
 public class CoreBlocks {
 	public static void init() {
@@ -56,9 +58,9 @@ public class CoreBlocks {
 
 	public static Block cableBlock;
 	public static Block pipeBlock;
-	
+
 	public static Block computer;
-	
+
 	public static Block radioWall;
 	public static Block radioHead;
 
@@ -75,10 +77,10 @@ public class CoreBlocks {
 	public static Fluid nitrogenFluid;
 
 	private static void initBlocks() {
-		CoreBlocks.coreOreBlocks = new BlockOreCore("core_ore");
-		CoreBlocks.coreDecorBlocks = new BlockDecorCore("core_decor");
-		CoreBlocks.teleportBlock = new BlockTeleportCore("teleporter");
-		
+		CoreBlocks.coreOreBlocks = new BlockOre("core_ore");
+		CoreBlocks.coreDecorBlocks = new BlockDecoration("core_decor");
+		CoreBlocks.teleportBlock = new BlockTeleporter("teleporter");
+
 		CoreBlocks.radioWall = new BlockRadioWall("radio_wall");
 		CoreBlocks.radioHead = new BlockRadioHead("radio_head");
 
@@ -90,7 +92,7 @@ public class CoreBlocks {
 		CoreBlocks.solarGenerator = new SolarGenerator("solar_generator");
 
 		CoreBlocks.computer = new Computer("computer");
-		
+
 		CoreBlocks.oilFluid = new FluidBlockOil("oil").setBlock(CoreBlocks.oilFluidBlock);
 		FluidRegistry.registerFluid(CoreBlocks.oilFluid);
 		CoreBlocks.oilFluidBlock = new BlockFluidOil("oil", CoreBlocks.oilFluid, Material.water);
@@ -109,13 +111,13 @@ public class CoreBlocks {
 	}
 
 	private static void registerBlocks() {
-		MinestellarCore.registerBlock(CoreBlocks.coreOreBlocks, ItemBlockOreCore.class);
-		MinestellarCore.registerBlock(CoreBlocks.coreDecorBlocks, ItemBlockDecorCore.class);
+		MinestellarCore.registerBlock(CoreBlocks.coreOreBlocks, ItemBlockOre.class);
+		MinestellarCore.registerBlock(CoreBlocks.coreDecorBlocks, ItemBlockDecoration.class);
 		MinestellarCore.registerBlock(CoreBlocks.teleportBlock, ItemBlockUtil.class);
 
 		GameRegistry.registerBlock(CoreBlocks.radioWall, "radio_wall");
 		GameRegistry.registerBlock(CoreBlocks.radioHead, "radio_head");
-		
+
 		MinestellarCore.registerBlock(CoreBlocks.cableBlock, ItemBlockCable.class);
 		MinestellarCore.registerBlock(CoreBlocks.pipeBlock, ItemBlockPipe.class);
 

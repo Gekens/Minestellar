@@ -16,25 +16,27 @@
 
 package com.minestellar.core.proxy;
 
-import com.minestellar.core.Constants;
-import com.minestellar.core.handler.FileHandler;
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.event.FMLInitializationEvent;
-import cpw.mods.fml.common.event.FMLPostInitializationEvent;
-import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingJumpEvent;
 import net.minecraftforge.event.entity.player.PlayerPickupXpEvent;
 
+import com.minestellar.core.Constants;
+import com.minestellar.core.handler.FileHandler;
+
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLPostInitializationEvent;
+import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+
 public abstract class CommonProxyCore {
 	public void preInit(FMLPreInitializationEvent event) {
 	}
 
 	public void init(FMLInitializationEvent event) {
-		FMLCommonHandler.instance().bus().register(new PlayerInteractor()); 
+		FMLCommonHandler.instance().bus().register(new PlayerInteractor());
 		MinecraftForge.EVENT_BUS.register(new PlayerInteractor()); // This is for debug, will be deleted when it will work
 	}
 
@@ -54,25 +56,25 @@ public abstract class CommonProxyCore {
 	public void onUpdate() {
 	}
 
-	public EntityPlayer getClientPlayer(){
+	public EntityPlayer getClientPlayer() {
 		return null;
 	}
 
-	public class PlayerInteractor{
-		@SubscribeEvent
-		public void onLogin(LivingJumpEvent event){ //Log-in isn't working. I think it doesn't have enough time. PlayerEvent.PlayerLoggedInEvent
-			if(event.entity instanceof EntityPlayerMP){
-				if(FileHandler.readFromFile(Constants.fileName).equals("false")){
+	public class PlayerInteractor {
+		/*@SubscribeEvent
+		public void onLogin(LivingJumpEvent event) { // Log-in isn't working. I think it doesn't have enough time. PlayerEvent.PlayerLoggedInEvent
+			if (event.entity instanceof EntityPlayerMP) {
+				if (FileHandler.readFromFile(Constants.fileName).equals("false")) {
 					Constants.runTimer = true;
 				}
-				FileHandler.writeToFile(Constants.fileName, Constants.runTimer ?  "true" : "false");
+				
+				FileHandler.writeToFile(Constants.fileName, Constants.runTimer ? "true" : "false");
 			}
 		}
-		
-		@SubscribeEvent
-		public void onLogout(PlayerPickupXpEvent event){ //Log-out isn't working. I think it logs out too soon. PlayerEvent.PlayerLoggedOutEvent
-			Constants.runTimer = FileHandler.readFromFile(Constants.fileName).equals("true");
-		}
-	}
 
+		@SubscribeEvent
+		public void onLogout(PlayerPickupXpEvent event) { // Log-out isn't working. I think it logs out too soon. PlayerEvent.PlayerLoggedOutEvent
+			Constants.runTimer = FileHandler.readFromFile(Constants.fileName).equals("true");
+		}*/
+	}
 }

@@ -16,16 +16,16 @@
 
 package com.minestellar.api.world.gen;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
+
 import net.minecraft.world.ChunkPosition;
 import net.minecraft.world.biome.BiomeCache;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.biome.WorldChunkManager;
 import net.minecraft.world.gen.layer.IntCache;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
 
 public abstract class WorldChunkManagerMinestellar extends WorldChunkManager {
 	private final BiomeCache biomeCache;
@@ -54,6 +54,7 @@ public abstract class WorldChunkManagerMinestellar extends WorldChunkManager {
 		}
 
 		Arrays.fill(par1ArrayOfFloat, 0, par4 * par5, 0.0F);
+		
 		return par1ArrayOfFloat;
 	}
 
@@ -93,6 +94,7 @@ public abstract class WorldChunkManagerMinestellar extends WorldChunkManager {
 		if (par6 && par4 == 16 && par5 == 16 && (par2 & 15) == 0 && (par3 & 15) == 0) {
 			final BiomeGenBase[] var9 = this.biomeCache.getCachedBiomes(par2, par3);
 			System.arraycopy(var9, 0, par1ArrayOfBiomeGenBase, 0, par4 * par5);
+			
 			return par1ArrayOfBiomeGenBase;
 		} else {
 			for (int var8 = 0; var8 < par4 * par5; ++var8) {
@@ -116,7 +118,6 @@ public abstract class WorldChunkManagerMinestellar extends WorldChunkManager {
 		final int var7 = par2 - par3 >> 2;
 		final int var8 = par1 + par3 >> 2;
 		final int var10 = var8 - var6 + 1;
-
 		final int var16 = var6 + 0 % var10 << 2;
 		final int var17 = var7 + 0 / var10 << 2;
 

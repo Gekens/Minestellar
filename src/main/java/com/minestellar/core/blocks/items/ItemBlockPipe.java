@@ -16,18 +16,18 @@
 
 package com.minestellar.core.blocks.items;
 
-import com.minestellar.core.proxy.ClientProxyCore;
 import net.minecraft.block.Block;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 
-public class ItemBlockPipe extends ItemBlock {
+import com.minestellar.core.proxy.ClientProxyCore;
 
-	public static String[] types = new String[] {
-			"light_pipe", 
-			"medium_pipe", 
-			"heavy_pipe"
+public class ItemBlockPipe extends ItemBlock {
+	public static String[] types = new String[] { 
+		"light_pipe", 
+		"medium_pipe", 
+		"heavy_pipe" 
 	};
 
 	public ItemBlockPipe(Block par1) {
@@ -48,11 +48,11 @@ public class ItemBlockPipe extends ItemBlock {
 	@Override
 	public String getUnlocalizedName(ItemStack itemstack) {
 		int meta = itemstack.getItemDamage();
-		
+
 		if (meta < 0 || meta >= ItemBlockPipe.types.length) {
 			meta = 0;
 		}
-		
+
 		return super.getUnlocalizedName() + "." + ItemBlockPipe.types[meta];
 	}
 }

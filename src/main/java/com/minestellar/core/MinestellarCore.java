@@ -16,8 +16,23 @@
 
 package com.minestellar.core;
 
+import java.io.File;
+import java.util.HashMap;
+
+import net.minecraft.block.Block;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemStack;
+
 import com.minestellar.core.blocks.CoreBlocks;
-import com.minestellar.core.blocks.tile.*;
+import com.minestellar.core.blocks.tile.TileEntityCable;
+import com.minestellar.core.blocks.tile.TileEntityComputer;
+import com.minestellar.core.blocks.tile.TileEntityGasSink;
+import com.minestellar.core.blocks.tile.TileEntityOxygenCollector;
+import com.minestellar.core.blocks.tile.TileEntityPipe;
+import com.minestellar.core.blocks.tile.TileEntityRadioHead;
+import com.minestellar.core.blocks.tile.TileEntitySolarGenerator;
 import com.minestellar.core.handler.GuiHandler;
 import com.minestellar.core.items.CoreItems;
 import com.minestellar.core.network.NetworkHandler;
@@ -27,6 +42,7 @@ import com.minestellar.core.util.ConfigManagerCore;
 import com.minestellar.core.util.MinestellarCreativeTab;
 import com.minestellar.core.util.MinestellarLog;
 import com.minestellar.core.world.gen.OverworldGenerator;
+
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
@@ -36,14 +52,6 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
-import net.minecraft.block.Block;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
-import net.minecraft.item.ItemStack;
-
-import java.io.File;
-import java.util.HashMap;
 
 @Mod(modid = MinestellarCore.MOD_ID, name = MinestellarCore.MOD_NAME, version = Constants.VERSION)
 public class MinestellarCore {
@@ -75,7 +83,7 @@ public class MinestellarCore {
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
-        long currTime = System.currentTimeMillis();
+		long currTime = System.currentTimeMillis();
 		new ConfigManagerCore(new File(event.getModConfigurationDirectory(), "Minestellar/core.cfg"));
 
 		CoreBlocks.init();
@@ -83,14 +91,14 @@ public class MinestellarCore {
 
 		MinestellarCore.proxy.preInit(event);
 
-		MinestellarLog.info("PreInitialization completed in " + (System.currentTimeMillis()-currTime) + " millis.");
+		MinestellarLog.info("PreInitialization completed in " + (System.currentTimeMillis() - currTime) + " millis.");
 	}
 
 	@EventHandler
 	public void init(FMLInitializationEvent event) {
-        long currTime = System.currentTimeMillis();
+		long currTime = System.currentTimeMillis();
 		NetworkHandler.init();
-		
+
 		MinestellarCore.stellarBlocksTab = new MinestellarCreativeTab(CreativeTabs.getNextID(), "MinestellarBlocks", Item.getItemFromBlock(CoreBlocks.coreOreBlocks), 0);
 		MinestellarCore.stellarItemsTab = new MinestellarCreativeTab(CreativeTabs.getNextID(), "MinestellarItems", CoreItems.coreBasicItems, 0);
 
@@ -111,16 +119,16 @@ public class MinestellarCore {
 		this.registerOtherEntities();
 
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
-		
+
 		MinestellarCore.proxy.init(event);
-        MinestellarLog.info("Initialization completed in " + (System.currentTimeMillis() - currTime) + " millis.");
+		MinestellarLog.info("Initialization completed in " + (System.currentTimeMillis() - currTime) + " millis.");
 	}
 
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event) {
-        long currTime = System.currentTimeMillis();
-        MinestellarCore.proxy.postInit(event);
-        MinestellarLog.info("PostInitialization completed in " + (System.currentTimeMillis() - currTime) + " millis.");
+		long currTime = System.currentTimeMillis();
+		MinestellarCore.proxy.postInit(event);
+		MinestellarLog.info("PostInitialization completed in " + (System.currentTimeMillis() - currTime) + " millis.");
 	}
 
 	private void registerTileEntities() {
@@ -138,5 +146,5 @@ public class MinestellarCore {
 
 	private void registerOtherEntities() {
 	}
-	
+
 }
