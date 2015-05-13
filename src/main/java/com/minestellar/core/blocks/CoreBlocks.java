@@ -16,13 +16,6 @@
 
 package com.minestellar.core.blocks;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidRegistry;
-import net.minecraftforge.oredict.OreDictionary;
-
 import com.minestellar.core.MinestellarCore;
 import com.minestellar.core.blocks.fluid.FluidBlockHydrogen;
 import com.minestellar.core.blocks.fluid.FluidBlockNitrogen;
@@ -37,8 +30,13 @@ import com.minestellar.core.blocks.machines.GasSinkMachine;
 import com.minestellar.core.blocks.machines.OxygenCollectorMachine;
 import com.minestellar.core.blocks.machines.SolarGenerator;
 import com.minestellar.core.util.ItemBlockUtil;
-
 import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.oredict.OreDictionary;
 
 public class CoreBlocks {
 	public static void init() {
@@ -61,8 +59,7 @@ public class CoreBlocks {
 
 	public static Block computer;
 
-	public static Block radioWall;
-	public static Block radioHead;
+	public static Block radioAntenna;
 
 	public static Block oilFluidBlock;
 	public static Fluid oilFluid;
@@ -81,8 +78,7 @@ public class CoreBlocks {
 		CoreBlocks.coreDecorBlocks = new BlockDecoration("core_decor");
 		CoreBlocks.teleportBlock = new BlockTeleporter("teleporter");
 
-		CoreBlocks.radioWall = new BlockRadioWall("radio_wall");
-		CoreBlocks.radioHead = new BlockRadioHead("radio_head");
+		CoreBlocks.radioAntenna = new BlockRadioAntenna("radio_antenna");
 
 		CoreBlocks.cableBlock = new BlockCable("core_cable");
 		CoreBlocks.pipeBlock = new BlockPipe("core_pipe");
@@ -115,8 +111,7 @@ public class CoreBlocks {
 		MinestellarCore.registerBlock(CoreBlocks.coreDecorBlocks, ItemBlockDecoration.class);
 		MinestellarCore.registerBlock(CoreBlocks.teleportBlock, ItemBlockUtil.class);
 
-		GameRegistry.registerBlock(CoreBlocks.radioWall, "radio_wall");
-		GameRegistry.registerBlock(CoreBlocks.radioHead, "radio_head");
+		GameRegistry.registerBlock(CoreBlocks.radioAntenna, "radio_antenna");
 
 		MinestellarCore.registerBlock(CoreBlocks.cableBlock, ItemBlockCable.class);
 		MinestellarCore.registerBlock(CoreBlocks.pipeBlock, ItemBlockPipe.class);

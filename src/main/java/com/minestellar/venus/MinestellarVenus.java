@@ -1,13 +1,6 @@
 package com.minestellar.venus;
 
-import java.io.File;
-import java.util.HashMap;
-
-import net.minecraft.block.Block;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
-import net.minecraft.item.ItemStack;
-
+import com.google.common.base.Stopwatch;
 import com.minestellar.core.Constants;
 import com.minestellar.core.util.MinestellarLog;
 import com.minestellar.core.util.MinestellarUtil;
@@ -20,7 +13,6 @@ import com.minestellar.venus.proxy.CommonProxyVenus;
 import com.minestellar.venus.util.ConfigManagerVenus;
 import com.minestellar.venus.util.RecipeManagerVenus;
 import com.minestellar.venus.world.DimensionVenus;
-
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.SidedProxy;
@@ -28,6 +20,14 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraft.block.Block;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemStack;
+
+import java.io.File;
+import java.util.HashMap;
+import java.util.concurrent.TimeUnit;
 
 @Mod(modid = MinestellarVenus.MODID, name = MinestellarVenus.MODNAME, version = Constants.VERSION)
 public class MinestellarVenus {
@@ -53,7 +53,8 @@ public class MinestellarVenus {
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
-		long currTime = System.currentTimeMillis();
+        Stopwatch stopwatch = Stopwatch.createStarted();
+
 		new ConfigManagerVenus(new File(event.getModConfigurationDirectory(), "Minestellar/venus.cfg"));
 
 		VenusBlocks.init();
@@ -61,28 +62,33 @@ public class MinestellarVenus {
 
 		DimensionVenus.init();
 
-		this.proxy.preInit(event);
-		MinestellarLog.info("Initialitazion completed in " + (System.currentTimeMillis() - currTime) + " millis.");
+		proxy.preInit(event);
+
+        MinestellarLog.info("PreInitialization (Venus) Completed in " + stopwatch.elapsed( TimeUnit.MILLISECONDS ) + " ms.");
 	}
 
 	@EventHandler
 	public void init(FMLInitializationEvent event) {
-		long currTime = System.currentTimeMillis();
+        Stopwatch stopwatch = Stopwatch.createStarted();
+
 		this.registerTileEntities();
 		this.registerCreatures();
 		this.registerOtherEntities();
 
-		this.proxy.init(event);
-		MinestellarLog.info("Initialitazion completed in " + (System.currentTimeMillis() - currTime) + " millis.");
+		proxy.init(event);
+
+        MinestellarLog.info("Initialization (Venus) Completed in " + stopwatch.elapsed( TimeUnit.MILLISECONDS ) + " ms.");
 	}
 
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event) {
-		long currTime = System.currentTimeMillis();
+        Stopwatch stopwatch = Stopwatch.createStarted();
+
 		RecipeManagerVenus.loadRecipes();
 
-		this.proxy.postInit(event);
-		MinestellarLog.info("Initialitazion completed in " + (System.currentTimeMillis() - currTime) + " millis.");
+		proxy.postInit(event);
+
+        MinestellarLog.info("PostInitialization (Venus) Completed in " + stopwatch.elapsed( TimeUnit.MILLISECONDS ) + " ms.");
 	}
 
 	private void registerTileEntities() {

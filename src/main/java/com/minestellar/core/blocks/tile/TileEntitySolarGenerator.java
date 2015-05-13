@@ -16,6 +16,7 @@
 
 package com.minestellar.core.blocks.tile;
 
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.EnumSkyBlock;
@@ -28,97 +29,108 @@ import cpw.mods.fml.common.Optional.Method;
 
 @Optional.Interface(iface = "cofh.api.energy.IEnergyHandler", modid = "CoFHCore")
 public class TileEntitySolarGenerator extends TileEntity implements IEnergyHandler {
-	private EnergyStorage storage;
-	public boolean Light = false;
+    private EnergyStorage storage;
+    public boolean Light = false;
 
-	public TileEntitySolarGenerator() {
-		storage = new EnergyStorage(150000);
-	}
+    public TileEntitySolarGenerator() {
+        storage = new EnergyStorage(150000);
+    }
 
-	@Override
-	public void updateEntity() {
-		/*
-		 * Check if this helps.
-		 * 
-		 * super.updateEntity();
-		 * 
-		 * if(!worldObj.isRemote) { if(worldObj.isDaytime() && ((!worldObj.isRaining() && !worldObj.isThundering())) && !worldObj.provider.hasNoSky &&
-		 * worldObj.canBlockSeeTheSky(xCoord, yCoord+1, zCoord)) { Light = true; } else { Light - false; }
-		 * 
-		 * if(canWork()) { storage.setEnergyStored(stored += this.getSolarLight(this.worldObj, this.xCoord, this.yCoord, this.zCoord)); } }
-		 */
-		
-		if (!this.worldObj.provider.hasNoSky) {
-			int stored = storage.getEnergyStored();
-			// MinestellarLog.info("Solar Light: " + this.getSolarLight(this.worldObj, this.xCoord, this.yCoord, this.zCoord));
-			storage.setEnergyStored(stored += this.getSolarLight(this.worldObj, this.xCoord, this.yCoord, this.zCoord));
-		}
-	}
+    @Override
+    public void updateEntity() {
+        super.updateEntity();
+        int stored = storage.getEnergyStored();
+        if(!worldObj.isRemote) {
+            Light = worldObj.isDaytime() && ((! worldObj.isRaining() && ! worldObj.isThundering())) && ! worldObj.provider.hasNoSky &&
+                    worldObj.canBlockSeeTheSky(xCoord, yCoord + 1, zCoord);
+            if(canWork()) {
+                storage.setEnergyStored(stored += this.getSolarLight(this.worldObj, this.xCoord, this.yCoord, this.zCoord));
+            }
+        }
 
-	/**
-	 * This checks if the energy that is store is not greater than the max amount and if their is light in the sky
-	 */
-	public boolean canWork() {
-		return storage.getEnergyStored() < storage.getMaxEnergyStored() && Light;
-	}
+        //		if (!this.worldObj.provider.hasNoSky) {
+        //
+        //			// MinestellarLog.info("Solar Light: " + this.getSolarLight(this.worldObj, this.xCoord, this.yCoord, this.zCoord));
+        //			storage.setEnergyStored(stored += this.getSolarLight(this.worldObj, this.xCoord, this.yCoord, this.zCoord));
+        //		}
+    }
 
-	/**
-	 * Gets the solar light of the given block
-	 */
-	public int getSolarLight(World world, int x, int y, int z) {
-		int i = world.getBlockMetadata(x, y, z);
-		int j = world.getSavedLightValue(EnumSkyBlock.Sky, x, y, z) - world.skylightSubtracted;
-		float f = world.getCelestialAngleRadians(1.0F);
-		
-		if (f < 3.141593F) {
-			f += (0.0F - f) * 0.2F;
-		} else {
-			f += (6.283186F - f) * 0.2F;
-		}
-		
-		j = Math.round(j * MathHelper.cos(f));
-		
-		if (j < 0) {
-			j = 0;
-		}
-		
-		if (j > 15) {
-			j = 15;
-		}
-		
-		return j;
-	}
+    /**
+     * This checks if the energy that is store is not greater than the max amount and if their is light in the sky
+     */
+    public boolean canWork() {
+        return storage.getEnergyStored() < storage.getMaxEnergyStored() && Light;
+    }
 
-	/**
-	 * RF IMPLEMENTATION
-	 */
-	@Method(modid = "CoFHCore")
-	@Override
-	public boolean canConnectEnergy(ForgeDirection direction) {
-		return true;
-	}
+    /**
+     * Gets the solar light of the given block
+     */
+    public int getSolarLight(World world, int x, int y, int z) {
+        int i = world.getBlockMetadata(x, y, z);
+        int j = world.getSavedLightValue(EnumSkyBlock.Sky, x, y, z) - world.skylightSubtracted;
+        float f = world.getCelestialAngleRadians(1.0F);
 
-	@Method(modid = "CoFHCore")
-	@Override
-	public int extractEnergy(ForgeDirection direction, int maxExtract, boolean simulate) {
-		return storage.extractEnergy(storage.getMaxExtract(), simulate);
-	}
+        if (f < 3.141593F) {
+            f += (0.0F - f) * 0.2F;
+        } else {
+            f += (6.283186F - f) * 0.2F;
+        }
 
-	@Method(modid = "CoFHCore")
-	@Override
-	public int getEnergyStored(ForgeDirection direction) {
-		return storage.getEnergyStored();
-	}
+        j = Math.round(j * MathHelper.cos(f));
 
-	@Method(modid = "CoFHCore")
-	@Override
-	public int getMaxEnergyStored(ForgeDirection direction) {
-		return storage.getMaxEnergyStored();
-	}
+        if (j < 0) {
+            j = 0;
+        }
 
-	@Method(modid = "CoFHCore")
-	@Override
-	public int receiveEnergy(ForgeDirection direction, int maxReceive, boolean simulate) {
-		return 0;
-	}
+        if (j > 15) {
+            j = 15;
+        }
+
+        return j;
+    }
+
+    @Override
+    public void readFromNBT(NBTTagCompound nbt) {
+        super.readFromNBT(nbt);
+        storage.readFromNBT(nbt);
+    }
+
+    @Override
+    public void writeToNBT(NBTTagCompound nbt) {
+        super.writeToNBT(nbt);
+        storage.writeToNBT(nbt);
+    }
+
+    /**
+     * RF IMPLEMENTATION
+     */
+    @Method(modid = "CoFHCore")
+    @Override
+    public boolean canConnectEnergy(ForgeDirection direction) {
+        return true;
+    }
+
+    @Method(modid = "CoFHCore")
+    @Override
+    public int extractEnergy(ForgeDirection direction, int maxExtract, boolean simulate) {
+        return storage.extractEnergy(storage.getMaxExtract(), simulate);
+    }
+
+    @Method(modid = "CoFHCore")
+    @Override
+    public int getEnergyStored(ForgeDirection direction) {
+        return storage.getEnergyStored();
+    }
+
+    @Method(modid = "CoFHCore")
+    @Override
+    public int getMaxEnergyStored(ForgeDirection direction) {
+        return storage.getMaxEnergyStored();
+    }
+
+    @Method(modid = "CoFHCore")
+    @Override
+    public int receiveEnergy(ForgeDirection direction, int maxReceive, boolean simulate) {
+        return 0;
+    }
 }

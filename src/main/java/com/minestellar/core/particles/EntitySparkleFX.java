@@ -16,23 +16,15 @@
 
 package com.minestellar.core.particles;
 
-import static org.lwjgl.opengl.GL11.GL_BLEND;
-import static org.lwjgl.opengl.GL11.GL_GREATER;
-import static org.lwjgl.opengl.GL11.glAlphaFunc;
-import static org.lwjgl.opengl.GL11.glBlendFunc;
-import static org.lwjgl.opengl.GL11.glColor4f;
-import static org.lwjgl.opengl.GL11.glDepthMask;
-import static org.lwjgl.opengl.GL11.glDisable;
-import static org.lwjgl.opengl.GL11.glEnable;
+import com.minestellar.core.MinestellarCore;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.EntityFX;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
-
 import org.lwjgl.opengl.GL11;
 
-import com.minestellar.core.MinestellarCore;
+import static org.lwjgl.opengl.GL11.*;
 
 public class EntitySparkleFX extends EntityFX {
 	private static final ResourceLocation texture = new ResourceLocation(MinestellarCore.TEXTURE_PREFIX + "textures/fx/sparkle.png");
@@ -61,7 +53,7 @@ public class EntitySparkleFX extends EntityFX {
 			float x = (float) (prevPosX + (posX - prevPosX) * partialTicks - interpPosX);
 			float y = (float) (prevPosY + (posY - prevPosY) * partialTicks - interpPosY);
 			float z = (float) (prevPosZ + (posZ - prevPosZ) * partialTicks - interpPosZ);
-			
+
 			{
 				tessellator.addVertexWithUV(x - par3 * scale - par6 * scale, y - par4 * scale, z - par5 * scale - par7 * scale, 0, 0);
 				tessellator.addVertexWithUV(x - par3 * scale + par6 * scale, y + par4 * scale, z - par5 * scale + par7 * scale, 1, 0);
@@ -85,7 +77,7 @@ public class EntitySparkleFX extends EntityFX {
 
 	@Override
 	public void onUpdate() {
-		setMaxAge(seconds * 20);
+		setMaxAge(seconds * 20 * 2);
 		this.prevPosX = this.posX;
 		this.prevPosY = this.posY;
 		this.prevPosZ = this.posZ;

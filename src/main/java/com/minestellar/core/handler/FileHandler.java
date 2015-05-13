@@ -16,84 +16,86 @@
 
 package com.minestellar.core.handler;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-
-import com.minestellar.core.util.MinestellarLog;
-
 import net.minecraft.client.Minecraft;
+
+import java.io.*;
 
 /**
  * Custom file handler for writing and reading files
  */
 public class FileHandler {
-	/**
-	 * Writes the given text in the given file.
-	 * <p>
-	 * <b>Note:</b> a new folder will be created in the <i>mods</i> folder. The file will be put there.
-	 * </p>
-	 * 
-	 * @param fileName The name of the file that should be written
-	 * @param text The text that should be written
-	 */
-	public static void writeToFile(String fileName, String text) {
-		FileWriter fileWriter;
+    /**
+     * Writes the given text in the given file.
+     * <p>
+     * <b>Note:</b> a new folder will be created in the <i>mods</i> folder. The file will be put there.
+     * </p>
+     *
+     * @param fileName The name of the file that should be written
+     * @param text The text that should be written
+     */
+    public static void writeToFile(String fileName, String text) {
+        FileWriter fileWriter;
 
-		try {
-			File modsFolder = new File(new File(Minecraft.getMinecraft().mcDataDir.getAbsolutePath().replace(File.separatorChar, '/').replace("/.", "/")), "mods");
-			File myFolder = new File(modsFolder, "MinestellarCore");
-			myFolder.mkdir();
-			File myFile = new File(myFolder, fileName);
+        try {
+            File modsFolder = new File(new File(Minecraft.getMinecraft().mcDataDir.getAbsolutePath().replace(File.separatorChar, '/').replace("/.", "/")), "mods");
+            File myFolder = new File(modsFolder, "MinestellarCore");
 
-			fileWriter = new FileWriter(myFile.getAbsolutePath());
+            myFolder.mkdir();
 
-			BufferedWriter writer = new BufferedWriter(fileWriter);
+            File myFile = new File(myFolder, fileName);
 
-			//MinestellarLog.info("String: " + text);
+            if(!myFile.exists())
+                myFile.createNewFile();
 
-			writer.write(text);
-			writer.newLine();
-			writer.close();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+            fileWriter = new FileWriter(myFile.getAbsolutePath());
 
-	/**
-	 * Reads all the lines on the given file name. The file will be checked in the custom folder.
-	 * 
-	 * @param fileName The name of the file
-	 * @see FileHandler#writeToFile(String, String)
-	 */
-	public static String readFromFile(String fileName) {
-		String line, text = "";
-		FileReader fileReader;
+            BufferedWriter writer = new BufferedWriter(fileWriter);
 
-		try {
-			File modsFolder = new File(new File(Minecraft.getMinecraft().mcDataDir.getAbsolutePath().replace(File.separatorChar, '/').replace("/.", "/")), "mods");
-			File myFolder = new File(modsFolder, "MinestellarCore");
-			myFolder.mkdir();
-			File myFile = new File(myFolder, fileName);
+            //MinestellarLog.info("String: " + text);
 
-			fileReader = new FileReader(myFile.getAbsolutePath());
+            writer.write(text);
+            writer.newLine();
+            writer.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
-			BufferedReader bufferedReader = new BufferedReader(fileReader);
+    /**
+     * Reads all the lines on the given file name. The file will be checked in the custom folder.
+     *
+     * @param fileName The name of the file
+     * @see FileHandler#writeToFile(String, String)
+     */
+    public static String readFromFile(String fileName) {
+        String line, text = "";
+        FileReader fileReader;
 
-			while ((line = bufferedReader.readLine()) != null) {
-				text += line;
-			}
+        try {
+            File modsFolder = new File(new File(Minecraft.getMinecraft().mcDataDir.getAbsolutePath().replace(File.separatorChar, '/').replace("/.", "/")), "mods");
+            File myFolder = new File(modsFolder, "MinestellarCore");
+            myFolder.mkdir();
+            File myFile = new File(myFolder, fileName);
 
-			//MinestellarLog.info("Text: " + text);
+            if(!myFile.exists())
+                myFile.createNewFile();
 
-			bufferedReader.close();
+            fileReader = new FileReader(myFile.getAbsolutePath());
 
-			return text;
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+
+            while ((line = bufferedReader.readLine()) != null) {
+                text += line;
+            }
+
+            //MinestellarLog.info("Text: " + text);
+
+            bufferedReader.close();
+
+            return text;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

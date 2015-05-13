@@ -64,8 +64,6 @@ public class TileEntityCable extends TileEntityWire implements IEnergyHandler {
 
 				TileEntity tile = worldObj.getTileEntity(targetX, targetY, targetZ);
 				if (tile instanceof IEnergyHandler) {
-					// System.out.println("instanceof IEnergyHandler");
-					System.out.println("Stored: " + storage.getEnergyStored() + " Max: " + storage.getMaxEnergyStored());
 					int maxExtract = storage.getMaxExtract(); // Gets the maximum amount of energy that can be extracted from this tile in one tick.
 					int maxAvailable = storage.extractEnergy(maxExtract, true); // Simulates removing "maxExtract" to find out how much energy is
 																				// actually available.
@@ -168,14 +166,12 @@ public class TileEntityCable extends TileEntityWire implements IEnergyHandler {
 
 	@Override
 	public void readFromNBT(NBTTagCompound nbt) {
-
 		super.readFromNBT(nbt);
 		storage.readFromNBT(nbt);
 	}
 
 	@Override
 	public void writeToNBT(NBTTagCompound nbt) {
-
 		super.writeToNBT(nbt);
 		storage.writeToNBT(nbt);
 	}

@@ -16,54 +16,59 @@
 
 package com.minestellar.core.blocks.tile;
 
-import java.util.ArrayList;
-
+import com.minestellar.core.particles.EntitySparkleFX;
+import cpw.mods.fml.common.Optional;
+import cpw.mods.fml.common.Optional.Method;
 import mekanism.api.gas.Gas;
 import mekanism.api.gas.GasStack;
 import mekanism.api.gas.GasTank;
 import mekanism.api.gas.IGasHandler;
 import net.minecraft.block.Block;
+import net.minecraft.client.Minecraft;
 import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Vec3;
 import net.minecraftforge.common.util.ForgeDirection;
-import cpw.mods.fml.common.Optional;
-import cpw.mods.fml.common.Optional.Method;
+
+import java.util.ArrayList;
 
 @Optional.Interface(iface = "mekanism.api.gas.IGasHandler", modid = "Mekanism")
 public class TileEntityOxygenCollector extends TileEntity implements IGasHandler {
 	private GasTank gasTank;
 	private int currentGasAmount;
-	private ArrayList<Block> blocks;
-	private ArrayList<Vec3> coords;
 
-	public TileEntityOxygenCollector() {
+    public TileEntityOxygenCollector() {
 		gasTank = new GasTank(15000);
 		gasTank.setGas(new GasStack(new Gas("oxygen"), 0));
 	}
 
 	@Override
 	public void updateEntity() {
-		blocks = getNatureBlocks(5);
-		coords = getNatureBlocksCoords(5);
+        ArrayList<Block> blocks = getNatureBlocks(5);
+        ArrayList<Vec3> coords = getNatureBlocksCoords(5);
 
 		if (!worldObj.isRemote && gasTank.getGas() != null) {
 			if (gasTank.getGas().getGas() != null) {
 				if (gasTank.stored.amount < gasTank.getMaxGas()) {
-					for (int i = 0; i < blocks.size(); i++) {
-						if (blocks.get(i) == Blocks.leaves || blocks.get(i) == Blocks.leaves2) {
-							gasTank.stored.amount += 5; // Augments the stored gas amount based on the nature of the nature blocks
-						} else if (blocks.get(i) == Blocks.cactus) {
-							gasTank.stored.amount += 1; // Augments the stored gas amount based on the nature of the nature blocks
-						} else if (blocks.get(i) == Blocks.grass) {
-							gasTank.stored.amount += 2; // Augments the stored gas amount based on the nature of the nature blocks
-						} else if (blocks.get(i) == Blocks.log || blocks.get(i) == Blocks.log2) {
-							gasTank.stored.amount += 1; // Augments the stored gas amount based on the nature of the nature blocks
-						} else {
-							continue;
-						}
-					}
+
+                    if(Math.random() <= 0.20){ // Yay for cool particles!
+                        for(Vec3 coord : coords){
+                            Minecraft.getMinecraft().effectRenderer.addEffect(new EntitySparkleFX(worldObj, coord.xCoord+0.5F, coord.yCoord+0.5F, coord.zCoord+0.5F, 2).setArrivalCoords(xCoord + 0.5F, yCoord + 0.5F, zCoord + 0.5F).setColor(0.0F, 1.0F, 0.0F));
+                        }
+                    }
+
+                    for(Block block : blocks){
+                        if(block == Blocks.leaves || block == Blocks.leaves2){
+                            gasTank.stored.amount += 5; // Augments the stored gas amount based on the nature of the nature blocks
+                        }else if(block == Blocks.cactus){
+                            gasTank.stored.amount += 1; // Augments the stored gas amount based on the nature of the nature blocks
+                        }else if(block == Blocks.grass){
+                            gasTank.stored.amount += 2; // Augments the stored gas amount based on the nature of the nature blocks
+                        }else if(block == Blocks.log || block == Blocks.log2){
+                            gasTank.stored.amount += 1; // Augments the stored gas amount based on the nature of the nature blocks
+                        }
+                    }
 				}
 			}
 		}
@@ -156,17 +161,17 @@ public class TileEntityOxygenCollector extends TileEntity implements IGasHandler
 		}
 	}
 
-	@Override
-	public void readFromNBT(NBTTagCompound nbt) {
-		super.readFromNBT(nbt);
-		currentGasAmount = nbt.getInteger("Oxygen");
-	}
+    @Override
+    public void readFromNBT(NBTTagCompound nbt) {
+        super.readFromNBT(nbt);
+        gasTank.read(nbt);
+    }
 
-	@Override
-	public void writeToNBT(NBTTagCompound nbt) {
-		super.writeToNBT(nbt);
-		nbt.setInteger("Oxygen", currentGasAmount);
-	}
+    @Override
+    public void writeToNBT(NBTTagCompound nbt) {
+        super.writeToNBT(nbt);
+        gasTank.write(nbt);
+    }
 
 	/**
 	 * MEKANISM IMPLEMENTATION

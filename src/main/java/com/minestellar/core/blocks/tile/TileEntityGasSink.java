@@ -20,6 +20,7 @@ import mekanism.api.gas.Gas;
 import mekanism.api.gas.GasStack;
 import mekanism.api.gas.GasTank;
 import mekanism.api.gas.IGasHandler;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
 import cpw.mods.fml.common.Optional.Method;
@@ -52,6 +53,18 @@ public class TileEntityGasSink extends TileEntity implements IGasHandler {
 		}
 
 	}
+
+    @Override
+    public void readFromNBT(NBTTagCompound nbt) {
+        super.readFromNBT(nbt);
+        gasTank.read(nbt);
+    }
+
+    @Override
+    public void writeToNBT(NBTTagCompound nbt) {
+        super.writeToNBT(nbt);
+        gasTank.write(nbt);
+    }
 
 	/**
 	 * MEKANISM IMPLEMENTATION

@@ -16,14 +16,7 @@
 
 package com.minestellar.moon;
 
-import java.io.File;
-import java.util.HashMap;
-
-import net.minecraft.block.Block;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
-import net.minecraft.item.ItemStack;
-
+import com.google.common.base.Stopwatch;
 import com.minestellar.core.Constants;
 import com.minestellar.core.util.MinestellarLog;
 import com.minestellar.moon.blocks.MoonBlocks;
@@ -32,7 +25,6 @@ import com.minestellar.moon.proxy.CommonProxyMoon;
 import com.minestellar.moon.recipe.RecipeManagerMoon;
 import com.minestellar.moon.util.ConfigManagerMoon;
 import com.minestellar.moon.world.DimensionMoon;
-
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
@@ -41,6 +33,14 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraft.block.Block;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemStack;
+
+import java.io.File;
+import java.util.HashMap;
+import java.util.concurrent.TimeUnit;
 
 @Mod(modid = MinestellarMoon.MODID, name = MinestellarMoon.MODNAME, version = Constants.VERSION)
 public class MinestellarMoon {
@@ -69,7 +69,8 @@ public class MinestellarMoon {
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
-		long currTime = System.currentTimeMillis();
+        Stopwatch stopwatch = Stopwatch.createStarted();
+
 		new ConfigManagerMoon(new File(event.getModConfigurationDirectory(), "Minestellar/moon.cfg"));
 
 		MoonBlocks.init();
@@ -78,12 +79,13 @@ public class MinestellarMoon {
 		DimensionMoon.init();
 
 		MinestellarMoon.proxy.preInit(event);
-		MinestellarLog.info("PreInitialitazion completed in " + (System.currentTimeMillis() - currTime) + " millis.");
+
+        MinestellarLog.info("PreInitialization (Moon) Completed in " + stopwatch.elapsed( TimeUnit.MILLISECONDS ) + " ms.");
 	}
 
 	@EventHandler
 	public void init(FMLInitializationEvent event) {
-		long currTime = System.currentTimeMillis();
+        Stopwatch stopwatch = Stopwatch.createStarted();
 		RecipeManagerMoon.loadRecipes();
 
 		this.registerTileEntities();
@@ -91,14 +93,17 @@ public class MinestellarMoon {
 		this.registerOtherEntities();
 
 		MinestellarMoon.proxy.init(event);
-		MinestellarLog.info("Initialitazion completed in " + (System.currentTimeMillis() - currTime) + " millis.");
+
+        MinestellarLog.info("Initialization (Moon) Completed in " + stopwatch.elapsed( TimeUnit.MILLISECONDS ) + " ms.");
 	}
 
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event) {
-		long currTime = System.currentTimeMillis();
-		MinestellarMoon.proxy.postInit(event);
-		MinestellarLog.info("PostInitialitazion completed in " + (System.currentTimeMillis() - currTime) + " millis.");
+        Stopwatch stopwatch = Stopwatch.createStarted();
+
+        MinestellarMoon.proxy.postInit(event);
+
+        MinestellarLog.info("PostInitialization (Moon) Completed in " + stopwatch.elapsed(TimeUnit.MILLISECONDS) + " ms.");
 	}
 
 	private void registerTileEntities() {

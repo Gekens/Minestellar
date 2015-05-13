@@ -16,14 +16,17 @@
 
 package com.minestellar.core.blocks;
 
+import com.minestellar.core.MinestellarCore;
+import com.minestellar.core.blocks.tile.TileEntityRadioAntenna;
 import net.minecraft.block.Block;
+import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.World;
 
-import com.minestellar.core.MinestellarCore;
-
-public class BlockRadioWall extends Block {
-	public BlockRadioWall(String name) {
+public class BlockRadioAntenna extends Block implements ITileEntityProvider {
+	protected BlockRadioAntenna(String name) {
 		super(Material.iron);
 		this.setBlockName(name);
 	}
@@ -31,5 +34,10 @@ public class BlockRadioWall extends Block {
 	@Override
 	public CreativeTabs getCreativeTabToDisplayOn() {
 		return MinestellarCore.stellarBlocksTab;
+	}
+
+	@Override
+	public TileEntity createNewTileEntity(World world, int meta) {
+		return new TileEntityRadioAntenna();
 	}
 }

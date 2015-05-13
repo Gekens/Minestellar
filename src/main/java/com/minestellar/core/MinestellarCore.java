@@ -16,23 +16,10 @@
 
 package com.minestellar.core;
 
-import java.io.File;
-import java.util.HashMap;
-
-import net.minecraft.block.Block;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
-import net.minecraft.item.ItemStack;
-
+import com.google.common.base.Stopwatch;
 import com.minestellar.core.blocks.CoreBlocks;
-import com.minestellar.core.blocks.tile.TileEntityCable;
-import com.minestellar.core.blocks.tile.TileEntityComputer;
-import com.minestellar.core.blocks.tile.TileEntityGasSink;
-import com.minestellar.core.blocks.tile.TileEntityOxygenCollector;
-import com.minestellar.core.blocks.tile.TileEntityPipe;
-import com.minestellar.core.blocks.tile.TileEntityRadioHead;
-import com.minestellar.core.blocks.tile.TileEntitySolarGenerator;
+import com.minestellar.core.blocks.tile.*;
+import com.minestellar.core.handler.FileHandler;
 import com.minestellar.core.handler.GuiHandler;
 import com.minestellar.core.items.CoreItems;
 import com.minestellar.core.network.NetworkHandler;
@@ -42,16 +29,22 @@ import com.minestellar.core.util.ConfigManagerCore;
 import com.minestellar.core.util.MinestellarCreativeTab;
 import com.minestellar.core.util.MinestellarLog;
 import com.minestellar.core.world.gen.OverworldGenerator;
-
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.SidedProxy;
-import cpw.mods.fml.common.event.FMLInitializationEvent;
-import cpw.mods.fml.common.event.FMLPostInitializationEvent;
-import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.event.*;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraft.block.Block;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemStack;
+
+import java.io.File;
+import java.util.HashMap;
+import java.util.concurrent.TimeUnit;
 
 @Mod(modid = MinestellarCore.MOD_ID, name = MinestellarCore.MOD_NAME, version = Constants.VERSION)
 public class MinestellarCore {
@@ -83,7 +76,8 @@ public class MinestellarCore {
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
-		long currTime = System.currentTimeMillis();
+        Stopwatch stopwatch = Stopwatch.createStarted();
+
 		new ConfigManagerCore(new File(event.getModConfigurationDirectory(), "Minestellar/core.cfg"));
 
 		CoreBlocks.init();
@@ -91,13 +85,14 @@ public class MinestellarCore {
 
 		MinestellarCore.proxy.preInit(event);
 
-		MinestellarLog.info("PreInitialization completed in " + (System.currentTimeMillis() - currTime) + " millis.");
+        MinestellarLog.info("PreInitialization (Core) Completed in " + stopwatch.elapsed( TimeUnit.MILLISECONDS ) + " ms.");
 	}
 
 	@EventHandler
 	public void init(FMLInitializationEvent event) {
-		long currTime = System.currentTimeMillis();
-		NetworkHandler.init();
+        Stopwatch stopwatch = Stopwatch.createStarted();
+
+        NetworkHandler.init();
 
 		MinestellarCore.stellarBlocksTab = new MinestellarCreativeTab(CreativeTabs.getNextID(), "MinestellarBlocks", Item.getItemFromBlock(CoreBlocks.coreOreBlocks), 0);
 		MinestellarCore.stellarItemsTab = new MinestellarCreativeTab(CreativeTabs.getNextID(), "MinestellarItems", CoreItems.coreBasicItems, 0);
@@ -121,14 +116,17 @@ public class MinestellarCore {
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
 
 		MinestellarCore.proxy.init(event);
-		MinestellarLog.info("Initialization completed in " + (System.currentTimeMillis() - currTime) + " millis.");
+
+        MinestellarLog.info("Initialization (Core) Completed in " + stopwatch.elapsed( TimeUnit.MILLISECONDS ) + " ms.");
 	}
 
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event) {
-		long currTime = System.currentTimeMillis();
-		MinestellarCore.proxy.postInit(event);
-		MinestellarLog.info("PostInitialization completed in " + (System.currentTimeMillis() - currTime) + " millis.");
+        Stopwatch stopwatch = Stopwatch.createStarted();
+
+        MinestellarCore.proxy.postInit(event);
+
+        MinestellarLog.info("PostInitialization (Core) Completed in " + stopwatch.elapsed( TimeUnit.MILLISECONDS ) + " ms.");
 	}
 
 	private void registerTileEntities() {
@@ -138,7 +136,7 @@ public class MinestellarCore {
 		GameRegistry.registerTileEntity(TileEntitySolarGenerator.class, "solar_generator");
 		GameRegistry.registerTileEntity(TileEntityGasSink.class, "gas_sink");
 		GameRegistry.registerTileEntity(TileEntityComputer.class, "computer");
-		GameRegistry.registerTileEntity(TileEntityRadioHead.class, "radio_head");
+		GameRegistry.registerTileEntity(TileEntityRadioAntenna.class, "radio_antenna");
 	}
 
 	private void registerCreatures() {
@@ -146,5 +144,18 @@ public class MinestellarCore {
 
 	private void registerOtherEntities() {
 	}
+
+    @EventHandler
+    public void serverStopping(FMLServerStoppingEvent event){
+        Constants.runTimer = FileHandler.readFromFile(Constants.fileName).equals("true");
+    }
+
+    @EventHandler
+    public void serverStarting(FMLServerStartingEvent event){
+        if(FileHandler.readFromFile(Constants.fileName).equals("false")) {
+            Constants.runTimer = true;
+        }
+        FileHandler.writeToFile(Constants.fileName, Constants.runTimer ? "true" : "false");
+    }
 
 }
