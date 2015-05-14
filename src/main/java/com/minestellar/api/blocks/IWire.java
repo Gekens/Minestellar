@@ -14,32 +14,14 @@
  * this program; if not, see <http://www.gnu.org/licenses>.
  */
 
-package com.minestellar.moon.world.gen;
+package com.minestellar.api.blocks;
 
-import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
 
-import com.minestellar.utils.world.gen.BiomeDecoratorMinestellar;
+public interface IWire {
+	public void updateCableConnections();
 
-public class BiomeDecoratorMoon extends BiomeDecoratorMinestellar {
-	// protected WorldGenerator oreExample;
-	private World currentWorld;
+	public boolean onlyOneOpposite(ForgeDirection[] directions);
 
-	public BiomeDecoratorMoon() {
-		// this.oreExample = new WorldGenMinableMeta(MoonBlocks.moonOreBlocks, 8, 1, true, MoonBlocks.moonBasicBlocks, 2);
-	}
-
-	@Override
-	public void decorate() {
-		// this.generateOre(32, this.oreExample, 0, 128);
-	}
-
-	@Override
-	protected void setCurrentWorld(World world) {
-		this.currentWorld = world;
-	}
-
-	@Override
-	protected World getCurrentWorld() {
-		return this.currentWorld;
-	}
+	public boolean isOpposite(ForgeDirection firstDirection, ForgeDirection secondDirection);
 }

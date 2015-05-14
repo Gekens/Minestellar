@@ -23,8 +23,8 @@ import net.minecraft.world.WorldProvider;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraftforge.client.IRenderHandler;
 
-import com.minestellar.api.vector.Vector3;
-import com.minestellar.api.world.IMinestellarWorldProvider;
+import com.minestellar.utils.vector.Vector3;
+import com.minestellar.utils.world.IMinestellarWorldProvider;
 import com.minestellar.moon.util.ConfigManagerMoon;
 import com.minestellar.moon.world.gen.ChunkProviderMoon;
 import com.minestellar.moon.world.gen.WorldChunkManagerMoon;

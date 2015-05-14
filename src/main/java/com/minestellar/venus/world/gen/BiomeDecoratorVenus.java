@@ -3,7 +3,7 @@ package com.minestellar.venus.world.gen;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
-import com.minestellar.api.world.gen.BiomeDecoratorMinestellar;
+import com.minestellar.utils.world.gen.BiomeDecoratorMinestellar;
 import com.minestellar.core.world.gen.WorldGenMinableMeta;
 import com.minestellar.venus.blocks.VenusBlocks;
 

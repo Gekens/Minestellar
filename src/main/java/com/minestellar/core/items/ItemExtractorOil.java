@@ -33,7 +33,7 @@ import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidBlock;
 
-import com.minestellar.api.vector.Vector3;
+import com.minestellar.utils.vector.Vector3;
 import com.minestellar.core.MinestellarCore;
 import com.minestellar.core.proxy.ClientProxyCore;
 

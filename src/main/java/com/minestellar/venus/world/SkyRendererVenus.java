@@ -15,7 +15,7 @@ import net.minecraftforge.client.IRenderHandler;
 
 import org.lwjgl.opengl.GL11;
 
-import com.minestellar.api.world.IMinestellarWorldProvider;
+import com.minestellar.utils.world.IMinestellarWorldProvider;
 import com.minestellar.core.util.ConfigManagerCore;
 
 import cpw.mods.fml.client.FMLClientHandler;

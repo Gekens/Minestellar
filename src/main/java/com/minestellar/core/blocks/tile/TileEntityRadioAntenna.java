@@ -20,7 +20,6 @@ import cofh.api.energy.EnergyStorage;
 import cofh.api.energy.IEnergyHandler;
 import com.minestellar.core.network.NetworkHandler;
 import com.minestellar.core.network.message.MessageAntennaOnline;
-import com.minestellar.core.util.MinestellarLog;
 import cpw.mods.fml.common.Optional;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -38,7 +37,7 @@ public class TileEntityRadioAntenna extends TileEntity implements IEnergyHandler
     @Override
     public void updateEntity() {
 
-        MinestellarLog.info("Stored: " + storage.getEnergyStored());
+//        MinestellarLog.info("Stored: " + storage.getEnergyStored());
 
         if(storage.getEnergyStored() > 0){
             NetworkHandler.sendToServer(new MessageAntennaOnline(true, xCoord, yCoord, zCoord));
@@ -81,9 +80,8 @@ public class TileEntityRadioAntenna extends TileEntity implements IEnergyHandler
         storage.writeToNBT(nbt);
     }
 
-    /**
-     * RF IMPLEMENTATION
-     */
+    //RF IMPLEMENTATION
+
     @Optional.Method(modid = "CoFHCore")
     @Override
     public boolean canConnectEnergy(ForgeDirection direction) {

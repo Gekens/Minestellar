@@ -24,7 +24,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
 
-import com.minestellar.api.core.TileEntityWire;
+import com.minestellar.api.blocks.TileEntityWire;
 
 import cpw.mods.fml.common.Optional;
 import cpw.mods.fml.common.Optional.Method;

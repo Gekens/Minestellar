@@ -1,37 +1,20 @@
 /**
- * Copyright (c) 22/Feb/2015 Davide Cossu & Matthew Albrecht.
- *
+ * Copyright (c) 14/05/15 Davide Cossu & Matthew Albrecht.
+ * <p/>
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
  * Software Foundation; either version 3 of the License, or (at your option) any
  * later version.
- *
+ * <p/>
  * This program is distributed in the hope that it will be useful, but WITHOUT ANY
  * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
  * PARTICULAR PURPOSE. See the GNU General Public License for more details.
- *
+ * <p/>
  * You should have received a copy of the GNU General Public License along with
  * this program; if not, see <http://www.gnu.org/licenses>.
  */
 
-package com.minestellar.api.core;
+@API(apiVersion = "@API_VERSION", owner = "Minestellar", provides = "Minestellar-API|network")
+package com.minestellar.api.data.network;
 
-import net.minecraft.block.Block;
-
-public class BlockMetaPair {
-	private final Block block;
-	private final byte metadata;
-
-	public BlockMetaPair(Block block, byte metadata) {
-		this.block = block;
-		this.metadata = metadata;
-	}
-
-	public Block getBlock() {
-		return this.block;
-	}
-
-	public byte getMetadata() {
-		return this.metadata;
-	}
-}
+import cpw.mods.fml.common.API;

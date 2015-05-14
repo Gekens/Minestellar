@@ -14,32 +14,24 @@
  * this program; if not, see <http://www.gnu.org/licenses>.
  */
 
-package com.minestellar.moon.world.gen;
+package com.minestellar.utils.world;
 
-import net.minecraft.world.World;
+import com.minestellar.utils.vector.Vector3;
 
-import com.minestellar.utils.world.gen.BiomeDecoratorMinestellar;
+public interface IMinestellarWorldProvider {
+	float getGravity();
 
-public class BiomeDecoratorMoon extends BiomeDecoratorMinestellar {
-	// protected WorldGenerator oreExample;
-	private World currentWorld;
+	boolean hasAtmosphere();
 
-	public BiomeDecoratorMoon() {
-		// this.oreExample = new WorldGenMinableMeta(MoonBlocks.moonOreBlocks, 8, 1, true, MoonBlocks.moonBasicBlocks, 2);
-	}
+	long getDayLength();
 
-	@Override
-	public void decorate() {
-		// this.generateOre(32, this.oreExample, 0, 128);
-	}
+	float getHeatLevelsDay();
 
-	@Override
-	protected void setCurrentWorld(World world) {
-		this.currentWorld = world;
-	}
+	float getHeatLevelsNight();
 
-	@Override
-	protected World getCurrentWorld() {
-		return this.currentWorld;
-	}
+	float getAirPressure();
+
+	Vector3 getSkyColor();
+
+	Vector3 getFogColor();
 }

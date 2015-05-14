@@ -30,10 +30,10 @@ import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.IChunkProvider;
 
 import com.google.common.collect.Lists;
-import com.minestellar.api.core.BlockMetaPair;
-import com.minestellar.api.world.gen.BiomeDecoratorMinestellar;
-import com.minestellar.api.world.gen.ChunkProviderMinestellar;
-import com.minestellar.api.world.gen.MapGenBaseMeta;
+import com.minestellar.api.blocks.BlockMetaPair;
+import com.minestellar.utils.world.gen.BiomeDecoratorMinestellar;
+import com.minestellar.utils.world.gen.ChunkProviderMinestellar;
+import com.minestellar.utils.world.gen.MapGenBaseMeta;
 import com.minestellar.venus.blocks.VenusBlocks;
 import com.minestellar.venus.world.gen.pit.MapGenBlazeNest;
 

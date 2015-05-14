@@ -8,7 +8,7 @@ import net.minecraft.client.audio.SoundPoolEntry;
 import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.client.multiplayer.WorldClient;
 
-import com.minestellar.api.world.IMinestellarWorldProvider;
+import com.minestellar.utils.world.IMinestellarWorldProvider;
 import com.minestellar.core.world.CloudRenderer;
 import com.minestellar.venus.entities.EntityEvolvedBlaze;
 import com.minestellar.venus.entities.EntityVenusianTNT;

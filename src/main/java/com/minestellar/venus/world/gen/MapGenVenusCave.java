@@ -7,7 +7,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
-import com.minestellar.api.world.gen.MapGenBaseMeta;
+import com.minestellar.utils.world.gen.MapGenBaseMeta;
 import com.minestellar.venus.blocks.VenusBlocks;
 
 public class MapGenVenusCave extends MapGenBaseMeta {

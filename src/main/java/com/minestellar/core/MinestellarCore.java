@@ -78,7 +78,7 @@ public class MinestellarCore {
 	public void preInit(FMLPreInitializationEvent event) {
         Stopwatch stopwatch = Stopwatch.createStarted();
 
-		new ConfigManagerCore(new File(event.getModConfigurationDirectory(), "Minestellar/core.cfg"));
+		new ConfigManagerCore(new File(event.getModConfigurationDirectory(), "Minestellar/blocks.cfg"));
 
 		CoreBlocks.init();
 		CoreItems.init();

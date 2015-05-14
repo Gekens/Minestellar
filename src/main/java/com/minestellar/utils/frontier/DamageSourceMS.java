@@ -1,4 +1,4 @@
-package com.minestellar.api.frontier;
+package com.minestellar.utils.frontier;
 
 import net.minecraft.util.DamageSource;
 

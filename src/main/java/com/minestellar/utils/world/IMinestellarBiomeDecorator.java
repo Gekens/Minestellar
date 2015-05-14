@@ -14,14 +14,7 @@
  * this program; if not, see <http://www.gnu.org/licenses>.
  */
 
-package com.minestellar.api.core;
+package com.minestellar.utils.world;
 
-import net.minecraftforge.common.util.ForgeDirection;
-
-public interface IWire {
-	public void updateCableConnections();
-
-	public boolean onlyOneOpposite(ForgeDirection[] directions);
-
-	public boolean isOpposite(ForgeDirection firstDirection, ForgeDirection secondDirection);
+public interface IMinestellarBiomeDecorator {
 }

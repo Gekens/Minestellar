@@ -14,7 +14,7 @@
  * this program; if not, see <http://www.gnu.org/licenses>.
  */
 
-package com.minestellar.api.vector;
+package com.minestellar.utils.vector;
 
 import java.util.Formatter;
 import java.util.Locale;

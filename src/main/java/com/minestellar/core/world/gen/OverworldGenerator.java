@@ -24,7 +24,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
 
-import com.minestellar.api.world.IMinestellarWorldProvider;
+import com.minestellar.utils.world.IMinestellarWorldProvider;
 
 import cpw.mods.fml.common.IWorldGenerator;
 

@@ -11,7 +11,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.StructureBoundingBox;
 import net.minecraft.world.gen.structure.StructureStart;
 
-import com.minestellar.api.world.gen.MapGenBaseMeta;
+import com.minestellar.utils.world.gen.MapGenBaseMeta;
 
 public abstract class MapGenBlazePitStructure extends MapGenBaseMeta {
 	protected Map<Long, StructureStart> structureMap = new HashMap<Long, StructureStart>();

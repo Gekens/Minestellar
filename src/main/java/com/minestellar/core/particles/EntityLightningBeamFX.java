@@ -30,7 +30,7 @@ import net.minecraft.world.World;
 
 import org.lwjgl.opengl.GL11;
 
-import com.minestellar.api.vector.Vector3;
+import com.minestellar.utils.vector.Vector3;
 
 public class EntityLightningBeamFX extends EntityFX {
 	// Minecraft.getMinecraft().effectRenderer.addEffect(new EntityLightningBeamFX(worldObj, xCoord, yCoord, zCoord).setColor(1F, 0.2F, 0.7F).setArrivalCoords(new Vector3(xCoord+12, 5, zCoord-1), new Vector3(xCoord-9, 4, zCoord+1), new Vector3(xCoord-15, 10, zCoord+6)));

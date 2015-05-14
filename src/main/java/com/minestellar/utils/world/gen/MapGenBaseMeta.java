@@ -14,7 +14,7 @@
  * this program; if not, see <http://www.gnu.org/licenses>.
  */
 
-package com.minestellar.api.world.gen;
+package com.minestellar.utils.world.gen;
 
 import java.util.Random;
 

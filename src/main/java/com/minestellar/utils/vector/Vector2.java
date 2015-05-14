@@ -1,4 +1,4 @@
-package com.minestellar.api.vector;
+package com.minestellar.utils.vector;
 
 /**
  * Vector2 Class is used for defining objects in a 2D space.

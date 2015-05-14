@@ -28,7 +28,7 @@ import net.minecraft.util.EnumChatFormatting;
 import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.common.util.EnumHelper;
 
-import com.minestellar.api.core.WireSpecialRender;
+import com.minestellar.api.blocks.WireSpecialRender;
 import com.minestellar.core.blocks.CoreBlocks;
 import com.minestellar.core.blocks.tile.TileEntityCable;
 import com.minestellar.core.blocks.tile.TileEntityGasSink;

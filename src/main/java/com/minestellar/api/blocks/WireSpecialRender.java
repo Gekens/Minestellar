@@ -14,7 +14,7 @@
  * this program; if not, see <http://www.gnu.org/licenses>.
  */
 
-package com.minestellar.api.core;
+package com.minestellar.api.blocks;
 
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
@@ -267,7 +267,7 @@ public class WireSpecialRender extends TileEntitySpecialRenderer {
 	}
 
 	/**
-	 * Draws the core of the wire
+	 * Draws the blocks of the wire
 	 */
 	private void drawCore() {
 		Tessellator tessellator = Tessellator.instance;

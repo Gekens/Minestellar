@@ -1,4 +1,4 @@
-package com.minestellar.api.vector;
+package com.minestellar.utils.vector;
 
 import java.util.List;
 

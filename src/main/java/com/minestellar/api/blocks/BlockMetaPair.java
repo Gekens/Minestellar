@@ -14,32 +14,24 @@
  * this program; if not, see <http://www.gnu.org/licenses>.
  */
 
-package com.minestellar.moon.world.gen;
+package com.minestellar.api.blocks;
 
-import net.minecraft.world.World;
+import net.minecraft.block.Block;
 
-import com.minestellar.utils.world.gen.BiomeDecoratorMinestellar;
+public class BlockMetaPair {
+	private final Block block;
+	private final byte metadata;
 
-public class BiomeDecoratorMoon extends BiomeDecoratorMinestellar {
-	// protected WorldGenerator oreExample;
-	private World currentWorld;
-
-	public BiomeDecoratorMoon() {
-		// this.oreExample = new WorldGenMinableMeta(MoonBlocks.moonOreBlocks, 8, 1, true, MoonBlocks.moonBasicBlocks, 2);
+	public BlockMetaPair(Block block, byte metadata) {
+		this.block = block;
+		this.metadata = metadata;
 	}
 
-	@Override
-	public void decorate() {
-		// this.generateOre(32, this.oreExample, 0, 128);
+	public Block getBlock() {
+		return this.block;
 	}
 
-	@Override
-	protected void setCurrentWorld(World world) {
-		this.currentWorld = world;
-	}
-
-	@Override
-	protected World getCurrentWorld() {
-		return this.currentWorld;
+	public byte getMetadata() {
+		return this.metadata;
 	}
 }

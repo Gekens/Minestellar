@@ -14,7 +14,7 @@
  * this program; if not, see <http://www.gnu.org/licenses>.
  */
 
-package com.minestellar.api.world.gen;
+package com.minestellar.utils.world.gen;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -33,7 +33,7 @@ import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.ChunkProviderGenerate;
 
-import com.minestellar.api.core.BlockMetaPair;
+import com.minestellar.api.blocks.BlockMetaPair;
 import com.minestellar.core.perlin.generator.Gradient;
 import com.minestellar.core.world.gen.EnumCraterSize;
 

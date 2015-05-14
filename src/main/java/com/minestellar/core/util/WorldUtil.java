@@ -34,8 +34,8 @@ import net.minecraft.world.WorldServer;
 import net.minecraft.world.WorldSettings;
 import net.minecraft.world.WorldType;
 
-import com.minestellar.api.vector.Vector3;
-import com.minestellar.api.world.IMinestellarWorldProvider;
+import com.minestellar.utils.vector.Vector3;
+import com.minestellar.utils.world.IMinestellarWorldProvider;
 
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.common.FMLCommonHandler;

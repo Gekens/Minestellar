@@ -18,14 +18,41 @@ buildscript {
 
 apply plugin: 'forge'
 
-version = "p0.0.4"
-group= "com" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+group= "com.minestellar" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "Minestellar"
 
-minecraft {
-    version = "1.7.10-10.13.2.1291"
-    runDir = "eclipse"
+ext.configFile = file "build.properties"
+
+configFile.withReader {
+    def prop = new Properties()
+    prop.load(it)
+    project.ext.config = new ConfigSlurper().parse prop
 }
+
+minecraft {
+    version = config.minecraft_version + "-" + config.forge_version
+    runDir = "eclipse"
+
+    replaceIn "api/package-info.java"
+    replace "@API_VERSION@", config.api_version
+
+    replaceIn "api/blocks/package-info.java"
+    replace "@API_VERSION@", config.api_version
+
+    replaceIn "api/data/package-info.java"
+    replace "@API_VERSION@", config.api_version
+
+    replaceIn "api/packet/package-info.java"
+    replace "@API_VERSION@", config.api_version
+
+    replaceIn "api/block/package-info.java"
+    replace "@API_VERSION@", config.api_version
+
+    replaceIn "api/network/package-info.java"
+    replace "@API_VERSION@", config.api_version
+}
+
+version = "${config.minecraft_version}-${config.mod_version}"
 
 dependencies {
     compile files("lib/CoFHCore-[1.7.10]3.0.0B3-dev-26.jar")
@@ -52,5 +79,28 @@ processResources {
 }
 
 sourceSets {
-    main { output.resourcesDir = output.classesDir }
+    main {
+        output.resourcesDir = output.classesDir
+    }
+
+    api {
+        java {
+            srcDir 'api'
+        }
+    }
 }
+
+// add source jar
+task sourceJar(type: Jar) {
+    from sourceSets.main.allSource
+    classifier = 'source'
+}
+
+// deobf jars
+task deobfJar(type: Jar) {
+    from sourceSets.main.output
+    classifier = 'deobf'
+}
+
+// make sure all of these happen when we run build
+build.dependsOn sourceJar, deobfJar

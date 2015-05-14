@@ -1,4 +1,4 @@
-package com.minestellar.api.frontier;
+package com.minestellar.utils.frontier;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingJumpEvent;

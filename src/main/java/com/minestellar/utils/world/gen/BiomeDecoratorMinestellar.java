@@ -14,7 +14,7 @@
  * this program; if not, see <http://www.gnu.org/licenses>.
  */
 
-package com.minestellar.api.world.gen;
+package com.minestellar.utils.world.gen;
 
 import java.util.Random;
 
@@ -22,7 +22,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraftforge.common.MinecraftForge;
 
-import com.minestellar.api.event.wgen.MinestellarEventPopulate;
+import com.minestellar.utils.world.wgen.MinestellarEventPopulate;
 
 public abstract class BiomeDecoratorMinestellar {
 	protected Random rand;
