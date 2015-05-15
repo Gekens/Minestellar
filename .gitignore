@@ -24,5 +24,3 @@
 /*.iws
 /atlassian-ide-plugin.xml
 *.db
-
-src/main/java/com/minestellar/test/*

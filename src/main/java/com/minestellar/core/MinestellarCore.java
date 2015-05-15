@@ -17,6 +17,7 @@
 package com.minestellar.core;
 
 import com.google.common.base.Stopwatch;
+import com.minestellar.api.data.wireless.WirelessDataNetwork;
 import com.minestellar.core.blocks.CoreBlocks;
 import com.minestellar.core.blocks.tile.*;
 import com.minestellar.core.handler.FileHandler;
@@ -29,6 +30,8 @@ import com.minestellar.core.util.ConfigManagerCore;
 import com.minestellar.core.util.MinestellarCreativeTab;
 import com.minestellar.core.util.MinestellarLog;
 import com.minestellar.core.world.gen.OverworldGenerator;
+import com.minestellar.test.blocks.TestDataBlock;
+import com.minestellar.test.blocks.TestDataTE;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
@@ -83,6 +86,8 @@ public class MinestellarCore {
 		CoreBlocks.init();
 		CoreItems.init();
 
+        GameRegistry.registerBlock(new TestDataBlock("testDataBlock"), "testDataBlock");
+
 		MinestellarCore.proxy.preInit(event);
 
         MinestellarLog.info("PreInitialization (Core) Completed in " + stopwatch.elapsed( TimeUnit.MILLISECONDS ) + " ms.");
@@ -130,6 +135,7 @@ public class MinestellarCore {
 	}
 
 	private void registerTileEntities() {
+        GameRegistry.registerTileEntity(TestDataTE.class, "testData");
 		GameRegistry.registerTileEntity(TileEntityCable.class, "cable");
 		GameRegistry.registerTileEntity(TileEntityPipe.class, "pipe");
 		GameRegistry.registerTileEntity(TileEntityOxygenCollector.class, "oxygen_collector");
@@ -152,6 +158,8 @@ public class MinestellarCore {
 
     @EventHandler
     public void serverStarting(FMLServerStartingEvent event){
+        WirelessDataNetwork wirelessDataNetwork = new WirelessDataNetwork();
+        wirelessDataNetwork.initTimer();
         if(FileHandler.readFromFile(Constants.fileName).equals("false")) {
             Constants.runTimer = true;
         }
