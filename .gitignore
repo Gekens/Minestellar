@@ -24,4 +24,5 @@
 /*.iws
 /atlassian-ide-plugin.xml
 *.db
-src/main/resources/assets/minestellarcore/textures/items/OxygenBottle.png
+
+src/main/java/com/minestellar/test/*

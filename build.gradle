@@ -34,22 +34,22 @@ minecraft {
     runDir = "eclipse"
 
     replaceIn "api/package-info.java"
-    replace "@API_VERSION@", config.api_version
+    replace "@API_VERSION", config.api_version
 
     replaceIn "api/blocks/package-info.java"
-    replace "@API_VERSION@", config.api_version
+    replace "@API_VERSION", config.api_version
 
     replaceIn "api/data/package-info.java"
-    replace "@API_VERSION@", config.api_version
+    replace "@API_VERSION", config.api_version
 
-    replaceIn "api/packet/package-info.java"
-    replace "@API_VERSION@", config.api_version
+    replaceIn "api/data/block/package-info.java"
+    replace "@API_VERSION", config.api_version
 
-    replaceIn "api/block/package-info.java"
-    replace "@API_VERSION@", config.api_version
+    replaceIn "api/data/wired/package-info.java"
+    replace "@API_VERSION", config.api_version
 
-    replaceIn "api/network/package-info.java"
-    replace "@API_VERSION@", config.api_version
+    replaceIn "api/data/wireless/package-info.java"
+    replace "@API_VERSION", config.api_version
 }
 
 version = "${config.minecraft_version}-${config.mod_version}"

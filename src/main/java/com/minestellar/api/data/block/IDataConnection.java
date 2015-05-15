@@ -16,10 +16,12 @@
 
 package com.minestellar.api.data.block;
 
-import com.minestellar.api.data.packet.DataPacket;
+import com.minestellar.api.data.wired.WiredDataPacket;
+import com.minestellar.api.data.wireless.WirelessDataPacket;
 
 /**
  * Implement this Interface on TileEntities that should send and/or receive packets of data.
+ * <p>It does not matter if it should only be wired/wireless</p>
  */
 
 public interface IDataConnection{
@@ -32,16 +34,34 @@ public interface IDataConnection{
 
     /**
      * Receives a packet from the network
+     *
+     * @param packet The packet received
      */
 
-    void receivePacket();
+    void receiveWirelessPacket(WirelessDataPacket packet);
 
     /**
-     * Sends a packet
+     * Receives a packet from the network
      *
-     * @param packet The {@code DataPacket} to send
+     * @param packet The packet received
      */
 
-    void sendPacket(DataPacket packet);
+    void receiveWiredPacket(WiredDataPacket packet);
+
+    /**
+     * Sends a wireless packet
+     *
+     * @return The {@code WirelessDataPacket} to send
+     */
+
+    WirelessDataPacket sendWirelessPacket();
+
+    /**
+     * Sends a wired packet
+     *
+     * @return The {@code WiredDataPacket} to send
+     */
+
+    WiredDataPacket sendWiredPacket();
 
 }

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 14/05/15 Davide Cossu & Matthew Albrecht.
+ * Copyright (c) 15/05/15 Davide Cossu & Matthew Albrecht.
  * <p/>
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -14,7 +14,7 @@
  * this program; if not, see <http://www.gnu.org/licenses>.
  */
 
-@API(apiVersion = "@API_VERSION", owner = "Minestellar", provides = "Minestellar-API|packet")
-package com.minestellar.api.data.packet;
+@API(apiVersion = "@API_VERSION", owner = "Minestellar", provides = "Minestellar-API|wireless")
+package com.minestellar.api.data.wireless;
 
 import cpw.mods.fml.common.API;

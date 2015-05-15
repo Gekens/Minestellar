@@ -14,9 +14,12 @@
  * this program; if not, see <http://www.gnu.org/licenses>.
  */
 
-package com.minestellar.api.data.packet;
+package com.minestellar.api.data.wireless;
 
+import com.minestellar.api.data.block.DataTileEntity;
+import com.minestellar.api.data.block.IDataConnection;
 import net.minecraft.util.Vec3;
+import net.minecraft.world.World;
 
 import java.util.Hashtable;
 import java.util.Map;
@@ -25,15 +28,18 @@ import java.util.Map;
  * This class represents a packet of data sent from Object A to Object B
  */
 
-public class DataPacket{
+public class WirelessDataPacket{
 
-    private double senderX, senderY, senderZ, receiverX, receiverY, receiverZ;
+    private int senderX, senderY, senderZ, receiverX, receiverY, receiverZ;
     /**
      * The map that stores all the different data. To every identifier (String) corresponds a different Object
      */
-    private Map<String, Object> dataMap;
+    public Map<String, Object> dataMap;
 
-    public DataPacket(double senderX, double senderY, double senderZ, double receiverX, double receiverY, double receiverZ){
+    private World world;
+
+    public WirelessDataPacket(World world, int senderX, int senderY, int senderZ,
+                              int receiverX, int receiverY, int receiverZ){
         this.senderX = senderX;
         this.senderY = senderY;
         this.senderZ = senderZ;
@@ -41,11 +47,36 @@ public class DataPacket{
         this.receiverY = receiverY;
         this.receiverZ = receiverZ;
         this.dataMap = new Hashtable<String, Object>();
+        this.world = world;
     }
 
-    public DataPacket(Vec3 senderCoordinates, Vec3 receiverCoordinates){
-        this(senderCoordinates.xCoord, senderCoordinates.zCoord, senderCoordinates.zCoord,
-                receiverCoordinates.xCoord, receiverCoordinates.yCoord, receiverCoordinates.zCoord);
+    public WirelessDataPacket(World world, Vec3 senderCoordinates, Vec3 receiverCoordinates){
+        this(world, (int)senderCoordinates.xCoord, (int)senderCoordinates.zCoord, (int)senderCoordinates.zCoord,
+                (int)receiverCoordinates.xCoord, (int)receiverCoordinates.yCoord, (int)receiverCoordinates.zCoord);
+    }
+
+    /**
+     * Gets the sender of the packet
+     *
+     * @return The block from which the packet is sent
+     */
+
+    public DataTileEntity getSender(){
+        return world.getTileEntity(senderX, senderY, senderZ) instanceof IDataConnection
+                ? (DataTileEntity)world.getTileEntity(senderX, senderY, senderZ)
+                : null;
+    }
+
+    /**
+     * Gets the receiver of the packet
+     *
+     * @return The block that should receive the packet
+     */
+
+    public DataTileEntity getReceiver(){
+        return world.getTileEntity(receiverX, receiverY, receiverZ) instanceof IDataConnection
+                ? (DataTileEntity)world.getTileEntity(receiverX, receiverY, receiverZ)
+                : null;
     }
 
     /**
@@ -69,4 +100,9 @@ public class DataPacket{
         return dataMap.get(identifier);
     }
 
+    @Override
+    public String toString(){
+        return "["+senderX+" "+senderY+" "+senderZ+"]/"
+        +"["+receiverX+" "+receiverY+" "+receiverZ+"]";
+    }
 }
