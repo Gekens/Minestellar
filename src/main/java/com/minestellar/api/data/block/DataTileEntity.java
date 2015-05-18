@@ -27,8 +27,7 @@ import net.minecraft.tileentity.TileEntity;
 
 public abstract class DataTileEntity extends TileEntity implements IDataConnection{
 
-    public DataTileEntity(){
-    }
+    public DataTileEntity(){}
 
     @Override
     public void updateEntity(){
@@ -60,7 +59,7 @@ public abstract class DataTileEntity extends TileEntity implements IDataConnecti
     public abstract void receiveWirelessPacket(WirelessDataPacket packet);
 
     @Override
-    public abstract WirelessDataPacket sendWirelessPacket();
+    public abstract void sendWirelessPacket();
 
     @Override
     public abstract WiredDataPacket sendWiredPacket();

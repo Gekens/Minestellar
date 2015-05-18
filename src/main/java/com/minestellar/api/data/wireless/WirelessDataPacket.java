@@ -92,7 +92,9 @@ public class WirelessDataPacket{
 
     /**
      * Returns the object associated to the given identifier
+     *
      * @param identifier The identifier
+     *
      * @return The object that corresponds to the given identifier
      */
 
@@ -102,7 +104,13 @@ public class WirelessDataPacket{
 
     @Override
     public String toString(){
-        return "["+senderX+" "+senderY+" "+senderZ+"]/"
-        +"["+receiverX+" "+receiverY+" "+receiverZ+"]";
+        String toString = "";
+        for(String s : dataMap.keySet()){
+            toString += "[" + s + "]" + ": " + dataMap.get(s) + ";\n";
+        }
+        toString += "["+senderX+" "+senderY+" "+senderZ+"]/"
+                +"["+receiverX+" "+receiverY+" "+receiverZ+"]";
+        return toString;
     }
+
 }

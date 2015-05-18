@@ -154,6 +154,7 @@ public class MinestellarCore {
     @EventHandler
     public void serverStopping(FMLServerStoppingEvent event){
         Constants.runTimer = FileHandler.readFromFile(Constants.fileName).equals("true");
+        WirelessDataNetwork.clearQueue();
     }
 
     @EventHandler

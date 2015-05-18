@@ -28,6 +28,9 @@ public class WirelessDataNetwork{
 
     public static ArrayList<WirelessDataPacket> packetList;
 
+    /** @see WirelessDataNetwork#getLock() */
+    private static Object lock = new Object();
+
     public WirelessDataNetwork(){
         packetList = new ArrayList<WirelessDataPacket>();
     }
@@ -39,16 +42,37 @@ public class WirelessDataNetwork{
      */
 
     public static void addPacket(WirelessDataPacket packet){ // This is currently not really working. It's throwing java.util.ConcurrentModificationException
-        boolean contains = false;
-        for(WirelessDataPacket next : packetList){
-            if(packet == next){
-                contains = true;
-                break;
+        synchronized(getLock()){
+            boolean contains = false;
+            for(WirelessDataPacket next : packetList){
+                if(packet.equals(next)){
+                    contains = true;
+                    break;
+                }
+            }
+            if(! contains){
+                packetList.listIterator().add(packet);
             }
         }
-        if(!contains){
-            packetList.listIterator().add(packet);
-        }
+    }
+
+    /**
+     * Clears the queue of packets
+     */
+
+    public static void clearQueue(){
+        packetList.clear();
+    }
+
+    /**
+     * Method that returns the lock for synchronization with this class
+     * <p>You probably won't use this</p>
+     *
+     * @return The lock for this class
+     */
+
+    public synchronized static Object getLock(){
+        return lock;
     }
 
     /**
@@ -71,11 +95,15 @@ public class WirelessDataNetwork{
 
         @Override
         public void run(){
-            for(WirelessDataPacket packet : WirelessDataNetwork.packetList){
-                System.out.println(packet);
-                packet.getReceiver().receiveWirelessPacket(packet.getSender().sendWirelessPacket());
+            synchronized(WirelessDataNetwork.getLock()){
+                for(WirelessDataPacket packet : WirelessDataNetwork.packetList){
+                    System.out.println("\n" + packet);
+                    packet.getReceiver().receiveWirelessPacket(packet);
+                    packetList.remove(packet);
+                }
             }
         }
+
     }
 
 }

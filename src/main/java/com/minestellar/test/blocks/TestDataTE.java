@@ -23,8 +23,19 @@ import com.minestellar.api.data.wireless.WirelessDataPacket;
 
 public class TestDataTE extends DataTileEntity{
 
+    private WirelessDataPacket packet, packet1;
+
+    private boolean firstTime = true;
+
+    public TestDataTE(){}
+
     @Override
     public void updateEntity(){
+        if(firstTime){
+            firstTime = false;
+            packet = new WirelessDataPacket(worldObj, xCoord, yCoord, zCoord, xCoord, yCoord, zCoord);
+            packet1 = new WirelessDataPacket(worldObj, xCoord, yCoord, zCoord, xCoord, yCoord, zCoord);
+        }
         super.updateEntity();
     }
 
@@ -33,14 +44,15 @@ public class TestDataTE extends DataTileEntity{
 
     @Override
     public void receiveWirelessPacket(WirelessDataPacket packet){
-        System.out.println(packet);
+        System.out.println("\n" + packet);
     }
 
     @Override
-    public WirelessDataPacket sendWirelessPacket(){
-        WirelessDataPacket packet = new WirelessDataPacket(worldObj, xCoord, yCoord, zCoord, xCoord, yCoord, zCoord);
+    public void sendWirelessPacket(){
+        packet.setAttribute("TestAttribute", "Test");
+        packet1.setAttribute("Test", "TestAttribute");
         WirelessDataNetwork.addPacket(packet);
-        return packet;
+        WirelessDataNetwork.addPacket(packet1);
     }
 
     @Override
