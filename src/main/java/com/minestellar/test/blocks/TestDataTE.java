@@ -21,17 +21,19 @@ import com.minestellar.api.data.wired.WiredDataPacket;
 import com.minestellar.api.data.wireless.WirelessDataNetwork;
 import com.minestellar.api.data.wireless.WirelessDataPacket;
 
+/**
+ * Example class for the {@link com.minestellar.api.data.block.IDataConnection} implementation
+ */
+
 public class TestDataTE extends DataTileEntity{
 
     private WirelessDataPacket packet, packet1;
 
-    private boolean firstTime = true;
-
-    public TestDataTE(){}
+    private boolean firstTime = true, firstSent = true;
 
     @Override
     public void updateEntity(){
-        if(firstTime){
+        if(firstTime){ //You need to do this otherwise it'll have tons of similar packets in the network queue
             firstTime = false;
             packet = new WirelessDataPacket(worldObj, xCoord, yCoord, zCoord, xCoord, yCoord, zCoord);
             packet1 = new WirelessDataPacket(worldObj, xCoord, yCoord, zCoord, xCoord, yCoord, zCoord);
@@ -49,10 +51,13 @@ public class TestDataTE extends DataTileEntity{
 
     @Override
     public void sendWirelessPacket(){
-        packet.setAttribute("TestAttribute", "Test");
+        packet.setAttribute("2", "Test");
         packet1.setAttribute("Test", "TestAttribute");
-        WirelessDataNetwork.addPacket(packet);
-        WirelessDataNetwork.addPacket(packet1);
+        if(firstSent){ //You don't necessarily need to do this. You can leave it alone but it'll send new packets every 1/20th of a second
+            firstSent = false;
+            WirelessDataNetwork.addPacket(packet);
+            WirelessDataNetwork.addPacket(packet1);
+        }
     }
 
     @Override

@@ -50,8 +50,6 @@ public interface IDataConnection{
 
     /**
      * Sends a wireless packet
-     *
-     * @return The {@code WirelessDataPacket} to send
      */
 
     void sendWirelessPacket();

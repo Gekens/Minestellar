@@ -17,6 +17,7 @@
 package com.minestellar.api.data.wireless;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -41,17 +42,17 @@ public class WirelessDataNetwork{
      * @param packet The packet to add
      */
 
-    public static void addPacket(WirelessDataPacket packet){ // This is currently not really working. It's throwing java.util.ConcurrentModificationException
+    public static void addPacket(WirelessDataPacket packet){
         synchronized(getLock()){
             boolean contains = false;
             for(WirelessDataPacket next : packetList){
-                if(packet.equals(next)){
+                if(packet.equals(next)){ //We check if the packet is already in the list. In that case we won't put it in again
                     contains = true;
                     break;
                 }
             }
             if(! contains){
-                packetList.listIterator().add(packet);
+                packetList.listIterator().add(packet); //Needs to use the Iterator otherwise it'll throw java.util.ConcurrentModificationException
             }
         }
     }
@@ -96,10 +97,13 @@ public class WirelessDataNetwork{
         @Override
         public void run(){
             synchronized(WirelessDataNetwork.getLock()){
-                for(WirelessDataPacket packet : WirelessDataNetwork.packetList){
-                    System.out.println("\n" + packet);
-                    packet.getReceiver().receiveWirelessPacket(packet);
-                    packetList.remove(packet);
+                Iterator<WirelessDataPacket> iterator = packetList.listIterator();
+                while(iterator.hasNext()){
+                    WirelessDataPacket packet = iterator.next();
+                    if(packet.getReceiver() != null){
+                        packet.getReceiver().receiveWirelessPacket(packet); //Here is where it notifies the receiver
+                        iterator.remove(); //We remove the packet because we don't want a backlog
+                    }
                 }
             }
         }

@@ -154,13 +154,13 @@ public class MinestellarCore {
     @EventHandler
     public void serverStopping(FMLServerStoppingEvent event){
         Constants.runTimer = FileHandler.readFromFile(Constants.fileName).equals("true");
-        WirelessDataNetwork.clearQueue();
+        WirelessDataNetwork.clearQueue(); //Clears the queue of packets
     }
 
     @EventHandler
     public void serverStarting(FMLServerStartingEvent event){
         WirelessDataNetwork wirelessDataNetwork = new WirelessDataNetwork();
-        wirelessDataNetwork.initTimer();
+        wirelessDataNetwork.initTimer(); //Initialises the timer for the wireless network
         if(FileHandler.readFromFile(Constants.fileName).equals("false")) {
             Constants.runTimer = true;
         }
