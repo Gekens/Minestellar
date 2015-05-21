@@ -17,6 +17,7 @@
 package com.minestellar.test.blocks;
 
 import com.minestellar.api.data.block.DataTileEntity;
+import com.minestellar.api.data.wired.WiredDataNetwork;
 import com.minestellar.api.data.wired.WiredDataPacket;
 import com.minestellar.api.data.wireless.WirelessDataNetwork;
 import com.minestellar.api.data.wireless.WirelessDataPacket;
@@ -28,8 +29,9 @@ import com.minestellar.api.data.wireless.WirelessDataPacket;
 public class TestDataTE extends DataTileEntity{
 
     private WirelessDataPacket packet, packet1;
+    private WiredDataPacket apacket;
 
-    private boolean firstTime = true, firstSent = true;
+    private boolean firstTime = true, firstSentWireless = true, firstSentWired = true;
 
     @Override
     public void updateEntity(){
@@ -37,31 +39,38 @@ public class TestDataTE extends DataTileEntity{
             firstTime = false;
             packet = new WirelessDataPacket(worldObj, xCoord, yCoord, zCoord, xCoord, yCoord, zCoord);
             packet1 = new WirelessDataPacket(worldObj, xCoord, yCoord, zCoord, xCoord, yCoord, zCoord);
+            apacket = new WiredDataPacket(worldObj, xCoord, yCoord, zCoord, xCoord+5, yCoord, zCoord);
         }
         super.updateEntity();
     }
 
     @Override
-    public void receiveWiredPacket(WiredDataPacket packet){}
+    public void receiveWiredPacket(WiredDataPacket packet){
+        System.out.println("\n" + packet);
+    }
 
     @Override
     public void receiveWirelessPacket(WirelessDataPacket packet){
-        System.out.println("\n" + packet);
+//        System.out.println("\n" + packet);
     }
 
     @Override
     public void sendWirelessPacket(){
         packet.setAttribute("2", "Test");
         packet1.setAttribute("Test", "TestAttribute");
-        if(firstSent){ //You don't necessarily need to do this. You can leave it alone but it'll send new packets every 1/20th of a second
-            firstSent = false;
+        if(firstSentWireless){ //You don't necessarily need to do this. You can leave it alone but it'll send new packets every 1/20th of a second
+            firstSentWireless = false;
             WirelessDataNetwork.addPacket(packet);
             WirelessDataNetwork.addPacket(packet1);
         }
     }
 
     @Override
-    public WiredDataPacket sendWiredPacket(){
-        return null;
+    public void sendWiredPacket(){
+        apacket.setAttribute("Test", "Atest");
+        if(firstSentWired){
+            firstSentWired = false;
+            WiredDataNetwork.addPacket(apacket);
+        }
     }
 }

@@ -64,9 +64,11 @@ public class WireSpecialRender extends TileEntitySpecialRenderer {
 			blockTexture = new ResourceLocation(MinestellarCore.TEXTURE_PREFIX + "textures/model/tile/blockCable" + tileEntity.blockMetadata + ".png");
 		} else if (type == 1) {
 			blockTexture = new ResourceLocation(MinestellarCore.TEXTURE_PREFIX + "textures/model/tile/blockPipe" + tileEntity.blockMetadata + ".png");
-		} else {
-			blockTexture = null;
-		}
+		} else if(type == 2){
+            blockTexture = new ResourceLocation(MinestellarCore.MOD_ID + "textures/model/tile/blockData.png");
+		}else{
+            blockTexture = null;
+        }
 
 		GL11.glTranslated(translationX, translationY, translationZ);
 		GL11.glDisable(GL11.GL_LIGHTING);

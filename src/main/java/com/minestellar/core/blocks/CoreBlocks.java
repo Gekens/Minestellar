@@ -16,6 +16,15 @@
 
 package com.minestellar.core.blocks;
 
+import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.oredict.OreDictionary;
+
+import com.minestellar.api.data.block.wire.DataWire;
 import com.minestellar.core.MinestellarCore;
 import com.minestellar.core.blocks.fluid.FluidBlockHydrogen;
 import com.minestellar.core.blocks.fluid.FluidBlockNitrogen;
@@ -30,13 +39,6 @@ import com.minestellar.core.blocks.machines.GasSinkMachine;
 import com.minestellar.core.blocks.machines.OxygenCollectorMachine;
 import com.minestellar.core.blocks.machines.SolarGenerator;
 import com.minestellar.core.util.ItemBlockUtil;
-import cpw.mods.fml.common.registry.GameRegistry;
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidRegistry;
-import net.minecraftforge.oredict.OreDictionary;
 
 public class CoreBlocks {
 	public static void init() {
@@ -56,6 +58,7 @@ public class CoreBlocks {
 
 	public static Block cableBlock;
 	public static Block pipeBlock;
+    public static Block dataBlock;
 
 	public static Block computer;
 
@@ -82,6 +85,7 @@ public class CoreBlocks {
 
 		CoreBlocks.cableBlock = new BlockCable("core_cable");
 		CoreBlocks.pipeBlock = new BlockPipe("core_pipe");
+        CoreBlocks.dataBlock = new DataWire("core_wire");
 
 		CoreBlocks.gasSink = new GasSinkMachine("gas_sink");
 		CoreBlocks.oxygenCollector = new OxygenCollectorMachine("oxygen_collector");
@@ -115,6 +119,7 @@ public class CoreBlocks {
 
 		MinestellarCore.registerBlock(CoreBlocks.cableBlock, ItemBlockCable.class);
 		MinestellarCore.registerBlock(CoreBlocks.pipeBlock, ItemBlockPipe.class);
+        GameRegistry.registerBlock(CoreBlocks.dataBlock, "core_wire");
 
 		GameRegistry.registerBlock(CoreBlocks.oxygenCollector, "oxygen_collector");
 		GameRegistry.registerBlock(CoreBlocks.gasSink, "gas_sink");

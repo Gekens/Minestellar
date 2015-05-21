@@ -56,10 +56,8 @@ public interface IDataConnection{
 
     /**
      * Sends a wired packet
-     *
-     * @return The {@code WiredDataPacket} to send
      */
 
-    WiredDataPacket sendWiredPacket();
+    void sendWiredPacket();
 
 }

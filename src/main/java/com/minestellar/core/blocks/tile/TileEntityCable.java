@@ -21,7 +21,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
 import cofh.api.energy.EnergyStorage;
 import cofh.api.energy.IEnergyHandler;
-import cofh.api.energy.IEnergyProvider;
+import cofh.api.energy.IEnergyConnection;
 
 import com.minestellar.api.blocks.TileEntityWire;
 
@@ -76,10 +76,10 @@ public class TileEntityCable extends TileEntityWire implements IEnergyHandler {
 	}
 
 	/**
-	 * Connects the cable to the <code>IEnergyProvider<code> blocks
+	 * Connects the cable to the <code>IEnergyConnection<code> blocks
 	 */
 	public void updateBlockConnections() {
-		if (this.worldObj.getTileEntity(xCoord, yCoord + 1, zCoord) instanceof IEnergyProvider) {
+		if (this.worldObj.getTileEntity(xCoord, yCoord + 1, zCoord) instanceof IEnergyConnection) {
 			if (this.worldObj.getTileEntity(xCoord, yCoord + 1, zCoord) instanceof TileEntityCable) {
 				if (this.worldObj.getTileEntity(xCoord, yCoord + 1, zCoord).getBlockMetadata() == this.getBlockMetadata()) {
 					connections[0] = ForgeDirection.UP;
@@ -93,7 +93,7 @@ public class TileEntityCable extends TileEntityWire implements IEnergyHandler {
 			connections[0] = null;
 		}
 
-		if (this.worldObj.getTileEntity(xCoord, yCoord - 1, zCoord) instanceof IEnergyProvider) {
+		if (this.worldObj.getTileEntity(xCoord, yCoord - 1, zCoord) instanceof IEnergyConnection) {
 			if (this.worldObj.getTileEntity(xCoord, yCoord - 1, zCoord) instanceof TileEntityCable) {
 				if (this.worldObj.getTileEntity(xCoord, yCoord - 1, zCoord).getBlockMetadata() == this.getBlockMetadata()) {
 					connections[1] = ForgeDirection.DOWN;
@@ -107,7 +107,7 @@ public class TileEntityCable extends TileEntityWire implements IEnergyHandler {
 			connections[1] = null;
 		}
 
-		if (this.worldObj.getTileEntity(xCoord, yCoord, zCoord - 1) instanceof IEnergyProvider) {
+		if (this.worldObj.getTileEntity(xCoord, yCoord, zCoord - 1) instanceof IEnergyConnection) {
 			if (this.worldObj.getTileEntity(xCoord, yCoord, zCoord - 1) instanceof TileEntityCable) {
 				if (this.worldObj.getTileEntity(xCoord, yCoord, zCoord - 1).getBlockMetadata() == this.getBlockMetadata()) {
 					connections[2] = ForgeDirection.NORTH;
@@ -121,7 +121,7 @@ public class TileEntityCable extends TileEntityWire implements IEnergyHandler {
 			connections[2] = null;
 		}
 
-		if (this.worldObj.getTileEntity(xCoord + 1, yCoord, zCoord) instanceof IEnergyProvider) {
+		if (this.worldObj.getTileEntity(xCoord + 1, yCoord, zCoord) instanceof IEnergyConnection) {
 			if (this.worldObj.getTileEntity(xCoord + 1, yCoord, zCoord) instanceof TileEntityCable) {
 				if (this.worldObj.getTileEntity(xCoord + 1, yCoord, zCoord).getBlockMetadata() == this.getBlockMetadata()) {
 					connections[3] = ForgeDirection.EAST;
@@ -135,7 +135,7 @@ public class TileEntityCable extends TileEntityWire implements IEnergyHandler {
 			connections[3] = null;
 		}
 
-		if (this.worldObj.getTileEntity(xCoord, yCoord, zCoord + 1) instanceof IEnergyProvider) {
+		if (this.worldObj.getTileEntity(xCoord, yCoord, zCoord + 1) instanceof IEnergyConnection) {
 			if (this.worldObj.getTileEntity(xCoord, yCoord, zCoord + 1) instanceof TileEntityCable) {
 				if (this.worldObj.getTileEntity(xCoord, yCoord, zCoord + 1).getBlockMetadata() == this.getBlockMetadata()) {
 					connections[4] = ForgeDirection.SOUTH;
@@ -149,7 +149,7 @@ public class TileEntityCable extends TileEntityWire implements IEnergyHandler {
 			connections[4] = null;
 		}
 
-		if (this.worldObj.getTileEntity(xCoord - 1, yCoord, zCoord) instanceof IEnergyProvider) {
+		if (this.worldObj.getTileEntity(xCoord - 1, yCoord, zCoord) instanceof IEnergyConnection) {
 			if (this.worldObj.getTileEntity(xCoord - 1, yCoord, zCoord) instanceof TileEntityCable) {
 				if (this.worldObj.getTileEntity(xCoord - 1, yCoord, zCoord).getBlockMetadata() == this.getBlockMetadata()) {
 					connections[5] = ForgeDirection.WEST;

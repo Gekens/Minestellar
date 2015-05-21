@@ -16,10 +16,11 @@
 
 package com.minestellar.api.data.block;
 
-import com.minestellar.api.data.wired.WiredDataPacket;
-import com.minestellar.api.data.wireless.WirelessDataPacket;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+
+import com.minestellar.api.data.wired.WiredDataPacket;
+import com.minestellar.api.data.wireless.WirelessDataPacket;
 
 /**
  * Extend this class if you want any of your tileEntities to be connectable to the network
@@ -62,5 +63,5 @@ public abstract class DataTileEntity extends TileEntity implements IDataConnecti
     public abstract void sendWirelessPacket();
 
     @Override
-    public abstract WiredDataPacket sendWiredPacket();
+    public abstract void sendWiredPacket();
 }
