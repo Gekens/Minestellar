@@ -16,9 +16,9 @@
 
 package com.minestellar.test.blocks;
 
+import net.minecraft.nbt.NBTTagCompound;
+
 import com.minestellar.api.data.block.DataTileEntity;
-import com.minestellar.api.data.wired.WiredDataNetwork;
-import com.minestellar.api.data.wired.WiredDataPacket;
 import com.minestellar.api.data.wireless.WirelessDataNetwork;
 import com.minestellar.api.data.wireless.WirelessDataPacket;
 
@@ -29,29 +29,32 @@ import com.minestellar.api.data.wireless.WirelessDataPacket;
 public class TestDataTE extends DataTileEntity{
 
     private WirelessDataPacket packet, packet1;
-    private WiredDataPacket apacket;
 
-    private boolean firstTime = true, firstSentWireless = true, firstSentWired = true;
+    private boolean firstTime = true, firstSentWireless = true;
+
+    @Override
+    public void writeToNBT(NBTTagCompound nbt){
+        super.writeToNBT(nbt);
+    }
+
+    @Override
+    public void readFromNBT(NBTTagCompound nbt){
+        super.readFromNBT(nbt);
+    }
 
     @Override
     public void updateEntity(){
         if(firstTime){ //You need to do this otherwise it'll have tons of similar packets in the network queue
             firstTime = false;
-            packet = new WirelessDataPacket(worldObj, xCoord, yCoord, zCoord, xCoord, yCoord, zCoord);
-            packet1 = new WirelessDataPacket(worldObj, xCoord, yCoord, zCoord, xCoord, yCoord, zCoord);
-            apacket = new WiredDataPacket(worldObj, xCoord, yCoord, zCoord, xCoord+5, yCoord, zCoord);
+            packet = new WirelessDataPacket(worldObj, xCoord, yCoord, zCoord, connectedX, connectedY, connectedZ);
+            packet1 = new WirelessDataPacket(worldObj, xCoord, yCoord, zCoord, connectedX, connectedY, connectedZ);
         }
         super.updateEntity();
     }
 
     @Override
-    public void receiveWiredPacket(WiredDataPacket packet){
-        System.out.println("\n" + packet);
-    }
-
-    @Override
     public void receiveWirelessPacket(WirelessDataPacket packet){
-//        System.out.println("\n" + packet);
+        System.out.println("\n" + packet);
     }
 
     @Override
@@ -65,12 +68,4 @@ public class TestDataTE extends DataTileEntity{
         }
     }
 
-    @Override
-    public void sendWiredPacket(){
-        apacket.setAttribute("Test", "Atest");
-        if(firstSentWired){
-            firstSentWired = false;
-            WiredDataNetwork.addPacket(apacket);
-        }
-    }
 }

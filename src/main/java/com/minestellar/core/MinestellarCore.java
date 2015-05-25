@@ -30,8 +30,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 
-import com.minestellar.api.data.block.wire.DataWireTileEntity;
-import com.minestellar.api.data.wired.WiredDataNetwork;
 import com.minestellar.api.data.wireless.WirelessDataNetwork;
 import com.minestellar.core.blocks.CoreBlocks;
 import com.minestellar.core.blocks.tile.*;
@@ -141,7 +139,6 @@ public class MinestellarCore {
         GameRegistry.registerTileEntity(TestDataTE.class, "testData");
 		GameRegistry.registerTileEntity(TileEntityCable.class, "cable");
 		GameRegistry.registerTileEntity(TileEntityPipe.class, "pipe");
-        GameRegistry.registerTileEntity(DataWireTileEntity.class, "data");
 		GameRegistry.registerTileEntity(TileEntityOxygenCollector.class, "oxygen_collector");
 		GameRegistry.registerTileEntity(TileEntitySolarGenerator.class, "solar_generator");
 		GameRegistry.registerTileEntity(TileEntityGasSink.class, "gas_sink");
@@ -159,15 +156,12 @@ public class MinestellarCore {
     public void serverStopping(FMLServerStoppingEvent event){
         Constants.runTimer = FileHandler.readFromFile(Constants.fileName).equals("true");
         WirelessDataNetwork.clearQueue(); //Clears the queue of packets
-        WiredDataNetwork.clearQueue(); //Clears the queue of packets
     }
 
     @EventHandler
     public void serverStarting(FMLServerStartingEvent event){
         WirelessDataNetwork wirelessDataNetwork = new WirelessDataNetwork();
         wirelessDataNetwork.initTimer(); //Initialises the timer for the wireless network
-        WiredDataNetwork wiredDataNetwork = new WiredDataNetwork();
-        wiredDataNetwork.initTimer(); //Initialises the timer foe the wired network
         if(FileHandler.readFromFile(Constants.fileName).equals("false")) {
             Constants.runTimer = true;
         }

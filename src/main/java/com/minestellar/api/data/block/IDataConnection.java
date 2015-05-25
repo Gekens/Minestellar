@@ -16,7 +16,6 @@
 
 package com.minestellar.api.data.block;
 
-import com.minestellar.api.data.wired.WiredDataPacket;
 import com.minestellar.api.data.wireless.WirelessDataPacket;
 
 /**
@@ -41,23 +40,9 @@ public interface IDataConnection{
     void receiveWirelessPacket(WirelessDataPacket packet);
 
     /**
-     * Receives a packet from the network
-     *
-     * @param packet The packet received
-     */
-
-    void receiveWiredPacket(WiredDataPacket packet);
-
-    /**
      * Sends a wireless packet
      */
 
     void sendWirelessPacket();
-
-    /**
-     * Sends a wired packet
-     */
-
-    void sendWiredPacket();
 
 }

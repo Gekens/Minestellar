@@ -16,6 +16,8 @@
 
 package com.minestellar.core.blocks.tile;
 
+import cpw.mods.fml.common.Optional;
+import cpw.mods.fml.common.Optional.Method;
 import mekanism.api.gas.Gas;
 import mekanism.api.gas.GasStack;
 import mekanism.api.gas.GasTank;
@@ -25,9 +27,6 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
 
 import com.minestellar.api.blocks.TileEntityWire;
-
-import cpw.mods.fml.common.Optional;
-import cpw.mods.fml.common.Optional.Method;
 
 @Optional.Interface(iface = "mekanism.api.gas.IGasHandler", modid = "Mekanism")
 public class TileEntityPipe extends TileEntityWire implements IGasHandler {
@@ -58,7 +57,7 @@ public class TileEntityPipe extends TileEntityWire implements IGasHandler {
 	}
 
 	/**
-	 * Called many times per second, it checks if it can transfer gas to any adjacent to our block
+	 * Called many times per second, it checks if it can transfer gas to any adjacent block
 	 */
 	@Override
 	public void updateEntity() {

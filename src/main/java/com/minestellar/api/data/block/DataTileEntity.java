@@ -19,7 +19,6 @@ package com.minestellar.api.data.block;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 
-import com.minestellar.api.data.wired.WiredDataPacket;
 import com.minestellar.api.data.wireless.WirelessDataPacket;
 
 /**
@@ -28,24 +27,31 @@ import com.minestellar.api.data.wireless.WirelessDataPacket;
 
 public abstract class DataTileEntity extends TileEntity implements IDataConnection{
 
+    public int connectedX, connectedY, connectedZ;
+
     public DataTileEntity(){}
 
     @Override
     public void updateEntity(){
         super.updateEntity();
-        //Makes sure that the methods are called
-        this.sendWiredPacket();
+        //Makes sure that the method is called
         this.sendWirelessPacket();
     }
 
     @Override
     public void writeToNBT(NBTTagCompound nbt){
         super.writeToNBT(nbt);
+        nbt.setInteger("connectedX", connectedX);
+        nbt.setInteger("connectedY", connectedY);
+        nbt.setInteger("connectedZ", connectedZ);
     }
 
     @Override
     public void readFromNBT(NBTTagCompound nbt){
         super.readFromNBT(nbt);
+        connectedX = nbt.getInteger("connectedX");
+        connectedY = nbt.getInteger("connectedY");
+        connectedZ = nbt.getInteger("connectedZ");
     }
 
     // IDataConnection Implementation
@@ -54,14 +60,9 @@ public abstract class DataTileEntity extends TileEntity implements IDataConnecti
     public boolean canDataConnect(){ return true; }
 
     @Override
-    public abstract void receiveWiredPacket(WiredDataPacket packet);
-
-    @Override
     public abstract void receiveWirelessPacket(WirelessDataPacket packet);
 
     @Override
     public abstract void sendWirelessPacket();
 
-    @Override
-    public abstract void sendWiredPacket();
 }
