@@ -16,14 +16,18 @@
 
 package com.minestellar.core.items;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
+import com.minestellar.api.data.block.DataTileEntity;
 import com.minestellar.api.data.block.IDataConnection;
-import com.minestellar.core.util.MinestellarLog;
+import com.minestellar.core.MinestellarCore;
 import com.minestellar.core.util.NBTHelper;
 
 import java.util.List;
@@ -58,15 +62,7 @@ public class ItemMemoryCard extends Item{
             }
         }else{
             if(world.getTileEntity(x, y, z) != null && world.getTileEntity(x, y, z) instanceof IDataConnection){
-                NBTTagCompound tag = new NBTTagCompound();
-                tag.setInteger("connectedX", NBTHelper.getInt(itemStack, "xCoord"));
-                tag.setInteger("connectedY", NBTHelper.getInt(itemStack, "yCoord"));
-                tag.setInteger("connectedZ", NBTHelper.getInt(itemStack, "zCoord"));
-
-                MinestellarLog.info("NBT: " + tag.toString());
-
-                world.getTileEntity(x, y, z).writeToNBT(tag);
-
+                ((DataTileEntity)world.getTileEntity(x, y, z)).setCoordinates(itemStack);
                 return true;
             }
         }
@@ -79,6 +75,12 @@ public class ItemMemoryCard extends Item{
         list.add("X: " + NBTHelper.getInt(stack, "xCoord"));
         list.add("Y: " + NBTHelper.getInt(stack, "yCoord"));
         list.add("Z: " + NBTHelper.getInt(stack, "zCoord"));
+    }
+
+    @SideOnly(Side.CLIENT)
+    @Override
+    public CreativeTabs getCreativeTab() {
+        return MinestellarCore.stellarItemsTab;
     }
 
 }

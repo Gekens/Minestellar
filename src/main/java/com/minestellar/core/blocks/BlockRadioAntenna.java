@@ -16,14 +16,17 @@
 
 package com.minestellar.core.blocks;
 
-import com.minestellar.core.MinestellarCore;
-import com.minestellar.core.blocks.tile.TileEntityRadioAntenna;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
+
+import com.minestellar.core.MinestellarCore;
+import com.minestellar.core.blocks.tile.TileEntityRadioAntenna;
+import com.minestellar.core.items.ItemMemoryCard;
 
 public class BlockRadioAntenna extends Block implements ITileEntityProvider {
 	protected BlockRadioAntenna(String name) {
@@ -40,4 +43,17 @@ public class BlockRadioAntenna extends Block implements ITileEntityProvider {
 	public TileEntity createNewTileEntity(World world, int meta) {
 		return new TileEntityRadioAntenna();
 	}
+
+    @Override
+    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ){
+        if(player.getCurrentEquippedItem() != null){
+            if(player.getCurrentEquippedItem().getItem() instanceof ItemMemoryCard){
+                TileEntityRadioAntenna te = (TileEntityRadioAntenna) world.getTileEntity(x, y, z);
+                if(te != null){
+                    te.setCoordinates(player.getCurrentEquippedItem()); //I'm binding the other IDataConnection TE to this one
+                }
+            }
+        }
+        return false;
+    }
 }

@@ -16,21 +16,19 @@
 
 package com.minestellar.moon.world;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.Entity;
-import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.WorldProvider;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraftforge.client.IRenderHandler;
 
-import com.minestellar.utils.vector.Vector3;
-import com.minestellar.utils.world.IMinestellarWorldProvider;
 import com.minestellar.moon.util.ConfigManagerMoon;
 import com.minestellar.moon.world.gen.ChunkProviderMoon;
 import com.minestellar.moon.world.gen.WorldChunkManagerMoon;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import com.minestellar.utils.vector.Vector3;
+import com.minestellar.utils.world.IMinestellarWorldProvider;
 
 public class WorldProviderMoon extends WorldProvider implements IMinestellarWorldProvider {
 	@Override
@@ -63,9 +61,8 @@ public class WorldProviderMoon extends WorldProvider implements IMinestellarWorl
 	@SideOnly(Side.CLIENT)
 	public float getStarBrightness(float par1) {
 		final float var2 = this.worldObj.getCelestialAngle(par1);
-		float var3 = 1.0F - (MathHelper.cos(var2 * (float) Math.PI * 2.0F) * 2.0F + 0.25F);
 
-		var3 = 0.0F;
+		float var3 = 0.0F;
 
 		return var3 * var3 * 0.5F + 0.3F;
 	}
@@ -122,13 +119,11 @@ public class WorldProviderMoon extends WorldProvider implements IMinestellarWorl
 
 	@Override
 	public Vector3 getSkyColor() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public Vector3 getFogColor() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

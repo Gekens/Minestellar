@@ -16,10 +16,13 @@
 
 package com.minestellar.api.data.block;
 
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 
 import com.minestellar.api.data.wireless.WirelessDataPacket;
+import com.minestellar.core.items.ItemMemoryCard;
+import com.minestellar.core.util.NBTHelper;
 
 /**
  * Extend this class if you want any of your tileEntities to be connectable to the network
@@ -52,6 +55,21 @@ public abstract class DataTileEntity extends TileEntity implements IDataConnecti
         connectedX = nbt.getInteger("connectedX");
         connectedY = nbt.getInteger("connectedY");
         connectedZ = nbt.getInteger("connectedZ");
+    }
+
+    /**
+     * Sets the coordinates to which the TE is connected to
+     *
+     * @param card The itemstack from which get the information
+     * @see ItemMemoryCard
+     */
+
+    public void setCoordinates(ItemStack card){
+        if(card != null && card.getItem() instanceof ItemMemoryCard){
+            connectedX = NBTHelper.getInt(card, "xCoord");
+            connectedY = NBTHelper.getInt(card, "yCoord");
+            connectedZ = NBTHelper.getInt(card, "zCoord");
+        }
     }
 
     // IDataConnection Implementation

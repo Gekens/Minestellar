@@ -18,15 +18,22 @@ package com.minestellar.core.blocks.tile;
 
 import cofh.api.energy.EnergyStorage;
 import cofh.api.energy.IEnergyHandler;
-import com.minestellar.core.network.NetworkHandler;
-import com.minestellar.core.network.message.MessageAntennaOnline;
 import cpw.mods.fml.common.Optional;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
 
+import com.minestellar.api.data.block.DataTileEntity;
+import com.minestellar.api.data.wireless.WirelessDataPacket;
+import com.minestellar.core.network.NetworkHandler;
+import com.minestellar.core.network.message.MessageAntennaOnline;
+
 @Optional.Interface(iface = "cofh.api.energy.IEnergyHandler", modid = "CoFHCore")
-public class TileEntityRadioAntenna extends TileEntity implements IEnergyHandler{
+public class TileEntityRadioAntenna extends DataTileEntity implements IEnergyHandler{
+
+    private boolean firstTime, firstWireless;
+
+    private WirelessDataPacket dataPacket;
 
     private EnergyStorage storage;
 
@@ -36,6 +43,15 @@ public class TileEntityRadioAntenna extends TileEntity implements IEnergyHandler
 
     @Override
     public void updateEntity() {
+
+        System.out.println("Connected: " + connectedX + " " + connectedY + " " + connectedZ);
+
+        if(worldObj.getTileEntity(connectedX, connectedY, connectedZ) instanceof TileEntityComputer){
+            if(firstTime){
+                firstTime = false;
+                dataPacket = new WirelessDataPacket(worldObj, xCoord, yCoord, zCoord, connectedX, connectedY, connectedZ);
+            }
+        }
 
 //        MinestellarLog.info("Stored: " + storage.getEnergyStored());
 
@@ -78,6 +94,18 @@ public class TileEntityRadioAntenna extends TileEntity implements IEnergyHandler
     public void writeToNBT(NBTTagCompound nbt) {
         super.writeToNBT(nbt);
         storage.writeToNBT(nbt);
+    }
+
+    //IDataConnection Implementation
+
+    @Override
+    public void receiveWirelessPacket(WirelessDataPacket packet){
+
+    }
+
+    @Override
+    public void sendWirelessPacket(){
+
     }
 
     //RF IMPLEMENTATION
