@@ -56,4 +56,20 @@ public class BlockRadioAntenna extends Block implements ITileEntityProvider {
         }
         return false;
     }
+
+    @Override
+    public int getRenderType() {
+        return -2;
+    }
+
+    @Override
+    public boolean isOpaqueCube() {
+        return false;
+    }
+
+    @Override
+    public boolean renderAsNormalBlock() {
+        return false;
+    }
+
 }

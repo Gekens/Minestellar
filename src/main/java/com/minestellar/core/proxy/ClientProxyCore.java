@@ -33,11 +33,11 @@ import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.common.util.EnumHelper;
 
 import com.minestellar.api.blocks.WireSpecialRender;
-import com.minestellar.api.data.block.wire.DataWireTileEntity;
 import com.minestellar.core.blocks.CoreBlocks;
 import com.minestellar.core.blocks.tile.*;
 import com.minestellar.core.particles.EntityCoreOilDripFX;
 import com.minestellar.core.render.item.*;
+import com.minestellar.core.render.tile.TileEntityRenderAntenna;
 import com.minestellar.core.render.tile.TileEntityRenderGasSink;
 import com.minestellar.core.render.tile.TileEntityRenderOxygenCollector;
 import com.minestellar.core.render.tile.TileEntityRenderSolarPanel;
@@ -78,10 +78,10 @@ public class ClientProxyCore extends CommonProxyCore {
 	private void registerTileEntityRenders() {
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityCable.class, new WireSpecialRender(0, 32, 5, false));
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityPipe.class, new WireSpecialRender(1, 32, 5, true));
-        ClientRegistry.bindTileEntitySpecialRenderer(DataWireTileEntity.class, new WireSpecialRender(2, 32, 5, false));
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityOxygenCollector.class, new TileEntityRenderOxygenCollector());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityGasSink.class, new TileEntityRenderGasSink());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntitySolarGenerator.class, new TileEntityRenderSolarPanel());
+        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityRadioAntenna.class, new TileEntityRenderAntenna());
 	}
 
 	private void registerEntityRenderers() {
@@ -93,6 +93,7 @@ public class ClientProxyCore extends CommonProxyCore {
 		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(CoreBlocks.oxygenCollector), new OxygenCollectorItemRender());
 		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(CoreBlocks.cableBlock), new CableItemRender(0));
 		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(CoreBlocks.pipeBlock), new PipeItemRender(0));
+        MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(CoreBlocks.radioAntenna), new AntennaItemRender());
 	}
 
 	@Override

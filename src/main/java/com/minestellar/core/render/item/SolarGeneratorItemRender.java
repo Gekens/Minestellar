@@ -40,14 +40,15 @@ public class SolarGeneratorItemRender implements IItemRenderer {
 		switch (type) {
 		case EQUIPPED_FIRST_PERSON:
 			GL11.glPushMatrix();
-			GL11.glTranslated(0, 0.25, 0);
+            GL11.glScaled(0.45D, 0.45D, 0.45D);
+			GL11.glTranslated(0, 1, 0);
 			TileEntityRendererDispatcher.instance.renderTileEntityAt(new TileEntitySolarGenerator(), 0.0D, 0.0D, 0.0D, 0.0F);
-			GL11.glTranslated(0, -0.25, 0);
+			GL11.glTranslated(0, -1, 0);
 			GL11.glPopMatrix();
 			break;
 		case INVENTORY:
 			GL11.glPushMatrix();
-			GL11.glScaled(0.45, 0.45, 0.45);
+			GL11.glScaled(0.45D, 0.45D, 0.45D);
 			GL11.glTranslated(0, -0.75, 0);
 			TileEntityRendererDispatcher.instance.renderTileEntityAt(new TileEntitySolarGenerator(), 0.0D, 0.0D, 0.0D, 0.0F);
 			GL11.glTranslated(0, 0.75, 0);
