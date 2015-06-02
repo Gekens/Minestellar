@@ -16,11 +16,10 @@
 
 package com.minestellar.core.gui;
 
-import java.util.TimerTask;
-
 import com.minestellar.core.gui.widget.GuiDraw;
 import com.minestellar.core.gui.widget.planets.GuiPlanet;
-import com.minestellar.core.util.MinestellarLog;
+
+import java.util.TimerTask;
 
 /**
  * Timer task for the planets.
@@ -85,12 +84,9 @@ public class PlanetTimer extends TimerTask {
 		switch (planet) {
 		case EARTH:
 			currentPlanet.setCoords(GuiDraw.displaySize().width / 2 + 4 + (int) x, GuiDraw.displaySize().height / 2 + 4 + (int) y);
-			//MinestellarLog.info("EarthX: " + x + " EarthY: " + y + " DoTop: " + doTop + " EarthX: " + ComputerGui.earth.x);
 			break;
 		case MOON:
-			// currentPlanet.setCoords(ComputerGui.earth.x+4+(int)x, ComputerGui.earth.y+4+(int)y);
 			currentPlanet.setCoords(GuiDraw.displaySize().width / 2 + 4 + (int) x, GuiDraw.displaySize().height / 2 + 4 + (int) y);
-			//MinestellarLog.info("MoonX: " + x + " MoonY: " + y + " DoTop: " + doTop + " EarthX: " + ComputerGui.earth.x);
 			break;
 		case VENUS:
 			currentPlanet.setCoords(GuiDraw.displaySize().width / 2 + 4 + (int) x, GuiDraw.displaySize().height / 2 + 4 + (int) y);
@@ -99,6 +95,5 @@ public class PlanetTimer extends TimerTask {
 			break;
 		}
 
-		// MinestellarLog.info("X: " + x + " Y: " + y + " DoTop: " + doTop + " Planet: " + planet);
 	}
 }

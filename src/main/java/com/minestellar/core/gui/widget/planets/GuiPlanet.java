@@ -17,7 +17,6 @@
 package com.minestellar.core.gui.widget.planets;
 
 import net.minecraft.util.ResourceLocation;
-
 import org.lwjgl.opengl.GL11;
 
 import com.minestellar.core.MinestellarCore;
@@ -35,7 +34,6 @@ public class GuiPlanet extends GuiWidget {
 	private String name;
 	private boolean isEnabled = true;
 	private boolean isSelected = false;
-	private boolean isSelectable = true;
 	private ResourceLocation texture;
 	private GuiScreenWidget parent;
 
@@ -58,7 +56,14 @@ public class GuiPlanet extends GuiWidget {
 								planet1.setSelected(false);
 								gui.setSelectedPlanet(null);
 								gui.setDraw(false);
-							}
+							}else{
+                                try{
+                                    gui.removeSidebars();
+                                }catch(Exception e){
+                                    MinestellarCore.log.fatal("Crash caught! Report this to the mod author!");
+                                    MinestellarCore.log.fatal(e);
+                                }
+                            }
 						} catch (Exception ignored) {
 						}
 					}

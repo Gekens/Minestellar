@@ -1,18 +1,6 @@
 package com.minestellar.venus;
 
 import com.google.common.base.Stopwatch;
-import com.minestellar.core.Constants;
-import com.minestellar.core.util.MinestellarLog;
-import com.minestellar.core.util.MinestellarUtil;
-import com.minestellar.venus.blocks.VenusBlocks;
-import com.minestellar.venus.entities.EntityEvolvedBlaze;
-import com.minestellar.venus.entities.EntityVenusianTNT;
-import com.minestellar.venus.entities.EntityVenusianVillager;
-import com.minestellar.venus.items.VenusItems;
-import com.minestellar.venus.proxy.CommonProxyVenus;
-import com.minestellar.venus.util.ConfigManagerVenus;
-import com.minestellar.venus.util.RecipeManagerVenus;
-import com.minestellar.venus.world.DimensionVenus;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.SidedProxy;
@@ -25,6 +13,19 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 
+import com.minestellar.core.Constants;
+import com.minestellar.core.util.LogHelper;
+import com.minestellar.core.util.MinestellarUtil;
+import com.minestellar.venus.blocks.VenusBlocks;
+import com.minestellar.venus.entities.EntityEvolvedBlaze;
+import com.minestellar.venus.entities.EntityVenusianTNT;
+import com.minestellar.venus.entities.EntityVenusianVillager;
+import com.minestellar.venus.items.VenusItems;
+import com.minestellar.venus.proxy.CommonProxyVenus;
+import com.minestellar.venus.util.ConfigManagerVenus;
+import com.minestellar.venus.util.RecipeManagerVenus;
+import com.minestellar.venus.world.DimensionVenus;
+
 import java.io.File;
 import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
@@ -36,6 +37,8 @@ public class MinestellarVenus {
 
 	public static final String ASSET_PREFIX = "minestellar_venus";
 	public static final String TEXTURE_PREFIX = MinestellarVenus.ASSET_PREFIX + ":";
+
+    LogHelper log = new LogHelper(MinestellarVenus.MODID);
 
 	public static HashMap<String, ItemStack> blocksList = new HashMap<String, ItemStack>();
 	public static HashMap<String, ItemStack> itemList = new HashMap<String, ItemStack>();
@@ -64,7 +67,7 @@ public class MinestellarVenus {
 
 		proxy.preInit(event);
 
-        MinestellarLog.info("PreInitialization (Venus) Completed in " + stopwatch.elapsed( TimeUnit.MILLISECONDS ) + " ms.");
+        log.info("PreInitialization (Venus) Completed in " + stopwatch.elapsed( TimeUnit.MILLISECONDS ) + " ms.");
 	}
 
 	@EventHandler
@@ -77,7 +80,7 @@ public class MinestellarVenus {
 
 		proxy.init(event);
 
-        MinestellarLog.info("Initialization (Venus) Completed in " + stopwatch.elapsed( TimeUnit.MILLISECONDS ) + " ms.");
+        log.info("Initialization (Venus) Completed in " + stopwatch.elapsed( TimeUnit.MILLISECONDS ) + " ms.");
 	}
 
 	@EventHandler
@@ -88,7 +91,7 @@ public class MinestellarVenus {
 
 		proxy.postInit(event);
 
-        MinestellarLog.info("PostInitialization (Venus) Completed in " + stopwatch.elapsed( TimeUnit.MILLISECONDS ) + " ms.");
+        log.info("PostInitialization (Venus) Completed in " + stopwatch.elapsed( TimeUnit.MILLISECONDS ) + " ms.");
 	}
 
 	private void registerTileEntities() {

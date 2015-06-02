@@ -17,14 +17,6 @@
 package com.minestellar.moon;
 
 import com.google.common.base.Stopwatch;
-import com.minestellar.core.Constants;
-import com.minestellar.core.util.MinestellarLog;
-import com.minestellar.moon.blocks.MoonBlocks;
-import com.minestellar.moon.items.MoonItems;
-import com.minestellar.moon.proxy.CommonProxyMoon;
-import com.minestellar.moon.recipe.RecipeManagerMoon;
-import com.minestellar.moon.util.ConfigManagerMoon;
-import com.minestellar.moon.world.DimensionMoon;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
@@ -38,6 +30,15 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 
+import com.minestellar.core.Constants;
+import com.minestellar.core.util.LogHelper;
+import com.minestellar.moon.blocks.MoonBlocks;
+import com.minestellar.moon.items.MoonItems;
+import com.minestellar.moon.proxy.CommonProxyMoon;
+import com.minestellar.moon.recipe.RecipeManagerMoon;
+import com.minestellar.moon.util.ConfigManagerMoon;
+import com.minestellar.moon.world.DimensionMoon;
+
 import java.io.File;
 import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
@@ -49,6 +50,8 @@ public class MinestellarMoon {
 
 	public static final String ASSET_PREFIX = "minestellar_moon";
 	public static final String TEXTURE_PREFIX = MinestellarMoon.ASSET_PREFIX + ":";
+
+    public static LogHelper log = new LogHelper(MinestellarMoon.MODID);
 
 	public static HashMap<String, ItemStack> blocksList = new HashMap<String, ItemStack>();
 	public static HashMap<String, ItemStack> itemList = new HashMap<String, ItemStack>();
@@ -80,7 +83,7 @@ public class MinestellarMoon {
 
 		MinestellarMoon.proxy.preInit(event);
 
-        MinestellarLog.info("PreInitialization (Moon) Completed in " + stopwatch.elapsed( TimeUnit.MILLISECONDS ) + " ms.");
+        log.info("PreInitialization (Moon) Completed in " + stopwatch.elapsed( TimeUnit.MILLISECONDS ) + " ms.");
 	}
 
 	@EventHandler
@@ -94,7 +97,7 @@ public class MinestellarMoon {
 
 		MinestellarMoon.proxy.init(event);
 
-        MinestellarLog.info("Initialization (Moon) Completed in " + stopwatch.elapsed( TimeUnit.MILLISECONDS ) + " ms.");
+        log.info("Initialization (Moon) Completed in " + stopwatch.elapsed( TimeUnit.MILLISECONDS ) + " ms.");
 	}
 
 	@EventHandler
@@ -103,7 +106,7 @@ public class MinestellarMoon {
 
         MinestellarMoon.proxy.postInit(event);
 
-        MinestellarLog.info("PostInitialization (Moon) Completed in " + stopwatch.elapsed(TimeUnit.MILLISECONDS) + " ms.");
+        log.info("PostInitialization (Moon) Completed in " + stopwatch.elapsed(TimeUnit.MILLISECONDS) + " ms.");
 	}
 
 	private void registerTileEntities() {

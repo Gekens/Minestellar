@@ -40,8 +40,8 @@ import com.minestellar.core.network.NetworkHandler;
 import com.minestellar.core.proxy.CommonProxyCore;
 import com.minestellar.core.recipe.RecipeManagerCore;
 import com.minestellar.core.util.ConfigManagerCore;
+import com.minestellar.core.util.LogHelper;
 import com.minestellar.core.util.MinestellarCreativeTab;
-import com.minestellar.core.util.MinestellarLog;
 import com.minestellar.core.world.gen.OverworldGenerator;
 import com.minestellar.test.blocks.TestDataBlock;
 import com.minestellar.test.blocks.TestDataTE;
@@ -60,6 +60,8 @@ public class MinestellarCore {
 
 	public static CreativeTabs stellarBlocksTab;
 	public static CreativeTabs stellarItemsTab;
+
+    public static LogHelper log = new LogHelper(MinestellarCore.MOD_ID);
 
 	public static HashMap<String, ItemStack> blocksList = new HashMap<String, ItemStack>();
 	public static HashMap<String, ItemStack> itemList = new HashMap<String, ItemStack>();
@@ -91,7 +93,7 @@ public class MinestellarCore {
 
 		MinestellarCore.proxy.preInit(event);
 
-        MinestellarLog.info("PreInitialization (Core) Completed in " + stopwatch.elapsed( TimeUnit.MILLISECONDS ) + " ms.");
+        log.info("PreInitialization (Core) Completed in " + stopwatch.elapsed(TimeUnit.MILLISECONDS) + " ms.");
 	}
 
 	@EventHandler
@@ -123,7 +125,7 @@ public class MinestellarCore {
 
 		MinestellarCore.proxy.init(event);
 
-        MinestellarLog.info("Initialization (Core) Completed in " + stopwatch.elapsed( TimeUnit.MILLISECONDS ) + " ms.");
+        log.info("Initialization (Core) Completed in " + stopwatch.elapsed( TimeUnit.MILLISECONDS ) + " ms.");
 	}
 
 	@EventHandler
@@ -132,7 +134,7 @@ public class MinestellarCore {
 
         MinestellarCore.proxy.postInit(event);
 
-        MinestellarLog.info("PostInitialization (Core) Completed in " + stopwatch.elapsed( TimeUnit.MILLISECONDS ) + " ms.");
+        log.info("PostInitialization (Core) Completed in " + stopwatch.elapsed( TimeUnit.MILLISECONDS ) + " ms.");
 	}
 
 	private void registerTileEntities() {
@@ -155,6 +157,7 @@ public class MinestellarCore {
     @EventHandler
     public void serverStopping(FMLServerStoppingEvent event){
         Constants.runTimer = FileHandler.readFromFile(Constants.fileName).equals("true");
+        System.out.println(Constants.runTimer);
         WirelessDataNetwork.clearQueue(); //Clears the queue of packets
     }
 
@@ -166,6 +169,7 @@ public class MinestellarCore {
             Constants.runTimer = true;
         }
         FileHandler.writeToFile(Constants.fileName, Constants.runTimer ? "true" : "false");
+        System.out.println(Constants.runTimer);
     }
 
 }
