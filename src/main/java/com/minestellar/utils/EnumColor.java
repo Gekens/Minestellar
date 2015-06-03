@@ -20,7 +20,7 @@ public enum EnumColor {
 	 */
 	public String unlocalizedName;
 
-	public EnumColor(String s, String n, int[] rgb) {
+	EnumColor(String s, String n, int[] rgb) {
 		this.code = s;
 		this.unlocalizedName = n;
 		this.rgbCode = rgb;
