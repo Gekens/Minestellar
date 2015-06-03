@@ -14,7 +14,7 @@
  * this program; if not, see <http://www.gnu.org/licenses>.
  */
 
-package com.minestellar.core.util;
+package com.minestellar.utils;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.EnumRarity;

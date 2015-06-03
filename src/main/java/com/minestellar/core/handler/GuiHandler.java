@@ -16,6 +16,7 @@
 
 package com.minestellar.core.handler;
 
+import cpw.mods.fml.common.network.IGuiHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 
@@ -23,8 +24,6 @@ import com.minestellar.core.blocks.container.ComputerContainer;
 import com.minestellar.core.blocks.tile.TileEntityComputer;
 import com.minestellar.core.gui.ComputerGui;
 import com.minestellar.core.gui.GUIs;
-
-import cpw.mods.fml.common.network.IGuiHandler;
 
 public class GuiHandler implements IGuiHandler {
 	@Override
@@ -40,7 +39,8 @@ public class GuiHandler implements IGuiHandler {
 	@Override
 	public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
 		if (ID == GUIs.COMPUTER_GUI) {
-			return new ComputerGui();
+            PlanetKnowledgeHandler props = (PlanetKnowledgeHandler) player.getExtendedProperties(PlanetKnowledgeHandler.PLANET_KNOWLEDGE);
+			return new ComputerGui(props.getAcknowledgedPlanets());
 		}
 
 		return null;

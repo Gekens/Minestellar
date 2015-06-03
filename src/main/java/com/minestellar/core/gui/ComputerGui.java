@@ -45,6 +45,8 @@ public class ComputerGui extends GuiScreenWidget {
     public int screenWidth, screenHeight, spaceX, spaceY, spaceWidth, spaceHeight, earthA, earthB;
     private boolean doesDraw = false;
 
+    private String[] knownPlanets;
+
     public ArrayList<GuiPlanet> planets = new ArrayList<GuiPlanet>();
     public ArrayList<Point2D.Double> earthCoordsArray = new ArrayList<Point2D.Double>();
     public ArrayList<Point2D.Double> moonCoordsArray = new ArrayList<Point2D.Double>();
@@ -55,8 +57,9 @@ public class ComputerGui extends GuiScreenWidget {
     public static GuiPlanet selectedPlanet, sun, earth, moon, venus;
     public GuiSideBarWidget planetInfoTop, planetInfoLeft, planetInfoBottom, planetInfoRight;
 
-    public ComputerGui() {
+    public ComputerGui(String[] knownPlanets) {
         super(GuiDraw.displaySize().width, GuiDraw.displaySize().height); // 0,0 is in the top left corner
+        this.knownPlanets = knownPlanets;
         this.screenWidth = GuiDraw.displaySize().width;
         this.screenHeight = GuiDraw.displaySize().height;
         this.spaceX = this.spaceY = 10;
@@ -96,19 +99,26 @@ public class ComputerGui extends GuiScreenWidget {
         }
 
         setWorldAndResolution(FMLClientHandler.instance().getClient(), screenWidth, screenHeight);
+
     }
 
     @Override
     public void addWidgets() {
+        boolean doMoon = false;
         add(sun = new GuiPlanet(getMid(screenWidth) - (int) Math.sqrt(earthA ^ 2 - earthB ^ 2), getMid(screenHeight) - 4, "sun"));
-        add(earth = new GuiPlanet(0, 0, "earth"));
-        add(moon = new GuiPlanet(0, 0, "moon"));
-        add(venus = new GuiPlanet(0, 0, "venus"));
-        moon.setSize(0, 0, 4, 4);
-        planets.add(earth);
-        planets.add(moon);
-        planets.add(sun);
-        planets.add(venus);
+        for(String knownPlanet : knownPlanets){
+            if(knownPlanet != null){
+                if(!knownPlanet.equals("sun")){
+                    if(knownPlanet.equals("moon"))
+                        doMoon = true;
+                    GuiPlanet p = new GuiPlanet(0, 0, knownPlanet);
+                    add(p);
+                    planets.add(p);
+                }
+            }
+        }
+        if(doMoon)
+            moon.setSize(0, 0, 4, 4);
     }
 
     @Override
@@ -143,35 +153,53 @@ public class ComputerGui extends GuiScreenWidget {
 
                 tess.draw();
 
-                // Moon
-                GL11.glColor4d(0.89, 0.89, 0.89, 1);
-                tess.startDrawing(GL11.GL_LINES);
+                for(String knownPlanet : knownPlanets){
+                    if(knownPlanet != null){
+                        if(knownPlanet.equals("moon")){
+                            GL11.glColor4d(0.89, 0.89, 0.89, 1);
+                            tess.startDrawing(GL11.GL_LINES);
 
-                for(Point2D.Double aMoonCoordsArray : moonCoordsArray){
-                    tess.addVertex(earth.x + 4 + aMoonCoordsArray.x, earth.y + 4 + aMoonCoordsArray.y, 0.0D);
+                            for(Point2D.Double aMoonCoordsArray : moonCoordsArray){
+                                tess.addVertex(earth.x + 4 + aMoonCoordsArray.x, earth.y + 4 + aMoonCoordsArray.y, 0.0D);
+                            }
+
+                            tess.draw();
+                            break;
+                        }
+                    }
                 }
 
-                tess.draw();
+                for(String knownPlanet : knownPlanets){
+                    if(knownPlanet != null){
+                        if(knownPlanet.equals("venus")){
+                            GL11.glColor4d(0.84, 0.63, 0.29, 1);
+                            tess.startDrawing(GL11.GL_LINES);
 
-                // Venus
-                GL11.glColor4d(0.84, 0.63, 0.29, 1);
-                tess.startDrawing(GL11.GL_LINES);
+                            for(Point2D.Double aVenusCoordsArray : venusCoordsArray){
+                                tess.addVertex(getMid(screenWidth) + 4 + aVenusCoordsArray.x, getMid(screenHeight) + 4 + aVenusCoordsArray.y, 0.0D);
+                            }
 
-                for(Point2D.Double aVenusCoordsArray : venusCoordsArray){
-                    tess.addVertex(getMid(screenWidth) + 4 + aVenusCoordsArray.x, getMid(screenHeight) + 4 + aVenusCoordsArray.y, 0.0D);
+                            tess.draw();
+                            break;
+                        }
+                    }
                 }
 
-                tess.draw();
+                for(String knownPlanet : knownPlanets){
+                    if(knownPlanet != null){
+                        if(knownPlanet.equals("venus")){
+                            GL11.glColor4d(0.49, 0.29, 0.06, 1);
+                            tess.startDrawing(GL11.GL_LINES);
 
-                // Mercury
-                GL11.glColor4d(0.49, 0.29, 0.06, 1);
-                tess.startDrawing(GL11.GL_LINES);
+                            for(Point2D.Double aMercuryCoordsArray : mercuryCoordsArray){
+                                tess.addVertex(getMid(screenWidth) + 4 + aMercuryCoordsArray.x, getMid(screenHeight) + 4 + aMercuryCoordsArray.y, 0.0D);
+                            }
 
-                for(Point2D.Double aMercuryCoordsArray : mercuryCoordsArray){
-                    tess.addVertex(getMid(screenWidth) + 4 + aMercuryCoordsArray.x, getMid(screenHeight) + 4 + aMercuryCoordsArray.y, 0.0D);
+                            tess.draw();
+                            break;
+                        }
+                    }
                 }
-
-                tess.draw();
 
                 GL11.glEnable(GL11.GL_LIGHTING);
                 GL11.glEnable(GL11.GL_DEPTH_TEST);
@@ -234,6 +262,10 @@ public class ComputerGui extends GuiScreenWidget {
     public GuiPlanet getSelectedPlanet() {
         return selectedPlanet;
     }
+
+    /**
+     * Removes all the sidebars from the screen
+     */
 
     public void removeSidebars() {
         Iterator<GuiWidget> iterator = widgets.listIterator();

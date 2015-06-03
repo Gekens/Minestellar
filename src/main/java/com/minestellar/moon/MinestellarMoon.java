@@ -31,7 +31,7 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 
 import com.minestellar.core.Constants;
-import com.minestellar.core.util.LogHelper;
+import com.minestellar.utils.LogHelper;
 import com.minestellar.moon.blocks.MoonBlocks;
 import com.minestellar.moon.items.MoonItems;
 import com.minestellar.moon.proxy.CommonProxyMoon;

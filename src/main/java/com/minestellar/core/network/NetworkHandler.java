@@ -16,8 +16,6 @@
 
 package com.minestellar.core.network;
 
-import com.minestellar.core.MinestellarCore;
-import com.minestellar.core.network.message.MessageAntennaOnline;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.network.NetworkRegistry.TargetPoint;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
@@ -25,12 +23,17 @@ import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import cpw.mods.fml.relauncher.Side;
 import net.minecraft.entity.player.EntityPlayerMP;
 
+import com.minestellar.core.MinestellarCore;
+import com.minestellar.core.network.message.MessageAntennaOnline;
+import com.minestellar.core.network.message.MessageSyncKnowledge;
+
 public class NetworkHandler {
 	private static SimpleNetworkWrapper INSTANCE;
 
 	public static void init() {
 		INSTANCE = NetworkRegistry.INSTANCE.newSimpleChannel(MinestellarCore.MOD_ID);
         INSTANCE.registerMessage(MessageAntennaOnline.class, MessageAntennaOnline.class, 0, Side.SERVER);
+        INSTANCE.registerMessage(MessageSyncKnowledge.class, MessageSyncKnowledge.class, 1, Side.CLIENT);
 	}
 
 	public static void sendToServer(IMessage message) {

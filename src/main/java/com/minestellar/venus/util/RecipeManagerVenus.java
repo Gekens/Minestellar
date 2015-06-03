@@ -5,7 +5,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraftforge.oredict.OreDictionary;
 
-import com.minestellar.core.util.RecipeUtil;
+import com.minestellar.utils.RecipeUtil;
 import com.minestellar.venus.blocks.VenusBlocks;
 import com.minestellar.venus.items.VenusItems;
 

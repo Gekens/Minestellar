@@ -28,7 +28,7 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
 import com.minestellar.core.MinestellarCore;
-import com.minestellar.core.util.MinestellarUtil;
+import com.minestellar.utils.MinestellarUtil;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

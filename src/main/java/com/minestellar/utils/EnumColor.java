@@ -1,4 +1,4 @@
-package com.minestellar.core.util;
+package com.minestellar.utils;
 
 /**
  * Simple color enum for adding colors to in-game GUI strings of text.
@@ -20,7 +20,7 @@ public enum EnumColor {
 	 */
 	public String unlocalizedName;
 
-	private EnumColor(String s, String n, int[] rgb) {
+	public EnumColor(String s, String n, int[] rgb) {
 		this.code = s;
 		this.unlocalizedName = n;
 		this.rgbCode = rgb;

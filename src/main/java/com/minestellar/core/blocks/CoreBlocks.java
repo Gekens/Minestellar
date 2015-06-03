@@ -24,7 +24,6 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.oredict.OreDictionary;
 
-import com.minestellar.api.data.block.wire.DataWire;
 import com.minestellar.core.MinestellarCore;
 import com.minestellar.core.blocks.fluid.FluidBlockHydrogen;
 import com.minestellar.core.blocks.fluid.FluidBlockNitrogen;
@@ -38,7 +37,7 @@ import com.minestellar.core.blocks.machines.Computer;
 import com.minestellar.core.blocks.machines.GasSinkMachine;
 import com.minestellar.core.blocks.machines.OxygenCollectorMachine;
 import com.minestellar.core.blocks.machines.SolarGenerator;
-import com.minestellar.core.util.ItemBlockUtil;
+import com.minestellar.utils.ItemBlockUtil;
 
 public class CoreBlocks {
     public static void init() {

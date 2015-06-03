@@ -20,7 +20,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraftforge.oredict.OreDictionary;
 
-import com.minestellar.core.util.RecipeUtil;
+import com.minestellar.utils.RecipeUtil;
 import com.minestellar.moon.blocks.MoonBlocks;
 import com.minestellar.moon.items.MoonItems;
 

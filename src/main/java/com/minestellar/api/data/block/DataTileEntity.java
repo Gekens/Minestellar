@@ -22,7 +22,7 @@ import net.minecraft.tileentity.TileEntity;
 
 import com.minestellar.api.data.wireless.WirelessDataPacket;
 import com.minestellar.core.items.ItemMemoryCard;
-import com.minestellar.core.util.NBTHelper;
+import com.minestellar.utils.NBTHelper;
 
 /**
  * Extend this class if you want any of your tileEntities to be connectable to the network

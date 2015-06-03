@@ -25,75 +25,76 @@ import java.util.TimerTask;
  * Timer task for the planets.
  */
 public class PlanetTimer extends TimerTask {
-	private String planetName;
+    private String planetName;
 
     private final double incr = 2;
 
-	private double x = 0., y = 0.;
-	private boolean doTop = false, firstTime = true;
-	private Planet planet;
-	private GuiPlanet currentPlanet;
+    private double x = 0., y = 0.;
+    private boolean doTop = false, firstTime = true;
+    private Planet planet;
+    private GuiPlanet currentPlanet;
 
-	public PlanetTimer(String planetName) {
-		this.planetName = planetName;
-	}
+    public PlanetTimer(String planetName) {
+        this.planetName = planetName;
+        if (this.planetName.equals("earth")) {
+            planet = Planet.EARTH;
+            currentPlanet = ComputerGui.earth;
+        } else if (this.planetName.equals("moon")) {
+            planet = Planet.MOON;
+            currentPlanet = ComputerGui.moon;
+        } else if (this.planetName.equals("venus")) {
+            planet = Planet.VENUS;
+            currentPlanet = ComputerGui.venus;
+        }
+    }
 
-	@Override
-	public void run() {
-		if (this.planetName.equals("earth")) {
-			planet = Planet.EARTH;
-			currentPlanet = ComputerGui.earth;
-		} else if (this.planetName.equals("moon")) {
-			planet = Planet.MOON;
-			currentPlanet = ComputerGui.moon;
-		} else if (this.planetName.equals("venus")) {
-			planet = Planet.VENUS;
-			currentPlanet = ComputerGui.venus;
-		}
+    @Override
+    public void run(){
+        if(currentPlanet != null && planet != null){
+            if(firstTime){
+                firstTime = false;
+                x = - planet.getA();
+            }
 
-		if (firstTime) {
-			firstTime = false;
-			x = -planet.getA();
-		}
+            if(x == 0.){
+                if(! doTop){
+                    x += incr;
+                }else{
+                    x -= incr;
+                }
+            }
 
-		if (x == 0.) {
-			if (!doTop) {
-				x += incr;
-			} else {
-				x -= incr;
-			}
-		}
+            if(planet.equals(Planet.MOON)){
+                y = Math.sqrt(Math.abs((planet.getB() * planet.getB()) * (1 - ((ComputerGui.earth.x * ComputerGui.earth.x) / (planet.getA() * planet.getA())))));
+            }else{
+                y = Math.sqrt(Math.abs((planet.getB() * planet.getB()) * (1 - ((x * x) / (planet.getA() * planet.getA())))));
+            }
 
-		if (planet.equals(Planet.MOON)) {
-			y = Math.sqrt(Math.abs((planet.getB() * planet.getB()) * (1 - ((ComputerGui.earth.x * ComputerGui.earth.x) / (planet.getA() * planet.getA())))));
-		} else {
-			y = Math.sqrt(Math.abs((planet.getB() * planet.getB()) * (1 - ((x * x) / (planet.getA() * planet.getA())))));
-		}
-		
-		if ((x == planet.getA() && !doTop) || (x == -planet.getA() && doTop)) {
-			doTop = !doTop;
-		}
+            if((x == planet.getA() && ! doTop) || (x == - planet.getA() && doTop)){
+                doTop = ! doTop;
+            }
 
-		if (doTop) {
-			y = -y;
-			x -= incr;
-		} else {
-			x += incr;
-		}
+            if(doTop){
+                y = - y;
+                x -= incr;
+            }else{
+                x += incr;
+            }
 
-		switch (planet) {
-		case EARTH:
-			currentPlanet.setCoords(GuiDraw.displaySize().width / 2 + 4 + (int) x, GuiDraw.displaySize().height / 2 + 4 + (int) y);
-			break;
-		case MOON:
-			currentPlanet.setCoords(GuiDraw.displaySize().width / 2 + 4 + (int) x, GuiDraw.displaySize().height / 2 + 4 + (int) y);
-			break;
-		case VENUS:
-			currentPlanet.setCoords(GuiDraw.displaySize().width / 2 + 4 + (int) x, GuiDraw.displaySize().height / 2 + 4 + (int) y);
-			break;
-		default:
-			break;
-		}
-
-	}
+            currentPlanet.setCoords(GuiDraw.displaySize().width / 2 + 4 + (int) x, GuiDraw.displaySize().height / 2 + 4 + (int) y);
+            /*switch(planet){
+                case EARTH:
+                    currentPlanet.setCoords(GuiDraw.displaySize().width / 2 + 4 + (int) x, GuiDraw.displaySize().height / 2 + 4 + (int) y);
+                    break;
+                case MOON:
+                    currentPlanet.setCoords(GuiDraw.displaySize().width / 2 + 4 + (int) x, GuiDraw.displaySize().height / 2 + 4 + (int) y);
+                    break;
+                case VENUS:
+                    currentPlanet.setCoords(GuiDraw.displaySize().width / 2 + 4 + (int) x, GuiDraw.displaySize().height / 2 + 4 + (int) y);
+                    break;
+                default:
+                    break;
+            }*/
+        }
+    }
 }

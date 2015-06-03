@@ -14,8 +14,8 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 
 import com.minestellar.core.Constants;
-import com.minestellar.core.util.LogHelper;
-import com.minestellar.core.util.MinestellarUtil;
+import com.minestellar.utils.LogHelper;
+import com.minestellar.utils.MinestellarUtil;
 import com.minestellar.venus.blocks.VenusBlocks;
 import com.minestellar.venus.entities.EntityEvolvedBlaze;
 import com.minestellar.venus.entities.EntityVenusianTNT;

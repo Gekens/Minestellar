@@ -40,11 +40,11 @@ import com.minestellar.core.network.NetworkHandler;
 import com.minestellar.core.proxy.CommonProxyCore;
 import com.minestellar.core.recipe.RecipeManagerCore;
 import com.minestellar.core.util.ConfigManagerCore;
-import com.minestellar.core.util.LogHelper;
 import com.minestellar.core.util.MinestellarCreativeTab;
 import com.minestellar.core.world.gen.OverworldGenerator;
 import com.minestellar.test.blocks.TestDataBlock;
 import com.minestellar.test.blocks.TestDataTE;
+import com.minestellar.utils.LogHelper;
 
 import java.io.File;
 import java.util.HashMap;

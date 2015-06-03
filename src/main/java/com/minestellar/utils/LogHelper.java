@@ -14,7 +14,7 @@
  * this program; if not, see <http://www.gnu.org/licenses>.
  */
 
-package com.minestellar.core.util;
+package com.minestellar.utils;
 
 import cpw.mods.fml.common.FMLLog;
 import org.apache.logging.log4j.Level;

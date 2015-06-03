@@ -20,7 +20,7 @@ import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
-import com.minestellar.core.util.ItemBlockUtil;
+import com.minestellar.utils.ItemBlockUtil;
 import com.minestellar.moon.MinestellarMoon;
 import com.minestellar.moon.blocks.items.ItemBlockBasicMoon;
 

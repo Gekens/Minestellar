@@ -28,7 +28,7 @@ import net.minecraft.world.World;
 import com.minestellar.api.data.block.DataTileEntity;
 import com.minestellar.api.data.block.IDataConnection;
 import com.minestellar.core.MinestellarCore;
-import com.minestellar.core.util.NBTHelper;
+import com.minestellar.utils.NBTHelper;
 
 import java.util.List;
 

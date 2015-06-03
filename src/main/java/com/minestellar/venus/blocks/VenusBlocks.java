@@ -4,7 +4,7 @@ import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
-import com.minestellar.core.util.ItemBlockUtil;
+import com.minestellar.utils.ItemBlockUtil;
 import com.minestellar.venus.MinestellarVenus;
 import com.minestellar.venus.blocks.items.ItemBlockBasicVenus;
 import com.minestellar.venus.blocks.items.ItemBlockDecorVenus;

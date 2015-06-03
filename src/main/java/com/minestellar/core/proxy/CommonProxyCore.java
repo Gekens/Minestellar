@@ -16,65 +16,70 @@
 
 package com.minestellar.core.proxy;
 
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.entity.living.LivingEvent.LivingJumpEvent;
-import net.minecraftforge.event.entity.player.PlayerPickupXpEvent;
-
-import com.minestellar.core.Constants;
-import com.minestellar.core.handler.FileHandler;
-
-import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.entity.EntityEvent;
+import net.minecraftforge.event.entity.EntityJoinWorldEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent;
+
+import com.minestellar.core.handler.PlanetKnowledgeHandler;
+import com.minestellar.core.network.NetworkHandler;
+import com.minestellar.core.network.message.MessageSyncKnowledge;
 
 public abstract class CommonProxyCore {
-	public void preInit(FMLPreInitializationEvent event) {
-	}
+    public void preInit(FMLPreInitializationEvent event) {
+    }
 
-	public void init(FMLInitializationEvent event) {
-		FMLCommonHandler.instance().bus().register(new PlayerInteractor());
-		MinecraftForge.EVENT_BUS.register(new PlayerInteractor()); // This is for debug, will be deleted when it will work
-	}
+    public void init(FMLInitializationEvent event) {
+        MinecraftForge.EVENT_BUS.register(new PlayerKnowledge());
+    }
 
-	public void postInit(FMLPostInitializationEvent event) {
-	}
+    public void postInit(FMLPostInitializationEvent event) {
+    }
 
-	public void spawnParticle(String string, double x, double y, double z) {
-	}
+    public void spawnParticle(String string, double x, double y, double z) {
+    }
 
-	public int getCarbonArmorRenderIndex() {
-		return 0;
-	}
+    public int getCarbonArmorRenderIndex() {
+        return 0;
+    }
 
-	public void spawnFootprint(EntityPlayer player) {
-	}
+    public void spawnFootprint(EntityPlayer player) {
+    }
 
-	public void onUpdate() {
-	}
+    public void onUpdate() {
+    }
 
-	public EntityPlayer getClientPlayer() {
-		return null;
-	}
+    public EntityPlayer getClientPlayer() {
+        return null;
+    }
 
-	public class PlayerInteractor {
-		/*@SubscribeEvent
-		public void onLogin(LivingJumpEvent event) { // Log-in isn't working. I think it doesn't have enough time. PlayerEvent.PlayerLoggedInEvent
-			if (event.entity instanceof EntityPlayerMP) {
-				if (FileHandler.readFromFile(Constants.fileName).equals("false")) {
-					Constants.runTimer = true;
-				}
-				
-				FileHandler.writeToFile(Constants.fileName, Constants.runTimer ? "true" : "false");
-			}
-		}
+    public class PlayerKnowledge{
+        @SubscribeEvent
+        public void onEntityConstructing(EntityEvent.EntityConstructing event){
+            if (event.entity instanceof EntityPlayer && PlanetKnowledgeHandler.get((EntityPlayer) event.entity) == null)
+                PlanetKnowledgeHandler.register((EntityPlayer) event.entity);
+        }
 
-		@SubscribeEvent
-		public void onLogout(PlayerPickupXpEvent event) { // Log-out isn't working. I think it logs out too soon. PlayerEvent.PlayerLoggedOutEvent
-			Constants.runTimer = FileHandler.readFromFile(Constants.fileName).equals("true");
-		}*/
-	}
+        @SubscribeEvent
+        public void onClonePlayer(PlayerEvent.Clone event) { //In case the player dies
+            NBTTagCompound compound = new NBTTagCompound();
+            PlanetKnowledgeHandler.get(event.original).saveNBTData(compound);
+            PlanetKnowledgeHandler.get(event.entityPlayer).loadNBTData(compound);
+        }
+
+        @SubscribeEvent
+        public void onEntityJoinWorld(EntityJoinWorldEvent event) {
+            if (event.entity instanceof EntityPlayer && !event.entity.worldObj.isRemote) {
+                NetworkHandler.sendTo(new MessageSyncKnowledge((EntityPlayer) event.entity), (EntityPlayerMP) event.entity);
+                System.out.println(event.entity.getExtendedProperties(PlanetKnowledgeHandler.PLANET_KNOWLEDGE));
+            }
+        }
+    }
 }

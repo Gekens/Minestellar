@@ -24,7 +24,7 @@ import net.minecraftforge.oredict.OreDictionary;
 
 import com.minestellar.core.blocks.CoreBlocks;
 import com.minestellar.core.items.CoreItems;
-import com.minestellar.core.util.RecipeUtil;
+import com.minestellar.utils.RecipeUtil;
 
 public class RecipeManagerCore {
 	private static void addUniversalRecipes() {
