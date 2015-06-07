@@ -52,6 +52,7 @@ import java.util.concurrent.TimeUnit;
 
 @Mod(modid = MinestellarCore.MOD_ID, name = MinestellarCore.MOD_NAME, version = Constants.VERSION)
 public class MinestellarCore {
+
 	public static final String MOD_ID = "MinestellarCore";
 	public static final String MOD_NAME = "Minestellar Core";
 
@@ -62,6 +63,8 @@ public class MinestellarCore {
 	public static CreativeTabs stellarItemsTab;
 
     public static LogHelper log = new LogHelper(MinestellarCore.MOD_ID);
+
+//    public static ArrayList<TimerTask> tasks = new ArrayList<TimerTask>();
 
 	public static HashMap<String, ItemStack> blocksList = new HashMap<String, ItemStack>();
 	public static HashMap<String, ItemStack> itemList = new HashMap<String, ItemStack>();
@@ -93,7 +96,7 @@ public class MinestellarCore {
 
 		MinestellarCore.proxy.preInit(event);
 
-        log.info("PreInitialization (Core) Completed in " + stopwatch.elapsed(TimeUnit.MILLISECONDS) + " ms.");
+        log.info("PreInitialization Completed in " + stopwatch.elapsed(TimeUnit.MILLISECONDS) + " ms.");
 	}
 
 	@EventHandler
@@ -125,7 +128,7 @@ public class MinestellarCore {
 
 		MinestellarCore.proxy.init(event);
 
-        log.info("Initialization (Core) Completed in " + stopwatch.elapsed( TimeUnit.MILLISECONDS ) + " ms.");
+        log.info("Initialization Completed in " + stopwatch.elapsed( TimeUnit.MILLISECONDS ) + " ms.");
 	}
 
 	@EventHandler
@@ -134,7 +137,7 @@ public class MinestellarCore {
 
         MinestellarCore.proxy.postInit(event);
 
-        log.info("PostInitialization (Core) Completed in " + stopwatch.elapsed( TimeUnit.MILLISECONDS ) + " ms.");
+        log.info("PostInitialization Completed in " + stopwatch.elapsed( TimeUnit.MILLISECONDS ) + " ms.");
 	}
 
 	private void registerTileEntities() {
@@ -157,7 +160,6 @@ public class MinestellarCore {
     @EventHandler
     public void serverStopping(FMLServerStoppingEvent event){
         Constants.runTimer = FileHandler.readFromFile(Constants.fileName).equals("true");
-        System.out.println(Constants.runTimer);
         WirelessDataNetwork.clearQueue(); //Clears the queue of packets
     }
 
@@ -169,7 +171,6 @@ public class MinestellarCore {
             Constants.runTimer = true;
         }
         FileHandler.writeToFile(Constants.fileName, Constants.runTimer ? "true" : "false");
-        System.out.println(Constants.runTimer);
     }
 
 }

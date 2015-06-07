@@ -22,6 +22,8 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IExtendedEntityProperties;
 
+import java.util.ArrayList;
+
 public class PlanetKnowledgeHandler implements IExtendedEntityProperties{
 
     public static final String PLANET_KNOWLEDGE = "PlanetKnowledge";
@@ -110,14 +112,14 @@ public class PlanetKnowledgeHandler implements IExtendedEntityProperties{
      * @return The array containing all known the planets
      */
 
-    public String[] getAcknowledgedPlanets(){
-        String[] a = new String[planetNames.length];
+    public ArrayList<String> getAcknowledgedPlanets(){
+        ArrayList<String> returnArray = new ArrayList<String>();
         for(int i = 0; i < planetNames.length; i++){
             if(planetFound[i]){
-                a[i] = planetNames[i];
+                returnArray.add(planetNames[i]);
             }
         }
-        return a;
+        return returnArray;
     }
 
     /**

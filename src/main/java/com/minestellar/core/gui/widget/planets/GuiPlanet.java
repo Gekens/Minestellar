@@ -85,27 +85,35 @@ public class GuiPlanet extends GuiWidget {
 	@Override
 	public void draw(int mousex, int mousey, float frame) {
 		super.draw(mousex, mousey, frame);
-		renderEngine.bindTexture(texture);
-		GL11.glColor4f(1, 1, 1, 1);
+        renderEngine.bindTexture(texture);
+        GL11.glColor4f(1, 1, 1, 1);
 
-		if (isSelected()) {
-			drawSelectedBox();
-		}
+        if (isSelected()) {
+            drawSelectedBox();
+        }
 
-		drawTexturedModalRect(x, y, 0, 0, width / 2, height / 2);
-		drawTexturedModalRect(x + width / 2, y, 4, 0, width / 2, height / 2);
-		drawTexturedModalRect(x, y + height / 2, 0, 4, width / 2, height / 2);
-		drawTexturedModalRect(x + width / 2, y + height / 2, 4, 4, width / 2, height / 2);
+        drawTexturedModalRect(x, y, 0, 0, width / 2, height / 2);
+        drawTexturedModalRect(x + width / 2, y, 4, 0, width / 2, height / 2);
+        drawTexturedModalRect(x, y + height / 2, 0, 4, width / 2, height / 2);
+        drawTexturedModalRect(x + width / 2, y + height / 2, 4, 4, width / 2, height / 2);
 	}
+
+    /**
+     * Sets the coordinates of the planet
+     *
+     * @param x The x coordinate
+     * @param y The y coordinate
+     */
 
 	public void setCoords(int x, int y) {
 		this.x = x;
 		this.y = y;
 	}
 
-	/**
+    /**
 	 * Draws the <i>selected box</i>
 	 */
+
 	public void drawSelectedBox() {
 		int away = 2;
 		GuiDraw.drawRect(x - away, y - away, this.width + away * 2, this.height + away * 2, 0xDD006666);
@@ -114,6 +122,7 @@ public class GuiPlanet extends GuiWidget {
 	/**
 	 * To make sure this is <i>visible</i>
 	 */
+
 	public boolean isEnabled() {
 		return isEnabled;
 	}
@@ -127,6 +136,7 @@ public class GuiPlanet extends GuiWidget {
 	 * 
 	 * @see GuiSideBarWidget
 	 */
+
 	public boolean isSelected() {
 		return isSelected;
 	}
@@ -149,6 +159,6 @@ public class GuiPlanet extends GuiWidget {
 
 	@Override
 	public String toString() {
-		return this.name + " " + this.x + " " + this.y;
+		return "[" + this.name + " " + this.x + " " + this.y + "]";
 	}
 }

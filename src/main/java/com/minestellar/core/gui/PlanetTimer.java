@@ -16,6 +16,7 @@
 
 package com.minestellar.core.gui;
 
+import com.minestellar.core.MinestellarCore;
 import com.minestellar.core.gui.widget.GuiDraw;
 import com.minestellar.core.gui.widget.planets.GuiPlanet;
 
@@ -24,6 +25,7 @@ import java.util.TimerTask;
 /**
  * Timer task for the planets.
  */
+
 public class PlanetTimer extends TimerTask {
     private String planetName;
 
@@ -34,17 +36,20 @@ public class PlanetTimer extends TimerTask {
     private Planet planet;
     private GuiPlanet currentPlanet;
 
-    public PlanetTimer(String planetName) {
+    public PlanetTimer(String planetName){
         this.planetName = planetName;
-        if (this.planetName.equals("earth")) {
+        if(this.planetName.equals("earth")){
             planet = Planet.EARTH;
+            MinestellarCore.log.info("ComputerGui.earth = " + ComputerGui.earth);
             currentPlanet = ComputerGui.earth;
-        } else if (this.planetName.equals("moon")) {
+        }else if (this.planetName.equals("moon")){
             planet = Planet.MOON;
             currentPlanet = ComputerGui.moon;
-        } else if (this.planetName.equals("venus")) {
+        }else if (this.planetName.equals("venus")){
             planet = Planet.VENUS;
             currentPlanet = ComputerGui.venus;
+        }else{
+            MinestellarCore.log.error("Unknown planet name! Be sure to spell it correctly!");
         }
     }
 
@@ -53,13 +58,13 @@ public class PlanetTimer extends TimerTask {
         if(currentPlanet != null && planet != null){
             if(firstTime){
                 firstTime = false;
-                x = - planet.getA();
+                x = -planet.getA();
             }
 
             if(x == 0.){
-                if(! doTop){
+                if(!doTop){
                     x += incr;
-                }else{
+                } else {
                     x -= incr;
                 }
             }
@@ -70,31 +75,36 @@ public class PlanetTimer extends TimerTask {
                 y = Math.sqrt(Math.abs((planet.getB() * planet.getB()) * (1 - ((x * x) / (planet.getA() * planet.getA())))));
             }
 
-            if((x == planet.getA() && ! doTop) || (x == - planet.getA() && doTop)){
-                doTop = ! doTop;
+            if((x == planet.getA() && !doTop) || (x == -planet.getA() && doTop)){
+                doTop = !doTop;
             }
 
             if(doTop){
-                y = - y;
+                y = -y;
                 x -= incr;
             }else{
                 x += incr;
             }
 
             currentPlanet.setCoords(GuiDraw.displaySize().width / 2 + 4 + (int) x, GuiDraw.displaySize().height / 2 + 4 + (int) y);
-            /*switch(planet){
-                case EARTH:
-                    currentPlanet.setCoords(GuiDraw.displaySize().width / 2 + 4 + (int) x, GuiDraw.displaySize().height / 2 + 4 + (int) y);
-                    break;
-                case MOON:
-                    currentPlanet.setCoords(GuiDraw.displaySize().width / 2 + 4 + (int) x, GuiDraw.displaySize().height / 2 + 4 + (int) y);
-                    break;
-                case VENUS:
-                    currentPlanet.setCoords(GuiDraw.displaySize().width / 2 + 4 + (int) x, GuiDraw.displaySize().height / 2 + 4 + (int) y);
-                    break;
-                default:
-                    break;
-            }*/
+
+            //            switch(planet){
+            //                case EARTH:
+            //                    currentPlanet.setCoords(GuiDraw.displaySize().width / 2 + 4 + (int) x, GuiDraw.displaySize().height / 2 + 4 + (int) y);
+            //                    break;
+            //                case MOON:
+            //                    currentPlanet.setCoords(GuiDraw.displaySize().width / 2 + 4 + (int) x, GuiDraw.displaySize().height / 2 + 4 + (int) y);
+            //                    break;
+            //                case VENUS:
+            //                    currentPlanet.setCoords(GuiDraw.displaySize().width / 2 + 4 + (int) x, GuiDraw.displaySize().height / 2 + 4 + (int) y);
+            //                    break;
+            //                default:
+            //                    break;
+            //            }
+
+            MinestellarCore.log.info("X: " + (GuiDraw.displaySize().width / 2 + 4 + (int) x) + " Y: " + (GuiDraw.displaySize().height / 2 + 4 + (int) y));
+        }else{
+            MinestellarCore.log.fatal("NullPointerException " + planet + " " + currentPlanet);
         }
     }
 }

@@ -78,7 +78,6 @@ public abstract class CommonProxyCore {
         public void onEntityJoinWorld(EntityJoinWorldEvent event) {
             if (event.entity instanceof EntityPlayer && !event.entity.worldObj.isRemote) {
                 NetworkHandler.sendTo(new MessageSyncKnowledge((EntityPlayer) event.entity), (EntityPlayerMP) event.entity);
-                System.out.println(event.entity.getExtendedProperties(PlanetKnowledgeHandler.PLANET_KNOWLEDGE));
             }
         }
     }

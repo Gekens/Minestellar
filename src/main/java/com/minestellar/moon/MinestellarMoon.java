@@ -83,7 +83,7 @@ public class MinestellarMoon {
 
 		MinestellarMoon.proxy.preInit(event);
 
-        log.info("PreInitialization (Moon) Completed in " + stopwatch.elapsed( TimeUnit.MILLISECONDS ) + " ms.");
+        log.info("PreInitialization Completed in " + stopwatch.elapsed( TimeUnit.MILLISECONDS ) + " ms.");
 	}
 
 	@EventHandler
@@ -97,7 +97,7 @@ public class MinestellarMoon {
 
 		MinestellarMoon.proxy.init(event);
 
-        log.info("Initialization (Moon) Completed in " + stopwatch.elapsed( TimeUnit.MILLISECONDS ) + " ms.");
+        log.info("Initialization Completed in " + stopwatch.elapsed( TimeUnit.MILLISECONDS ) + " ms.");
 	}
 
 	@EventHandler
@@ -106,7 +106,7 @@ public class MinestellarMoon {
 
         MinestellarMoon.proxy.postInit(event);
 
-        log.info("PostInitialization (Moon) Completed in " + stopwatch.elapsed(TimeUnit.MILLISECONDS) + " ms.");
+        log.info("PostInitialization Completed in " + stopwatch.elapsed(TimeUnit.MILLISECONDS) + " ms.");
 	}
 
 	private void registerTileEntities() {

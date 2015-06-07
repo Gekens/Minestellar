@@ -66,8 +66,9 @@ public class MinestellarVenus {
 		DimensionVenus.init();
 
 		proxy.preInit(event);
+        proxy.registerRenderInfo();
 
-        log.info("PreInitialization (Venus) Completed in " + stopwatch.elapsed( TimeUnit.MILLISECONDS ) + " ms.");
+        log.info("PreInitialization Completed in " + stopwatch.elapsed( TimeUnit.MILLISECONDS ) + " ms.");
 	}
 
 	@EventHandler
@@ -80,7 +81,7 @@ public class MinestellarVenus {
 
 		proxy.init(event);
 
-        log.info("Initialization (Venus) Completed in " + stopwatch.elapsed( TimeUnit.MILLISECONDS ) + " ms.");
+        log.info("Initialization Completed in " + stopwatch.elapsed( TimeUnit.MILLISECONDS ) + " ms.");
 	}
 
 	@EventHandler
@@ -91,7 +92,7 @@ public class MinestellarVenus {
 
 		proxy.postInit(event);
 
-        log.info("PostInitialization (Venus) Completed in " + stopwatch.elapsed( TimeUnit.MILLISECONDS ) + " ms.");
+        log.info("PostInitialization Completed in " + stopwatch.elapsed( TimeUnit.MILLISECONDS ) + " ms.");
 	}
 
 	private void registerTileEntities() {
@@ -106,8 +107,4 @@ public class MinestellarVenus {
 		MinestellarUtil.registerMinestellarNonMobEntity(EntityVenusianTNT.class, "VenusianTNT", 150, 1, true);
 	}
 
-	@EventHandler
-	public static void PreLoad(FMLPreInitializationEvent PreEvent) {
-		proxy.registerRenderInfo();
-	}
 }

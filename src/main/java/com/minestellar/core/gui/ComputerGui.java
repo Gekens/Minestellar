@@ -22,6 +22,7 @@ import net.minecraft.client.resources.I18n;
 import org.lwjgl.opengl.GL11;
 
 import com.minestellar.core.Constants;
+import com.minestellar.core.MinestellarCore;
 import com.minestellar.core.blocks.machines.Computer;
 import com.minestellar.core.blocks.tile.TileEntityComputer;
 import com.minestellar.core.gui.widget.GuiDraw;
@@ -35,6 +36,7 @@ import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * GuiScreen for the {@link Computer} and {@link TileEntityComputer}
@@ -45,21 +47,26 @@ public class ComputerGui extends GuiScreenWidget {
     public int screenWidth, screenHeight, spaceX, spaceY, spaceWidth, spaceHeight, earthA, earthB;
     private boolean doesDraw = false;
 
-    private String[] knownPlanets;
+    private static ArrayList<String> knownPlanets = new ArrayList<String>();
 
     public ArrayList<GuiPlanet> planets = new ArrayList<GuiPlanet>();
     public ArrayList<Point2D.Double> earthCoordsArray = new ArrayList<Point2D.Double>();
     public ArrayList<Point2D.Double> moonCoordsArray = new ArrayList<Point2D.Double>();
     public ArrayList<Point2D.Double> mercuryCoordsArray = new ArrayList<Point2D.Double>();
     public ArrayList<Point2D.Double> venusCoordsArray = new ArrayList<Point2D.Double>();
-    private Timer timer;
+
+    public static Timer timer;
 
     public static GuiPlanet selectedPlanet, sun, earth, moon, venus;
     public GuiSideBarWidget planetInfoTop, planetInfoLeft, planetInfoBottom, planetInfoRight;
 
-    public ComputerGui(String[] knownPlanets) {
+    /**
+     * @param knownPlanets The planets known by the player. It's used to display only those
+     */
+
+    public ComputerGui(ArrayList<String> knownPlanets) {
         super(GuiDraw.displaySize().width, GuiDraw.displaySize().height); // 0,0 is in the top left corner
-        this.knownPlanets = knownPlanets;
+        ComputerGui.knownPlanets = knownPlanets;
         this.screenWidth = GuiDraw.displaySize().width;
         this.screenHeight = GuiDraw.displaySize().height;
         this.spaceX = this.spaceY = 10;
@@ -71,29 +78,20 @@ public class ComputerGui extends GuiScreenWidget {
         GuiDraw.fillEllipseCoordsArray(384 / 152, 383 / 147, moonCoordsArray);
         GuiDraw.fillEllipseCoordsArray(108 / 2, 107 / 2, venusCoordsArray);
         GuiDraw.fillEllipseCoordsArray(57 / 2, 56 / 2, mercuryCoordsArray);
-
-        if (Constants.runTimer) {
-            FileHandler.writeToFile(Constants.fileName, "false");
-            Constants.runTimer = false;
-            this.timer = new Timer(false);
-            this.timer.scheduleAtFixedRate(new PlanetTimer("earth"), 10, 100);
-            this.timer.scheduleAtFixedRate(new PlanetTimer("moon"), 10, 100);
-            this.timer.scheduleAtFixedRate(new PlanetTimer("venus"), 10, 100);
-        }
     }
 
     @Override
     public void updateScreen() {
         super.updateScreen();
 
-        if (selectedPlanet != null) {
-            if (doesDraw) {
+        if(selectedPlanet != null) {
+            if(doesDraw) {
                 setDraw(false);
                 add(planetInfoLeft = new GuiSideBarWidget(screenWidth, screenHeight, 200, screenHeight, 1).setColors(0xAA555555, 0xAA000000).setTitle(selectedPlanet.getName()).setContent("dimension", I18n.format("data." + selectedPlanet.getName() + ".dimension")).setContent("gravity", I18n.format("data." + selectedPlanet.getName() + ".gravity")));
             }
         }
 
-        if (selectedPlanet == null && !this.doesDraw) {
+        if(selectedPlanet == null && !this.doesDraw) {
             setDraw(true);
             removeSidebars();
         }
@@ -103,22 +101,33 @@ public class ComputerGui extends GuiScreenWidget {
     }
 
     @Override
-    public void addWidgets() {
-        boolean doMoon = false;
+    public void addWidgets(){
         add(sun = new GuiPlanet(getMid(screenWidth) - (int) Math.sqrt(earthA ^ 2 - earthB ^ 2), getMid(screenHeight) - 4, "sun"));
-        for(String knownPlanet : knownPlanets){
-            if(knownPlanet != null){
-                if(!knownPlanet.equals("sun")){
-                    if(knownPlanet.equals("moon"))
-                        doMoon = true;
-                    GuiPlanet p = new GuiPlanet(0, 0, knownPlanet);
-                    add(p);
-                    planets.add(p);
-                }
-            }
-        }
-        if(doMoon)
+
+        if(knownPlanets.contains("moon")){
+            add(moon = new GuiPlanet(0, 0, "moon"));
             moon.setSize(0, 0, 4, 4);
+            planets.add(moon);
+        }
+        if(knownPlanets.contains("earth")){
+            add(earth = new GuiPlanet(0, 0, "earth"));
+            planets.add(earth);
+        }
+        if(knownPlanets.contains("moon")){
+            add(moon = new GuiPlanet(0, 0, "moon"));
+            planets.add(moon);
+        }
+        if(knownPlanets.contains("venus")){
+            add(venus = new GuiPlanet(0, 0, "venus"));
+            planets.add(venus);
+        }
+
+        if(Constants.runTimer){
+            FileHandler.writeToFile(Constants.fileName, "false");
+            Constants.runTimer = false;
+            initTimer();
+        }
+
     }
 
     @Override
@@ -132,6 +141,7 @@ public class ComputerGui extends GuiScreenWidget {
         GL11.glDisable(GL11.GL_LIGHTING);
         GL11.glDisable(GL11.GL_DEPTH_TEST);
         GL11.glDisable(GL11.GL_TEXTURE_2D);
+
         {
             GL11.glPushMatrix();
             {
@@ -153,63 +163,37 @@ public class ComputerGui extends GuiScreenWidget {
 
                 tess.draw();
 
-                for(String knownPlanet : knownPlanets){
-                    if(knownPlanet != null){
-                        if(knownPlanet.equals("moon")){
-                            GL11.glColor4d(0.89, 0.89, 0.89, 1);
-                            tess.startDrawing(GL11.GL_LINES);
+                if(knownPlanets.contains("moon")){
+                    GL11.glColor4d(0.89, 0.89, 0.89, 1);
+                    tess.startDrawing(GL11.GL_LINES);
 
-                            for(Point2D.Double aMoonCoordsArray : moonCoordsArray){
-                                tess.addVertex(earth.x + 4 + aMoonCoordsArray.x, earth.y + 4 + aMoonCoordsArray.y, 0.0D);
-                            }
-
-                            tess.draw();
-                            break;
-                        }
+                    for(Point2D.Double aMoonCoordsArray : moonCoordsArray){
+                        tess.addVertex(earth.x + 4 + aMoonCoordsArray.x, earth.y + 4 + aMoonCoordsArray.y, 0.0D);
                     }
+
+                    tess.draw();
                 }
 
-                for(String knownPlanet : knownPlanets){
-                    if(knownPlanet != null){
-                        if(knownPlanet.equals("venus")){
-                            GL11.glColor4d(0.84, 0.63, 0.29, 1);
-                            tess.startDrawing(GL11.GL_LINES);
+                if(knownPlanets.contains("venus")){
+                    GL11.glColor4d(0.84, 0.63, 0.29, 1);
+                    tess.startDrawing(GL11.GL_LINES);
 
-                            for(Point2D.Double aVenusCoordsArray : venusCoordsArray){
-                                tess.addVertex(getMid(screenWidth) + 4 + aVenusCoordsArray.x, getMid(screenHeight) + 4 + aVenusCoordsArray.y, 0.0D);
-                            }
-
-                            tess.draw();
-                            break;
-                        }
+                    for(Point2D.Double aVenusCoordsArray : venusCoordsArray){
+                        tess.addVertex(getMid(screenWidth) + 4 + aVenusCoordsArray.x, getMid(screenHeight) + 4 + aVenusCoordsArray.y, 0.0D);
                     }
+
+                    tess.draw();
                 }
 
-                for(String knownPlanet : knownPlanets){
-                    if(knownPlanet != null){
-                        if(knownPlanet.equals("venus")){
-                            GL11.glColor4d(0.49, 0.29, 0.06, 1);
-                            tess.startDrawing(GL11.GL_LINES);
-
-                            for(Point2D.Double aMercuryCoordsArray : mercuryCoordsArray){
-                                tess.addVertex(getMid(screenWidth) + 4 + aMercuryCoordsArray.x, getMid(screenHeight) + 4 + aMercuryCoordsArray.y, 0.0D);
-                            }
-
-                            tess.draw();
-                            break;
-                        }
-                    }
-                }
-
-                GL11.glEnable(GL11.GL_LIGHTING);
-                GL11.glEnable(GL11.GL_DEPTH_TEST);
-                GL11.glDepthMask(true);
-                GL11.glDisable(GL11.GL_BLEND);
-                GL11.glEnable(GL11.GL_TEXTURE_2D);
             }
 
-            GL11.glPopMatrix();
+            GL11.glEnable(GL11.GL_LIGHTING);
+            GL11.glEnable(GL11.GL_DEPTH_TEST);
+            GL11.glDepthMask(true);
+            GL11.glDisable(GL11.GL_BLEND);
+            GL11.glEnable(GL11.GL_TEXTURE_2D);
         }
+        GL11.glPopMatrix();
 
         GL11.glEnable(GL11.GL_TEXTURE_2D);
         GL11.glEnable(GL11.GL_LIGHTING);
@@ -245,8 +229,6 @@ public class ComputerGui extends GuiScreenWidget {
 
     /**
      * Sets the selected planet to draw the {@link GuiSideBarWidget}
-     *
-     * @see GuiSideBarWidget
      */
 
     public void setSelectedPlanet(GuiPlanet planet) {
@@ -279,6 +261,35 @@ public class ComputerGui extends GuiScreenWidget {
         planetInfoLeft = null;
         planetInfoRight = null;
         planetInfoTop = null;
+    }
+
+    /**
+     * Initializes all the tasks for the timer along with the timer itself, if needed
+     */
+
+    public static void initTimer(){
+        if(timer == null){
+            timer = new Timer(false);
+            MinestellarCore.log.info("Initializing timer...");
+        }
+
+        if(knownPlanets != null){
+            if(knownPlanets.contains("earth")){
+                TimerTask t = new PlanetTimer("earth");
+                MinestellarCore.log.info("Adding " + t + " to the timer");
+                timer.scheduleAtFixedRate(t, 10, 100);
+            }
+            if(knownPlanets.contains("moon")){
+                TimerTask t = new PlanetTimer("moon");
+                MinestellarCore.log.info("Adding " + t + "to the timer");
+                timer.scheduleAtFixedRate(t, 10, 100);
+            }
+            if(knownPlanets.contains("venus")){
+                TimerTask t = new PlanetTimer("venus");
+                MinestellarCore.log.info("Adding " + t + "to the timer");
+                timer.scheduleAtFixedRate(t, 10, 100);
+            }
+        }
     }
 
 }
