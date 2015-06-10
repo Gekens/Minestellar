@@ -28,6 +28,7 @@ import net.minecraft.world.World;
 import com.minestellar.api.data.block.DataTileEntity;
 import com.minestellar.api.data.block.IDataConnection;
 import com.minestellar.core.MinestellarCore;
+import com.minestellar.core.handler.PlanetKnowledgeHandler;
 import com.minestellar.utils.NBTHelper;
 
 import java.util.List;
@@ -58,6 +59,9 @@ public class ItemMemoryCard extends Item{
                 NBTHelper.setInteger(itemStack, "yCoord", y);
                 NBTHelper.setInteger(itemStack, "zCoord", z);
 
+                ((PlanetKnowledgeHandler) entityPlayer.getExtendedProperties(PlanetKnowledgeHandler.PLANET_KNOWLEDGE)).setAcknowledged("venus");
+                MinestellarCore.log.info("Known: " + ((PlanetKnowledgeHandler) entityPlayer.getExtendedProperties(PlanetKnowledgeHandler.PLANET_KNOWLEDGE)).getAcknowledgedPlanets());
+
                 return true;
             }
         }else{
@@ -65,7 +69,9 @@ public class ItemMemoryCard extends Item{
                 ((DataTileEntity)world.getTileEntity(x, y, z)).setCoordinates(itemStack);
                 return true;
             }
+
         }
+
         return false;
     }
 

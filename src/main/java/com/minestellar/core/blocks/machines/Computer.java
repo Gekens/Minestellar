@@ -24,9 +24,12 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
+import com.minestellar.core.Constants;
 import com.minestellar.core.MinestellarCore;
 import com.minestellar.core.blocks.tile.TileEntityComputer;
+import com.minestellar.core.gui.ComputerGui;
 import com.minestellar.core.gui.GUIs;
+import com.minestellar.core.handler.FileHandler;
 
 public class Computer extends Block implements ITileEntityProvider {
 	public Computer(String name) {
@@ -45,6 +48,9 @@ public class Computer extends Block implements ITileEntityProvider {
 
 		if (te != null) {
 			player.openGui(MinestellarCore.instance, GUIs.COMPUTER_GUI, world, x, y, z);
+            Constants.runTimer = true;
+            FileHandler.writeToFile(Constants.fileName, Constants.runTimer ? "true" : "false");
+            ComputerGui.initTimer();
 		}
 
 		return true;

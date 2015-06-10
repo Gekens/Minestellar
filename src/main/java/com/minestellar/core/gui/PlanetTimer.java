@@ -40,7 +40,6 @@ public class PlanetTimer extends TimerTask {
         this.planetName = planetName;
         if(this.planetName.equals("earth")){
             planet = Planet.EARTH;
-            MinestellarCore.log.info("ComputerGui.earth = " + ComputerGui.earth);
             currentPlanet = ComputerGui.earth;
         }else if (this.planetName.equals("moon")){
             planet = Planet.MOON;
@@ -102,7 +101,7 @@ public class PlanetTimer extends TimerTask {
             //                    break;
             //            }
 
-            MinestellarCore.log.info("X: " + (GuiDraw.displaySize().width / 2 + 4 + (int) x) + " Y: " + (GuiDraw.displaySize().height / 2 + 4 + (int) y));
+            MinestellarCore.log.info(planet + " X: " + currentPlanet.x + " Y: " + currentPlanet.y);
         }else{
             MinestellarCore.log.fatal("NullPointerException " + planet + " " + currentPlanet);
         }

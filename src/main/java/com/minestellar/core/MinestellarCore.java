@@ -33,6 +33,7 @@ import net.minecraft.item.ItemStack;
 import com.minestellar.api.data.wireless.WirelessDataNetwork;
 import com.minestellar.core.blocks.CoreBlocks;
 import com.minestellar.core.blocks.tile.*;
+import com.minestellar.core.gui.ComputerGui;
 import com.minestellar.core.handler.FileHandler;
 import com.minestellar.core.handler.GuiHandler;
 import com.minestellar.core.items.CoreItems;
@@ -63,8 +64,6 @@ public class MinestellarCore {
 	public static CreativeTabs stellarItemsTab;
 
     public static LogHelper log = new LogHelper(MinestellarCore.MOD_ID);
-
-//    public static ArrayList<TimerTask> tasks = new ArrayList<TimerTask>();
 
 	public static HashMap<String, ItemStack> blocksList = new HashMap<String, ItemStack>();
 	public static HashMap<String, ItemStack> itemList = new HashMap<String, ItemStack>();
@@ -161,16 +160,16 @@ public class MinestellarCore {
     public void serverStopping(FMLServerStoppingEvent event){
         Constants.runTimer = FileHandler.readFromFile(Constants.fileName).equals("true");
         WirelessDataNetwork.clearQueue(); //Clears the queue of packets
+        ComputerGui.timer.purge();
     }
 
     @EventHandler
     public void serverStarting(FMLServerStartingEvent event){
         WirelessDataNetwork wirelessDataNetwork = new WirelessDataNetwork();
         wirelessDataNetwork.initTimer(); //Initialises the timer for the wireless network
-        if(FileHandler.readFromFile(Constants.fileName).equals("false")) {
-            Constants.runTimer = true;
+        if(FileHandler.readFromFile(Constants.fileName).equals("true")) {
+            ComputerGui.initTimer();
         }
-        FileHandler.writeToFile(Constants.fileName, Constants.runTimer ? "true" : "false");
     }
 
 }

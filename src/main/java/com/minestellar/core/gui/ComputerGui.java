@@ -21,7 +21,6 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.resources.I18n;
 import org.lwjgl.opengl.GL11;
 
-import com.minestellar.core.Constants;
 import com.minestellar.core.MinestellarCore;
 import com.minestellar.core.blocks.machines.Computer;
 import com.minestellar.core.blocks.tile.TileEntityComputer;
@@ -30,7 +29,6 @@ import com.minestellar.core.gui.widget.GuiScreenWidget;
 import com.minestellar.core.gui.widget.GuiSideBarWidget;
 import com.minestellar.core.gui.widget.GuiWidget;
 import com.minestellar.core.gui.widget.planets.GuiPlanet;
-import com.minestellar.core.handler.FileHandler;
 
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
@@ -55,7 +53,7 @@ public class ComputerGui extends GuiScreenWidget {
     public ArrayList<Point2D.Double> mercuryCoordsArray = new ArrayList<Point2D.Double>();
     public ArrayList<Point2D.Double> venusCoordsArray = new ArrayList<Point2D.Double>();
 
-    public static Timer timer;
+    public static final Timer timer = new Timer(false);
 
     public static GuiPlanet selectedPlanet, sun, earth, moon, venus;
     public GuiSideBarWidget planetInfoTop, planetInfoLeft, planetInfoBottom, planetInfoRight;
@@ -84,14 +82,14 @@ public class ComputerGui extends GuiScreenWidget {
     public void updateScreen() {
         super.updateScreen();
 
-        if(selectedPlanet != null) {
+        if(selectedPlanet != null){
             if(doesDraw) {
                 setDraw(false);
                 add(planetInfoLeft = new GuiSideBarWidget(screenWidth, screenHeight, 200, screenHeight, 1).setColors(0xAA555555, 0xAA000000).setTitle(selectedPlanet.getName()).setContent("dimension", I18n.format("data." + selectedPlanet.getName() + ".dimension")).setContent("gravity", I18n.format("data." + selectedPlanet.getName() + ".gravity")));
             }
         }
 
-        if(selectedPlanet == null && !this.doesDraw) {
+        if(selectedPlanet == null && !this.doesDraw){
             setDraw(true);
             removeSidebars();
         }
@@ -113,20 +111,16 @@ public class ComputerGui extends GuiScreenWidget {
             add(earth = new GuiPlanet(0, 0, "earth"));
             planets.add(earth);
         }
-        if(knownPlanets.contains("moon")){
-            add(moon = new GuiPlanet(0, 0, "moon"));
-            planets.add(moon);
-        }
         if(knownPlanets.contains("venus")){
-            add(venus = new GuiPlanet(0, 0, "venus"));
+            add(venus = new GuiPlanet(10, 10, "venus"));
             planets.add(venus);
         }
 
-        if(Constants.runTimer){
-            FileHandler.writeToFile(Constants.fileName, "false");
-            Constants.runTimer = false;
-            initTimer();
-        }
+//        if(Constants.runTimer){
+//            FileHandler.writeToFile(Constants.fileName, "false");
+//            Constants.runTimer = false;
+//            initTimer();
+//        }
 
     }
 
@@ -268,25 +262,20 @@ public class ComputerGui extends GuiScreenWidget {
      */
 
     public static void initTimer(){
-        if(timer == null){
-            timer = new Timer(false);
-            MinestellarCore.log.info("Initializing timer...");
-        }
-
         if(knownPlanets != null){
             if(knownPlanets.contains("earth")){
                 TimerTask t = new PlanetTimer("earth");
-                MinestellarCore.log.info("Adding " + t + " to the timer");
+                MinestellarCore.log.info("Adding earth to the timer");
                 timer.scheduleAtFixedRate(t, 10, 100);
             }
             if(knownPlanets.contains("moon")){
                 TimerTask t = new PlanetTimer("moon");
-                MinestellarCore.log.info("Adding " + t + "to the timer");
+                MinestellarCore.log.info("Adding moon to the timer");
                 timer.scheduleAtFixedRate(t, 10, 100);
             }
             if(knownPlanets.contains("venus")){
                 TimerTask t = new PlanetTimer("venus");
-                MinestellarCore.log.info("Adding " + t + "to the timer");
+                MinestellarCore.log.info("Adding venus to the timer");
                 timer.scheduleAtFixedRate(t, 10, 100);
             }
         }
