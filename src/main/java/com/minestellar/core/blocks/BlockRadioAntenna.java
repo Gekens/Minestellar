@@ -26,35 +26,56 @@ import net.minecraft.world.World;
 
 import com.minestellar.core.MinestellarCore;
 import com.minestellar.core.blocks.tile.TileEntityRadioAntenna;
-import com.minestellar.core.items.ItemMemoryCard;
+import com.minestellar.core.handler.PlanetKnowledgeHandler;
+
+import java.util.ArrayList;
+import java.util.Random;
 
 public class BlockRadioAntenna extends Block implements ITileEntityProvider {
-	protected BlockRadioAntenna(String name) {
-		super(Material.iron);
-		this.setBlockName(name);
-	}
 
-	@Override
-	public CreativeTabs getCreativeTabToDisplayOn() {
-		return MinestellarCore.stellarBlocksTab;
-	}
+    /** Stores the players that will discover new planets */
+    private ArrayList<EntityPlayer> playerList;
 
-	@Override
-	public TileEntity createNewTileEntity(World world, int meta) {
-		return new TileEntityRadioAntenna();
-	}
+    public BlockRadioAntenna(String name) {
+        super(Material.iron);
+        this.setBlockName(name);
+        this.setTickRandomly(true);
+        playerList = new ArrayList<EntityPlayer>();
+    }
 
     @Override
-    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ){
-        if(player.getCurrentEquippedItem() != null){
-            if(player.getCurrentEquippedItem().getItem() instanceof ItemMemoryCard){
-                TileEntityRadioAntenna te = (TileEntityRadioAntenna) world.getTileEntity(x, y, z);
-                if(te != null){
-                    te.setCoordinates(player.getCurrentEquippedItem()); //I'm binding the other IDataConnection TE to this one
+    public CreativeTabs getCreativeTabToDisplayOn() {
+        return MinestellarCore.stellarBlocksTab;
+    }
+
+    @Override
+    public TileEntity createNewTileEntity(World world, int meta) {
+        return new TileEntityRadioAntenna();
+    }
+
+    @Override
+    public void updateTick(World world, int x, int y, int z, Random rnd){
+        if(Math.random() <= 0.5 && !playerList.isEmpty()){
+            MinestellarCore.log.info("Maybe adding planet to player");
+            for(EntityPlayer player : playerList){
+                if(Math.random() < 0.5){
+                    PlanetKnowledgeHandler props = (PlanetKnowledgeHandler)player.getExtendedProperties(PlanetKnowledgeHandler.PLANET_KNOWLEDGE);
+                    MinestellarCore.log.info("Known: " + props.getAcknowledgedPlanets());
+                    props.setAcknowledgedNext();
+                    MinestellarCore.log.info("Now known: " + props.getAcknowledgedPlanets());
                 }
             }
         }
-        return false;
+    }
+
+    /**
+     * Adds a player to the {@link BlockRadioAntenna#playerList}
+     *
+     * @param player The player to add
+     */
+
+    public void addPlayer(EntityPlayer player){
+        playerList.listIterator().add(player);
     }
 
     @Override

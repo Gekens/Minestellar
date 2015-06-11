@@ -72,7 +72,7 @@ public class PlanetKnowledgeHandler implements IExtendedEntityProperties{
      */
 
     public static void register(EntityPlayer player){
-       player.registerExtendedProperties(PlanetKnowledgeHandler.PLANET_KNOWLEDGE, new PlanetKnowledgeHandler(player));
+        player.registerExtendedProperties(PlanetKnowledgeHandler.PLANET_KNOWLEDGE, new PlanetKnowledgeHandler(player));
     }
 
     /**
@@ -145,6 +145,19 @@ public class PlanetKnowledgeHandler implements IExtendedEntityProperties{
     }
 
     /**
+     * Sets the next available planet to known
+     */
+
+    public void setAcknowledgedNext(){
+        for(int i = 0; i < planetNames.length; i++){
+            if(!isAcknowledged(planetNames[i])){
+                planetFound[i] = true;
+                break;
+            }
+        }
+    }
+
+    /**
      * Returns if the planet has already been acknowledged
      *
      * @param planet The planet to know the value of
@@ -159,6 +172,14 @@ public class PlanetKnowledgeHandler implements IExtendedEntityProperties{
             }
         }
         return false;
+    }
+
+    public void reset(){
+        for(int i = 0; i < planetNames.length; i++){
+            planetFound[i] = false;
+        }
+        planetFound[0] = true;
+        planetFound[1] = true;
     }
 
     /**

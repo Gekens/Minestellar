@@ -68,15 +68,15 @@ public abstract class CommonProxyCore {
         }
 
         @SubscribeEvent
-        public void onClonePlayer(PlayerEvent.Clone event) { //In case the player dies
+        public void onClonePlayer(PlayerEvent.Clone event){ //In case the player dies
             NBTTagCompound compound = new NBTTagCompound();
             PlanetKnowledgeHandler.get(event.original).saveNBTData(compound);
             PlanetKnowledgeHandler.get(event.entityPlayer).loadNBTData(compound);
         }
 
         @SubscribeEvent
-        public void onEntityJoinWorld(EntityJoinWorldEvent event) {
-            if (event.entity instanceof EntityPlayer && !event.entity.worldObj.isRemote) {
+        public void onEntityJoinWorld(EntityJoinWorldEvent event){
+            if(event.entity instanceof EntityPlayer && !event.entity.worldObj.isRemote){
                 NetworkHandler.sendTo(new MessageSyncKnowledge((EntityPlayer) event.entity), (EntityPlayerMP) event.entity);
             }
         }

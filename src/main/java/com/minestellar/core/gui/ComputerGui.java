@@ -115,13 +115,6 @@ public class ComputerGui extends GuiScreenWidget {
             add(venus = new GuiPlanet(10, 10, "venus"));
             planets.add(venus);
         }
-
-//        if(Constants.runTimer){
-//            FileHandler.writeToFile(Constants.fileName, "false");
-//            Constants.runTimer = false;
-//            initTimer();
-//        }
-
     }
 
     @Override

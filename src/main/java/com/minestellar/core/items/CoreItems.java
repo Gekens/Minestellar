@@ -42,6 +42,7 @@ public class CoreItems {
 	public static Item coreBasicItems;
 
     public static Item memoryCard;
+    public static Item bindingCard;
 
 	public static Item carbonSword;
 	public static Item carbonPickaxe;
@@ -69,6 +70,7 @@ public class CoreItems {
 		CoreItems.coreBasicItems = new ItemBasicCore();
 
         CoreItems.memoryCard = new ItemMemoryCard("memoryCard");
+        CoreItems.bindingCard = new ItemBindingCard("bindingCard");
 
 		CoreItems.carbonSword = new ItemSwordCore("carbon_sword", CoreItems.TOOL_CARBON);
 		CoreItems.carbonPickaxe = new ItemPickaxeCore("carbon_pickaxe", CoreItems.TOOL_CARBON);
@@ -95,6 +97,7 @@ public class CoreItems {
 		MinestellarCore.registerItem(coreBasicItems);
 
         MinestellarCore.registerItem(memoryCard);
+        MinestellarCore.registerItem(bindingCard);
 
 		MinestellarCore.registerItem(carbonPickaxe);
 		MinestellarCore.registerItem(carbonAxe);

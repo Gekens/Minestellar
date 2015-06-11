@@ -23,17 +23,11 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
 
-import com.minestellar.api.data.block.DataTileEntity;
-import com.minestellar.api.data.wireless.WirelessDataPacket;
 import com.minestellar.core.network.NetworkHandler;
 import com.minestellar.core.network.message.MessageAntennaOnline;
 
 @Optional.Interface(iface = "cofh.api.energy.IEnergyHandler", modid = "CoFHCore")
-public class TileEntityRadioAntenna extends DataTileEntity implements IEnergyHandler{
-
-    private boolean firstTime, firstWireless;
-
-    private WirelessDataPacket dataPacket;
+public class TileEntityRadioAntenna extends TileEntity implements IEnergyHandler{
 
     private EnergyStorage storage;
 
@@ -43,17 +37,6 @@ public class TileEntityRadioAntenna extends DataTileEntity implements IEnergyHan
 
     @Override
     public void updateEntity() {
-
-        System.out.println("Connected: " + connectedX + " " + connectedY + " " + connectedZ);
-
-        if(worldObj.getTileEntity(connectedX, connectedY, connectedZ) instanceof TileEntityComputer){
-            if(firstTime){
-                firstTime = false;
-                dataPacket = new WirelessDataPacket(worldObj, xCoord, yCoord, zCoord, connectedX, connectedY, connectedZ);
-            }
-        }
-
-//        MinestellarLog.info("Stored: " + storage.getEnergyStored());
 
         if(storage.getEnergyStored() > 0){
             NetworkHandler.sendToServer(new MessageAntennaOnline(true, xCoord, yCoord, zCoord));
@@ -80,7 +63,7 @@ public class TileEntityRadioAntenna extends DataTileEntity implements IEnergyHan
             }
         }
 
-        storage.extractEnergy(10, false);
+        storage.extractEnergy(10, false); //This machine uses 10 RF/t
 
     }
 
@@ -94,18 +77,6 @@ public class TileEntityRadioAntenna extends DataTileEntity implements IEnergyHan
     public void writeToNBT(NBTTagCompound nbt) {
         super.writeToNBT(nbt);
         storage.writeToNBT(nbt);
-    }
-
-    //IDataConnection Implementation
-
-    @Override
-    public void receiveWirelessPacket(WirelessDataPacket packet){
-
-    }
-
-    @Override
-    public void sendWirelessPacket(){
-
     }
 
     //RF IMPLEMENTATION

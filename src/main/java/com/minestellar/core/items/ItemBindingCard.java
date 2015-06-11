@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 25/05/15 Davide Cossu & Matthew Albrecht.
+ * Copyright (c) 11/06/15 Davide Cossu & Matthew Albrecht.
  * <p/>
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -25,16 +25,13 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
-import com.minestellar.api.data.block.DataTileEntity;
-import com.minestellar.api.data.block.IDataConnection;
 import com.minestellar.core.MinestellarCore;
-import com.minestellar.utils.NBTHelper;
+import com.minestellar.core.blocks.BlockRadioAntenna;
+import com.minestellar.core.handler.PlanetKnowledgeHandler;
 
-import java.util.List;
+public class ItemBindingCard extends Item{
 
-public class ItemMemoryCard extends Item{
-
-    public ItemMemoryCard(String name){
+    public ItemBindingCard(String name){
         this.setUnlocalizedName(name);
         this.setMaxStackSize(1);
     }
@@ -52,30 +49,19 @@ public class ItemMemoryCard extends Item{
 
     @Override
     public boolean onItemUse(ItemStack itemStack, EntityPlayer entityPlayer, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ){
-        if(entityPlayer.isSneaking()){
-            if(world.getTileEntity(x, y, z) != null && world.getTileEntity(x, y, z) instanceof IDataConnection){
-                NBTHelper.setInteger(itemStack, "xCoord", x);
-                NBTHelper.setInteger(itemStack, "yCoord", y);
-                NBTHelper.setInteger(itemStack, "zCoord", z);
-                return true;
-            }
-        }else{
-            if(world.getTileEntity(x, y, z) != null && world.getTileEntity(x, y, z) instanceof IDataConnection){
-                ((DataTileEntity)world.getTileEntity(x, y, z)).setCoordinates(itemStack);
-                return true;
-            }
-
+        if(world.getBlock(x, y, z) != null && world.getBlock(x, y, z) instanceof BlockRadioAntenna){
+            ((BlockRadioAntenna)world.getBlock(x, y, z)).addPlayer(entityPlayer); //Adds the player to the block. That player will start then learning new planets over time.
         }
 
+        if(entityPlayer.isSneaking()){
+            PlanetKnowledgeHandler props = (PlanetKnowledgeHandler)entityPlayer.getExtendedProperties(PlanetKnowledgeHandler.PLANET_KNOWLEDGE);
+            MinestellarCore.log.info("Known: " + props.getAcknowledgedPlanets());
+        }else{
+            PlanetKnowledgeHandler props = (PlanetKnowledgeHandler)entityPlayer.getExtendedProperties(PlanetKnowledgeHandler.PLANET_KNOWLEDGE);
+            props.reset();
+            MinestellarCore.log.info("Known: " + props.getAcknowledgedPlanets());
+        }
         return false;
-    }
-
-    @SuppressWarnings("unchecked")
-    @Override
-    public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean par4){
-        list.add("X: " + NBTHelper.getInt(stack, "xCoord"));
-        list.add("Y: " + NBTHelper.getInt(stack, "yCoord"));
-        list.add("Z: " + NBTHelper.getInt(stack, "zCoord"));
     }
 
     @SideOnly(Side.CLIENT)

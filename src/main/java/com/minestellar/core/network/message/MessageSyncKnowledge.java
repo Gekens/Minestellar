@@ -36,14 +36,10 @@ public class MessageSyncKnowledge extends MessageBase<MessageSyncKnowledge>{
 
     @Override
     public void handleClientSide(MessageSyncKnowledge message, EntityPlayer player){
-        //PlanetKnowledgeHandler.register(player);
-        //player.getExtendedProperties(PlanetKnowledgeHandler.PLANET_KNOWLEDGE).saveNBTData(data);
     }
 
     @Override
     public void handleServerSide(MessageSyncKnowledge message, EntityPlayer player){
-        //PlanetKnowledgeHandler.register(player);
-        //player.getExtendedProperties(PlanetKnowledgeHandler.PLANET_KNOWLEDGE).saveNBTData(data);
     }
 
     @Override
