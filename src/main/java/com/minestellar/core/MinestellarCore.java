@@ -33,8 +33,6 @@ import net.minecraft.item.ItemStack;
 import com.minestellar.api.data.wireless.WirelessDataNetwork;
 import com.minestellar.core.blocks.CoreBlocks;
 import com.minestellar.core.blocks.tile.*;
-import com.minestellar.core.gui.ComputerGui;
-import com.minestellar.core.handler.FileHandler;
 import com.minestellar.core.handler.GuiHandler;
 import com.minestellar.core.items.CoreItems;
 import com.minestellar.core.network.NetworkHandler;
@@ -158,18 +156,13 @@ public class MinestellarCore {
 
     @EventHandler
     public void serverStopping(FMLServerStoppingEvent event){
-        Constants.runTimer = FileHandler.readFromFile(Constants.fileName).equals("true");
         WirelessDataNetwork.clearQueue(); //Clears the queue of packets
-        ComputerGui.timer.purge();
     }
 
     @EventHandler
     public void serverStarting(FMLServerStartingEvent event){
         WirelessDataNetwork wirelessDataNetwork = new WirelessDataNetwork();
         wirelessDataNetwork.initTimer(); //Initialises the timer for the wireless network
-        if(FileHandler.readFromFile(Constants.fileName).equals("true")) {
-            ComputerGui.initTimer();
-        }
     }
 
 }

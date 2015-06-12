@@ -18,12 +18,16 @@ package com.minestellar.core.handler;
 
 import net.minecraft.client.Minecraft;
 
+import com.minestellar.core.MinestellarCore;
+
 import java.io.*;
 
 /**
  * Custom file handler for writing and reading files
  */
+
 public class FileHandler {
+
     /**
      * Writes the given text in the given file.
      * <p>
@@ -32,13 +36,22 @@ public class FileHandler {
      *
      * @param fileName The name of the file that should be written
      * @param text The text that should be written
+     * @param inMods If the file should be created in the mods folder. If false, it'll be created inside the world save
      */
-    public static void writeToFile(String fileName, String text) {
+
+    public static void writeToFile(String fileName, String text, boolean inMods) { //TODO: make a file create in the saves folder
         FileWriter fileWriter;
 
         try {
-            File modsFolder = new File(new File(Minecraft.getMinecraft().mcDataDir.getAbsolutePath().replace(File.separatorChar, '/').replace("/.", "/")), "mods");
-            File myFolder = new File(modsFolder, "MinestellarCore");
+            File myFolder;
+            if(inMods){
+                File modsFolder = new File(new File(Minecraft.getMinecraft().mcDataDir.getAbsolutePath().replace(File.separatorChar, '/').replace("/.", "/")), "mods");
+                myFolder = new File(modsFolder, "MinestellarCore");
+            }else{
+                File savesFolder = new File(new File(Minecraft.getMinecraft().theWorld.provider.getSaveFolder()).getParent());
+                myFolder = new File(savesFolder, "MinestellarCore");
+                MinestellarCore.log.info(Minecraft.getMinecraft().theWorld.provider.getSaveFolder());
+            }
 
             myFolder.mkdir();
 
@@ -51,8 +64,6 @@ public class FileHandler {
 
             BufferedWriter writer = new BufferedWriter(fileWriter);
 
-            //MinestellarLog.info("String: " + text);
-
             writer.write(text);
             writer.newLine();
             writer.close();
@@ -62,18 +73,27 @@ public class FileHandler {
     }
 
     /**
-     * Reads all the lines on the given file name. The file will be checked in the custom folder.
+     * Reads all the lines on the given file name.
      *
      * @param fileName The name of the file
-     * @see FileHandler#writeToFile(String, String)
+     * @param inMods If the file is to be searched in the mods folder, otherwise it's in the world's save
      */
-    public static String readFromFile(String fileName) {
+
+    public static String readFromFile(String fileName, boolean inMods){
         String line, text = "";
         FileReader fileReader;
 
         try {
-            File modsFolder = new File(new File(Minecraft.getMinecraft().mcDataDir.getAbsolutePath().replace(File.separatorChar, '/').replace("/.", "/")), "mods");
-            File myFolder = new File(modsFolder, "MinestellarCore");
+            File myFolder;
+
+            if(inMods){
+                File modsFolder = new File(new File(Minecraft.getMinecraft().mcDataDir.getAbsolutePath().replace(File.separatorChar, '/').replace("/.", "/")), "mods");
+                myFolder = new File(modsFolder, "MinestellarCore");
+            }else{
+                File savesFolder = Minecraft.getMinecraft().theWorld.getSaveHandler().getWorldDirectory();
+                myFolder = new File(savesFolder, "MinestellarCore");
+            }
+
             myFolder.mkdir();
             File myFile = new File(myFolder, fileName);
 
@@ -88,7 +108,7 @@ public class FileHandler {
                 text += line;
             }
 
-            //MinestellarLog.info("Text: " + text);
+            MinestellarCore.log.info("Text: " + text);
 
             bufferedReader.close();
 

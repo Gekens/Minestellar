@@ -53,8 +53,9 @@ public class ItemBindingCard extends Item{
             ((BlockRadioAntenna)world.getBlock(x, y, z)).addPlayer(entityPlayer); //Adds the player to the block. That player will start then learning new planets over time.
         }
 
-        if(entityPlayer.isSneaking()){
+        if(entityPlayer.isSneaking() && world.isRemote){
             PlanetKnowledgeHandler props = (PlanetKnowledgeHandler)entityPlayer.getExtendedProperties(PlanetKnowledgeHandler.PLANET_KNOWLEDGE);
+            props.setAcknowledgedNext();
             MinestellarCore.log.info("Known: " + props.getAcknowledgedPlanets());
         }else{
             PlanetKnowledgeHandler props = (PlanetKnowledgeHandler)entityPlayer.getExtendedProperties(PlanetKnowledgeHandler.PLANET_KNOWLEDGE);
