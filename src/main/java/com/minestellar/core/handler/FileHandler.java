@@ -16,9 +16,9 @@
 
 package com.minestellar.core.handler;
 
+import cpw.mods.fml.client.FMLClientHandler;
+import cpw.mods.fml.common.FMLCommonHandler;
 import net.minecraft.client.Minecraft;
-
-import com.minestellar.core.MinestellarCore;
 
 import java.io.*;
 
@@ -39,7 +39,7 @@ public class FileHandler {
      * @param inMods If the file should be created in the mods folder. If false, it'll be created inside the world save
      */
 
-    public static void writeToFile(String fileName, String text, boolean inMods) { //TODO: make a file create in the saves folder
+    public static void writeToFile(String fileName, String text, boolean inMods){
         FileWriter fileWriter;
 
         try {
@@ -48,9 +48,9 @@ public class FileHandler {
                 File modsFolder = new File(new File(Minecraft.getMinecraft().mcDataDir.getAbsolutePath().replace(File.separatorChar, '/').replace("/.", "/")), "mods");
                 myFolder = new File(modsFolder, "MinestellarCore");
             }else{
-                File savesFolder = new File(new File(Minecraft.getMinecraft().theWorld.provider.getSaveFolder()).getParent());
-                myFolder = new File(savesFolder, "MinestellarCore");
-                MinestellarCore.log.info(Minecraft.getMinecraft().theWorld.provider.getSaveFolder());
+                File savesFolder = FMLClientHandler.instance().getSavesDir();
+                File worldSave = new File(savesFolder, FMLCommonHandler.instance().getMinecraftServerInstance().getWorldName());
+                myFolder = new File(worldSave, "MinestellarCore");
             }
 
             myFolder.mkdir();
@@ -90,8 +90,9 @@ public class FileHandler {
                 File modsFolder = new File(new File(Minecraft.getMinecraft().mcDataDir.getAbsolutePath().replace(File.separatorChar, '/').replace("/.", "/")), "mods");
                 myFolder = new File(modsFolder, "MinestellarCore");
             }else{
-                File savesFolder = Minecraft.getMinecraft().theWorld.getSaveHandler().getWorldDirectory();
-                myFolder = new File(savesFolder, "MinestellarCore");
+                File savesFolder = FMLClientHandler.instance().getSavesDir();
+                File worldSave = new File(savesFolder, FMLCommonHandler.instance().getMinecraftServerInstance().getWorldName());
+                myFolder = new File(worldSave, "MinestellarCore");
             }
 
             myFolder.mkdir();
@@ -107,8 +108,6 @@ public class FileHandler {
             while ((line = bufferedReader.readLine()) != null) {
                 text += line;
             }
-
-            MinestellarCore.log.info("Text: " + text);
 
             bufferedReader.close();
 

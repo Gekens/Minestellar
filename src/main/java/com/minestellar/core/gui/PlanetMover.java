@@ -26,7 +26,7 @@ import com.minestellar.core.gui.widget.planets.GuiPlanet;
 public class PlanetMover implements Runnable{
 
     private final double incr = 2;
-    private double x = 0., y = 0.;
+    private static double x = 0., y = 0.;
     private boolean doTop = false, firstTime = true;
 
     private Planet planet;

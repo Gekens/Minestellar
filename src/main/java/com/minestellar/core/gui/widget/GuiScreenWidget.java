@@ -14,7 +14,7 @@ public abstract class GuiScreenWidget extends GuiScreen implements IGuiActionLis
 
     public ArrayList<GuiWidget> widgets = new ArrayList<GuiWidget>();
 
-    public int xSize, ySize, midX, midY, guiTop, guiLeft;
+    public int xSize, ySize, guiTop, guiLeft;
 
     public GuiScreenWidget() {
         this(176, 166);
@@ -73,7 +73,7 @@ public abstract class GuiScreenWidget extends GuiScreen implements IGuiActionLis
                 widget.draw(mousex - guiTop, mousey - guiLeft, f);
         }catch(Exception e ){
             MinestellarCore.log.fatal("Crash caught! Report this to the mod author!");
-            MinestellarCore.log.fatal(e);
+            MinestellarCore.log.fatal(e.getCause());
         }
         drawForeground();
         GL11.glTranslated(-guiTop, -guiLeft, 0);
@@ -91,7 +91,7 @@ public abstract class GuiScreenWidget extends GuiScreen implements IGuiActionLis
                 widget.mouseClicked(x - guiTop, y - guiLeft, button);
         }catch(Exception e ){
             MinestellarCore.log.fatal("Crash caught! Report this to the mod author!");
-            MinestellarCore.log.fatal(e);
+            MinestellarCore.log.fatal(e.getCause());
         }
     }
 
@@ -103,7 +103,7 @@ public abstract class GuiScreenWidget extends GuiScreen implements IGuiActionLis
                 widget.mouseMovedOrUp(x - guiTop, y - guiLeft, button);
         }catch(Exception e ){
             MinestellarCore.log.fatal("Crash caught! Report this to the mod author!");
-            MinestellarCore.log.fatal(e);
+            MinestellarCore.log.fatal(e.getCause());
         }
     }
 
@@ -115,7 +115,7 @@ public abstract class GuiScreenWidget extends GuiScreen implements IGuiActionLis
                 widget.mouseDragged(x - guiTop, y - guiLeft, button, time);
         }catch(Exception e ){
             MinestellarCore.log.fatal("Crash caught! Report this to the mod author!");
-            MinestellarCore.log.fatal(e);
+            MinestellarCore.log.fatal(e.getCause());
         }
     }
 
@@ -128,7 +128,7 @@ public abstract class GuiScreenWidget extends GuiScreen implements IGuiActionLis
                     widget.update();
             }catch(Exception e ){
                 MinestellarCore.log.fatal("Crash caught! Report this to the mod author!");
-                MinestellarCore.log.fatal(e);
+                MinestellarCore.log.fatal(e.getCause());
             }
     }
 
@@ -140,7 +140,7 @@ public abstract class GuiScreenWidget extends GuiScreen implements IGuiActionLis
                 widget.keyTyped(c, keycode);
         }catch(Exception e ){
             MinestellarCore.log.fatal("Crash caught! Report this to the mod author!");
-            MinestellarCore.log.fatal(e);
+            MinestellarCore.log.fatal(e.getCause());
         }
     }
 
@@ -156,7 +156,7 @@ public abstract class GuiScreenWidget extends GuiScreen implements IGuiActionLis
                     widget.mouseScrolled(p.x, p.y, scroll);
             }catch(Exception e ){
                 MinestellarCore.log.fatal("Crash caught! Report this to the mod author!");
-                MinestellarCore.log.fatal(e);
+                MinestellarCore.log.fatal(e.getCause());
             }
         }
     }

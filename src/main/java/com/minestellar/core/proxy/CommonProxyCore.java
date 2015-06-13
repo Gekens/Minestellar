@@ -16,10 +16,12 @@
 
 package com.minestellar.core.proxy;
 
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.gameevent.TickEvent;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
@@ -28,6 +30,9 @@ import net.minecraftforge.event.entity.EntityEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 
+import com.minestellar.core.Constants;
+import com.minestellar.core.gui.ComputerGui;
+import com.minestellar.core.handler.FileHandler;
 import com.minestellar.core.handler.PlanetKnowledgeHandler;
 import com.minestellar.core.network.NetworkHandler;
 import com.minestellar.core.network.message.MessageSyncKnowledge;
@@ -38,6 +43,7 @@ public abstract class CommonProxyCore {
 
     public void init(FMLInitializationEvent event) {
         MinecraftForge.EVENT_BUS.register(new PlayerKnowledge());
+        FMLCommonHandler.instance().bus().register(new PlayerTicker());
     }
 
     public void postInit(FMLPostInitializationEvent event) {
@@ -81,4 +87,19 @@ public abstract class CommonProxyCore {
             }
         }
     }
+
+    public class PlayerTicker{
+        private int temp = 0;
+        @SubscribeEvent
+        public void onTick(TickEvent.WorldTickEvent event){
+            if(FileHandler.readFromFile(Constants.fileName, false).equals("run")){
+                if(temp >= 500){
+                    temp = 0;
+                    ComputerGui.movePlanets();
+                }
+                temp++;
+            }
+        }
+    }
+
 }

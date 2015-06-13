@@ -50,7 +50,7 @@ public class ComputerGui extends GuiScreenWidget {
     public ArrayList<Point2D.Double> mercuryCoordsArray = new ArrayList<Point2D.Double>();
     public ArrayList<Point2D.Double> venusCoordsArray = new ArrayList<Point2D.Double>();
 
-    private PlanetMover earthMover, venusMover, moonMover;
+    private static PlanetMover earthMover, venusMover, moonMover;
 
     private byte temp;
 
@@ -84,9 +84,7 @@ public class ComputerGui extends GuiScreenWidget {
 
         if(first){
             first = false;
-            earthMover.run();
-            venusMover.run();
-            moonMover.run();
+            //            movePlanets();
         }
 
         if(selectedPlanet != null){
@@ -103,9 +101,7 @@ public class ComputerGui extends GuiScreenWidget {
 
         if(temp >= 50){
             temp = 0;
-            earthMover.run();
-            venusMover.run();
-            moonMover.run();
+            //            movePlanets();
         }
 
         setWorldAndResolution(FMLClientHandler.instance().getClient(), screenWidth, screenHeight);
@@ -265,6 +261,12 @@ public class ComputerGui extends GuiScreenWidget {
         planetInfoLeft = null;
         planetInfoRight = null;
         planetInfoTop = null;
+    }
+
+    public static void movePlanets(){
+        if(earthMover != null) earthMover.run();
+        if(moonMover != null && knownPlanets.contains("moon")) moonMover.run();
+        if(venusMover != null && knownPlanets.contains("venus")) venusMover.run();
     }
 
 }

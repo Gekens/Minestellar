@@ -24,6 +24,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
+import com.minestellar.core.Constants;
 import com.minestellar.core.MinestellarCore;
 import com.minestellar.core.blocks.tile.TileEntityComputer;
 import com.minestellar.core.gui.GUIs;
@@ -46,7 +47,7 @@ public class Computer extends Block implements ITileEntityProvider {
 
 		if (te != null) {
 			player.openGui(MinestellarCore.instance, GUIs.COMPUTER_GUI, world, x, y, z);
-            FileHandler.writeToFile("test.txt", "TEst", false);
+            FileHandler.writeToFile(Constants.fileName, "run", false);
 		}
 
 		return true;

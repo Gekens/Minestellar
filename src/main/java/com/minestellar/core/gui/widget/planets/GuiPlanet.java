@@ -116,7 +116,7 @@ public class GuiPlanet extends GuiWidget {
 
 	public void drawSelectedBox() {
 		int away = 2;
-		GuiDraw.drawRect(x - away, y - away, this.width + away * 2, this.height + away * 2, 0xDD006666);
+		GuiDraw.drawRect(x - away, y - away, width + away * 2, height + away * 2, 0xDD006666);
 	}
 
 	/**
@@ -159,6 +159,6 @@ public class GuiPlanet extends GuiWidget {
 
 	@Override
 	public String toString() {
-		return "[" + this.name + " " + this.x + " " + this.y + "]";
+		return "[" + this.name + " " + x + " " + y + "]";
 	}
 }

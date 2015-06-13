@@ -26,9 +26,9 @@ public class GuiWidget extends Gui {
 
 	public void setSize(int x, int y, int width, int height) {
 		this.x = x;
-		this.y = y;
-		this.width = width;
-		this.height = height;
+        this.y = y;
+        this.width = width;
+        this.height = height;
 	}
 
 	public boolean pointInside(int px, int py) {
