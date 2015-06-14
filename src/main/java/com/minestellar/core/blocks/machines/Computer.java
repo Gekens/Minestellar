@@ -47,7 +47,7 @@ public class Computer extends Block implements ITileEntityProvider {
 
 		if (te != null) {
 			player.openGui(MinestellarCore.instance, GUIs.COMPUTER_GUI, world, x, y, z);
-            FileHandler.writeToFile(Constants.fileName, "run", false);
+            FileHandler.writeToFile(Constants.stateFile, "run", false);
 		}
 
 		return true;

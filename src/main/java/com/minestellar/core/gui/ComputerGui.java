@@ -21,6 +21,7 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.resources.I18n;
 import org.lwjgl.opengl.GL11;
 
+import com.minestellar.core.Constants;
 import com.minestellar.core.blocks.machines.Computer;
 import com.minestellar.core.blocks.tile.TileEntityComputer;
 import com.minestellar.core.gui.widget.GuiDraw;
@@ -28,6 +29,7 @@ import com.minestellar.core.gui.widget.GuiScreenWidget;
 import com.minestellar.core.gui.widget.GuiSideBarWidget;
 import com.minestellar.core.gui.widget.GuiWidget;
 import com.minestellar.core.gui.widget.planets.GuiPlanet;
+import com.minestellar.core.handler.FileHandler;
 
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
@@ -40,7 +42,7 @@ import java.util.Iterator;
 public class ComputerGui extends GuiScreenWidget {
 
     public int screenWidth, screenHeight, spaceX, spaceY, spaceWidth, spaceHeight, earthA, earthB;
-    private boolean doesDraw = false, first = true;
+    private boolean doesDraw = false;
 
     private static ArrayList<String> knownPlanets = new ArrayList<String>();
 
@@ -51,8 +53,6 @@ public class ComputerGui extends GuiScreenWidget {
     public ArrayList<Point2D.Double> venusCoordsArray = new ArrayList<Point2D.Double>();
 
     private static PlanetMover earthMover, venusMover, moonMover;
-
-    private byte temp;
 
     public static GuiPlanet selectedPlanet, sun, earth, moon, venus;
     public GuiSideBarWidget planetInfoTop, planetInfoLeft, planetInfoBottom, planetInfoRight;
@@ -75,17 +75,11 @@ public class ComputerGui extends GuiScreenWidget {
         GuiDraw.fillEllipseCoordsArray(384 / 152, 383 / 147, moonCoordsArray);
         GuiDraw.fillEllipseCoordsArray(108 / 2, 107 / 2, venusCoordsArray);
         GuiDraw.fillEllipseCoordsArray(57 / 2, 56 / 2, mercuryCoordsArray);
-        temp = 0;
     }
 
     @Override
     public void updateScreen() {
         super.updateScreen();
-
-        if(first){
-            first = false;
-            //            movePlanets();
-        }
 
         if(selectedPlanet != null){
             if(doesDraw) {
@@ -99,37 +93,59 @@ public class ComputerGui extends GuiScreenWidget {
             removeSidebars();
         }
 
-        if(temp >= 50){
-            temp = 0;
-            //            movePlanets();
-        }
-
         setWorldAndResolution(FMLClientHandler.instance().getClient(), screenWidth, screenHeight);
 
-        temp += 1;
     }
 
     @Override
     public void addWidgets(){
         add(sun = new GuiPlanet(getMid(screenWidth) - (int) Math.sqrt(earthA ^ 2 - earthB ^ 2), getMid(screenHeight) - 4, "sun"));
 
-        if(knownPlanets.contains("moon")){
-            add(moon = new GuiPlanet(0, 0, "moon"));
-            moon.setSize(0, 0, 4, 4);
-            planets.add(moon);
-            moonMover = new PlanetMover(moon, Planet.MOON);
+        String text = FileHandler.readFromFile(Constants.coordinatesFile, false);
+        if(text != null){
+            String[] split = text.split(" ");
+            if(split.length >= 3){
+                String textX = split[1];
+                String textY = split[2];
+                int x = Integer.parseInt(textX);
+                int y = Integer.parseInt(textY);
+                if(x > 0 && y > 0){
+                    if(knownPlanets.contains("moon")){
+                        add(moon = new GuiPlanet(x, y, "moon"));
+                        moon.setSize(x, y, 4, 4);
+                        planets.add(moon);
+                        moonMover = new PlanetMover(Planet.MOON);
+                    }
+                    if(knownPlanets.contains("earth")){
+                        add(earth = new GuiPlanet(x, y, "earth"));
+                        planets.add(earth);
+                        earthMover = new PlanetMover(Planet.EARTH);
+                    }
+                    if(knownPlanets.contains("venus")){
+                        add(venus = new GuiPlanet(x, y, "venus"));
+                        planets.add(venus);
+                        venusMover = new PlanetMover(Planet.VENUS);
+                    }
+                }else{
+                    if(knownPlanets.contains("moon")){
+                        add(moon = new GuiPlanet(x, y, "moon"));
+                        moon.setSize(x, y, 4, 4);
+                        planets.add(moon);
+                        moonMover = new PlanetMover(Planet.MOON);
+                    }
+                    if(knownPlanets.contains("earth")){
+                        add(earth = new GuiPlanet(x, y, "earth"));
+                        planets.add(earth);
+                        earthMover = new PlanetMover(Planet.EARTH);
+                    }
+                    if(knownPlanets.contains("venus")){
+                        add(venus = new GuiPlanet(x, y, "venus"));
+                        planets.add(venus);
+                        venusMover = new PlanetMover(Planet.VENUS);
+                    }
+                }
+            }
         }
-        if(knownPlanets.contains("earth")){
-            add(earth = new GuiPlanet(0, 0, "earth"));
-            planets.add(earth);
-            earthMover = new PlanetMover(earth, Planet.EARTH);
-        }
-        if(knownPlanets.contains("venus")){
-            add(venus = new GuiPlanet(10, 10, "venus"));
-            planets.add(venus);
-            venusMover = new PlanetMover(venus, Planet.VENUS);
-        }
-
     }
 
     @Override
@@ -263,10 +279,57 @@ public class ComputerGui extends GuiScreenWidget {
         planetInfoTop = null;
     }
 
+    /**
+     * Calculates the new planet coordinates
+     */
+
     public static void movePlanets(){
         if(earthMover != null) earthMover.run();
         if(moonMover != null && knownPlanets.contains("moon")) moonMover.run();
         if(venusMover != null && knownPlanets.contains("venus")) venusMover.run();
+    }
+
+    /**
+     * Gets the planet object from the given variable name
+     *
+     * @param name The name of the variable to search
+     * @return The object corresponding
+     */
+
+    public GuiPlanet getPlanetFromString(String name){
+        GuiPlanet p = null;
+        try{
+            p = (GuiPlanet)this.getClass().getDeclaredField(name.toLowerCase()).get(this);
+        }catch(IllegalAccessException e){
+            e.printStackTrace();
+        }catch(NoSuchFieldException e){
+            e.printStackTrace();
+        }
+        return p;
+    }
+
+    /**
+     * Sets the coordinates of the planets
+     */
+
+    public static void setPlanetCoordinates(){
+        String text = FileHandler.readFromFile(Constants.coordinatesFile, false);
+        if(text != null){
+            String[] split = text.split(" ");
+            if(split.length >= 3){
+                String name = split[0].toLowerCase();
+                String x = split[1];
+                String y = split[2];
+
+                if(name.equals("earth") && earth != null){ //Unfortunately I can't use the ComputerGui#getPlanetFromString(String). Because I can't use static methods
+                    earth.setCoords(Integer.parseInt(x), Integer.parseInt(y));
+                }else if(name.equals("moon") && moon != null){
+                    moon.setCoords(Integer.parseInt(x), Integer.parseInt(y));
+                }else if(name.equals("venus") && venus != null){
+                    venus.setCoords(Integer.parseInt(x), Integer.parseInt(y));
+                }
+            }
+        }
     }
 
 }

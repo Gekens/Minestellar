@@ -16,8 +16,9 @@
 
 package com.minestellar.core.gui;
 
+import com.minestellar.core.Constants;
 import com.minestellar.core.gui.widget.GuiDraw;
-import com.minestellar.core.gui.widget.planets.GuiPlanet;
+import com.minestellar.core.handler.FileHandler;
 
 /**
  * Runnable that moves the planets
@@ -30,10 +31,7 @@ public class PlanetMover implements Runnable{
     private boolean doTop = false, firstTime = true;
 
     private Planet planet;
-    private GuiPlanet currentPlanet;
-
-    public PlanetMover(GuiPlanet currentPlanet, Planet planet){
-        this.currentPlanet = currentPlanet;
+    public PlanetMover(Planet planet){
         this.planet = planet;
     }
 
@@ -69,6 +67,8 @@ public class PlanetMover implements Runnable{
             x += incr;
         }
 
-        currentPlanet.setCoords(GuiDraw.displaySize().width / 2 + 4 + (int) x, GuiDraw.displaySize().height / 2 + 4 + (int) y);
+        System.out.println(planet + " " + ((GuiDraw.displaySize().width / 2) + 4 + (int) x) + " " + ((GuiDraw.displaySize().height / 2) + 4 + (int) y));
+
+        FileHandler.writeToFile(Constants.coordinatesFile, planet + " " + ((GuiDraw.displaySize().width / 2) + 4 + (int) x) + " " + ((GuiDraw.displaySize().height / 2) + 4 + (int) y), false);
     }
 }

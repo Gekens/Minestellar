@@ -38,4 +38,22 @@ public enum Planet {
 	public double getB() {
 		return this.b;
 	}
+
+    /**
+     * Gets the {@link Planet} object corresponding to the specified String
+     *
+     * @param planet The string to compare
+     * @return The Planet object
+     */
+
+    public Planet getPlanetFromString(String planet){
+        if(planet.toLowerCase().equals("earth")){
+            return EARTH;
+        }else if(planet.toLowerCase().equals("moon")){
+            return MOON;
+        }else if(planet.toLowerCase().equals("venus")){
+            return VENUS;
+        }
+        return null;
+    }
 }

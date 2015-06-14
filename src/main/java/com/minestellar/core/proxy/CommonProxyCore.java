@@ -92,10 +92,11 @@ public abstract class CommonProxyCore {
         private int temp = 0;
         @SubscribeEvent
         public void onTick(TickEvent.WorldTickEvent event){
-            if(FileHandler.readFromFile(Constants.fileName, false).equals("run")){
+            if(FileHandler.readFromFile(Constants.stateFile, false).equals("run")){
                 if(temp >= 500){
                     temp = 0;
                     ComputerGui.movePlanets();
+                    ComputerGui.setPlanetCoordinates();
                 }
                 temp++;
             }
