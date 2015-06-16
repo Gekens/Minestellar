@@ -38,6 +38,7 @@ public class PlanetKnowledgeHandler implements IExtendedEntityProperties{
             "moon",
             "venus",
             "mercury",
+            "mars",
             "jupiter",
             "saturn",
             "uranus",
@@ -51,6 +52,7 @@ public class PlanetKnowledgeHandler implements IExtendedEntityProperties{
     private static final boolean[] planetFound = new boolean[]{
             true,
             true,
+            false,
             false,
             false,
             false,
