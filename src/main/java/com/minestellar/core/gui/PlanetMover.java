@@ -28,7 +28,8 @@ public class PlanetMover implements Runnable{
 
     private final double incr = 2;
     private static double x = 0., y = 0.;
-    private boolean doTop = false, firstTime = true;
+    private boolean doTop = false;
+    private static boolean firstTime = true;
 
     private Planet planet;
     public PlanetMover(Planet planet){
@@ -45,7 +46,7 @@ public class PlanetMover implements Runnable{
         if(x == 0.){
             if(!doTop){
                 x += incr;
-            } else {
+            }else{
                 x -= incr;
             }
         }

@@ -46,7 +46,7 @@ public enum Planet {
      * @return The Planet object
      */
 
-    public Planet getPlanetFromString(String planet){
+    public static Planet getPlanetFromString(String planet){
         if(planet.toLowerCase().equals("earth")){
             return EARTH;
         }else if(planet.toLowerCase().equals("moon")){

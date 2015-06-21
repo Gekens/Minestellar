@@ -33,6 +33,7 @@ import net.minecraft.item.ItemStack;
 import com.minestellar.api.data.wireless.WirelessDataNetwork;
 import com.minestellar.core.blocks.CoreBlocks;
 import com.minestellar.core.blocks.tile.*;
+import com.minestellar.core.gui.PlanetMover;
 import com.minestellar.core.handler.GuiHandler;
 import com.minestellar.core.items.CoreItems;
 import com.minestellar.core.network.NetworkHandler;
@@ -46,6 +47,7 @@ import com.minestellar.test.blocks.TestDataTE;
 import com.minestellar.utils.LogHelper;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 
@@ -65,6 +67,8 @@ public class MinestellarCore {
 
 	public static HashMap<String, ItemStack> blocksList = new HashMap<String, ItemStack>();
 	public static HashMap<String, ItemStack> itemList = new HashMap<String, ItemStack>();
+
+    public static ArrayList<PlanetMover> planetMovers = new ArrayList<PlanetMover>();
 
 	@Instance(MinestellarCore.MOD_ID)
 	public static MinestellarCore instance = new MinestellarCore();

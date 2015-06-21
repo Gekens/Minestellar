@@ -22,6 +22,7 @@ import net.minecraft.client.resources.I18n;
 import org.lwjgl.opengl.GL11;
 
 import com.minestellar.core.Constants;
+import com.minestellar.core.MinestellarCore;
 import com.minestellar.core.blocks.machines.Computer;
 import com.minestellar.core.blocks.tile.TileEntityComputer;
 import com.minestellar.core.gui.widget.GuiDraw;
@@ -39,7 +40,7 @@ import java.util.Iterator;
  * GuiScreen for the {@link Computer} and {@link TileEntityComputer}
  */
 
-public class ComputerGui extends GuiScreenWidget {
+public class ComputerGui extends GuiScreenWidget{
 
     public int screenWidth, screenHeight, spaceX, spaceY, spaceWidth, spaceHeight, earthA, earthB;
     private boolean doesDraw = false;
@@ -114,34 +115,34 @@ public class ComputerGui extends GuiScreenWidget {
                         add(moon = new GuiPlanet(x, y, "moon"));
                         moon.setSize(x, y, 4, 4);
                         planets.add(moon);
-                        moonMover = new PlanetMover(Planet.MOON);
+                        MinestellarCore.planetMovers.add(new PlanetMover(Planet.MOON));
                     }
                     if(knownPlanets.contains("earth")){
                         add(earth = new GuiPlanet(x, y, "earth"));
                         planets.add(earth);
-                        earthMover = new PlanetMover(Planet.EARTH);
+                        MinestellarCore.planetMovers.add(new PlanetMover(Planet.EARTH));
                     }
                     if(knownPlanets.contains("venus")){
                         add(venus = new GuiPlanet(x, y, "venus"));
                         planets.add(venus);
-                        venusMover = new PlanetMover(Planet.VENUS);
+                        MinestellarCore.planetMovers.add(new PlanetMover(Planet.VENUS));
                     }
                 }else{
                     if(knownPlanets.contains("moon")){
                         add(moon = new GuiPlanet(x, y, "moon"));
                         moon.setSize(x, y, 4, 4);
                         planets.add(moon);
-                        moonMover = new PlanetMover(Planet.MOON);
+                        MinestellarCore.planetMovers.add(new PlanetMover(Planet.MOON));
                     }
                     if(knownPlanets.contains("earth")){
                         add(earth = new GuiPlanet(x, y, "earth"));
                         planets.add(earth);
-                        earthMover = new PlanetMover(Planet.EARTH);
+                        MinestellarCore.planetMovers.add(new PlanetMover(Planet.EARTH));
                     }
                     if(knownPlanets.contains("venus")){
                         add(venus = new GuiPlanet(x, y, "venus"));
                         planets.add(venus);
-                        venusMover = new PlanetMover(Planet.VENUS);
+                        MinestellarCore.planetMovers.add(new PlanetMover(Planet.VENUS));
                     }
                 }
             }
@@ -284,13 +285,31 @@ public class ComputerGui extends GuiScreenWidget {
      */
 
     public static void movePlanets(){
-        if(earthMover != null) earthMover.run();
-        if(moonMover != null && knownPlanets.contains("moon")) moonMover.run();
-        if(venusMover != null && knownPlanets.contains("venus")) venusMover.run();
+//        if(earthMover != null){
+//            earthMover.run();
+//        }else{
+//            earthMover = new PlanetMover(Planet.EARTH);
+//        }
+//
+//        if(moonMover != null){
+//            if(knownPlanets.contains("moon")) moonMover.run();
+//        }else{
+//            moonMover = new PlanetMover(Planet.MOON);
+//        }
+//
+//        if(venusMover != null){
+//            if(knownPlanets.contains("venus")) venusMover.run();
+//        }else{
+//            venusMover = new PlanetMover(Planet.VENUS);
+//        }
+        for(PlanetMover mover : MinestellarCore.planetMovers){
+            mover.run();
+        }
     }
 
     /**
      * Gets the planet object from the given variable name
+     * <p>Unfortunately it cant be used in any static context</p>
      *
      * @param name The name of the variable to search
      * @return The object corresponding

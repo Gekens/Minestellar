@@ -29,6 +29,7 @@ import com.minestellar.core.MinestellarCore;
 import com.minestellar.core.blocks.tile.TileEntityComputer;
 import com.minestellar.core.gui.GUIs;
 import com.minestellar.core.handler.FileHandler;
+import com.minestellar.core.handler.PlanetKnowledgeHandler;
 
 public class Computer extends Block implements ITileEntityProvider {
 	public Computer(String name) {
@@ -45,9 +46,10 @@ public class Computer extends Block implements ITileEntityProvider {
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
 		TileEntityComputer te = (TileEntityComputer) world.getTileEntity(x, y, z);
 
-		if (te != null) {
+		if(te != null){
 			player.openGui(MinestellarCore.instance, GUIs.COMPUTER_GUI, world, x, y, z);
             FileHandler.writeToFile(Constants.stateFile, "run", false);
+            MinestellarCore.log.info(((PlanetKnowledgeHandler)player.getExtendedProperties(PlanetKnowledgeHandler.PLANET_KNOWLEDGE)).getAcknowledgedPlanets());
 		}
 
 		return true;

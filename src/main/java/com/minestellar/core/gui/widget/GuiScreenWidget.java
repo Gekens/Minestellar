@@ -53,7 +53,7 @@ public abstract class GuiScreenWidget extends GuiScreen implements IGuiActionLis
     public void setWorldAndResolution(Minecraft mc, int i, int j) {
         boolean init = this.mc == null;
         super.setWorldAndResolution(mc, i, j);
-        if (init) {
+        if(init) {
             addWidgets();
             resize();
         }
