@@ -59,4 +59,19 @@ public class Computer extends Block implements ITileEntityProvider {
 	public CreativeTabs getCreativeTabToDisplayOn() {
 		return MinestellarCore.stellarBlocksTab;
 	}
+
+    @Override
+    public int getRenderType() {
+        return -2;
+    }
+
+    @Override
+    public boolean isOpaqueCube() {
+        return false;
+    }
+
+    @Override
+    public boolean renderAsNormalBlock() {
+        return false;
+    }
 }

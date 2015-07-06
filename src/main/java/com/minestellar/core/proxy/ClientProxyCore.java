@@ -37,10 +37,7 @@ import com.minestellar.core.blocks.CoreBlocks;
 import com.minestellar.core.blocks.tile.*;
 import com.minestellar.core.particles.EntityCoreOilDripFX;
 import com.minestellar.core.render.item.*;
-import com.minestellar.core.render.tile.TileEntityRenderAntenna;
-import com.minestellar.core.render.tile.TileEntityRenderGasSink;
-import com.minestellar.core.render.tile.TileEntityRenderOxygenCollector;
-import com.minestellar.core.render.tile.TileEntityRenderSolarPanel;
+import com.minestellar.core.render.tile.*;
 
 import java.util.Objects;
 
@@ -82,6 +79,7 @@ public class ClientProxyCore extends CommonProxyCore {
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityGasSink.class, new TileEntityRenderGasSink());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntitySolarGenerator.class, new TileEntityRenderSolarPanel());
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityRadioAntenna.class, new TileEntityRenderAntenna());
+        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityComputer.class, new TileEntityRenderComputer());
 	}
 
 	private void registerEntityRenderers() {
@@ -94,6 +92,7 @@ public class ClientProxyCore extends CommonProxyCore {
 		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(CoreBlocks.cableBlock), new CableItemRender(0));
 		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(CoreBlocks.pipeBlock), new PipeItemRender(0));
         MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(CoreBlocks.radioAntenna), new AntennaItemRender());
+        MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(CoreBlocks.computer), new ComputerItemRender());
 	}
 
 	@Override

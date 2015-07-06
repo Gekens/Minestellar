@@ -38,6 +38,7 @@ public class PlanetMover implements Runnable{
 
     @Override
     public void run(){
+        System.out.println("DoTop: " + doTop);
         if(firstTime){
             firstTime = false;
             x = -planet.getA();
